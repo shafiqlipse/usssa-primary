@@ -11,7 +11,26 @@ import traceback
 
 # Create your views here.
 def Overview(request):
-    context = {}
+    schools = School.objects.all()
+    schools_count = School.objects.all().count
+    athletes = Athlete.objects.all()
+    athletes_count = Athlete.objects.all().count
+    officials_count = school_official.objects.all().count
+    athletes_bcount = Athlete.objects.filter(gender="male").count
+    athletes_gcount = Athlete.objects.filter(gender="female").count
+    officials_bcount = school_official.objects.filter(gender="M").count
+    officials_gcount = school_official.objects.filter(gender="F").count
+    context = {
+        "athletes": athletes,
+        "schools": schools,
+        "athletes_count": athletes_count,
+        "schools_count": schools_count,
+        "athletes_bcount": athletes_bcount,
+        "athletes_gcount": athletes_gcount,
+        "officials_count": officials_count,
+        "officials_bcount": officials_bcount,
+        "officials_gcount": officials_gcount,
+    }
     return render(request, "dashboard/overview.html", context)
 
 

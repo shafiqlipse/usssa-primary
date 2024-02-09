@@ -5,5 +5,17 @@
 {%block title%}Dashboard{% endblock %}
 <!---->
 {% block content %}
-<div class="overview">overview</div>
+<div class="soverview">
+  <div class="school-box grid2 glue">
+    <div class="left">
+      <div class="attr"><span>Schools : </span>{{schools_count}}</div>
+      <div class="attr"><span>Athletes : </span>{{athletes_count}}</div>
+      <div class="attr"><span>Boys : </span>{{athletes_bcount}}</div>
+      <div class="attr"><span>Girls : </span>{{athletes_gcount}}</div>
+      <div class="attr"><span>Officials : </span>{{officials_count}}</div>
+      <div class="attr"><span>Male : </span>{{officials_bcount}}</div>
+      <div class="attr"><span>Female : </span>{{officials_gcount}}</div>
+    </div>
+  </div>
+</div>
 {% endblock %}
