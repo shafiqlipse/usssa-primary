@@ -1,0 +1,142 @@
+.soverview {
+  position: relative;
+}
+.soverview .school-box {
+  padding: 20px;
+  border-radius: 5px;
+}
+.soverview .school-box .attr {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  margin: 15px 0;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.soverview .school-box .attr span {
+  font-weight: 400;
+}
+.soverview .official-poy {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  background-color: rgba(63, 63, 63, 0.071);
+  -webkit-backdrop-filter: blur(2em);
+          backdrop-filter: blur(2em);
+  padding: 100px;
+}
+.soverview .official-poy .lop {
+  font-size: 2em;
+  padding: 10px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.soverview .official-poy .form-cotrl {
+  padding: 20px;
+  width: 100%;
+}
+.soverview .official-poy .form-cotrl .fields .left .field {
+  flex-direction: column;
+  margin: 15px 0;
+  text-align: left;
+  align-items: flex-start;
+}
+.soverview .official-poy .form-cotrl .fields .left .field input,
+.soverview .official-poy .form-cotrl .fields .left .field select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 3px;
+}
+.soverview .official-poy .form-cotrl .fields .left .field img {
+  width: 300px;
+  height: 400px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.soverview .school-off {
+  display: none;
+}
+.soverview .dextails {
+  margin: 10px 0;
+  width: 100%;
+}
+.soverview .dextails .tabs-section .tabs-container .tabs .tab {
+  padding: 15px 10px;
+  width: 150px;
+  background-color: #f7f7f7;
+  border: 0;
+  border-radius: 3px;
+}
+.soverview .dextails .tabs-section .tabs-container .tabs .tab:hover {
+  background-color: #ccc;
+  cursor: pointer;
+}
+.soverview .dextails .tabs-section .tabs-container .content .tabpanel {
+  padding: 20px;
+}
+.soverview .dextails .tabs-section .tabs-container .content .tabpanel .head {
+  overflow: hidden;
+}
+.soverview .dextails .tabs-section .tabs-container .content .tabpanel .head h3 {
+  text-transform: capitalize;
+  font-weight: 500;
+  font-size: 20px;
+}
+.soverview .dextails .tabs-section .tabs-container .content .tabpanel .head a {
+  font-weight: 500;
+}
+.soverview .dextails .tabs-section .tabs-container .content .tabpanel .athletelist .filter {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 0;
+}
+.soverview .dextails .tabs-section .tabs-container .content .tabpanel .athletelist .filter .formis {
+  margin: 10px;
+}
+.soverview .dextails .tabs-section .tabs-container .content .tabpanel .athletelist .filter .formis .field {
+  flex-direction: column;
+  align-items: flex-start;
+}
+.soverview .dextails .tabs-section .tabs-container .content .tabpanel .athletelist .filter .formis .field input,
+.soverview .dextails .tabs-section .tabs-container .content .tabpanel .athletelist .filter .formis .field select {
+  width: 100%;
+  border-radius: 3px;
+}
+.soverview .dextails .tabs-section .tabs-container .content .tabpanel .athletelist .filter .formis .field label {
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.soverview .dextails .tabs-section .tabs-container .content .tabpanel .athletelist .filter .formis .btn-submit {
+  margin: 0;
+}
+.soverview .dextails .tabs-section .tabs-container .content .tabpanel .athletelist .titles {
+  width: 100%;
+  border-collapse: collapse;
+  padding: 10px 20px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.soverview .dextails .tabs-section .tabs-container .content .tabpanel .athletelist .official-list {
+  width: 100%;
+  padding: 10px;
+  border-collapse: collapse;
+  text-transform: uppercase;
+}
+.soverview .dextails .tabs-section .tabs-container .content .tabpanel .athletelist .official-list .school {
+  padding: 15px 10px;
+}
+.soverview .dextails .tabs-section .tabs-container .content .tabpanel .athletelist .official-list .school a {
+  color: inherit;
+}
+.soverview .dextails .tabs-section .tabs-container .content .tabpanel .athletelist .official-list .school span {
+  color: inherit;
+  font-size: 15px;
+  font-weight: 400;
+  text-transform: capitalize;
+}
+.soverview .dextails .tabs-section .tabs-container .content .tabpanel .athletelist .official-list .school:hover {
+  background-color: rgba(59, 59, 59, 0.1058823529);
+}
+.soverview .dextails .tabs-section .tabs-container .content .tabpanel .athletelist .official-list hr {
+  border: solid 1px rgba(238, 238, 238, 0.1921568627);
+}/*# sourceMappingURL=school.css.map */

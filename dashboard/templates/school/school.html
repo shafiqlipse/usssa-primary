@@ -1,0 +1,211 @@
+{% extends "dashboard/dashboard.html" %}
+<!---->
+{% load static %}
+<!---->
+{%block title%}Dashboard{% endblock %}
+<!---->
+{% block content %}
+<div class="soverview">
+  <div class="official-poy school-off">
+    <div class="lop">
+      <i class="fa fa-times" onclick="officialPage()"></i>
+    </div>
+    <form
+      action=""
+      method="POST"
+      class="form-cotrl glue"
+      enctype="multipart/form-data"
+    >
+      {% csrf_token %}
+      <div class="fields grid2">
+        <div class="left">
+          <div class="field">
+            <label>{{cform.photo.label}} </label>{% if cform.instance.photo %}
+            <img
+              src="{{ cform.instance.photo.url }}"
+              id="image-preview"
+              alt="Current Photo"
+            />
+            {% else %}
+
+            <img
+              src="{% static 'images/profile.png'%}"
+              id="image-preview"
+              alt="No Photo"
+            />
+            {% endif %}
+          </div>
+          <div class="field">
+            <input
+              type="file"
+              name="photo"
+              accept="image/*"
+              onchange="displayImage(this);"
+              id="id_photo"
+            />
+          </div>
+        </div>
+        <div class="left">
+          <div class="field flex">
+            <label>{{ cform.name.label}}</label> {{cform.name}}
+          </div>
+          <div class="field flex">
+            <label>{{ cform.nin.label}} </label>{{cform.nin}}
+          </div>
+          <div class="field flex">
+            <label>{{ cform.date_of_birth.label}} </label
+            >{{cform.date_of_birth}}
+          </div>
+          <div class="field flex">
+            <label>{{ cform.role.label}} </label>{{cform.role}}
+          </div>
+
+          <div class="field flex">
+            <label>{{ cform.phone_number.label}}</label> {{cform.phone_number}}
+          </div>
+          <div class="field flex">
+            <label>{{ cform.email.label}}</label> {{cform.email}}
+          </div>
+          <div class="field flex">
+            <label>{{ cform.gender.label}}</label> {{cform.gender}}
+          </div>
+          <button type="submit" class="btn-submit">Save official</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="school-box grid2 glue">
+    <div class="left">
+      <div class="attr"><span>Name : </span>{{school.school_name}}</div>
+      <div class="attr"><span>EMIS : </span>{{school.EMIS}}</div>
+      <div class="attr">
+        <span>Center Number : </span>{{school.center_number}}
+      </div>
+      <div class="attr"><span>Region : </span>{{school.region}}</div>
+      <div class="attr"><span>Zone : </span>{{school.zone}}</div>
+    </div>
+    <div class="left">
+      <h1>{{ath}} <span>Athletes</span></h1>
+      <h1>{{off}} <span>Officials</span></h1>
+    </div>
+  </div>
+
+  <div class="dextails">
+    <div class="tabs-section">
+      <div class="tabs-container">
+        <div class="tabs">
+          <button class="tab" aria-selected="true" id="js">Athletes</button>
+          <button class="tab" aria-selected="false" id="ruby">Officials</button>
+        </div>
+        <div class="content">
+          <div class="tabpanel glue" aria-labelledby="js">
+            <div class="athletelist">
+              <div class="filter">
+                <form action="" method="get" class="formis grid5">
+                  <div class="field flex">
+                    <label>{{myAFilter.form.name.label}}</label>
+                    {{myAFilter.form.name}}
+                  </div>
+                  <div class="field flex">
+                    <label>{{myAFilter.form.sport.label}}</label>
+                    {{myAFilter.form.sport}}
+                  </div>
+                  <div class="field flex">
+                    <label>Class</label>
+                    {{myAFilter.form.classroom}}
+                  </div>
+                  <div class="field flex">
+                    <label>{{myAFilter.form.gender.label}}</label>
+                    {{myAFilter.form.gender}}
+                  </div>
+                  <button type="submit" class="btn-submit">filter</button>
+                </form>
+              </div>
+              <div class="titles grid6">
+                <span>Photo</span>
+                <span>name</span>
+                <span>sport</span>
+                <span>lin</span>
+                <span>gender</span>
+              </div>
+              <div class="athlete-list">
+                {% for athlete in athleteslist%}
+                <div class="athletel grid6">
+                  <img src="{{athlete.photo.url}}" alt="" />
+                  <a href="{%url 'athlete' athlete.id%}"
+                    ><span>{{athlete.name}} </span>
+                  </a>
+                  <span>{{athlete.sport}} </span>
+                  <span>{{athlete.lin}} </span>
+                  <span>{{athlete.gender}}</span>
+                </div>
+                <hr />
+                {%endfor%}
+              </div>
+            </div>
+          </div>
+          <div class="tabpanel glue" aria-labelledby="ruby" hidden>
+            <div class="head flex">
+              <h3>Schools</h3>
+              <a href="{%url 'new_school'%}" class="btn-submit">Add official</a>
+            </div>
+            <div class="athletelist">
+              <div class="filter">
+                <form action="" method="get" class="formis grid5">
+                  <div class="field flex">
+                    <label>{{myFilter.form.name.label}}</label>
+                    {{myFilter.form.name}}
+                  </div>
+                  <div class="field flex">
+                    <label>Role</label>
+                    {{myFilter.form.role}}
+                  </div>
+                  <div class="field flex">
+                    <label>{{myFilter.form.gender.label}}</label>
+                    {{myFilter.form.gender}}
+                  </div>
+                  <button type="submit" class="btn-submit">filter</button>
+                </form>
+              </div>
+              <div class="titles grid5">
+                <span>name</span>
+                <span>role</span>
+                <span>nin</span>
+                <span>gender</span>
+                <span>email</span>
+              </div>
+              <div class="official-list">
+                {% for athlete in officialist%}
+                <div class="school grid5">
+                  <a href="{%url 'athlete' athlete.id%}"
+                    ><span>{{athlete.name}} </span>
+                  </a>
+                  <span>{{athlete.role}} </span>
+                  <span>{{athlete.nin}} </span>
+                  <span>{{athlete.gender}}</span>
+                  <span>{{athlete.email}}</span>
+                </div>
+                <hr />
+                {%endfor%}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const poy = document.querySelector(".official-poy");
+    const officialPage = () => {
+      if (poy.classList.contains("school-off")) {
+        poy.classList.remove("school-off");
+      } else {
+        poy.classList.add("school-off");
+      }
+      console.log(poy.classList);
+    };
+  </script>
+</div>
+{% endblock %}

@@ -1,0 +1,159 @@
+.soverview {
+  position: relative;
+  .school-box {
+    padding: 20px;
+    border-radius: 5px;
+    // width: 330px;
+    // background-color: inherit;
+    .attr {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      margin: 15px 0;
+      font-weight: bold;
+      text-transform: uppercase;
+      span {
+        font-weight: 400;
+      }
+    }
+  }
+  .official-poy {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    background-color: rgba(63, 63, 63, 0.071);
+    backdrop-filter: blur(2em);
+    padding: 100px;
+    .lop {
+      font-size: 2em;
+      padding: 10px;
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+    .form-cotrl {
+      padding: 20px;
+      width: 100%;
+      .fields {
+        .left {
+          .field {
+            input,
+            select {
+              width: 100%;
+              padding: 12px;
+              border-radius: 3px;
+            }
+            flex-direction: column;
+            margin: 15px 0;
+            text-align: left;
+            align-items: flex-start;
+            img {
+              width: 300px;
+              height: 400px;
+              object-fit: cover;
+            }
+          }
+        }
+      }
+    }
+  }
+  .school-off {
+    display: none;
+  }
+
+  .dextails {
+    margin: 10px 0;
+    width: 100%;
+    .tabs-section {
+      .tabs-container {
+        .tabs {
+          .tab {
+            padding: 15px 10px;
+            width: 150px;
+            background-color: #f7f7f7;
+            border: 0;
+            border-radius: 3px;
+            &:hover {
+              background-color: #ccc;
+              cursor: pointer;
+            }
+          }
+        }
+        .content {
+          .tabpanel {
+            padding: 20px;
+            .head {
+              overflow: hidden;
+              h3 {
+                text-transform: capitalize;
+                font-weight: 500;
+                font-size: 20px;
+              }
+              a {
+                font-weight: 500;
+              }
+            }
+            .athletelist {
+              .filter {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 10px 0;
+                .formis {
+                  margin: 10px;
+                  .field {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    input,
+                    select {
+                      width: 100%;
+                      border-radius: 3px;
+                    }
+                    label {
+                      text-transform: uppercase;
+                      font-weight: 600;
+                    }
+                  }
+                  .btn-submit {
+                    margin: 0;
+                  }
+                }
+              }
+
+              .titles {
+                width: 100%;
+                border-collapse: collapse;
+                padding: 10px 20px;
+                text-transform: uppercase;
+                font-weight: 600;
+              }
+
+              .official-list {
+                width: 100%;
+                padding: 10px;
+                border-collapse: collapse;
+                text-transform: uppercase;
+                .school {
+                  padding: 15px 10px;
+                  a {
+                    color: inherit;
+                  }
+                  span {
+                    color: inherit;
+                    font-size: 15px;
+                    font-weight: 400;
+                    text-transform: capitalize;
+                  }
+                  &:hover {
+                    background-color: #3b3b3b1b;
+                  }
+                }
+                hr {
+                  border: solid 1px #eeeeee31;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

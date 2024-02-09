@@ -1,0 +1,84 @@
+.profile-update {
+  max-width: 1600px;
+  width: 100%;
+  background-color: rgba(73, 72, 72, 0.082);
+  -webkit-backdrop-filter: blur(3em);
+          backdrop-filter: blur(3em);
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.profile-update .school-long {
+  width: 70%;
+  background-color: #fff;
+  padding: 20px;
+}
+@media (max-width: 999px) {
+  .profile-update .school-long {
+    width: 90%;
+  }
+}
+@media (max-width: 768px) {
+  .profile-update .school-long {
+    width: 100%;
+    margin: 10px;
+  }
+}
+.profile-update .school-long .form-ctrl .fields {
+  flex-direction: row-reverse;
+}
+@media (max-width: 768px) {
+  .profile-update .school-long .form-ctrl .fields {
+    flex-direction: column-reverse;
+  }
+}
+.profile-update .school-long .form-ctrl .fields .other-fields {
+  width: 65%;
+  padding: 20px;
+}
+@media (max-width: 768px) {
+  .profile-update .school-long .form-ctrl .fields .other-fields {
+    width: 100%;
+  }
+}
+.profile-update .school-long .form-ctrl .fields .other-fields .field-grid .field {
+  flex-direction: column;
+  align-items: flex-start;
+}
+.profile-update .school-long .form-ctrl .fields .other-fields .field-grid .field input,
+.profile-update .school-long .form-ctrl .fields .other-fields .field-grid .field select,
+.profile-update .school-long .form-ctrl .fields .other-fields .field-grid .field textarea {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 10px 0;
+}
+.profile-update .school-long .form-ctrl .fields .left {
+  padding: 20px;
+}
+@media (max-width: 768px) {
+  .profile-update .school-long .form-ctrl .fields .left {
+    width: 100%;
+  }
+}
+.profile-update .school-long .form-ctrl .fields .left .field {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.profile-update .school-long .form-ctrl .fields .left .field img {
+  width: 100%;
+  height: 150px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.profile-update .school-long .form-ctrl .fields .left .field input,
+.profile-update .school-long .form-ctrl .fields .left .field select,
+.profile-update .school-long .form-ctrl .fields .left .field textarea {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 10px 0;
+}/*# sourceMappingURL=school_new.css.map */

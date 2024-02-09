@@ -1,0 +1,84 @@
+.schools-dew {
+  width: 100%;
+  .grid-5 {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+  }
+  .head {
+    overflow: hidden;
+    h3 {
+      text-transform: capitalize;
+      font-weight: 500;
+      font-size: 20px;
+    }
+    a {
+      font-weight: 500;
+    }
+  }
+  .filterlist {
+    padding: 10px;
+    overflow-x: auto;
+    margin: auto;
+    .lo {
+      @media (max-width: 768px) {
+        width: 768px;
+      }
+    }
+    .filter {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0;
+      .formis {
+        margin: 10px;
+        .field {
+          flex-direction: column;
+          align-items: flex-start;
+          input,
+          select {
+            width: 100%;
+            border-radius: 3px;
+          }
+          label {
+            text-transform: uppercase;
+            font-weight: 600;
+          }
+        }
+        .btn-submit {
+          margin: 0;
+        }
+      }
+    }
+    .titles {
+      width: 100%;
+      border-collapse: collapse;
+      padding: 10px 20px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .official-list {
+      width: 100%;
+      padding: 10px;
+      border-collapse: collapse;
+      text-transform: uppercase;
+      .school {
+        padding: 15px 10px;
+        a {
+          color: inherit;
+        }
+        span {
+          color: inherit;
+          font-size: 15px;
+          font-weight: 400;
+          text-transform: capitalize;
+        }
+        &:hover {
+          background-color: #3b3b3b1b;
+        }
+      }
+      hr {
+        border: solid 1px #eeeeee31;
+      }
+    }
+  }
+}

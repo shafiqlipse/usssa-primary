@@ -1,0 +1,125 @@
+<html lang="en">
+  {%load static%}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>School-Registration | USSSA</title>
+    <link rel="icon" href="{%static 'images/logo.png'%}" sizes="35x35" />
+
+    <link rel="stylesheet" href="{% static 'css/profile/school_new.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/main/main.css'%}" />
+  </head>
+  <body>
+    <div class="profile-update">
+      <div class="school-long">
+        <form
+          action=""
+          method="POST"
+          class="form-ctrl"
+          enctype="multipart/form-data"
+        >
+          {% csrf_token %}
+          <div class="fields flex">
+            <div class="left">
+              <div class="field">
+                <label>{{form.badge.label}} </label>{% if form.instance.badge %}
+                <img
+                  src="{{ form.instance.badge.url }}"
+                  id="image-preview"
+                  alt="Current Photo"
+                />
+                {% else %}
+
+                <img
+                  src="{% static 'images/bade.png'%}"
+                  id="image-preview"
+                  alt="No Photo"
+                />
+                {% endif %}
+              </div>
+              <div class="field">
+                <input
+                  type="file"
+                  name="badge"
+                  accept="image/*"
+                  onchange="displayImage(this);"
+                  id="id_badge"
+                />
+              </div>
+
+              <div class="field ">
+                <label >Region:</label>
+                {{form.region}}
+              </div>
+              <div class="field">
+                <label for="zone">{{form.zone.label }}:</label>
+                {{form.zone}}
+              </div>
+              <div class="field flex">
+                {% if form.zone.errors %}
+                <ul class="errorlist">
+                  {% for error in form.zone.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+              <button type="submit" class="btn-submit">Save profile</button>
+            </div>
+            <div class="other-fields">
+              <div class="field-grid grid2">
+                <div class="field flex">
+                  <label>{{ form.school_name.label}}</label>
+                  {{form.school_name}}
+                </div>
+                <div class="field flex">
+                  <label>{{ form.center_number.label}}</label>
+                  {{form.center_number}}
+                </div>
+              </div>
+              <div class="field-grid grid2">
+                <div class="field flex">
+                  <label>{{ form.EMIS.label}} </label>{{form.EMIS}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        {% if form.non_field_errors %}
+        <div class="alert alert-danger">{{ form.non_field_errors.as_ul }}</div>
+        {% endif %}
+      </div>
+    </div>
+    <!-- 
+    <script>
+      function get_zones() {
+        var region_select = document.getElementById("region");
+        var zone_select = document.getElementById("zone");
+
+        // Show a loading indicator for zones
+        zone_select.innerHTML =
+          "<option disabled selected>Loading zones...</option>";
+
+        // Fetch zones for the selected region using AJAX
+        var region_id = region_select.value;
+        fetch(`/get_zones/?region_id=${region_id}`)
+          .then((response) => response.json())
+          .then((data) => {
+            // Hide the loading indicator
+            zone_select.innerHTML = "";
+
+            // Update the 'zone' dropdown with the fetched data
+            data.forEach((zone) => {
+              var option = document.createElement("option");
+              option.value = zone.id;
+              option.text = zone.name;
+              zone_select.add(option);
+            });
+          })
+          .catch((error) => console.error("Error:", error));
+      }
+    </script> -->
+
+    <script src="{% static 'scripts/app.js'%}"></script>
+  </body>
+</html>

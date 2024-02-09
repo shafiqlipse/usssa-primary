@@ -1,0 +1,28 @@
+{% extends "dashboard/dashboard.html" %}
+<!---->
+{% load static %}
+<!---->
+{%block title%}Register{% endblock %}
+<!---->
+{% block content %}
+<div class="account flex">
+   
+  <div class="left">
+    <form
+      method="POST"
+      action=""
+      class="form-ctrl"
+      enctype="multipart/form-data"
+    >
+      {% csrf_token %} {{form.as_p}}
+
+      <button type="submit" class="btn-submit">register</button>
+      <div class="acct flex">
+        <a href="{% url 'login'%}">login</a>
+      </div>
+    </form>
+    <!--form for the school-->
+  </div>
+</div>
+
+{% endblock %}

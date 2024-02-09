@@ -1,0 +1,155 @@
+<html lang="en">
+  {% load static %}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{%block title%}Dashboard{%endblock%} | USSSA</title>
+    <link rel="stylesheet" href="{% static 'css/main/main.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/dashboard/dashboard.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/dashboard/school.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/dashboard/schoolist.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/css/all.min.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/profile/school_new.css'%}" />
+  </head>
+  <body>
+    <div class="dashboard-main light">
+      <div class="inner-dashboard flex">
+        <div class="sidebar-main">
+          <div class="big glue">
+            <div class="logo-brand flex">
+              <img src="{%static 'images/logo.png'%}" alt="" />
+              <h2>Dashboard</h2>
+            </div>
+            <hr />
+            <ul class="dash-items">
+              <h3>Dashboard</h3>
+              <li class="dash-item">
+                <i class="fa fa-bell"></i>
+                <a href="{% url 'dashboard'%}" class="dash-link">Overview</a>
+              </li>
+              <li class="dash-item">
+                <i class="fa fa-graduation-cap"></i>
+                <a href="{%url 'schools'%}" class="dash-link">Schools</a>
+              </li>
+              <h3>Modules</h3>
+              <li class="dash-item">
+                <i class="fa fa-calendar"></i>
+                <a href="" class="dash-link">Schedules</a>
+              </li>
+              <li class="dash-item">
+                <i class="fa fa-cubes"></i>
+                <a href="{% url 'tournaments'%}" class="dash-link"
+                  >Tournaments</a
+                >
+              </li>
+              <li class="dash-item">
+                <i class="fa fa-location-arrow"></i>
+                <a href="{% url 'districts'%}" class="dash-link">Districts</a>
+              </li>
+              <li class="dash-item">
+                <i class="fa fa-map-marker"></i>
+                <a href="{% url 'zones'%}" class="dash-link">Zones</a>
+              </li>
+              <h3>Enrollment</h3>
+              <li class="dash-item">
+                <i class="fa fa-list"></i>
+                <a href="" class="dash-link">Enrolled Schools</a>
+              </li>
+              <li class="dash-item">
+                <i class="fa fa-list-alt"></i>
+                <a href="" class="dash-link">Enrolled Athletes</a>
+              </li>
+            </ul>
+
+            <div class="c-support">
+              <div class="support flex">
+                <p>
+                  If you have any problems managing your dashboard, Try
+                  contacting customer support.
+                </p>
+                <button class="btn-support">Contact</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="content-main">
+          <div class="top-nav glue flex">
+            <div class="sidebar-toggle">
+              <i class="fa fa-bars" onclick="SideToggle()"></i>
+            </div>
+            <div class="school-id flex">
+              <img src="{% static 'images/profile.png'%}" alt="" />
+              <h3>{{user}}</h3>
+            </div>
+
+            <div class="controls flex glue">
+              <li class="control-item">
+                <i class="fa fa-bell"></i>
+                <div class="notification modal-popup"></div>
+              </li>
+              <li
+                class="control-item setting"
+                id="iconed"
+                onclick="Toggletheme()"
+              >
+                <i class="fa fa-sun"></i>
+              </li>
+              <li class="control-item setting">
+                <i class="fa fa-cog" id="cog"></i>
+                <div id="contoggle" class="account-toggle glue account-off">
+                  <!-- Modal content -->
+                  {% if user.is_authenticated%}
+                  <div class="modal-content flex">
+                    <!-- check if the loged in user is a school -->
+                    {% if user.is_school%}
+                    <div class="prof-img">
+                      <img src="" alt="" />
+                    </div>
+                    <span class="modal-item"><a href="">Profile</a></span>
+                    <span class="modal-item"><a href="">Dashboard</a></span>
+                    <span class="modal-item"><a href="">Account</a></span>
+                    <span class="modal-item"><a href="">Logout</a></span>
+                    {%else%}
+                    <span class="modal-item"><a href="">Profile</a></span>
+                    <span class="modal-item"><a href="">Dashboard</a></span>
+                    <span class="modal-item"><a href="">Account</a></span>
+                    <span class="modal-item"><a href="">Logout</a></span>
+                    {%endif%}
+                  </div>
+                  {%else%}
+                  <span class="modal-item"><a href="">Login</a></span>
+                  {%endif%}
+                </div>
+              </li>
+            </div>
+          </div>
+          <div class="content">
+            {% block content %}{% endblock %}
+            <div class="footer">
+              USSSA Copyright © 2024. All Rights Reserved
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const sidebar = document.querySelector(".sidebar-main");
+
+      const SideToggle = () => {
+        // Assuming 'sidebar' is the correct reference to your sidebar element
+        // Replace 'yourSidebarId' with the actual ID of your sidebar
+
+        if (sidebar.style.display === "none" || sidebar.style.display === "") {
+          sidebar.style.display = "block";
+        } else {
+          sidebar.style.display = "none";
+        }
+      };
+
+      // Example usage:
+      // Add a button or any element that triggers the toggle
+      document.getElementById("cog").addEventListener("click", SideToggle);
+    </script>
+    <script src="{% static 'scripts/app.js'%}"></script>
+  </body>
+</html>
