@@ -1,100 +1,88 @@
-
 {% extends "school/schooldash.html" %}
 <!---->
 {% load static %} {% block s_content %}
-<div class="profile-update">
-    <h1>Add Athlete</h1>
-    <form action="" method="POST" class="form-ctrl glue" enctype="multipart/form-data">
-      {% csrf_token %}
-      <div class="fields flex">
-        <div class="left">
-          <div class="field">
-            <label>{{form.photo.label}} </label>{% if form.instance.photo %}
-            <img
-              src="{{ form.instance.photo.url }}"
-              id="image-preview"
-              alt="Current Photo"
-            />
-            {% else %}
-  
-            <img
-              src="{% static 'images/profile.png'%}"
-              id="image-preview"
-              alt="No Photo"
-            />
-            {% endif %}
-          </div>
-          <div class="field">
-            <input
-              type="file"
-              name="photo"
-              accept="image/*"
-              onchange="displayImage(this);"
-              id="id_photo"
-            />
-          </div>
-  
-          <div class="field flex">
-            <label>{{ form.classroom.label}}</label> {{form.classroom}}
-          </div>
-          <div class="field flex">
-            <label>{{ form.gender.label}}</label> {{form.gender}}
-          </div>
-          <div class="field flex">
-            <label for="date_of_birth">Date of Birth:</label>
-            <input
-              type="date"
-              id="id_date_of_birth"
-              name="date_of_birth"
-              onchange="get_age()"
-            />
-          </div>
-          
-          <div class="field flex">
-            <label for="id_age">Age:</label>
-            <select id="id_age" name="age">
-              <!-- Options will be dynamically populated using JavaScript -->
-            </select>
-          </div>
+<div class="profileupdate">
+  <h1>Add Athlete</h1>
+  <form
+    action=""
+    method="POST"
+    class="form-ctrl glue"
+    enctype="multipart/form-data"
+  >
+    {% csrf_token %}
+    <div class="fields grid2">
+      <div class="left">
+        <div class="field">
+          <label>{{form.photo.label}} </label>{% if form.instance.photo %}
+          <img
+            src="{{ form.instance.photo.url }}"
+            id="image-preview"
+            alt="Current Photo"
+          />
+          {% else %}
+
+          <img
+            src="{% static 'images/profile.png'%}"
+            id="image-preview"
+            alt="No Photo"
+          />
+          {% endif %}
         </div>
-        <div class="other-fields">
-          <div class="field flex">
-            <label>{{ form.name.label}}</label> {{form.name}}
-          </div>
-          <div class="field flex">
-            <label>{{ form.lin.label}} </label>{{form.lin}}
-          </div>
-          <div class="field flex">
-            <label>{{ form.sport.label}}</label> {{form.sport}}
-          </div>
-          <div class="field flex">
-            <label>{{ form.Parent_guadian.label}}</label> {{form.Parent_guadian}}
-          </div>
-          <div class="field flex">
-            <label>{{ form.parent_email.label}}</label> {{form.parent_email}}
-          </div>
-          <div class="field flex">
-            <label>{{ form.parent_phone_number.label}}</label> {{form.parent_phone_number}}
-          </div>
-          <div class="field flex">
-            <label>{{ form.parent_nin.label}}</label> {{form.parent_nin}}
-          </div>
-          <div class="field flex">
-            <label>{{ form.parent_gender.label}}</label> {{form.parent_gender}}
-          </div>
-  
-          
+        <div class="field">
+          <input
+            type="file"
+            name="photo"
+            accept="image/*"
+            onchange="displayImage(this);"
+            id="id_photo"
+          />
+        </div>
+
+        <div class="field flex">
+          <label>{{ form.classroom.label}}</label> {{form.classroom}}
+        </div>
+        <div class="field flex">
+          <label>{{ form.gender.label}}</label> {{form.gender}}
+        </div>
+        <div class="field flex">
+          <label for="date_of_birth">Date of Birth:</label>
+          <input
+            type="date"
+            id="id_date_of_birth"
+            name="date_of_birth"
+            onchange="get_age()"
+          />
         </div>
       </div>
-      <button type="submit" class="btn-submit">Save athlete</button>
-      {% if messages %}
-      <ul class="messages">
-          {% for message in messages %}
-              <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-          {% endfor %}
-      </ul>
-      {% endif %}
-  
-    </form>
+      <div class="other-fields">
+        <div class="field flex">
+          <label>{{ form.name.label}}</label> {{form.name}}
+        </div>
+        <div class="field flex">
+          <label>{{ form.lin.label}} </label>{{form.lin}}
+        </div>
+        <div class="field flex">
+          <label>{{ form.sport.label}}</label> {{form.sport}}
+        </div>
+        <div class="field flex">
+          <label>{{ form.Parent_guadian.label}}</label> {{form.Parent_guadian}}
+        </div>
+        <div class="field flex">
+          <label>{{ form.parent_email.label}}</label> {{form.parent_email}}
+        </div>
+        <div class="field flex">
+          <label>{{ form.parent_phone_number.label}}</label>
+          {{form.parent_phone_number}}
+        </div>
+        <div class="field flex">
+          <label>{{ form.parent_nin.label}}</label> {{form.parent_nin}}
+        </div>
+        <div class="field flex">
+          <label>{{ form.parent_gender.label}}</label> {{form.parent_gender}}
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn-submit">Save athlete</button>
+  </form>
 </div>
 {% endblock %}

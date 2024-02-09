@@ -1,0 +1,36 @@
+.profileupdate .form-ctrl {
+  padding: 20px;
+  width: 100%;
+}
+.profileupdate .form-ctrl .fields .left .field,
+.profileupdate .form-ctrl .fields .other-fields .field {
+  width: 100%;
+  flex-direction: column;
+  margin: 10px 0;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.profileupdate .form-ctrl .fields .left .field label,
+.profileupdate .form-ctrl .fields .other-fields .field label {
+  margin: 0 15px 0 0;
+  font-size: 14px;
+  font-weight: 500;
+}
+.profileupdate .form-ctrl .fields .left .field input,
+.profileupdate .form-ctrl .fields .left .field select,
+.profileupdate .form-ctrl .fields .other-fields .field input,
+.profileupdate .form-ctrl .fields .other-fields .field select {
+  width: 100%;
+  border-radius: 5px;
+  outline-color: rgba(51, 228, 255, 0.4);
+}
+.profileupdate .form-ctrl .fields .left .field input:focus,
+.profileupdate .form-ctrl .fields .left .field select:focus,
+.profileupdate .form-ctrl .fields .other-fields .field input:focus,
+.profileupdate .form-ctrl .fields .other-fields .field select:focus {
+  border: solid 1px;
+}
+.profileupdate .form-ctrl .fields .left .field img,
+.profileupdate .form-ctrl .fields .other-fields .field img {
+  width: 100%;
+}/*# sourceMappingURL=newAthlete.css.map */

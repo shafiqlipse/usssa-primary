@@ -1,0 +1,35 @@
+.profileupdate {
+  .form-ctrl {
+    padding: 20px;
+    width: 100%;
+    .fields {
+      .left,
+      .other-fields {
+        .field {
+          width: 100%;
+          flex-direction: column;
+          margin: 10px 0;
+          justify-content: flex-start;
+          align-items: flex-start;
+          label {
+            margin: 0 15px 0 0;
+            font-size: 14px;
+            font-weight: 500;
+          }
+          input,
+          select {
+            width: 100%;
+            border-radius: 5px;
+            outline-color: #33e4ff66;
+            &:focus {
+              border: solid 1px;
+            }
+          }
+          img {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
