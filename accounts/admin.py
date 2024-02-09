@@ -5,7 +5,7 @@ from dashboard.models import *
 # Register your models here.
 admin.site.register(User)
 admin.site.register(Sport)
-admin.site.register(Championship)
+admin.site.register(Tournament)
 admin.site.register(Zone)
 admin.site.register(Region)
 admin.site.register(Athlete)

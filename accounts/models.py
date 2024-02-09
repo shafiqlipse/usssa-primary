@@ -37,12 +37,11 @@ class User(AbstractUser):
     thumbnail = models.ImageField(upload_to="profile/", blank=True, null=True)
 
 
-class Championship(models.Model):
+class Tournament(models.Model):
     name = models.CharField(max_length=245)
     host = models.CharField(max_length=245)
     start_date = models.DateField(blank=True, null=True)
     end_date = models.DateField(blank=True, null=True)
-    
     thumbnail = models.ImageField(upload_to="champImages/", blank=True, null=True)
 
     class Meta:

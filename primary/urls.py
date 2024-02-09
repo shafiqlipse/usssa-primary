@@ -5,7 +5,8 @@ from accounts.views import *
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("login/", user_login, name="login"),
+    path("", user_login, name="login"),
+    # path("login/", user_login, name="login"),
     path("register/", school_registration, name="register"),
     path("logout/", user_logout, name="logout"),
     path("dashboard/", Overview, name="dashboard"),
