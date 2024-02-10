@@ -34,28 +34,47 @@
           <button type="submit" class="btn-submit">filter</button>
         </form>
       </div>
-      <div class="titles grid5">
-     
-        <span>name</span>
-        <span>lin</span>
-        <span>sport</span>
-        <span>class</span>
-        <span>gender</span>
+      <div class="table-responsive">
+        <table class="table custom-table">
+          <thead>
+            <tr>
+              <th scope="col">
+                <label class="control control--checkbox">
+                  <input type="checkbox" class="js-check-all" />
+                  <div class="control__indicator"></div>
+                </label>
+              </th>
+              <th>name</th>
+              <th>lin</th>
+              <th>sport</th>
+              <th>class</th>
+              <th>gender</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for athlete in athletelist%}
+            <tr>
+              <th scope="row">
+                <label class="control control--checkbox">
+                  <input type="checkbox" />
+                  <div class="control__indicator"></div>
+                </label>
+              </th>
+              <td>
+                <a href="{% url 'athlete' athlete.id%}"
+                  ><span>{{athlete.name}} </span>
+                </a>
+              </td>
+              <td>{{athlete.lin}}</td>
+              <td>{{athlete.sport}}</td>
+              <td>{{athlete.classroom}}</td>
+              <td>{{athlete.gender}}</td>
+            </tr>
+            {%endfor%}
+          </tbody>
+        </table>
       </div>
-      <hr />
-      <div class="official-list">
-        {% for athlete in athletelist%}
-        <div class="school grid5">
-          <a href="{% url 'athlete' athlete.id%}">
-            <span>{{athlete.name}} </span> </a
-          ><span>{{athlete.lin}}</span>
-          <span>{{athlete.sport}} </span>
-          <span>{{athlete.classroom}}</span>
-          <span>{{athlete.gender}}</span>
-        </div>
-        <hr />
-        {%endfor%}
-      </div>
+
       <div class="pagination">
         <span class="step-links">
           {% if athletelist.has_previous %}

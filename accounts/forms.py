@@ -20,7 +20,16 @@ class SchoolRegistrationForm(UserCreationForm):
 class SchoolProfileForm(forms.ModelForm):
     class Meta:
         model = School
-        fields = ["school_name", "EMIS", "center_number", "badge", "region", "zone"]
+        fields = [
+            "school_name",
+            "EMIS",
+            "center_number",
+            "badge",
+            "region",
+            "district",
+            "county",
+            "subcounty",
+        ]
 
     def __init__(self, *args, **kwargs):
         super(SchoolProfileForm, self).__init__(*args, **kwargs)
@@ -54,18 +63,26 @@ class NewAthleteForm(forms.ModelForm):
     class Meta:
         model = Athlete
         fields = [
-            "name",
+            "fname",
+            "mname",
+            "lname",
             "lin",
             "sport",
             "date_of_birth",
             "gender",
             "classroom",
-          
             "photo",
-            "Parent_guadian",
-            "parent_email",
+            "Parent_fname",
+            
+            "Parent_lname",
             "parent_phone_number",
             "parent_nin",
-            "parent_gender",
+            
             "address",
+            "relationship",
+            "designation",
+            "status",
         ]
+        widgets = {
+            "date_of_birth": forms.DateInput(attrs={"type": "date"}),
+        }

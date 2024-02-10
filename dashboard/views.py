@@ -36,10 +36,30 @@ def Overview(request):
 
 # schools
 # Create your views here.
-def get_zones(request):
+def get_districts(request):
     region_id = request.GET.get("region_id")
-    zones = Zone.objects.filter(region_id=region_id).values("id", "name")
-    return JsonResponse(list(zones), safe=False)
+    districts = District.objects.filter(region_id=region_id).values("id", "name")
+    return JsonResponse(list(districts), safe=False)
+
+
+# schools
+# Create your views here.
+def get_counties(request):
+    district_id = request.GET.get("district_id")
+    counties = County.objects.filter(district_id=district_id).values("id", "name")
+    return JsonResponse(list(counties), safe=False)
+
+
+# schools
+# Create your views here.
+def get_subcounties(request):
+    county_id = request.GET.get("county_id")
+    subcounties = Subcounty.objects.filter(county_id=county_id).values("id", "name")
+    return JsonResponse(list(subcounties), safe=False)
+
+
+# schools
+
 
 
 # schools list, tuple or array
@@ -330,7 +350,7 @@ def AthleteDetail(request, id):
         # "breadcrumbs": breadcrumbs,
     }
 
-    return render(request, "athletes/athlete.html", context)
+    return render(request, "school/athlete.html", context)
 
 
 # @login_required(login_url="login")

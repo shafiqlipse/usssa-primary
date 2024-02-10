@@ -29,19 +29,39 @@ class School(models.Model):
     EMIS = models.CharField(max_length=100, unique=True)
     center_number = models.CharField(max_length=100, null=True, blank=True, unique=True)
 
-    region = models.ForeignKey(Region, related_name="region", on_delete=models.CASCADE)
-    zone = models.ForeignKey(
-        Zone,
-        related_name="zone",
+    district = models.ForeignKey(
+        District,
+        related_name="district",
         on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+    )
+    region = models.ForeignKey(
+        Region,
+        related_name="region",
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+    )
+    county = models.ForeignKey(
+        County,
+        related_name="county",
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+    )
+    subcounty = models.ForeignKey(
+        Subcounty,
+        related_name="subcounty",
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
     )
 
 
 class school_official(models.Model):
-    school = models.ForeignKey(
-        School, related_name="school", on_delete=models.CASCADE
-    )
-    
+    school = models.ForeignKey(School, related_name="school", on_delete=models.CASCADE)
+
     name = models.CharField(max_length=100, null=True, blank=True, default="")
     email = models.EmailField(null=True, blank=True, default="")
     phone_number = models.CharField(max_length=15, null=True, blank=True, default="")
@@ -115,10 +135,26 @@ class AthleteManager(models.Manager):
 
 
 class Athlete(models.Model):
-    name = models.CharField(max_length=255)
+    fname = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    mname = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    lname = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+    )
     lin = models.IntegerField()
     sport = models.ForeignKey(Sport, related_name="sport", on_delete=models.CASCADE)
-    school = models.ForeignKey(School, related_name="schooler", on_delete=models.CASCADE)
+    school = models.ForeignKey(
+        School, related_name="schooler", on_delete=models.CASCADE
+    )
     date_of_birth = models.DateField()
     gender = models.CharField(
         choices=[("Male", "male"), ("Female", "female")], max_length=10
@@ -129,19 +165,15 @@ class Athlete(models.Model):
 
     photo = models.ImageField(upload_to="athlete_photos/", blank=True, null=True)
 
-    Parent_guadian = models.CharField(max_length=100, null=True, blank=True, default="")
-    parent_email = models.EmailField(null=True, blank=True, default="")
+    Parent_fname = models.CharField(max_length=100, null=True, blank=True, default="")
+    Parent_lname = models.CharField(max_length=100, null=True, blank=True, default="")
     parent_phone_number = models.CharField(
         max_length=15, null=True, blank=True, default=""
     )
     parent_nin = models.CharField(max_length=20, null=True, blank=True, default="")
     address = models.CharField(max_length=20, null=True, blank=True, default="")
-    parent_gender = models.CharField(
-        max_length=10,
-        choices=[("Male", "Male"), ("Female", "Female"), ("Other", "Other")],
-        null=True,
-        blank=True,
-    )
+    designation = models.CharField(max_length=20, null=True, blank=True, default="")
+    
 
     relationship = models.CharField(
         max_length=10,
@@ -149,15 +181,26 @@ class Athlete(models.Model):
         null=True,
         blank=True,
     )
+    status = models.CharField(
+        max_length=10,
+        choices=[("Active", "Active"), ("Inactive", "Inactive")],
+        default="Active",
+    )
     objects = AthleteManager()
 
     def save(self, *args, **kwargs):
-        # Find the corresponding age range and assign it to the athlete
+        # Calculate the athlete's age from the date of birth
         age = date.today().year - self.date_of_birth.year
-        age_range = Age.objects.filter(min_age__lte=age, max_age__gte=age).first()
-        self.age = age_range
 
-        super().save(*args, **kwargs)
+        # Check if the athlete's age is within the specified range (9-14 years)
+        if 9 <= age <= 14:
+            super().save(*args, **kwargs)
+        else:
+            raise ValueError(
+                "Athlete must be between 9 and 14 years old to be registered."
+            )
+
+    # other methods ...
 
     def __str__(self):
         return self.name

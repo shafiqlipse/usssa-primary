@@ -40,19 +40,21 @@
 }
 .dashboard-main .inner-dashboard .sidebar-main .big .logo-brand {
   width: 100%;
-  padding: 0 20px;
+  padding: 0 10px;
   justify-content: flex-start;
   position: sticky;
   top: 0;
   background-color: inherit;
 }
 .dashboard-main .inner-dashboard .sidebar-main .big .logo-brand img {
-  width: 50px;
+  width: 100px;
+  margin: 10px;
 }
 .dashboard-main .inner-dashboard .sidebar-main .big .logo-brand h2 {
-  font-size: 1.5em;
+  font-size: 1.1em;
   text-transform: uppercase;
   color: inherit;
+  display: none;
 }
 .dashboard-main .inner-dashboard .sidebar-main .big .dash-items {
   flex-direction: column;
@@ -61,13 +63,13 @@
 }
 .dashboard-main .inner-dashboard .sidebar-main .big .dash-items .dash-item {
   width: 100%;
-  padding: 10px 20px;
+  padding: 10px;
   color: inherit;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   border-radius: 5px;
-  margin: 10px 0;
+  margin: 5px 0;
 }
 .dashboard-main .inner-dashboard .sidebar-main .big .dash-items .dash-item:hover {
   background-color: #fff;
@@ -80,7 +82,7 @@
 .dashboard-main .inner-dashboard .sidebar-main .big .dash-items .dash-item .dash-link {
   color: inherit;
   text-transform: capitalize;
-  font-size: 16px;
+  font-size: 14px;
 }
 .dashboard-main .inner-dashboard .sidebar-main .big .c-support {
   margin: 20px;

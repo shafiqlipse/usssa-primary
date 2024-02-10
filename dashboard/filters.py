@@ -11,10 +11,10 @@ class OfficialFilter(django_filters.FilterSet):
 class schoolsFilter(django_filters.FilterSet):
     class Meta:
         model = School
-        fields = ("school_name", "EMIS", "zone", "region")
+        fields = ("school_name", "EMIS", "region", "district")
 
 
 class AthleteFilter(django_filters.FilterSet):
     class Meta:
         model = Athlete
-        fields = ("name", "sport", "classroom", "gender")
+        fields = ("fname", "sport", "classroom", "gender")

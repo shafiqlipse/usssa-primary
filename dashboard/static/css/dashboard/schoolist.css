@@ -1,5 +1,6 @@
 .schools-dew {
   width: 100%;
+  padding: 20px;
 }
 .schools-dew .grid-5 {
   display: grid;
@@ -12,7 +13,7 @@
 .schools-dew .head h3 {
   text-transform: capitalize;
   font-weight: 500;
-  font-size: 20px;
+  font-size: 10px;
 }
 .schools-dew .head a {
   font-weight: 500;

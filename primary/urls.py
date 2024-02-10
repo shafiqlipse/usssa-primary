@@ -12,5 +12,7 @@ urlpatterns = [
     path("dashboard/", Overview, name="dashboard"),
     path("school/", Dash, name="school_dashboard"),
     path("dashboard/", include("dashboard.urls")),
-    path("get_zones/", get_zones, name="get_zones"),
+    path("get_zones/", get_districts, name="get_zones"),
+    path("get_zones/", get_counties, name="get_zones"),
+    path("get_zones/", get_subcounties, name="get_zones"),
 ]

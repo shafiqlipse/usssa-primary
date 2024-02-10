@@ -12,6 +12,7 @@
     {% csrf_token %}
     <div class="fields grid2">
       <div class="left">
+        <h2>Athlete Info</h2>
         <div class="field">
           <label>{{form.photo.label}} </label>{% if form.instance.photo %}
           <img
@@ -37,52 +38,51 @@
             id="id_photo"
           />
         </div>
-
-        <div class="field flex">
-          <label>{{ form.classroom.label}}</label> {{form.classroom}}
+        <div class="field-grid grid2">
+          <div class="field"><label>First Name</label>{{form.fname}}</div>
+          <div class="field"><label>Middle Name</label>{{form.mname}}</div>
         </div>
-        <div class="field flex">
-          <label>{{ form.gender.label}}</label> {{form.gender}}
-        </div>
-        <div class="field flex">
-          <label for="date_of_birth">Date of Birth:</label>
-          <input
-            type="date"
-            id="id_date_of_birth"
-            name="date_of_birth"
-            onchange="get_age()"
-          />
+        <div class="field-grid grid2">
+          <div class="field"><label>Last Name</label>{{form.lname}}</div>
+          <div class="field"><label>LIN</label>{{form.lin}}</div>
         </div>
       </div>
-      <div class="other-fields">
-        <div class="field flex">
-          <label>{{ form.name.label}}</label> {{form.name}}
+      <div class="left">
+        <div class="field-grid grid2">
+          <div class="field"><label>Sport</label>{{form.sport}}</div>
+          <div class="field"><label>Gender</label>{{form.gender}}</div>
         </div>
-        <div class="field flex">
-          <label>{{ form.lin.label}} </label>{{form.lin}}
+        <div class="field-grid grid2">
+          <div class="field"><label>Class</label>{{form.classroom}}</div>
+          <div class="field">
+            <label>Date o Birth</label>{{form.date_of_birth}}
+          </div>
         </div>
-        <div class="field flex">
-          <label>{{ form.sport.label}}</label> {{form.sport}}
+        <h2>Parent/ Guardian Info</h2>
+        <div class="field-grid grid2">
+          <div class="field">
+            <label>Parent's First name</label>{{form.Parent_fname}}
+          </div>
+          <div class="field">
+            <label>Parent's Last name</label>{{form.Parent_lname}}
+          </div>
         </div>
-        <div class="field flex">
-          <label>{{ form.Parent_guadian.label}}</label> {{form.Parent_guadian}}
+        <div class="field-grid grid2">
+          <div class="field"><label>Parent's NIN</label>{{form.parent_nin}}</div>
+          <div class="field">
+            <label>Parent's contact</label>{{form.parent_phone_number}}
+          </div>
         </div>
-        <div class="field flex">
-          <label>{{ form.parent_email.label}}</label> {{form.parent_email}}
+        <div class="field-grid grid2">
+          <div class="field"><label>Address</label>{{form.address}}</div>
+          <div class="field"><label>Designation</label>{{form.designation}}</div>
         </div>
-        <div class="field flex">
-          <label>{{ form.parent_phone_number.label}}</label>
-          {{form.parent_phone_number}}
+        <div class="field-grid grid2">
+          <div class="field"><label>Relationship</label>{{form.relationship}}</div>
         </div>
-        <div class="field flex">
-          <label>{{ form.parent_nin.label}}</label> {{form.parent_nin}}
-        </div>
-        <div class="field flex">
-          <label>{{ form.parent_gender.label}}</label> {{form.parent_gender}}
-        </div>
+        <button type="submit" class="btn-submit">Save athlete</button>
       </div>
     </div>
-    <button type="submit" class="btn-submit">Save athlete</button>
   </form>
 </div>
 {% endblock %}

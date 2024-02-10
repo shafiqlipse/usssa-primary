@@ -10,8 +10,26 @@
     <link rel="stylesheet" href="{% static 'css/profile/school_new.css'%}" />
     <link rel="stylesheet" href="{% static 'css/dashboard/school.css'%}" />
     <link rel="stylesheet" href="{% static 'css/dashboard/schoolist.css'%}" />
+    <link
+      rel="stylesheet"
+      href="{% static 'assets/css/owl.carousel.min.css'%}"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap"
+      rel="stylesheet"
+    />
 
-    <link rel="stylesheet" href="{% static 'css/profile/newAthlete.css'%}" /> 
+    <link
+      rel="stylesheet"
+      href="{% static 'assets/fonts/icomoon/style.css'%}"
+    />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css'%}" />
+
+    <!-- Style -->
+    <link rel="stylesheet" href="{% static 'assets/scss/style.css'%}" />
+
+    <link rel="stylesheet" href="{% static 'css/profile/newAthlete.css'%}" />
   </head>
   <body>
     <div class="dashboard-main light">
@@ -19,7 +37,7 @@
         <div class="sidebar-main">
           <div class="big glue">
             <div class="logo-brand flex">
-              <img src="{%static 'images/logo.png'%}" alt="" />
+              <img src="{%static 'images/upsa.png'%}" alt="" />
               <h2>Dashboard</h2>
             </div>
             <hr />
@@ -27,11 +45,13 @@
               <h3>Dashboard</h3>
               <li class="dash-item">
                 <i class="fa fa-bell"></i>
-                <a href="{% url 'school_dashboard'%}" class="dash-link">Overview</a>
+                <a href="{% url 'school_dashboard'%}" class="dash-link"
+                  >Overview</a
+                >
               </li>
               <li class="dash-item">
                 <i class="fa fa-graduation-cap"></i>
-                <a href="{%url 'athletes'%}" class="dash-link">Athletes</a>
+                <a href="{%url 'athletes'%}" class="dash-link">Pupils</a>
               </li>
               <li class="dash-item">
                 <i class="fa fa-calendar"></i>
@@ -41,11 +61,7 @@
               <h3>Enrollment</h3>
               <li class="dash-item">
                 <i class="fa fa-list"></i>
-                <a href="" class="dash-link">Enrolled Schools</a>
-              </li>
-              <li class="dash-item">
-                <i class="fa fa-list-alt"></i>
-                <a href="" class="dash-link">Enrolled Athletes</a>
+                <a href="" class="dash-link">Athletes</a>
               </li>
               <h3>Account</h3>
               <li class="dash-item">
@@ -149,5 +165,9 @@
       document.getElementById("cog").addEventListener("click", SideToggle);
     </script>
     <script src="{% static 'scripts/app.js'%}"></script>
+    <script src="{% static 'js/jquery-3.3.1.min.js'%}"></script>
+    <script src="{% static 'js/popper.min.js'%}"></script>
+    <script src="{% static 'js/bootstrap.min.js'%}"></script>
+    <script src="{% static 'js/main.js'%}"></script>
   </body>
 </html>

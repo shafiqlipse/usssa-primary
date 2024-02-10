@@ -7,7 +7,6 @@ from django.contrib.auth.models import AbstractUser
 class Sport(models.Model):
     name = models.CharField(max_length=245)
 
-
     class Meta:
         ordering = ["-name"]
 
@@ -17,17 +16,33 @@ class Sport(models.Model):
 
 class Region(models.Model):
     name = models.CharField(max_length=100)
+    
 
     def __str__(self):
         return self.name
 
-
-class Zone(models.Model):
+class District(models.Model):
     name = models.CharField(max_length=100)
     region = models.ForeignKey(Region, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
+
+class County(models.Model):
+    name = models.CharField(max_length=100)
+    district = models.ForeignKey(District, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+    
+class Subcounty(models.Model):
+    name = models.CharField(max_length=100)
+    county = models.ForeignKey(County, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+
 
 
 class User(AbstractUser):
@@ -49,7 +64,7 @@ class Tournament(models.Model):
 
     def __str__(self):
         return self.name
-    
+
 
 class Game(models.Model):
     name = models.CharField(max_length=245)
@@ -60,4 +75,3 @@ class Game(models.Model):
 
     def __str__(self):
         return self.name
-    
