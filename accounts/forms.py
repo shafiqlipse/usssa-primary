@@ -73,11 +73,9 @@ class NewAthleteForm(forms.ModelForm):
             "classroom",
             "photo",
             "Parent_fname",
-            
             "Parent_lname",
             "parent_phone_number",
             "parent_nin",
-            
             "address",
             "relationship",
             "designation",
@@ -86,3 +84,14 @@ class NewAthleteForm(forms.ModelForm):
         widgets = {
             "date_of_birth": forms.DateInput(attrs={"type": "date"}),
         }
+
+        def clean_date_of_birth(self):
+            date_of_birth = self.cleaned_data.get("date_of_birth")
+            age = date.today().year - date_of_birth.year
+
+            if not (9 <= age <= 14):
+                raise forms.ValidationError(
+                    "Athlete must be between 9 and 14 years old."
+                )
+
+            return date_of_birth

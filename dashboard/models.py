@@ -116,24 +116,6 @@ class Age(models.Model):
         return self.name
 
 
-class AthleteManager(models.Manager):
-    def get_queryset(self):
-        today = date.today()
-        queryset = super().get_queryset()
-        queryset = queryset.filter(date_of_birth__lte=today)
-        return queryset.annotate(
-            calculated_age=models.ExpressionWrapper(
-                today.year - models.F("date_of_birth__year"),
-                output_field=models.IntegerField(),
-            )
-        )
-
-    def filter_by_age_range(self, min_age, max_age):
-        return self.get_queryset().filter(
-            calculated_age__gte=min_age, calculated_age__lte=max_age
-        )
-
-
 class Athlete(models.Model):
     fname = models.CharField(
         max_length=255,
@@ -150,7 +132,7 @@ class Athlete(models.Model):
         null=True,
         blank=True,
     )
-    lin = models.IntegerField()
+    lin = models.CharField(max_length=8)
     sport = models.ForeignKey(Sport, related_name="sport", on_delete=models.CASCADE)
     school = models.ForeignKey(
         School, related_name="schooler", on_delete=models.CASCADE
@@ -173,7 +155,6 @@ class Athlete(models.Model):
     parent_nin = models.CharField(max_length=20, null=True, blank=True, default="")
     address = models.CharField(max_length=20, null=True, blank=True, default="")
     designation = models.CharField(max_length=20, null=True, blank=True, default="")
-    
 
     relationship = models.CharField(
         max_length=10,
@@ -184,23 +165,8 @@ class Athlete(models.Model):
     status = models.CharField(
         max_length=10,
         choices=[("Active", "Active"), ("Inactive", "Inactive")],
-        default="Active",
+        default="Active", null=True, blank=True
     )
-    objects = AthleteManager()
-
-    def save(self, *args, **kwargs):
-        # Calculate the athlete's age from the date of birth
-        age = date.today().year - self.date_of_birth.year
-
-        # Check if the athlete's age is within the specified range (9-14 years)
-        if 9 <= age <= 14:
-            super().save(*args, **kwargs)
-        else:
-            raise ValueError(
-                "Athlete must be between 9 and 14 years old to be registered."
-            )
-
-    # other methods ...
 
     def __str__(self):
-        return self.name
+        return f"{self.fname} {self.mname} {self.lname}"

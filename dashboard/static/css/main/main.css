@@ -44,7 +44,7 @@ a {
 
 .dark {
   color: white;
-  background-color: rgb(0, 0, 0);
+  background-color: rgb(13, 1, 58);
 }
 .dark input,
 .dark select,
@@ -55,7 +55,7 @@ a {
   padding: 10px;
 }
 .dark .glue {
-  background-color: #3b3b3b;
+  background-color: #010f51;
   border-radius: 10px;
 }
 
@@ -74,6 +74,10 @@ a {
 }
 .btn-green:hover {
   background-color: rgb(0, 0, 58);
+}
+
+h3 {
+  font-size: 13px;
 }
 
 .btn-submit {

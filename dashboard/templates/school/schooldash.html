@@ -4,14 +4,30 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{%block title%}Dashboard{%endblock%} | USSSA</title>
-    <link rel="icon" href="{%static 'images/upsa.png'%}" sizes="35x35" />
     <link rel="stylesheet" href="{% static 'css/main/main.css'%}" />
     <link rel="stylesheet" href="{% static 'css/dashboard/dashboard.css'%}" />
-    <link rel="stylesheet" href="{% static 'css/dashboard/school.css'%}" />
-    <link rel="stylesheet" href="{% static 'css/dashboard/schoolist.css'%}" />
     <link rel="stylesheet" href="{% static 'css/css/all.min.css'%}" />
     <link rel="stylesheet" href="{% static 'css/profile/school_new.css'%}" />
-    <link rel="stylesheet" href="{% static 'css/profile/athletes.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/dashboard/school.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/dashboard/schoolist.css'%}" />
+    <link
+      rel="stylesheet"
+      href="{% static 'assets/css/owl.carousel.min.css'%}"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="{% static 'assets/fonts/icomoon/style.css'%}"
+    />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css'%}" />
+
+    <!-- Style -->
+    <link rel="stylesheet" href="{% static 'assets/scss/style.css'%}" />
 
     <link rel="stylesheet" href="{% static 'css/profile/newAthlete.css'%}" />
   </head>
@@ -27,20 +43,12 @@
             <hr />
             <ul class="dash-items">
               <h3>Dashboard</h3>
-              {% if user.is_school %}
-
               <li class="dash-item">
                 <i class="fa fa-bell"></i>
                 <a href="{% url 'school_dashboard'%}" class="dash-link"
                   >Overview</a
                 >
               </li>
-              {% else %}
-              <li class="dash-item">
-                <i class="fa fa-bell"></i>
-                <a href="{% url 'dashboard'%}" class="dash-link">Overview</a>
-              </li>
-              {% endif %} {% if user.is_school %}
               <li class="dash-item">
                 <i class="fa fa-graduation-cap"></i>
                 <a href="{%url 'athletes'%}" class="dash-link">Pupils</a>
@@ -49,51 +57,16 @@
                 <i class="fa fa-calendar"></i>
                 <a href="" class="dash-link">Officials</a>
               </li>
-              {% else %}
-              <li class="dash-item">
-                <i class="fa fa-graduation-cap"></i>
-                <a href="{%url 'schools'%}" class="dash-link">Schools</a>
-              </li>
-              {% endif %}
-              <h3>Modules</h3>
-              <li class="dash-item">
-                <i class="fa fa-calendar"></i>
-                <a href="" class="dash-link">Schedules</a>
-              </li>
-              <li class="dash-item">
-                <i class="fa fa-cubes"></i>
-                <a href="{% url 'tournaments'%}" class="dash-link"
-                  >Tournaments</a
-                >
-              </li>
-              <li class="dash-item">
-                <i class="fa fa-location-arrow"></i>
-                <a href="{% url 'districts'%}" class="dash-link">Districts</a>
-              </li>
-              <li class="dash-item">
-                <i class="fa fa-map-marker"></i>
-                <a href="{% url 'zones'%}" class="dash-link">Zones</a>
-              </li>
+
               <h3>Enrollment</h3>
-              {% if user.is_school %}
               <li class="dash-item">
                 <i class="fa fa-list"></i>
                 <a href="" class="dash-link">Athletes</a>
               </li>
-              {% else %}
-              <li class="dash-item">
-                <i class="fa fa-list"></i>
-                <a href="" class="dash-link">Enrolled Schools</a>
-              </li>
-              <li class="dash-item">
-                <i class="fa fa-list-alt"></i>
-                <a href="" class="dash-link">Enrolled Athletes</a>
-              </li>
-              {% endif %}
               <h3>Account</h3>
               <li class="dash-item">
                 <i class="fa fa-location-arrow"></i>
-                <a href="{% url 'change_password'%}" class="dash-link"
+                <a href="{% url 'districts'%}" class="dash-link"
                   >Change password</a
                 >
               </li>
@@ -102,7 +75,7 @@
                 <a href="{% url 'logout'%}" class="dash-link">Logout</a>
               </li>
             </ul>
-            {% if user.is_school %}
+
             <div class="c-support">
               <div class="support flex">
                 <p>
@@ -112,7 +85,6 @@
                 <button class="btn-support">Contact</button>
               </div>
             </div>
-            {% endif %}
           </div>
         </div>
         <div class="content-main">
@@ -121,10 +93,8 @@
               <i class="fa fa-bars" onclick="SideToggle()"></i>
             </div>
             <div class="school-id flex">
-              <img src="{% static 'images/upsa.png'%}" alt="" />
-              {% if user.is_school %} {% else %}
-              <h1>{{user}}</h1>
-              {% endif %}
+              <img src="{% static 'images/profile.png'%}" alt="" />
+              <h3>{{school.school_name}}</h3>
             </div>
 
             <div class="controls flex glue">
@@ -139,13 +109,39 @@
               >
                 <i class="fa fa-sun"></i>
               </li>
+              <li class="control-item setting">
+                <i class="fa fa-cog" id="cog"></i>
+                <div id="contoggle" class="account-toggle glue account-off">
+                  <!-- Modal content -->
+                  {% if user.is_authenticated%}
+                  <div class="modal-content flex">
+                    <!-- check if the loged in user is a school -->
+                    {% if user.is_school%}
+                    <div class="prof-img">
+                      <img src="" alt="" />
+                    </div>
+                    <span class="modal-item"><a href="">Profile</a></span>
+                    <span class="modal-item"><a href="">Dashboard</a></span>
+                    <span class="modal-item"><a href="">Account</a></span>
+                    <span class="modal-item"><a href="">Logout</a></span>
+                    {%else%}
+                    <span class="modal-item"><a href="">Profile</a></span>
+                    <span class="modal-item"><a href="">Dashboard</a></span>
+                    <span class="modal-item"><a href="">Account</a></span>
+                    <span class="modal-item"><a href="">Logout</a></span>
+                    {%endif%}
+                  </div>
+                  {%else%}
+                  <span class="modal-item"><a href="">Login</a></span>
+                  {%endif%}
+                </div>
+              </li>
             </div>
           </div>
-          <div class="content">
-            {% block content %}{% endblock %}
-            <div class="footer">
-              USSSA Copyright © 2024. All Rights Reserved
-            </div>
+          <div class="content glue">{% block s_content %}{% endblock %}</div>
+
+          <div class="footer-flow">
+            USSSA Copyright © 2024. All Rights Reserved
           </div>
         </div>
       </div>
@@ -169,5 +165,9 @@
       document.getElementById("cog").addEventListener("click", SideToggle);
     </script>
     <script src="{% static 'scripts/app.js'%}"></script>
+    <script src="{% static 'js/jquery-3.3.1.min.js'%}"></script>
+    <script src="{% static 'js/popper.min.js'%}"></script>
+    <script src="{% static 'js/bootstrap.min.js'%}"></script>
+    <script src="{% static 'js/main.js'%}"></script>
   </body>
 </html>

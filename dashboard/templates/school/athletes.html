@@ -9,6 +9,10 @@
 <div class="schools-dew">
   <div class="head flex">
     <h1>Athletes</h1>
+    <div class="pay">
+      <div class="pay flex" id="pay"></div>
+      <button class="btn-green">Pay</button>
+    </div>
     <a href="{% url 'addathlete'%}" class="btn-submit">Add Athlete</a>
   </div>
   <div class="filterlist glue">
@@ -16,8 +20,8 @@
       <div class="filter">
         <form action="" method="get" class="formis grid5">
           <div class="field flex">
-            <label>{{myFilter.form.name.label}}</label>
-            {{myFilter.form.name}}
+            <label>First Name</label>
+            {{myFilter.form.fname}}
           </div>
           <div class="field flex">
             <label>{{myFilter.form.sport.label}}</label>
@@ -56,10 +60,15 @@
             <tr>
               <th scope="row">
                 <label class="control control--checkbox">
-                  <input type="checkbox" />
+                  <input
+                    type="checkbox"
+                    class="js-check-single"
+                    data-athlete-id="{{ athlete.id }}"
+                  />
                   <div class="control__indicator"></div>
                 </label>
               </th>
+
               <td>
                 <a href="{% url 'athlete' athlete.id%}"
                   ><span>{{athlete.fname}} {{athlete.lname}} </span>
@@ -94,5 +103,61 @@
       </div>
     </div>
   </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      let totalAmount = 0; // Initial total amount
+      const payT = document.getElementById("pay");
+
+      // Function to update the total amount and display it
+      const updateTotalAmount = () => {
+        // Assuming each selected athlete adds 1500 to the total
+        totalAmount = selectedAthletes.length * 1500;
+        console.log("Updated Total Amount:", totalAmount);
+
+        // Update the pay div with the total amount
+        payT.innerText = totalAmount;
+      };
+
+      const selectedAthletes = []; // Array to store selected athlete IDs
+
+      // Add event listener to checkboxes
+      const checkboxes = document.querySelectorAll(".js-check-single");
+      checkboxes.forEach(function (checkbox) {
+        checkbox.addEventListener("change", function () {
+          const athleteId = this.getAttribute("data-athlete-id");
+
+          if (this.checked) {
+            // Add athlete ID to the selectedAthletes array
+            selectedAthletes.push(athleteId);
+          } else {
+            // Remove athlete ID from the selectedAthletes array
+            const index = selectedAthletes.indexOf(athleteId);
+            if (index !== -1) {
+              selectedAthletes.splice(index, 1);
+            }
+          }
+
+          // Update the total amount and display it
+          updateTotalAmount();
+
+          // Log the selected athlete IDs and total amount
+          console.log("Selected athlete IDs:", selectedAthletes);
+        });
+      });
+
+      // Add event listener to the "Pay" button for further actions (e.g., submitting the form)
+      const performActionButton = document.getElementById(
+        "perform-action-button"
+      );
+      performActionButton.addEventListener("click", function () {
+        // You can use the selectedAthletes array and totalAmount for further actions
+        console.log(
+          "Performing action with selected athlete IDs:",
+          selectedAthletes
+        );
+        console.log("Total Amount:", totalAmount);
+      });
+    });
+  </script>
 </div>
 {% endblock %}
