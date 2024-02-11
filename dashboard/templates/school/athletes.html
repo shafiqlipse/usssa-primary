@@ -1,11 +1,11 @@
-{% extends "school/schooldash.html" %}
+{% extends "dashboard/dashboard.html" %}
 
 <!--static-->
 {% block title %}Athletes{% endblock %}
 <!--static-->
 {% load static %}
 <!--khfufufu-->
-{% block s_content %}
+{% block content %}
 <div class="schools-dew">
   <div class="head flex">
     <h1>Athletes</h1>
@@ -44,7 +44,7 @@
                   <div class="control__indicator"></div>
                 </label>
               </th>
-              <th>name</th>
+              <th>names</th>
               <th>lin</th>
               <th>sport</th>
               <th>class</th>
@@ -62,7 +62,7 @@
               </th>
               <td>
                 <a href="{% url 'athlete' athlete.id%}"
-                  ><span>{{athlete.name}} </span>
+                  ><span>{{athlete.fname}} {{athlete.lname}} </span>
                 </a>
               </td>
               <td>{{athlete.lin}}</td>
@@ -94,5 +94,5 @@
       </div>
     </div>
   </div>
-  {% endblock %}
 </div>
+{% endblock %}

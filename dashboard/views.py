@@ -6,10 +6,12 @@ from .models import *
 from .filters import *
 from django.contrib import messages
 from django.http import JsonResponse
+from accounts.decorators import school_required, anonymous_required, staff_required
 import traceback
 
 
 # Create your views here.
+@staff_required
 def Overview(request):
     schools = School.objects.all()
     schools_count = School.objects.all().count
@@ -63,6 +65,7 @@ def get_subcounties(request):
 
 
 # schools list, tuple or array
+@staff_required
 def schools(request):
 
     schools = School.objects.all()
@@ -96,7 +99,7 @@ def schools(request):
 
 # Import the traceback module for logging
 
-
+@staff_required
 def Schoolnew(request):
     regions = Region.objects.all()
 
@@ -133,7 +136,7 @@ def Schoolnew(request):
     context = {"form": form, "regions": regions}
     return render(request, "school/create_school.html", context)
 
-
+@staff_required
 def school_detail(request, id):
     school = School.objects.get(id=id)
     officials = school_official.objects.filter(school_id=id)
@@ -301,7 +304,7 @@ def zones(request):
     }
     return render(request, "dashboard/zones.html", context)
 
-
+@school_required
 def Dash(request):
     user = request.user
     school = School.objects.get(user_id=user.id)
@@ -314,7 +317,7 @@ def Dash(request):
     }
     return render(request, "school/schoolprofile.html", context)
 
-
+@school_required
 def newAthlete(request):
     if request.method == "POST":
         form = NewAthleteForm(request.POST, request.FILES)
@@ -339,7 +342,7 @@ def newAthlete(request):
 # # Athletes details......................................................
 def AthleteDetail(request, id):
     athlete = get_object_or_404(Athlete, id=id)
-    relatedathletes = Athlete.objects.filter(sport=athlete.sport).exclude(id=id)
+    relatedathletes = Athlete.objects.filter(school=athlete.school).exclude(id=id)
     # breadcrumbs = [{'url': '/', 'name': 'Home'},
     #                {'url': f'/team/{athlete.team.id}/', 'name': 'Category'},
     #             #    {'url': f'/product/{product_id}/', 'name': 'Product'}

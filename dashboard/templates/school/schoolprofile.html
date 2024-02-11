@@ -1,6 +1,6 @@
-{% extends "school/schooldash.html" %}
+{% extends "dashboard/dashboard.html" %}
 <!---->
-{% load static %} {% block s_content %}
+{% load static %} {% block content %}
 <div class="soverview">
   <div class="school-box glue">
     <div class="attr"><span>Name : </span>{{school.school_name}}</div>
@@ -9,7 +9,9 @@
       <span>Center Number : </span>{{school.center_number}}
     </div>
     <div class="attr"><span>Region : </span>{{school.region}}</div>
-    <div class="attr"><span>Zone : </span>{{school.zone}}</div>
+    <div class="attr"><span>District : </span>{{school.district}}</div>
+    <div class="attr"><span>County : </span>{{school.county}}</div>
+    <div class="attr"><span>Subcounty : </span>{{school.subcounty}}</div>
   </div>
 
  

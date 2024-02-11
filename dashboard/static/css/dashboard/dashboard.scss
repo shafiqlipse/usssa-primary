@@ -15,7 +15,7 @@
       z-index: 990;
       overflow: hidden;
       display: block;
-      scrollbar-color: red;
+      scrollbar-color: rgb(1, 5, 84);
       background-color: inherit;
       box-shadow: 1px 1px 10px 1px #36363671;
       border-radius: 10px;
@@ -66,7 +66,7 @@
             margin: 5px 0;
             &:hover {
               background-color: #fff;
-              color: red;
+              color: rgb(0, 8, 96);
             }
             i {
               width: 30px;
@@ -97,7 +97,7 @@
               padding: 10px;
               width: 100%;
               border-radius: 5px;
-              background-color: red;
+              background-color: rgb(0, 13, 77);
               border: 0;
               color: #fff;
               font-size: 18px;

@@ -35,16 +35,31 @@
               class="form-control"
               name="password"
               placeholder="Password"
+              id="Password"
               required
             />
+            <i class="fa fa-eye" id="eye" onclick="passview()"></i>
           </div>
 
           <button type="submit" class="btn-submit">Login</button>
-          <div class="acct flex">
-            <a href="{% url 'dashboard'%}">register</a>
-          </div>
         </form>
       </div>
     </div>
+    <script>
+      const password = document.getElementById("Password");
+      const eye = document.querySelector("#eye");
+
+      const passview = () => {
+        if (password.type == "password") {
+          password.type = "text";
+          eye.classList.remove("fa-eye");
+          eye.classList.add("fa-eye-slash");
+        } else {
+          password.type = "password";
+          eye.classList.remove("fa-eye-slash");
+          eye.classList.add("fa-eye");
+        }
+      };
+    </script>
   </body>
 </html>

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout
-from accounts.decorators import school_required, anonymous_required
+from accounts.decorators import school_required, anonymous_required, staff_required
 from django.http import JsonResponse
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -11,7 +11,7 @@ from django.contrib import messages
 from .forms import SchoolRegistrationForm
 
 
-@anonymous_required
+@staff_required
 def school_registration(request):
     if request.method == "POST":
         form = SchoolRegistrationForm(request.POST)
@@ -32,6 +32,7 @@ def school_registration(request):
 
 
 # Create your views here.
+@anonymous_required
 def user_login(request):
     if request.method == "POST":
         form = AuthenticationForm(data=request.POST)
@@ -66,3 +67,29 @@ def user_logout(request):
 
 def custom_404(request, exception):
     return render(request, "account/custom404.html", {}, status=404)
+
+
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
+from django.shortcuts import render, redirect
+from django.contrib import messages
+
+
+from django.contrib.auth.decorators import login_required
+
+
+@login_required
+def change_password(request):
+    if request.method == "POST":
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            # Update the session to maintain the user's login status
+            update_session_auth_hash(request, user)
+            messages.success(request, "Your password was successfully updated!")
+            return redirect("login")
+        else:
+            messages.error(request, "Please correct the error below.")
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, "change_password.html", {"form": form})

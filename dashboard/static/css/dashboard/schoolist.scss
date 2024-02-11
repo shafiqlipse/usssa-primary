@@ -64,14 +64,22 @@
       text-transform: uppercase;
       .school {
         padding: 15px 10px;
+        &:first-child {
+          width: 450px;
+        }
         a {
           color: inherit;
         }
         span {
           color: inherit;
-          font-size: 15px;
+          font-size: 12px;
           font-weight: 400;
-          text-transform: capitalize;
+          text-transform: uppercase;
+          &:hover {
+            color: #0a0073e4;
+            font-size: 12px;
+            font-weight: bold;
+          }
         }
         &:hover {
           background-color: #3b3b3b1b;

@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background-image: url(../../images/bgc.jpg);
+  background-image: url(../../images/derty.jpg);
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -20,7 +20,7 @@
 .account .flex-account img {
   width: 100px;
   padding: 10px;
-  background-color: rgba(255, 255, 255, 0.1450980392);
+  background-color: #ffffff;
   border-radius: 20px;
 }
 .account .flex-account .form-ctrl {
@@ -28,6 +28,8 @@
   width: 100%;
 }
 .account .flex-account .form-ctrl .field {
+  display: flex;
+  align-items: center;
   margin: 20px 0;
   border-bottom: solid rgb(255, 255, 255) 1px;
 }

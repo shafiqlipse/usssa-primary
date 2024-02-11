@@ -28,8 +28,8 @@
           {{myFilter.form.region}}
         </div>
         <div class="field flex">
-          <label>{{myFilter.form.zone.label}}</label>
-          {{myFilter.form.zone}}
+          <label>{{myFilter.form.district.label}}</label>
+          {{myFilter.form.district}}
         </div>
         <button type="submit" class="btn-submit">filter</button>
       </form>
@@ -40,7 +40,7 @@
       <span>EMIS number</span>
       <span>center number</span>
       <span>Region</span>
-      <span>Zone</span>
+      <span>District</span>
     </div>
    
     <div class="official-list">
@@ -53,7 +53,7 @@
         ><span>{{school.EMIS}}</span>
         <span>{{school.center_number}}</span>
         <span>{{school.region}} </span>
-        <span>{{school.zone}}</span>
+        <span>{{school.district}}</span>
       </div>
     
       {%endfor%}
