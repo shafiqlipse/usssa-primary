@@ -332,7 +332,7 @@ def newAthlete(request):
         if form.is_valid():
             try:
                 new_athlete = form.save(commit=False)
-                new_athlete.school = request.user
+                new_athlete.school = request.user.school_profile.first()
                 new_athlete.save()
                 messages.success(request, "Athlete added successfully!")
                 return redirect("athletes")
