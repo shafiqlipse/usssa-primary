@@ -27,8 +27,8 @@ class SchoolProfileForm(forms.ModelForm):
             "badge",
             "region",
             "district",
-            "county",
-            "subcounty",
+            "municipality",
+            "city",
         ]
 
     def __init__(self, *args, **kwargs):

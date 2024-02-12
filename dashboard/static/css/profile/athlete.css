@@ -1,1 +1,26 @@
-/*# sourceMappingURL=athlete.css.map */
+.athlete-dew {
+  width: 100%;
+}
+.athlete-dew .athlete .img {
+  overflow: hidden;
+}
+.athlete-dew .athlete .img img {
+  width: 100%;
+}
+.athlete-dew .athlete .athlete-details {
+  padding: 20px;
+}
+.athlete-dew .athlete hr {
+  margin: 10px 0;
+}
+.athlete-dew .athlete span {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+.athlete-dew .athlete span h3 {
+  font-weight: bold;
+  font-size: 15px;
+  text-transform: uppercase;
+}/*# sourceMappingURL=athlete.css.map */

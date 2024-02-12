@@ -28,16 +28,14 @@ class District(models.Model):
     def __str__(self):
         return self.name
 
-class County(models.Model):
+class Municipality(models.Model):
     name = models.CharField(max_length=100)
-    district = models.ForeignKey(District, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
     
-class Subcounty(models.Model):
+class City(models.Model):
     name = models.CharField(max_length=100)
-    county = models.ForeignKey(County, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name

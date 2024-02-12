@@ -75,12 +75,8 @@
     </form>
   </div>
 
-  <div class="school-box grid2 glue">
-    <div class="left">
-<div class="numcard"></div>
- 
-    
-  </div>
+
+
 
   <div class="dextails">
     <div class="tabs-section">
@@ -95,8 +91,8 @@
               <div class="filter">
                 <form action="" method="get" class="formis grid5">
                   <div class="field flex">
-                    <label>{{myAFilter.form.name.label}}</label>
-                    {{myAFilter.form.name}}
+                    <label>{{myAFilter.form.fname.label}}</label>
+                    {{myAFilter.form.fname}}
                   </div>
                   <div class="field flex">
                     <label>{{myAFilter.form.sport.label}}</label>
@@ -119,17 +115,20 @@
                 <span>sport</span>
                 <span>lin</span>
                 <span>gender</span>
+                <span>Actions</span>
               </div>
-              <div class="athlete-list">
-                {% for athlete in athleteslist%}
-                <div class="athletel grid6">
-                  <img src="{{athlete.photo.url}}" alt="" />
+              <div class="official-list">
+                {% for athlete in athletelist%}
+                <div class="school grid6">
+                  <img src="{%static 'images/profile.png'%}" alt="" />
+                  
                   <a href="{%url 'athlete' athlete.id%}"
-                    ><span>{{athlete.name}} </span>
+                    ><span>{{athlete.fname}} {{athlete.lname}} </span>
                   </a>
                   <span>{{athlete.sport}} </span>
                   <span>{{athlete.lin}} </span>
                   <span>{{athlete.gender}}</span>
+                  <span><a href="{% url 'updateathlete' athlete.id%}"><i class="fa fa-pencil"></i></a></span>
                 </div>
                 <hr />
                 {%endfor%}
@@ -167,15 +166,15 @@
                 <span>email</span>
               </div>
               <div class="official-list">
-                {% for athlete in officialist%}
+                {% for official in officialist%}
                 <div class="school grid5">
-                  <a href="{%url 'athlete' athlete.id%}"
-                    ><span>{{athlete.name}} </span>
+                  <a href="{%url 'official' official.id%}"
+                    ><span>{{official.name}} </span>
                   </a>
-                  <span>{{athlete.role}} </span>
-                  <span>{{athlete.nin}} </span>
-                  <span>{{athlete.gender}}</span>
-                  <span>{{athlete.email}}</span>
+                  <span>{{official.role}} </span>
+                  <span>{{official.nin}} </span>
+                  <span>{{official.gender}}</span>
+                  <span>{{official.email}}</span>
                 </div>
                 <hr />
                 {%endfor%}

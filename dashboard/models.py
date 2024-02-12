@@ -43,15 +43,15 @@ class School(models.Model):
         null=True,
         blank=True,
     )
-    county = models.ForeignKey(
-        County,
+    municipality = models.ForeignKey(
+        Municipality,
         related_name="county",
         on_delete=models.CASCADE,
         null=True,
         blank=True,
     )
-    subcounty = models.ForeignKey(
-        Subcounty,
+    city = models.ForeignKey(
+        City,
         related_name="subcounty",
         on_delete=models.CASCADE,
         null=True,

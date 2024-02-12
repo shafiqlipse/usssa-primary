@@ -6,7 +6,12 @@ from .models import *
 from .filters import *
 from django.contrib import messages
 from django.http import JsonResponse
-from accounts.decorators import school_required, anonymous_required, staff_required
+from accounts.decorators import (
+    school_required,
+    anonymous_required,
+    staff_required,
+    login_required,
+)
 import traceback
 
 
@@ -63,7 +68,6 @@ def get_subcounties(request):
 # schools
 
 
-
 # schools list, tuple or array
 @staff_required
 def schools(request):
@@ -98,6 +102,7 @@ def schools(request):
 
 
 # Import the traceback module for logging
+
 
 @staff_required
 def Schoolnew(request):
@@ -135,6 +140,7 @@ def Schoolnew(request):
 
     context = {"form": form, "regions": regions}
     return render(request, "school/create_school.html", context)
+
 
 @staff_required
 def school_detail(request, id):
@@ -304,6 +310,7 @@ def zones(request):
     }
     return render(request, "dashboard/zones.html", context)
 
+
 @school_required
 def Dash(request):
     user = request.user
@@ -317,7 +324,8 @@ def Dash(request):
     }
     return render(request, "school/schoolprofile.html", context)
 
-@school_required
+
+@login_required
 def newAthlete(request):
     if request.method == "POST":
         form = NewAthleteForm(request.POST, request.FILES)
@@ -343,10 +351,7 @@ def newAthlete(request):
 def AthleteDetail(request, id):
     athlete = get_object_or_404(Athlete, id=id)
     relatedathletes = Athlete.objects.filter(school=athlete.school).exclude(id=id)
-    # breadcrumbs = [{'url': '/', 'name': 'Home'},
-    #                {'url': f'/team/{athlete.team.id}/', 'name': 'Category'},
-    #             #    {'url': f'/product/{product_id}/', 'name': 'Product'}
-    #             ]
+
     context = {
         "athlete": athlete,
         "relatedathletes": relatedathletes,
@@ -394,3 +399,33 @@ def athletes(request):
     }
 
     return render(request, "school/athletes.html", context)
+
+
+@staff_required
+def AthleteUpdate(request, id):
+    band = Athlete.objects.get(id=id)
+
+    if request.method == "POST":
+        form = NewAthleteForm(request.POST, instance=band)
+        if form.is_valid():
+            form.save()
+
+            return redirect("athletes")
+    else:
+        form = NewAthleteForm(instance=band)
+    context = {"form": form}
+    return render(request, "school/newAthlete.html", context)
+
+
+# # Athletes details......................................................
+def OfficialDetail(request, id):
+    official = get_object_or_404(school_official, id=id)
+    relatedathletes = school_official.objects.filter(school=official.school).exclude(id=id)
+
+    context = {
+        "official": official,
+        "relatedathletes": relatedathletes,
+        # "breadcrumbs": breadcrumbs,
+    }
+
+    return render(request, "school/official.html", context)

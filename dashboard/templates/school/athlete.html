@@ -8,17 +8,67 @@
 {% block content %}
 <div class="athlete-dew">
   <div class="athlete grid3">
-    <div class="img">
+    <div class="img glue">
       {% if athlete.photo %}
       <img src="{{athlete.photo.url}}" alt="" />
       {% else %}
       <img src="{% static 'images/profile.png'%}" alt="" />{% endif %}
     </div>
-    <div class="athlete-details">
-
+    <div class="athlete-details glue">
+      Athlete info
+      <hr>
+      <span
+        >Names:
+        <h3>{{athlete.fname}} {{athlete.lname}}</h3></span
+      >
+      <span
+        >LIN:
+        <h3>{{athlete.lin}}</h3></span
+      >
+      <span
+        >Sport:
+        <h3>{{athlete.sport}}</h3></span
+      >
+      <span
+        >Date of Birth:
+        <h3>{{athlete.date_of_birth}}</h3></span
+      >
+      <span
+        >Class:
+        <h3>{{athlete.classroom}}</h3></span
+      >
+      <span
+        >Status:
+        <h3>{{athlete.status}}</h3></span
+      >
     </div>
-    <div class="athlete-details">
-        
+    <div class="athlete-details glue">
+      <h3>Guardian Infor</h3>
+      <hr>
+      <span
+        >Names:
+        <h3>{{athlete.parent_fname}} {{athlete.Parent_lname}}</h3></span
+      >
+      <span
+        >NIN:
+        <h3>{{athlete.parent_nin}}</h3></span
+      >
+      <span
+        >Contact:
+        <h3>{{athlete.parent_phone_number}}</h3></span
+      >
+      <span
+        >Designation:
+        <h3>{{athlete.designation}}</h3></span
+      >
+      <span
+        >Address:
+        <h3>{{athlete.address}}</h3></span
+      >
+      <span
+        >Relationship:
+        <h3>{{athlete.relationship}}</h3></span
+      >
     </div>
   </div>
 </div>
