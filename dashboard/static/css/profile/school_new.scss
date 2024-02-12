@@ -23,50 +23,45 @@
     }
     .form-ctrl {
       .fields {
-        flex-direction: row-reverse;
-        @media (max-width: 768px) {
-          flex-direction: column-reverse;
-        }
-        .other-fields {
-          width: 65%;
-          @media (max-width: 768px) {
-            width: 100%;
-          }
-          padding: 20px;
-          .field-grid {
+        .left {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 20px;
+          .fiil {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
             .field {
-              flex-direction: column;
+              display: flex;
               align-items: flex-start;
+              justify-content: flex-start;
+              flex-direction: column;
+
               input,
-              select,
-              textarea {
+              select {
+                padding: 8px 10px;
+                border-radius: 3px;
                 width: 100%;
-                margin-bottom: 20px;
-                padding: 10px 0;
+                border: solid 1px rgba(49, 101, 255, 0.982);
               }
             }
           }
-        }
-        .left {
-          padding: 20px;
-          @media (max-width: 768px) {
-            width: 100%;
-          }
-          .field {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            img {
-              width: 100%;
-              height: 150px;
-              object-fit: cover;
-            }
-            input,
-            select,
-            textarea {
-              width: 100%;
-              margin-bottom: 20px;
-              padding: 10px 0;
+          .imgbox {
+            .field {
+              display: flex;
+              align-items: flex-start;
+              justify-content: flex-start;
+              flex-direction: column;
+              img {
+                width: 50%;
+              }
+              input,
+              select {
+                padding: 8px 10px;
+                border-radius: 3px;
+                width: 100%;
+                border: solid 1px rgba(49, 101, 255, 0.982);
+              }
             }
           }
         }
