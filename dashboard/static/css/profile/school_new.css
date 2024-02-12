@@ -30,13 +30,33 @@
 }
 .profile-update .school-long .form-ctrl .fields .left {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 300px 2fr;
   gap: 20px;
+}
+@media (max-width: 768px) {
+  .profile-update .school-long .form-ctrl .fields .left {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+@media (max-width: 508px) {
+  .profile-update .school-long .form-ctrl .fields .left {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
 .profile-update .school-long .form-ctrl .fields .left .fiil {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
+}
+@media (max-width: 768px) {
+  .profile-update .school-long .form-ctrl .fields .left .fiil {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+@media (max-width: 508px) {
+  .profile-update .school-long .form-ctrl .fields .left .fiil {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
 .profile-update .school-long .form-ctrl .fields .left .fiil .field {
   display: flex;
@@ -54,8 +74,8 @@
 .profile-update .school-long .form-ctrl .fields .left .imgbox .field {
   display: flex;
   align-items: flex-start;
-  justify-content: flex-start;
   flex-direction: column;
+  justify-content: center;
 }
 .profile-update .school-long .form-ctrl .fields .left .imgbox .field img {
   width: 50%;
