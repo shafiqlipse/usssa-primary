@@ -4,6 +4,7 @@ from dashboard.models import *
 
 # Register your models here.
 admin.site.register(User)
+admin.site.register(Age)
 admin.site.register(Sport)
 admin.site.register(Tournament)
 admin.site.register(Region)

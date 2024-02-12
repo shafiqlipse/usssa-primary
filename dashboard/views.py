@@ -332,11 +332,10 @@ def newAthlete(request):
         if form.is_valid():
             try:
                 new_athlete = form.save(commit=False)
-                new_athlete.school = request.user.school_profile.first()
+                new_athlete.school = request.user
                 new_athlete.save()
                 messages.success(request, "Athlete added successfully!")
                 return redirect("athletes")
-
             except Exception as e:
                 messages.error(request, f"Error adding athlete: {str(e)}")
         else:
@@ -345,6 +344,40 @@ def newAthlete(request):
         form = NewAthleteForm()
 
     return render(request, "school/newAthlete.html", {"form": form})
+
+from django.http import JsonResponse
+import datetime
+from django.contrib import messages
+def calculate_age_choices(request):
+    date_of_birth_str = request.GET.get("date_of_birth")
+
+    # Check if date_of_birth_str is None
+    if date_of_birth_str is None:
+        return JsonResponse({"error": "Date of birth is missing"}, status=400)
+
+    # Convert date_of_birth string to a datetime.date object
+    date_of_birth = datetime.datetime.strptime(date_of_birth_str, "%Y-%m-%d").date()
+
+    # Calculate the athlete's age based on the date of birth
+    current_year = datetime.date.today().year
+    calculated_age = (
+        current_year
+        - date_of_birth.year
+        - (
+            (datetime.date.today().month, datetime.date.today().day)
+            < (date_of_birth.month, date_of_birth.day)
+        )
+    )
+
+    # Filter the Age model to get age choices based on the calculated age
+    age_choices = Age.objects.filter(
+        min_age__lte=calculated_age, max_age__gte=calculated_age
+    ).values_list("id", "name")
+
+    # Prepare the JSON response
+    response_data = {"ages": list(age_choices)}
+
+    return JsonResponse(response_data)
 
 
 # # Athletes details......................................................
@@ -420,7 +453,9 @@ def AthleteUpdate(request, id):
 # # Athletes details......................................................
 def OfficialDetail(request, id):
     official = get_object_or_404(school_official, id=id)
-    relatedathletes = school_official.objects.filter(school=official.school).exclude(id=id)
+    relatedathletes = school_official.objects.filter(school=official.school).exclude(
+        id=id
+    )
 
     context = {
         "official": official,

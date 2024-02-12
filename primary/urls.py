@@ -13,7 +13,6 @@ urlpatterns = [
     path("dashboard/", Overview, name="dashboard"),
     path("school/", Dash, name="school_dashboard"),
     path("dashboard/", include("dashboard.urls")),
-    path("get_districts/", get_districts, name="get_districts"),
-    path("get_counties/", get_counties, name="get_counties"),
-    path("get_subcounties/", get_subcounties, name="get_subcounties"),
+
+    path("calculate_age_choices/", calculate_age_choices, name="calculate_age_choices"),
 ]
