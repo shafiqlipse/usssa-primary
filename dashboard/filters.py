@@ -18,3 +18,8 @@ class AthleteFilter(django_filters.FilterSet):
     class Meta:
         model = Athlete
         fields = ("fname", "sport", "classroom", "gender")
+
+class AthletesFilter(django_filters.FilterSet):
+    class Meta:
+        model = Athlete
+        fields = ("fname", "sport", "school", "gender")

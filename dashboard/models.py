@@ -58,6 +58,9 @@ class School(models.Model):
         blank=True,
     )
 
+    def __str__(self):
+        return self.school_name
+
 
 class school_official(models.Model):
     school = models.ForeignKey(School, related_name="school", on_delete=models.CASCADE)
@@ -74,8 +77,19 @@ class school_official(models.Model):
         blank=True,
     )
     role = models.CharField(
-        max_length=10,
-        choices=[("Manager", "Manager"), ("Medical", "Medical"), ("Coach", "Coach")],
+        max_length=40,
+        choices=[
+            ("Head Teacher", "Head Teacher"),
+            ("Games Teacher", "Games Teacher"),
+            ("Coach", "Coach"),
+            ("Teacher", "Teacher"),
+            ("Assistant Games Teacher", "Assistant Games Teacher"),
+            ("Assistant Head Teacher", "Assistant Head Teacher"),
+            ("Nurse", "Nurse"),
+            ("Doctor", "Doctor"),
+            ("District Education Officer", "District Education Officer"),
+            ("District Sports Officer", "District Sports Officer"),
+        ],
         null=True,
         blank=True,
     )
@@ -139,9 +153,11 @@ class Athlete(models.Model):
     mname = models.CharField(max_length=255)
     lname = models.CharField(max_length=255)
     lin = models.CharField(max_length=255)
-  
+
     sport = models.ForeignKey(Sport, related_name="sport", on_delete=models.CASCADE)
-    school = models.ForeignKey(School, related_name="schooler", on_delete=models.CASCADE)
+    school = models.ForeignKey(
+        School, related_name="schooler", on_delete=models.CASCADE
+    )
     date_of_birth = models.DateField()
     gender = models.CharField(
         choices=[("Male", "male"), ("Female", "female")], max_length=10
@@ -186,4 +202,4 @@ class Athlete(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.name
+        return self.fname

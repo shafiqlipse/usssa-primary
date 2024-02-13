@@ -8,6 +8,7 @@ from .views import *
 urlpatterns = [
     # venues
     path("schools/", schools, name="schools"),
+    path("all_athletes/", all_athletes, name="athletex"),
     path("tournaments/", Tournaments, name="tournaments"),
     path("districts/", districts, name="districts"),
     path("zones/", zones, name="zones"),
