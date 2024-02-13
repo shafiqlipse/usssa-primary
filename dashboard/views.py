@@ -40,7 +40,6 @@ def Overview(request):
     return render(request, "dashboard/overview.html", context)
 
 
-
 # schools
 
 
@@ -313,6 +312,7 @@ def newAthlete(request):
                 messages.success(request, "Athlete added successfully!")
                 return redirect("athletes")
             except Exception as e:
+                print(f"Error adding athlete: {str(e)}")  # Add this line for debugging
                 messages.error(request, f"Error adding athlete: {str(e)}")
         else:
             messages.error(request, "Form is not valid. Please check your input.")
@@ -321,9 +321,12 @@ def newAthlete(request):
 
     return render(request, "school/newAthlete.html", {"form": form})
 
+
 from django.http import JsonResponse
 import datetime
 from django.contrib import messages
+
+
 def calculate_age_choices(request):
     date_of_birth_str = request.GET.get("date_of_birth")
 
