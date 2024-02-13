@@ -8,7 +8,6 @@ from django.contrib import messages
 from django.http import JsonResponse
 from accounts.decorators import (
     school_required,
-    anonymous_required,
     staff_required,
     login_required,
 )
@@ -40,29 +39,6 @@ def Overview(request):
     }
     return render(request, "dashboard/overview.html", context)
 
-
-# schools
-# Create your views here.
-def get_districts(request):
-    region_id = request.GET.get("region_id")
-    districts = District.objects.filter(region_id=region_id).values("id", "name")
-    return JsonResponse(list(districts), safe=False)
-
-
-# schools
-# Create your views here.
-def get_counties(request):
-    district_id = request.GET.get("district_id")
-    counties = County.objects.filter(district_id=district_id).values("id", "name")
-    return JsonResponse(list(counties), safe=False)
-
-
-# schools
-# Create your views here.
-def get_subcounties(request):
-    county_id = request.GET.get("county_id")
-    subcounties = Subcounty.objects.filter(county_id=county_id).values("id", "name")
-    return JsonResponse(list(subcounties), safe=False)
 
 
 # schools
