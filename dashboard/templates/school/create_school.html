@@ -7,9 +7,8 @@
     <link rel="icon" href="{%static 'images/upsa.png'%}" sizes="35x35" />
     <link rel="stylesheet" href="{% static 'css/profile/school_new.css'%}" />
     <link rel="stylesheet" href="{% static 'css/main/main.css'%}" />
-    <link href="{% static 'django_select2/select2.css' %}" rel="stylesheet" />
     <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/css/select2.min.css"
+      href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
       rel="stylesheet"
     />
   </head>
@@ -95,13 +94,17 @@
         </form>
       </div>
     </div>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
     <script>
       $(document).ready(function () {
-        $("id_region").select2();
+        $("#id_district,#id_region,#id_municipality,#id_city").select2();
       });
     </script>
-    <script src="{% static 'django_select2/select2.js' %}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="{% static 'scripts/app.js'%}"></script>
   </body>
 </html>

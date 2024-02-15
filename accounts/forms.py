@@ -32,7 +32,11 @@ class SchoolProfileForm(forms.ModelForm):
             "city",
         ]
 
-        widgets = {"region": Select2Widget}
+        widgets = {
+            "city": Select2Widget,
+            "district": Select2Widget,
+            "municipality": Select2Widget,
+        }
 
     def __init__(self, *args, **kwargs):
         super(SchoolProfileForm, self).__init__(*args, **kwargs)
