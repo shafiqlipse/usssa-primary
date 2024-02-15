@@ -13,9 +13,15 @@
     <link rel="stylesheet" href="{% static 'css/profile/school_new.css'%}" />
     <link rel="stylesheet" href="{% static 'css/profile/athlete.css'%}" />
     <link rel="stylesheet" href="{% static 'css/profile/athletes.css'%}" />
-
+    <link href="path/to/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{% static 'css/profile/newAthlete.css'%}" />
+    <link href="path/to/select2.min.css" rel="stylesheet" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/css/select2.min.css"
+      rel="stylesheet"
+    />
   </head>
+
   <body>
     <div class="dashboard-main light">
       <div class="inner-dashboard flex">
@@ -155,6 +161,13 @@
         </div>
       </div>
     </div>
+    <script>
+      $(document).ready(function () {
+        $("#mySelect").select2();
+      });
+    </script>
+    <script src="path/to/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
       const sidebar = document.querySelector(".sidebar-main");
 
