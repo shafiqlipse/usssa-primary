@@ -8,7 +8,7 @@
 <div class="schools-dew">
   <div class="head flex">
     <h3>Schools</h3>
-    
+    <a href="{% url 'pdfreport'%}" class="btn-green">generate report</a>
   </div>
 
   <div class="filterlist glue">
@@ -54,6 +54,9 @@
         <span>{{school.sport}}</span>
         <span>{{school.gender}} </span>
         <span>{{school.age}}</span>
+        <span>
+          <a href="{% url 'updateathlete' school.id%}"><i class="fa fa-pencil"></i></a
+                ></span>
       </div>
     
       {%endfor%}

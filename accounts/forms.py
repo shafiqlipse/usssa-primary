@@ -2,6 +2,21 @@ from django import forms
 from dashboard.models import *
 from accounts.models import User
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
+from django_select2 import forms as s2forms
+
+
+class DistWidget(s2forms.ModelSelect2Widget):
+    search_fields = [
+        "name__icontains",
+    ]
+
+
+class MunisWidget(s2forms.ModelSelect2MultipleWidget):
+    search_fields = ["name__icontains"]
+
+
+class citWidget(s2forms.ModelSelect2MultipleWidget):
+    search_fields = ["name__icontains"]
 
 
 class SchoolRegistrationForm(UserCreationForm):
@@ -30,6 +45,11 @@ class SchoolProfileForm(forms.ModelForm):
             "municipality",
             "city",
         ]
+        widgets = {
+            "district": DistWidget,
+            "municipality": MunisWidget,
+            "city": citWidget,
+        }
 
     def __init__(self, *args, **kwargs):
         super(SchoolProfileForm, self).__init__(*args, **kwargs)
@@ -87,3 +107,10 @@ class NewAthleteForm(forms.ModelForm):
         }
 
 
+# class AthleteFilterForm(forms.Form):
+#     school = forms.ModelChoiceField(
+#         queryset=School.objects.all(), empty_label="Select a school"
+#     )
+#     tournament = forms.ModelChoiceField(
+#         queryset=Tournament.objects.all(), empty_label="Select a competition"
+#     )

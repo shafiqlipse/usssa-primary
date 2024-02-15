@@ -6,13 +6,15 @@ from accounts.views import *
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", user_login, name="login"),
-    path('change_password/', change_password, name='change_password'),
+    path("change_password/", change_password, name="change_password"),
     # path("login/", user_login, name="login"),
     path("register/", school_registration, name="register"),
     path("logout/", user_logout, name="logout"),
     path("dashboard/", Overview, name="dashboard"),
     path("school/", Dash, name="school_dashboard"),
     path("dashboard/", include("dashboard.urls")),
-
+    # path("pdf_report/", some_view, name="pdfreport"),
+    # path("album/", album, name="album"),
+    path("select2/", include("django_select2.urls")),
     path("calculate_age_choices/", calculate_age_choices, name="calculate_age_choices"),
 ]
