@@ -1,7 +1,7 @@
 .dashboard-main {
   padding: 20px;
 }
-@media (max-width: 600px) {
+@media (max-width: 700px) {
   .dashboard-main {
     padding: 10px;
   }
@@ -119,7 +119,7 @@
 }
 @media (max-width: 600px) {
   .dashboard-main .inner-dashboard .content-main {
-    padding: 10px;
+    padding: 0;
   }
 }
 .dashboard-main .inner-dashboard .content-main .top-nav {
@@ -129,6 +129,11 @@
   z-index: 990;
   padding: 10px 20px;
   border-radius: 10px;
+}
+@media (max-width: 990px) {
+  .dashboard-main .inner-dashboard .content-main .top-nav {
+    padding: 10px;
+  }
 }
 .dashboard-main .inner-dashboard .content-main .top-nav .sidebar-toggle {
   font-size: 2em;
@@ -149,6 +154,10 @@
 .dashboard-main .inner-dashboard .content-main .top-nav .school-id h3 {
   font-size: 15px;
   margin-left: 20px;
+}
+.dashboard-main .inner-dashboard .content-main .top-nav .school-id h1 {
+  font-size: 16px;
+  text-transform: capitalize;
 }
 .dashboard-main .inner-dashboard .content-main .top-nav .search-form {
   width: 40%;
@@ -212,6 +221,11 @@
 }
 .dashboard-main .inner-dashboard .content-main .content {
   margin: 20px 0;
+}
+@media (max-width: 990px) {
+  .dashboard-main .inner-dashboard .content-main .content {
+    padding: 0;
+  }
 }
 .dashboard-main .inner-dashboard .content-main .content .footer {
   padding: 20px;

@@ -3,16 +3,18 @@
   .school-box {
     padding: 20px;
     border-radius: 5px;
-    // width: 330px;
-    // background-color: inherit;
+    font-size: 80%;
     .attr {
       display: grid;
-      grid-template-columns: 90px 1fr;
+      grid-template-columns: 190px 1fr;
       margin: 15px 0;
       font-weight: bold;
-      text-transform: uppercase;
+      text-transform: capitalize;
       span {
         font-weight: 400;
+      }
+      @media (max-width: 990px) {
+        grid-template-columns: 100px 1fr;
       }
     }
   }
@@ -23,6 +25,9 @@
     background-color: rgba(63, 63, 63, 0.071);
     backdrop-filter: blur(2em);
     padding: 100px;
+    @media (max-width: 990px) {
+      padding: 10px;
+    }
     .lop {
       font-size: 2em;
       padding: 10px;
@@ -97,6 +102,9 @@
                 width: 100%;
                 border-collapse: collapse;
                 margin: 10px 0;
+                @media (max-width: 790px) {
+                  display: none;
+                }
                 .formis {
                   margin: 10px;
                   .field {
@@ -125,13 +133,20 @@
                 text-transform: uppercase;
                 font-weight: 600;
               }
-
+              .grid05 {
+                display: grid;
+                grid-template-columns: repeat(5, 1fr);
+              }
               .official-list {
                 width: 100%;
                 padding: 10px;
                 border-collapse: collapse;
                 text-transform: uppercase;
+
                 .school {
+                  @media (max-width: 700px) {
+                    width: 100%;
+                  }
                   img {
                     width: 40px;
                     height: 30px;

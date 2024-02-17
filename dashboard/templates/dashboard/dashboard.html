@@ -13,9 +13,7 @@
     <link rel="stylesheet" href="{% static 'css/profile/school_new.css'%}" />
     <link rel="stylesheet" href="{% static 'css/profile/athlete.css'%}" />
     <link rel="stylesheet" href="{% static 'css/profile/athletes.css'%}" />
-    <link href="path/to/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{% static 'css/profile/newAthlete.css'%}" />
-    <link href="path/to/select2.min.css" rel="stylesheet" />
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/css/select2.min.css"
       rel="stylesheet"
@@ -133,9 +131,6 @@
             </div>
             <div class="school-id flex">
               <img src="{% static 'images/upsa.png'%}" alt="" />
-              {% if user.is_school %} {% else %}
-              <h1>{{user}}</h1>
-              {% endif %}
             </div>
 
             <div class="controls flex glue">
@@ -161,12 +156,17 @@
         </div>
       </div>
     </div>
-    {% comment %} <script>
+
+    {% comment %} <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script> {% endcomment %}
+    <script>
       $(document).ready(function () {
-        $("#mySelect").select2();
-      }); {% endcomment %}
+        $("#id_region,#id_district,#sport,#id_school").select2();
+      });
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
       const sidebar = document.querySelector(".sidebar-main");
 
@@ -186,5 +186,6 @@
       document.getElementById("cog").addEventListener("click", SideToggle);
     </script>
     <script src="{% static 'scripts/app.js'%}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   </body>
 </html>

@@ -1,7 +1,7 @@
 .dashboard-main {
   padding: 20px;
   // background-color: inherit;
-  @media (max-width: 600px) {
+  @media (max-width: 700px) {
     padding: 10px;
   }
   .inner-dashboard {
@@ -116,7 +116,7 @@
       padding: 0 20px;
       position: relative;
       @media (max-width: 600px) {
-        padding: 10px;
+        padding: 0;
       }
       .top-nav {
         width: 100%;
@@ -125,6 +125,9 @@
         z-index: 990;
         // background-color: inherit;
         padding: 10px 20px;
+        @media (max-width: 990px) {
+          padding: 10px;
+        }
         border-radius: 10px;
         // padding: 10px;
         .sidebar-toggle {
@@ -143,6 +146,10 @@
           h3 {
             font-size: 15px;
             margin-left: 20px;
+          }
+          h1 {
+            font-size: 16px;
+            text-transform: capitalize;
           }
         }
         .search-form {
@@ -206,7 +213,10 @@
       }
       .content {
         margin: 20px 0;
-        .footer{
+        @media (max-width: 990px) {
+          padding: 0;
+        }
+        .footer {
           padding: 20px;
         }
       }

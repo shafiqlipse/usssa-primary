@@ -76,7 +76,17 @@
   </div>
 
 
-
+  <div class="school-box glue">
+    <div class="attr"><span>Name : </span>{{school.school_name}}</div>
+    <div class="attr"><span>EMIS : </span>{{school.EMIS}}</div>
+    <div class="attr">
+      <span>Center Number : </span>{{school.center_number}}
+    </div>
+    <div class="attr"><span>Region : </span>{{school.region}}</div>
+    <div class="attr"><span>District : </span>{{school.district}}</div>
+    <div class="attr"><span>Municipality : </span>{{school.municipality}}</div>
+    <div class="attr"><span>City : </span>{{school.city}}</div>
+  </div>
 
   <div class="dextails">
     <div class="tabs-section">
@@ -109,17 +119,17 @@
                   <button type="submit" class="btn-submit">filter</button>
                 </form>
               </div>
-              <div class="titles grid6">
+              <div class="titles grid05">
                 <span>Photo</span>
                 <span>name</span>
                 <span>sport</span>
                 <span>lin</span>
                 <span>gender</span>
-                <span>Actions</span>
+                
               </div>
               <div class="official-list">
                 {% for athlete in athletelist%}
-                <div class="school grid6">
+                <div class="school grid05">
                   <img src="{%static 'images/profile.png'%}" alt="" />
                   
                   <a href="{%url 'athlete' athlete.id%}"
@@ -128,7 +138,8 @@
                   <span>{{athlete.sport}} </span>
                   <span>{{athlete.lin}} </span>
                   <span>{{athlete.gender}}</span>
-                  <span><a href="{% url 'updateathlete' athlete.id%}"><i class="fa fa-pencil"></i></a></span>
+                  <!--<span><a href="{% url 'updateathlete' athlete.id%}"><i class="fa fa-pencil"></i></a></span>
+                  -->
                 </div>
                 <hr />
                 {%endfor%}
@@ -158,7 +169,7 @@
                   <button type="submit" class="btn-submit">filter</button>
                 </form>
               </div>
-              <div class="titles grid5">
+              <div class="titles grid05">
                 <span>name</span>
                 <span>role</span>
                 <span>nin</span>
@@ -167,7 +178,7 @@
               </div>
               <div class="official-list">
                 {% for official in officialist%}
-                <div class="school grid5">
+                <div class="school grid05">
                   <a href="{%url 'official' official.id%}"
                     ><span>{{official.name}} </span>
                   </a>
