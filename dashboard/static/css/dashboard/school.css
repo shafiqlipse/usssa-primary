@@ -162,7 +162,10 @@
   color: inherit;
   font-size: 15px;
   font-weight: 400;
-  text-transform: capitalize;
+  text-transform: normal;
+}
+.soverview .dextails .tabs-section .tabs-container .content .tabpanel .athletelist .official-list .school span:nth-child(5) {
+  text-transform: lowercase;
 }
 .soverview .dextails .tabs-section .tabs-container .content .tabpanel .athletelist .official-list .school:hover {
   background-color: rgba(59, 59, 59, 0.1058823529);
