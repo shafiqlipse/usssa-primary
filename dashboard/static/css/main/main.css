@@ -25,37 +25,8 @@ a {
   font-size: 17px;
 }
 
-.light {
-  color: black;
-  background-color: rgb(224, 224, 224);
-}
-.light input,
-.light select,
-.light textarea {
-  background-color: white;
-  border: solid 0.3px rgb(0, 0, 0) !important;
-  color: black;
-  padding: 10px;
-}
-.light .glue {
+.glue {
   background-color: #fff;
-  border-radius: 10px;
-}
-
-.dark {
-  color: white;
-  background-color: rgb(13, 1, 58);
-}
-.dark input,
-.dark select,
-.dark textarea {
-  background-color: rgb(1, 18, 86);
-  border: solid 0.3px white !important;
-  color: white;
-  padding: 10px;
-}
-.dark .glue {
-  background-color: #010f51;
   border-radius: 10px;
 }
 
