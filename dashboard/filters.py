@@ -15,6 +15,11 @@ class schoolsFilter(django_filters.FilterSet):
         fields = ("school_name", "EMIS", "region", "district")
 
 
+class districtsFilter(django_filters.FilterSet):
+    class Meta:
+        model = District
+        fields = ("id", "name")
+
 
 class AthleteFilter(django_filters.FilterSet):
     class Meta:

@@ -261,8 +261,27 @@ def districts(request):
 
     districts = District.objects.all()
 
+    # schoolFilter = schoolFilter(request.GET, queryset=schools)
+    myFilter = districtsFilter(request.GET, queryset=districts)
+
+    districtslist = myFilter.qs
+
+    items_per_page = 10
+
+    paginator = Paginator(districtslist, items_per_page)
+    page = request.GET.get("page")
+
+    try:
+        districtslist = paginator.page(page)
+    except PageNotAnInteger:
+        # If the page is not an integer, deliver the first page
+        districtslist = paginator.page(1)
+    except EmptyPage:
+        # If the page is out of range, deliver the last page
+        districtslist = paginator.page(paginator.num_pages)
+ 
     context = {
-      "districts": districts,
+      "districtslist": districtslist,"myFilter": myFilter,
     }
     return render(request, "dashboard/districts.html", context)
 

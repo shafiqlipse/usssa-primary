@@ -1,19 +1,68 @@
 {% extends "dashboard/dashboard.html" %}
-<!---->
-{% load static %}
-<!---->
-{%block title%}Districts{% endblock %}
-<!---->
-{% block content %}
-<div class="overview">
-  <h1>Districts</h1>
 
-  <ul class="districts">
-    {% for district in districts %}
-    <div class="district">
-      {{district.name}} {{district.school_set.all.count}}
+<!--static-->
+{% block title %}Athletes{% endblock %}
+<!--static-->
+{% load static %}
+<!--khfufufu-->
+{% block content %}
+<div class="schools-dew">
+  <div class="head flex">
+    <h1>Districts</h1>
+  </div>
+  <div class="filterlist glue">
+    <div class="lo">
+      <div class="filter">
+        <form action="" method="get" class="formis grid4">
+          <div class="field flex">
+            <label>Name</label>
+            {{myFilter.form.name}}
+          </div>
+          <button type="submit" class="btn-submit">filter</button>
+        </form>
+      </div>
+      <div class="table-responsive">
+        <table class="table custom-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>name</th>
+              <th>Schools</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for athlete in districtslist%}
+            <tr>
+              <td>{{athlete.id}}</td>
+              <td>{{athlete.name}}</td>
+              <td>{{athlete.school_set.all.count}}</td>
+            </tr>
+            {%endfor%}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pagination">
+        <span class="step-links">
+          {% if districtslist.has_previous %}
+          <a href="?page=1">&laquo; first</a>
+          <a href="?page={{ districtslist.previous_page_number }}">previous</a>
+          {% endif %}
+
+          <span class="current">
+            Page {{districtslist.number }} of
+            {{districtslist.paginator.num_pages}}
+          </span>
+
+          {% if officiallist.has_next %}
+          <a href="?page={{ districtslist.next_page_number }}">next</a>
+          <a href="?page={{ districtslist.paginator.num_pages }}"
+            >last &raquo;</a
+          >
+          {% endif %}
+        </span>
+      </div>
     </div>
-    {% endfor %}
-  </ul>
+  </div>
 </div>
 {% endblock %}
