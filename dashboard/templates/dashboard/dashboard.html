@@ -10,10 +10,10 @@
     <link
       rel="apple-touch-icon"
       sizes="76x76"
-      href="{% static 'images/logo.png'%}"
+      href="{% static 'images/upsa.png'%}"
     />
     <link rel="icon" type="image/png" href="{% static 'images/logo.png'%}" />
-    <title>CONNECT | {% block title %}{% endblock%}</title>
+    <title>UPSSA | {% block title %}{% endblock%}</title>
 
     <link href="{% static 'assets/css/nucleo-icons.css" rel="stylesheet'%}" />
     <link href="{% static 'assets/css/nucleo-svg.css" rel="stylesheet'%}" />
@@ -105,7 +105,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white" href="">
+            <a class="nav-link text-white" href="{%url 'officials'  %}">
               <div
                 class="text-white text-center me-2 d-flex align-items-center justify-content-center"
               >
@@ -203,7 +203,7 @@
           </li>
         </ul>
         {% if user.is_school %}
-        <div class="c-support">
+        <!--<div class="c-support">
           <div class="support flex">
             <p>
               If you have any problems managing your dashboard, Try contacting
@@ -211,7 +211,7 @@
             </p>
             <button class="btn-support">Contact</button>
           </div>
-        </div>
+        </div>-->
         {% endif %}
       </div>
     </aside>
@@ -535,7 +535,7 @@
       </div>
     </div>
     <!--   Select2   -->
-     <script>
+    <script>
       $(document).ready(function () {
         $("#id_region,#id_district,#sport,#id_school").select2();
       });
@@ -562,6 +562,5 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="{% static 'assets/js/material-dashboard.min.js'%}"></script>
-  
   </body>
 </html>

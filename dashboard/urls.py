@@ -11,10 +11,11 @@ urlpatterns = [
     path("all_athletes/", all_athletes, name="athletex"),
     path("tournaments/", Tournaments, name="tournaments"),
     path("districts/", districts, name="districts"),
-    path("zones/", zones, name="zones"),
+    path("zones/", municipalities, name="zones"),
     path("addschool/", Schoolnew, name="new_school"),
     path("school/<int:id>", school_detail, name="schooldetail"),
     path("athletes", athletes, name="athletes"),
+    path("officials", school_offs, name="officials"),
     path("athlete/<int:id>", AthleteDetail, name="athlete"),
     path("official/<int:id>", OfficialDetail, name="official"),
     path("updateathlete/<int:id>", AthleteUpdate, name="updateathlete"),
@@ -24,4 +25,10 @@ urlpatterns = [
     # path("deleteofficial/<int:id>", delete_official, name="deleteofficial"),
     # path("officials/", officials, name="officials"),
     # competition
+    
+    path('athlete-list/', athlete_list, name='athlete_list'),
+    path('payment-page/', payment_page, name='payment_page'),
+    path('process-payment/', process_payment, name='process_payment'),  # Add this line
+
+    # Add more URLs as ne
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

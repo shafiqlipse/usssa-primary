@@ -1,0 +1,7 @@
+<!-- templates/payment_page.html -->
+<h2>Payment Details</h2>
+<p>Total Amount: {{ payment.total_amount }}</p>
+<form method="post" action="{% url 'process_payment' %}">
+  {% csrf_token %}
+  <button type="submit">Process Payment</button>
+</form>

@@ -1,0 +1,77 @@
+{% extends "dashboard/dashboard.html" %}
+
+<!--static-->
+{% block title %}offss{% endblock %}
+<!--static-->
+{% load static %}
+<!--khfufufu-->
+{% block content %}
+<div class="schools-dew">
+  <div class="head flex">
+    <h1>Officials</h1>
+  </div>
+  <div class="filterlist glue">
+    <div class="lo">
+      <div class="filter">
+        <form action="" method="get" class="formis grid3">
+          <div class="field flex">
+            <label>{{myFilter.form.role.label}}</label>
+            {{myFilter.form.role}}
+          </div>
+          <div class="field flex">
+            <label>{{myFilter.form.gender.label}}</label>
+            {{myFilter.form.gender}}
+          </div>
+          <button type="submit" class="btn-submit">filter</button>
+        </form>
+      </div>
+      <div class="table-responsive">
+        <table class="table custom-table">
+          <thead>
+            <tr>
+              <th>names</th>
+              <th>nin</th>
+              <th>email</th>
+              <th>role</th>
+              <th>gender</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for offs in offslist%}
+            <tr>
+              <td>
+                <a href="{% url 'official' offs.id%}"
+                  ><span>{{offs.name}} </span>
+                </a>
+              </td>
+              <td>{{offs.phone_number}}</td>
+              <td>{{offs.email}}</td>
+              <td>{{offs.role}}</td>
+              <td>{{offs.gender}}</td>
+            </tr>
+            {%endfor%}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pagination">
+        <span class="step-links">
+          {% if offslist.has_previous %}
+          <a href="?page=1">&laquo; first</a>
+          <a href="?page={{ offslist.previous_page_number }}">previous</a>
+          {% endif %}
+
+          <span class="current">
+            Page {{offslist.number }} of {{offslist.paginator.num_pages}}
+          </span>
+
+          {% if officiallist.has_next %}
+          <a href="?page={{ offslist.next_page_number }}">next</a>
+          <a href="?page={{ offslist.paginator.num_pages }}">last &raquo;</a>
+          {% endif %}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

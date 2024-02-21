@@ -15,6 +15,8 @@
   <body>
     <div class="profile-update">
       <div class="school-long">
+        <h2>Create School</h2>
+        <hr />
         <form
           action=""
           method="POST"
@@ -22,8 +24,8 @@
           enctype="multipart/form-data"
         >
           {% csrf_token %}
-          <div class="fields flex">
-            <div class="left grid2">
+          <div class="fields">
+            <div class="left">
               <div class="imgbox">
                 <div class="field">
                   <label>{{form.badge.label}} </label>
@@ -101,5 +103,10 @@
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="{% static 'scripts/app.js'%}"></script>
+    <script>
+      $(document).ready(function () {
+        $("#id_region,#id_district,#id_municipality,#id_city").select2();
+      });
+    </script>
   </body>
 </html>

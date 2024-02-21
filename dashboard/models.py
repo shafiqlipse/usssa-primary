@@ -184,6 +184,8 @@ class Athlete(models.Model):
         null=True,
         blank=True,
     )
+    is_paid = models.BooleanField(default=False, null=True, blank=True,)  # New field to track payment status
+
     status = models.CharField(
         max_length=10,
         choices=[("Active", "Active"), ("Inactive", "Inactive")],
@@ -203,3 +205,9 @@ class Athlete(models.Model):
 
     def __str__(self):
         return self.fname
+
+
+class Payment(models.Model):
+    athletes = models.ManyToManyField(Athlete)
+    total_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    is_paid = models.BooleanField(default=False)

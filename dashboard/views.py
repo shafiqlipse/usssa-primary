@@ -3,6 +3,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from accounts.models import *
 from accounts.forms import *
 from .models import *
+from .forms import *
 from .filters import *
 from django.contrib import messages
 from django.http import JsonResponse
@@ -38,7 +39,6 @@ def Overview(request):
         "officials_gcount": officials_gcount,
     }
     return render(request, "dashboard/overview.html", context)
-
 
 
 # schools
@@ -259,63 +259,22 @@ def Tournaments(request):
 # schools list, tuple or array
 def districts(request):
 
-    # schools = school.objects.all()
+    districts = District.objects.all()
 
-    # # schoolFilter = schoolFilter(request.GET, queryset=schools)
-    # myFilter = schoolFilter(request.GET, queryset=schools)
-
-    # schoollist = myFilter.qs
-
-    # items_per_page = 10
-
-    # paginator = Paginator(schoollist, items_per_page)
-    # page = request.GET.get("page")
-
-    # try:
-    #     schoollist = paginator.page(page)
-    # except PageNotAnInteger:
-    #     # If the page is not an integer, deliver the first page
-    #     schoollist = paginator.page(1)
-    # except EmptyPage:
-    #     # If the page is out of range, deliver the last page
-    #     schoollist = paginator.page(paginator.num_pages)
     context = {
-        #     "schoollist": schoollist,
-        #     # "teamsFilter": teamsFilter,
-        #     "myFilter": myFilter,
-        #     # "teamlist": teamlist,
+      "districts": districts,
     }
     return render(request, "dashboard/districts.html", context)
 
 
 # schools list, tuple or array
-def zones(request):
+def municipalities(request):
 
-    # schools = school.objects.all()
+    municipalities = Municipality.objects.all()
 
-    # # schoolFilter = schoolFilter(request.GET, queryset=schools)
-    # myFilter = schoolFilter(request.GET, queryset=schools)
-
-    # schoollist = myFilter.qs
-
-    # items_per_page = 10
-
-    # paginator = Paginator(schoollist, items_per_page)
-    # page = request.GET.get("page")
-
-    # try:
-    #     schoollist = paginator.page(page)
-    # except PageNotAnInteger:
-    #     # If the page is not an integer, deliver the first page
-    #     schoollist = paginator.page(1)
-    # except EmptyPage:
-    #     # If the page is out of range, deliver the last page
-    #     schoollist = paginator.page(paginator.num_pages)
     context = {
-        #     "schoollist": schoollist,
-        #     # "teamsFilter": teamsFilter,
-        #     "myFilter": myFilter,
-        #     # "teamlist": teamlist,
+           "municipalities": municipalities,
+   
     }
     return render(request, "dashboard/zones.html", context)
 
@@ -354,9 +313,12 @@ def newAthlete(request):
 
     return render(request, "school/newAthlete.html", {"form": form})
 
+
 from django.http import JsonResponse
 import datetime
 from django.contrib import messages
+
+
 def calculate_age_choices(request):
     date_of_birth_str = request.GET.get("date_of_birth")
 
@@ -443,6 +405,46 @@ def athletes(request):
     return render(request, "school/athletes.html", context)
 
 
+# @login_required(login_url="login")
+def school_offs(request):
+    user = request.user
+    school_profile = (
+        user.school_profile.first()
+    )  # Retrieve the first related School object
+    if school_profile:
+        school_id = school_profile.id
+        school_offs = school_official.objects.filter(school_id=school_id)
+    else:
+        # Handle the case where the user is not associated with any school
+        school_offs = school_official.objects.none()
+    # officialFilter = OfficialFilter(request.GET, queryset=officials)
+    myFilter = OfficialFilter(request.GET, queryset=school_offs)
+
+    offslist = myFilter.qs
+
+    items_per_page = 10
+
+    paginator = Paginator(offslist, items_per_page)
+    page = request.GET.get("page")
+
+    try:
+        offslist = paginator.page(page)
+    except PageNotAnInteger:
+        # If the page is not an integer, deliver the first page
+        offslist = paginator.page(1)
+    except EmptyPage:
+        # If the page is out of range, deliver the last page
+        offslist = paginator.page(paginator.num_pages)
+    context = {
+        "offslist": offslist,
+        # "teamsFilter": teamsFilter,
+        "myFilter": myFilter,
+        # "teamlist": teamlist,
+    }
+
+    return render(request, "school/officials.html", context)
+
+
 @staff_required
 def AthleteUpdate(request, id):
     band = Athlete.objects.get(id=id)
@@ -473,3 +475,53 @@ def OfficialDetail(request, id):
     }
 
     return render(request, "school/official.html", context)
+
+
+def athlete_list(request):
+    athletes = Athlete.objects.all()
+    form = AthleteSelectionForm()
+
+    if request.method == "POST":
+        form = AthleteSelectionForm(request.POST)
+        if form.is_valid():
+            selected_athletes = form.cleaned_data["athletes"]
+            total_amount = 1500 * len(selected_athletes)
+
+            # Update the payment total_amount
+            payment, created = Payment.objects.get_or_create(is_paid=False)
+            payment.total_amount += total_amount
+            payment.save()
+
+            # Add selected athletes to the payment without deleting them
+            payment.athletes.add(*selected_athletes)
+
+            # Mark selected athletes as paid
+            Athlete.objects.filter(
+                pk__in=[athlete.pk for athlete in selected_athletes]
+            ).update(is_paid=True)
+
+            return redirect("payment_page")
+
+    context = {"athletes": athletes, "form": form}
+    return render(request, "school/athlete_list.html", context)
+
+
+def payment_page(request):
+    payment = Payment.objects.filter(is_paid=False).first()
+    context = {"payment": payment}
+    return render(request, "school/payment_page.html", context)
+
+
+def process_payment(request):
+    # Retrieve the payment record for processing
+    payment = Payment.objects.filter(is_paid=False).first()
+
+    if payment:
+        # Process payment logic here (e.g., connect to payment gateway API, mark payment as paid)
+        # ...
+
+        # After successful payment processing, mark the payment as paid
+        payment.is_paid = True
+        payment.save()
+
+    return redirect("payment_page")

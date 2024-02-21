@@ -1,0 +1,14 @@
+<!-- templates/athlete_list.html -->
+<form method="post" action="{% url 'athlete_list' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add to Payment</button>
+  </form>
+  
+  <h2>Athlete List</h2>
+  <ul>
+    {% for athlete in athletes %}
+      <li>{{ athlete.name }}</li>
+    {% endfor %}
+  </ul>
+  
