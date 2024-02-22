@@ -54,11 +54,16 @@
             {{districtslist.paginator.num_pages}}
           </span>
 
-          {% if officiallist.has_next %}
+          {% if districtslist.has_next %}
           <a href="?page={{ districtslist.next_page_number }}">next</a>
+          {% for page_num in districtslist.paginator.page_range %}
+          <a href="?page={{ page_num }}" class="btn-green">{{ page_num }}</a>
+          {% endfor %}
           <a href="?page={{ districtslist.paginator.num_pages }}"
             >last &raquo;</a
           >
+          {% endif %} {% if districtslist.has_next %}
+          <!---->
           {% endif %}
         </span>
       </div>
