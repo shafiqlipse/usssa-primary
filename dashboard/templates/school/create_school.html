@@ -24,7 +24,8 @@
           enctype="multipart/form-data"
         >
           {% csrf_token %}
-          <div class="fields">
+          {{form.as_p}}
+          <!--<div class="fields">
             <div class="left">
               <div class="imgbox">
                 <div class="field">
@@ -84,7 +85,7 @@
                   <label for="subcounty">{{form.city.label }}</label>
                   {{form.city}}
                 </div>
-                <button type="submit" class="btn-submit">Save profile</button>
+                
               </div>
             </div>
           </div>
@@ -92,7 +93,8 @@
           <div class="alert alert-danger">
             {{ form.non_field_errors.as_ul }}
           </div>
-          {% endif %}
+          {% endif %}-->
+          <button type="submit" class="btn-submit">Save profile</button>
         </form>
       </div>
     </div>

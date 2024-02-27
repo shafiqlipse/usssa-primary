@@ -6,11 +6,18 @@ from django_select2.forms import Select2Widget
 
 
 class SchoolRegistrationForm(UserCreationForm):
+    first_name = forms.CharField(max_length=255)
+    last_name = forms.CharField(max_length=255)
+    email = forms.EmailField(max_length=100)
+    phone = forms.CharField(max_length=20, required=False)
 
     class Meta:
         model = User
         fields = [
             "email",
+            "first_name",
+            "last_name",
+            "phone",
             "username",
             "password1",
             "password2",
@@ -30,6 +37,22 @@ class SchoolProfileForm(forms.ModelForm):
             "district",
             "municipality",
             "city",
+            "fname",
+            "lname",
+            "nin",
+            "photo",
+            "phone_number",
+            "email",
+            "gender",
+            "date_of_birth",
+            "gfname",
+            "glname",
+            "gnin",
+            "gphoto",
+            "gphone",
+            "gemail",
+            "ggender",
+            "gdate_of_birth",
         ]
 
         widgets = {
@@ -38,9 +61,24 @@ class SchoolProfileForm(forms.ModelForm):
             "municipality": Select2Widget,
         }
 
+        widgets = {
+            "date_of_birth": forms.DateInput(attrs={"type": "date"}),
+        }
+        widgets = {
+            "gdate_of_birth": forms.DateInput(attrs={"type": "date"}),
+    }
+
     def __init__(self, *args, **kwargs):
         super(SchoolProfileForm, self).__init__(*args, **kwargs)
         self.fields["badge"].widget.attrs["onchange"] = "displayImage(this);"
+
+    def __init__(self, *args, **kwargs):
+        super(SchoolProfileForm, self).__init__(*args, **kwargs)
+        self.fields["photo"].widget.attrs["onchange"] = "displayImage(this);"
+
+    def __init__(self, *args, **kwargs):
+        super(SchoolProfileForm, self).__init__(*args, **kwargs)
+        self.fields["gphoto"].widget.attrs["onchange"] = "displayImage(this);"
 
 
 class OfficialForm(forms.ModelForm):
@@ -52,6 +90,26 @@ class OfficialForm(forms.ModelForm):
             "photo",
             "phone_number",
             "email",
+            "gender",
+            "date_of_birth",
+            "role",
+        ]
+
+        widgets = {
+            "date_of_birth": forms.DateInput(attrs={"type": "date"}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(OfficialForm, self).__init__(*args, **kwargs)
+        self.fields["photo"].widget.attrs["onchange"] = "displayImage(this);"
+
+
+class profileForm(forms.ModelForm):
+    class Meta:
+        model = school_official
+        fields = [
+            "nin",
+            "photo",
             "gender",
             "date_of_birth",
             "role",

@@ -16,10 +16,10 @@ class Sport(models.Model):
 
 class Region(models.Model):
     name = models.CharField(max_length=100)
-    
 
     def __str__(self):
         return self.name
+
 
 class District(models.Model):
     name = models.CharField(max_length=100)
@@ -28,12 +28,14 @@ class District(models.Model):
     def __str__(self):
         return self.name
 
+
 class Municipality(models.Model):
     name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
-    
+
+
 class City(models.Model):
     name = models.CharField(max_length=100)
 
@@ -41,13 +43,13 @@ class City(models.Model):
         return self.name
 
 
-
-
 class User(AbstractUser):
     is_school = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
     thumbnail = models.ImageField(upload_to="profile/", blank=True, null=True)
+
+
 
 
 class Tournament(models.Model):

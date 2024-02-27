@@ -37,6 +37,18 @@
 }
 .profile-update .school-long .form-ctrl {
   width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+@media (max-width: 768px) {
+  .profile-update .school-long .form-ctrl {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 508px) {
+  .profile-update .school-long .form-ctrl {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
 .profile-update .school-long .form-ctrl .fields {
   width: 100%;
@@ -98,4 +110,15 @@
 }
 .profile-update .school-long .form-ctrl .fields .left .imgbox .field img {
   width: 100%;
+}
+.profile-update .school-long .form-ctrl p {
+  margin: 10px;
+}
+.profile-update .school-long .form-ctrl p label {
+  text-transform: capitalize;
+}
+.profile-update .school-long .form-ctrl p input,
+.profile-update .school-long .form-ctrl p select {
+  width: 100%;
+  padding: 8px;
 }/*# sourceMappingURL=school_new.css.map */

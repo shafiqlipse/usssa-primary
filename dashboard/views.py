@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from accounts.models import *
 from accounts.forms import *
 from .models import *
 from .forms import *
+from accounts.forms import *
 from .filters import *
 from django.contrib import messages
 from django.http import JsonResponse
@@ -111,9 +113,9 @@ def all_athletes(request):
 
 
 # Import the traceback module for logging
+from django.contrib.auth.models import AnonymousUser
 
 
-@staff_required
 def Schoolnew(request):
     regions = Region.objects.all()
 
@@ -121,24 +123,12 @@ def Schoolnew(request):
         form = SchoolProfileForm(request.POST, request.FILES)
 
         if form.is_valid():
-            try:
-                schoolX = form.save(commit=False)
-                schoolX.user = request.user  # Assign the currently logged-in user
-                schoolX.save()
-                messages.success(request, "Account completed successfully!")
-                return redirect("dashboard")
+            # admin_user = User.objects.get_or_create(username="admin")
+            # Assign the currently logged-in user
+            form.save()
+            messages.success(request, "Account completed successfully!")
+            return redirect("school")
 
-            except Exception as e:
-                # Log the exception for debugging
-                traceback.print_exc()
-
-                # Add a form-specific error message
-                form.add_error(None, f"Error adding school: {str(e)}")
-                messages.error(
-                    request,
-                    "There was an error with the form submission. Please try again.",
-                )
-                print(f"Error adding school: {str(e)}")
         else:
             # Add form-specific error messages for individual fields
             messages.error(request, "Form is not valid. Please check your input.")
@@ -279,9 +269,10 @@ def districts(request):
     except EmptyPage:
         # If the page is out of range, deliver the last page
         districtslist = paginator.page(paginator.num_pages)
- 
+
     context = {
-      "districtslist": districtslist,"myFilter": myFilter,
+        "districtslist": districtslist,
+        "myFilter": myFilter,
     }
     return render(request, "dashboard/districts.html", context)
 
@@ -292,8 +283,7 @@ def municipalities(request):
     municipalities = Municipality.objects.all()
 
     context = {
-           "municipalities": municipalities,
-   
+        "municipalities": municipalities,
     }
     return render(request, "dashboard/zones.html", context)
 

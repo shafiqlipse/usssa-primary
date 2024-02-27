@@ -12,7 +12,7 @@ from django.contrib.auth.hashers import make_password
 
 class School(models.Model):
     user = models.ForeignKey(
-        User, related_name="school_profile", on_delete=models.CASCADE
+        User, related_name="school_profile", on_delete=models.CASCADE, null=True
     )
     school_name = models.CharField(max_length=100)
     status = models.CharField(
@@ -20,7 +20,6 @@ class School(models.Model):
         choices=[("Active", "Active"), ("Inactive", "Inactive")],
         default="Active",
     )
-
     badge = models.ImageField(
         upload_to="badge/",
         blank=True,
@@ -28,7 +27,6 @@ class School(models.Model):
     )
     EMIS = models.CharField(max_length=100, unique=True)
     center_number = models.CharField(max_length=100, null=True, blank=True, unique=True)
-
     district = models.ForeignKey(
         District,
         related_name="district",
@@ -57,14 +55,47 @@ class School(models.Model):
         null=True,
         blank=True,
     )
+    # headteacher
+    lname = models.CharField(max_length=100, null=True, blank=True, default="")
+    fname = models.CharField(max_length=100, null=True, blank=True, default="")
+    email = models.EmailField(null=True, blank=True, default="")
+    phone_number = models.CharField(max_length=15, null=True, blank=True, default="")
+    nin = models.CharField(max_length=20, default="")
+    date_of_birth = models.DateField()
+    gender = models.CharField(
+        max_length=1,
+        choices=[("M", "Male"), ("F", "Female")],
+        null=True,
+        blank=True,
+    )
+    photo = models.ImageField(
+        upload_to="badge/",
+        blank=True,
+        null=True,
+    )
 
-    def __str__(self):
-        return self.school_name
+    # games teacher
+    gfname = models.CharField(max_length=100, null=True, blank=True, default="")
+    glname = models.CharField(max_length=100, null=True, blank=True, default="")
+    gemail = models.EmailField(null=True, blank=True, default="")
+    gphone = models.CharField(max_length=15, null=True, blank=True, default="")
+    gnin = models.CharField(max_length=20, default="")
+    gdate_of_birth = models.DateField()
+    ggender = models.CharField(
+        max_length=1,
+        choices=[("M", "Male"), ("F", "Female")],
+        null=True,
+        blank=True,
+    )
+    gphoto = models.ImageField(
+        upload_to="badge/",
+        blank=True,
+        null=True,
+    )
 
 
 class school_official(models.Model):
     school = models.ForeignKey(School, related_name="school", on_delete=models.CASCADE)
-
     name = models.CharField(max_length=100, null=True, blank=True, default="")
     email = models.EmailField(null=True, blank=True, default="")
     phone_number = models.CharField(max_length=15, null=True, blank=True, default="")
@@ -79,8 +110,6 @@ class school_official(models.Model):
     role = models.CharField(
         max_length=40,
         choices=[
-            ("Head Teacher", "Head Teacher"),
-            ("Games Teacher", "Games Teacher"),
             ("Coach", "Coach"),
             ("Teacher", "Teacher"),
             ("Assistant Games Teacher", "Assistant Games Teacher"),
@@ -184,7 +213,11 @@ class Athlete(models.Model):
         null=True,
         blank=True,
     )
-    is_paid = models.BooleanField(default=False, null=True, blank=True,)  # New field to track payment status
+    is_paid = models.BooleanField(
+        default=False,
+        null=True,
+        blank=True,
+    )  # New field to track payment status
 
     status = models.CharField(
         max_length=10,

@@ -23,7 +23,7 @@ urlpatterns = [
     # path("updateofficial/<int:id>", update_official, name="updateofficial"),
     # path("official/<int:id>", official_details, name="official"),
     # path("deleteofficial/<int:id>", delete_official, name="deleteofficial"),
-    # path("officials/", officials, name="officials"),
+  
     # competition
     
     path('athlete-list/', athlete_list, name='athlete_list'),

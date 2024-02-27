@@ -30,6 +30,14 @@
     }
     .form-ctrl {
       width: 100%;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      @media (max-width: 768px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      @media (max-width: 508px) {
+        grid-template-columns: repeat(1, 1fr);
+      }
       .fields {
         width: 100%;
         .left {
@@ -81,6 +89,17 @@
               }
             }
           }
+        }
+      }
+      p {
+        margin: 10px;
+        label {
+          text-transform: capitalize;
+        }
+        input,
+        select {
+          width: 100%;
+          padding: 8px;
         }
       }
     }

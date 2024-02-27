@@ -9,7 +9,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from .models import User
 from django.contrib import messages
 from .forms import SchoolRegistrationForm
-from dashboard.models import school_official
+from dashboard.models import school_official,School
 
 @staff_required
 def school_registration(request):
@@ -41,13 +41,13 @@ def user_login(request):
             user = form.get_user()
             login(request, user)
 
-            # Check if the user is a school
+            # Check if the user is a school and has a school profile
             if user.is_school:
-                # Check if the school user has a profile
-
-                return redirect(
-                    "school_dashboard"
-                )  # Adjust the URL name for your create school profile view
+                try:
+                    school = School.objects.get(user=user)
+                    return redirect("school_dashboard")  # Adjust the URL name for your school dashboard view
+                except School.DoesNotExist:
+                    return redirect("new_school")  # Adjust the URL name for your create school view
 
             # If the user is not a school, log in and redirect to dashboard
             messages.success(request, "Login successful.")
@@ -76,6 +76,25 @@ from django.contrib import messages
 # from accounts.forms import AthleteFilterForm
 
 from django.contrib.auth.decorators import login_required
+#  auth views
+@anonymous_required
+def school_registration(request):
+    if request.method == "POST":
+        form = SchoolRegistrationForm(request.POST)
+        if form.is_valid():
+            user = form.save(
+                commit=False
+            )  # Create the user object without saving to the database
+            user.is_school = True  # Set is_school to True
+            user.save()  # Save the user object with is_school set to True
+
+            # Log in the user
+            login(request, user)
+
+            return redirect("new_school")
+    else:
+        form = SchoolRegistrationForm()
+    return render(request, "register.html", {"form": form})
 
 
 @login_required
