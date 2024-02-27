@@ -37,88 +37,78 @@
 }
 .profile-update .school-long .form-ctrl {
   width: 100%;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-direction: column;
 }
-@media (max-width: 768px) {
-  .profile-update .school-long .form-ctrl {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (max-width: 508px) {
-  .profile-update .school-long .form-ctrl {
-    grid-template-columns: repeat(1, 1fr);
-  }
-}
-.profile-update .school-long .form-ctrl .fields {
+.profile-update .school-long .form-ctrl .school .fields {
   width: 100%;
 }
-.profile-update .school-long .form-ctrl .fields .left {
+.profile-update .school-long .form-ctrl .school .fields .left {
   display: grid;
   grid-template-columns: 350px 2fr;
   gap: 20px;
   width: 100%;
 }
 @media (max-width: 768px) {
-  .profile-update .school-long .form-ctrl .fields .left {
+  .profile-update .school-long .form-ctrl .school .fields .left {
     grid-template-columns: repeat(1, 1fr);
   }
 }
 @media (max-width: 508px) {
-  .profile-update .school-long .form-ctrl .fields .left {
+  .profile-update .school-long .form-ctrl .school .fields .left {
     grid-template-columns: repeat(1, 1fr);
   }
 }
-.profile-update .school-long .form-ctrl .fields .left .fiil {
+.profile-update .school-long .form-ctrl .school .fields .left .fiil {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 }
 @media (max-width: 768px) {
-  .profile-update .school-long .form-ctrl .fields .left .fiil {
+  .profile-update .school-long .form-ctrl .school .fields .left .fiil {
     grid-template-columns: repeat(1, 1fr);
   }
 }
 @media (max-width: 508px) {
-  .profile-update .school-long .form-ctrl .fields .left .fiil {
+  .profile-update .school-long .form-ctrl .school .fields .left .fiil {
     grid-template-columns: repeat(1, 1fr);
   }
 }
-.profile-update .school-long .form-ctrl .fields .left .fiil .field {
+.profile-update .school-long .form-ctrl .school .fields .left .fiil .field {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
   flex-direction: column;
   width: 100%;
 }
-.profile-update .school-long .form-ctrl .fields .left .fiil .field input,
-.profile-update .school-long .form-ctrl .fields .left .fiil .field select {
+.profile-update .school-long .form-ctrl .school .fields .left .fiil .field input,
+.profile-update .school-long .form-ctrl .school .fields .left .fiil .field select {
   padding: 8px 10px;
   border-radius: 3px;
   width: 100% !important;
   border: solid 1px rgba(49, 101, 255, 0.982);
 }
-.profile-update .school-long .form-ctrl .fields .left .imgbox {
+.profile-update .school-long .form-ctrl .school .fields .left .imgbox {
   width: 320px;
 }
-.profile-update .school-long .form-ctrl .fields .left .imgbox .field {
+.profile-update .school-long .form-ctrl .school .fields .left .imgbox .field {
   display: flex;
   align-items: flex-start;
   flex-direction: column;
   justify-content: center;
   width: 100%;
 }
-.profile-update .school-long .form-ctrl .fields .left .imgbox .field img {
+.profile-update .school-long .form-ctrl .school .fields .left .imgbox .field img {
   width: 100%;
 }
-.profile-update .school-long .form-ctrl p {
+.profile-update .school-long .form-ctrl .school p {
   margin: 10px;
 }
-.profile-update .school-long .form-ctrl p label {
+.profile-update .school-long .form-ctrl .school p label {
   text-transform: capitalize;
 }
-.profile-update .school-long .form-ctrl p input,
-.profile-update .school-long .form-ctrl p select {
+.profile-update .school-long .form-ctrl .school p input,
+.profile-update .school-long .form-ctrl .school p select {
   width: 100%;
   padding: 8px;
 }/*# sourceMappingURL=school_new.css.map */

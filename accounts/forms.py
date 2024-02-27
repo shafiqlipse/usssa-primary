@@ -59,14 +59,9 @@ class SchoolProfileForm(forms.ModelForm):
             "city": Select2Widget,
             "district": Select2Widget,
             "municipality": Select2Widget,
-        }
-
-        widgets = {
             "date_of_birth": forms.DateInput(attrs={"type": "date"}),
-        }
-        widgets = {
             "gdate_of_birth": forms.DateInput(attrs={"type": "date"}),
-    }
+        }
 
     def __init__(self, *args, **kwargs):
         super(SchoolProfileForm, self).__init__(*args, **kwargs)

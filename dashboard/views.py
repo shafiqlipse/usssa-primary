@@ -127,7 +127,7 @@ def Schoolnew(request):
             # Assign the currently logged-in user
             form.save()
             messages.success(request, "Account completed successfully!")
-            return redirect("school")
+            return redirect("confirmation")
 
         else:
             # Add form-specific error messages for individual fields
@@ -321,6 +321,14 @@ def newAthlete(request):
         form = NewAthleteForm()
 
     return render(request, "school/newAthlete.html", {"form": form})
+
+
+# a confirmation of credentials
+# @login_required
+def confirmation(request):
+    user = request.user
+    context = {"user": user}
+    return render(request, "confirm.html", context)
 
 
 from django.http import JsonResponse

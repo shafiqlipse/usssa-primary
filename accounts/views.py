@@ -9,7 +9,8 @@ from django.contrib.auth.forms import AuthenticationForm
 from .models import User
 from django.contrib import messages
 from .forms import SchoolRegistrationForm
-from dashboard.models import school_official,School
+from dashboard.models import school_official, School
+
 
 @staff_required
 def school_registration(request):
@@ -25,7 +26,7 @@ def school_registration(request):
             # Log in the user
             login(request, user)
 
-            return redirect("schools")
+            return redirect("confirmation")
     else:
         form = SchoolRegistrationForm()
     return render(request, "register.html", {"form": form})
@@ -45,9 +46,13 @@ def user_login(request):
             if user.is_school:
                 try:
                     school = School.objects.get(user=user)
-                    return redirect("school_dashboard")  # Adjust the URL name for your school dashboard view
+                    return redirect(
+                        "school_dashboard"
+                    )  # Adjust the URL name for your school dashboard view
                 except School.DoesNotExist:
-                    return redirect("new_school")  # Adjust the URL name for your create school view
+                    return redirect(
+                        "new_school"
+                    )  # Adjust the URL name for your create school view
 
             # If the user is not a school, log in and redirect to dashboard
             messages.success(request, "Login successful.")
@@ -73,9 +78,12 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.shortcuts import render, redirect
 from django.contrib import messages
+
 # from accounts.forms import AthleteFilterForm
 
 from django.contrib.auth.decorators import login_required
+
+
 #  auth views
 @anonymous_required
 def school_registration(request):
@@ -186,21 +194,21 @@ def change_password(request):
 
 
 # def album(request):
-    # if request.method == 'POST':
-    #     form = AthleteFilterForm(request.POST)
-    #     if form.is_valid():
-    #         selected_school = form.cleaned_data['school']
-    #         selected_tournament = form.cleaned_data['tournament']
+# if request.method == 'POST':
+#     form = AthleteFilterForm(request.POST)
+#     if form.is_valid():
+#         selected_school = form.cleaned_data['school']
+#         selected_tournament = form.cleaned_data['tournament']
 
-    #         athletes = Athlete.objects.filter(school=selected_school, tournament=selected_tournament)
-    #         officials = school_official.objects.filter(school=selected_school)
+#         athletes = Athlete.objects.filter(school=selected_school, tournament=selected_tournament)
+#         officials = school_official.objects.filter(school=selected_school)
 
-    #         return render(request, 'filtered_results.html', {'athletes': athletes, 'officials': officials})
+#         return render(request, 'filtered_results.html', {'athletes': athletes, 'officials': officials})
 
-    # else:
-    #     form = AthleteFilterForm()
+# else:
+#     form = AthleteFilterForm()
 
-    # return render(request, 'filter_album.html', {'form': form})
+# return render(request, 'filter_album.html', {'form': form})
 
 
 # views.py

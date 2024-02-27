@@ -15,8 +15,6 @@
   <body>
     <div class="profile-update">
       <div class="school-long">
-        <h2>Create School</h2>
-        <hr />
         <form
           action=""
           method="POST"
@@ -24,76 +22,213 @@
           enctype="multipart/form-data"
         >
           {% csrf_token %}
-          {{form.as_p}}
-          <!--<div class="fields">
-            <div class="left">
-              <div class="imgbox">
-                <div class="field">
-                  <label>{{form.badge.label}} </label>
-                  {% if form.instance.badge %}
-                  <img
-                    src="{{ form.instance.badge.url }}"
-                    id="image-preview"
-                    alt="Current Photo"
-                  />
-                  {% else %}
+          <div class="school">
+            <h2>School Info</h2>
+            <hr />
+            <div class="fields">
+              <div class="left">
+                <div class="imgbox">
+                  <div class="field">
+                    <label>{{form.badge.label}} </label>
+                    {% if form.instance.badge %}
+                    <img
+                      src="{{ form.instance.badge.url }}"
+                      id="image-preview"
+                      alt="Current Photo"
+                    />
+                    {% else %}
 
-                  <img
-                    src="{% static 'images/bade.png'%}"
-                    id="image-preview"
-                    alt="No Photo"
-                  />
-                  {% endif %}
+                    <img
+                      src="{% static 'images/bade.png'%}"
+                      id="image-preview"
+                      alt="No Photo"
+                    />
+                    {% endif %}
+                  </div>
+                  <div class="field">
+                    <input
+                      type="file"
+                      name="badge"
+                      accept="image/*"
+                      onchange="displayImage(this);"
+                      id="id_badge"
+                    />
+                  </div>
                 </div>
-                <div class="field">
-                  <input
-                    type="file"
-                    name="badge"
-                    accept="image/*"
-                    onchange="displayImage(this);"
-                    id="id_badge"
-                  />
-                </div>
-              </div>
-              <div class="fiil">
-                <div class="field flex">
-                  <label>{{ form.school_name.label}}</label>
-                  {{form.school_name}}
-                </div>
-                <div class="field flex">
-                  <label>{{ form.center_number.label}}</label>
-                  {{form.center_number}}
-                </div>
+                <div class="fiil">
+                  <div class="field flex">
+                    <label>{{ form.school_name.label}}</label>
+                    {{form.school_name}}
+                  </div>
+                  <div class="field flex">
+                    <label>{{ form.center_number.label}}</label>
+                    {{form.center_number}}
+                  </div>
 
-                <div class="field flex">
-                  <label>{{ form.EMIS.label}} </label>{{form.EMIS}}
-                </div>
+                  <div class="field flex">
+                    <label>{{ form.EMIS.label}} </label>{{form.EMIS}}
+                  </div>
 
-                <div class="field">
-                  <label>Region:</label>
-                  {{form.region}}
+                  <div class="field">
+                    <label>Region:</label>
+                    {{form.region}}
+                  </div>
+                  <div class="field">
+                    <label for="district">{{form.district.label }}</label>
+                    {{form.district}}
+                  </div>
+                  <div class="field">
+                    <label for="county">{{form.municipality.label }}</label>
+                    {{form.municipality}}
+                  </div>
+                  <div class="field">
+                    <label for="subcounty">{{form.city.label }}</label>
+                    {{form.city}}
+                  </div>
                 </div>
-                <div class="field">
-                  <label for="district">{{form.district.label }}</label>
-                  {{form.district}}
-                </div>
-                <div class="field">
-                  <label for="county">{{form.municipality.label }}</label>
-                  {{form.municipality}}
-                </div>
-                <div class="field">
-                  <label for="subcounty">{{form.city.label }}</label>
-                  {{form.city}}
-                </div>
-                
               </div>
             </div>
           </div>
+          <div class="school">
+            <h2>HEad Teacher</h2>
+            <hr />
+            <div class="fields">
+              <div class="left">
+                <div class="imgbox">
+                  <div class="field">
+                    <label>{{form.photo.label}} </label>
+                    {% if form.instance.photo %}
+                    <img
+                      src="{{ form.instance.photo.url }}"
+                      id="image-preview"
+                      alt="Current Photo"
+                    />
+                    {% else %}
+
+                    <img
+                      src="{% static 'images/profile.png'%}"
+                      id="image-preview"
+                      alt="No Photo"
+                    />
+                    {% endif %}
+                  </div>
+                  <div class="field">
+                    <input
+                      type="file"
+                      name="badge"
+                      accept="image/*"
+                      onchange="displayImage(this);"
+                      id="id_badge"
+                    />
+                  </div>
+                </div>
+                <div class="fiil">
+                  <div class="field flex">
+                    <label>First Name</label>
+                    {{form.fname}}
+                  </div>
+                  <div class="field flex">
+                    <label>Last Name</label>
+                    {{form.lname}}
+                  </div>
+                  <div class="field flex">
+                    <label>{{ form.nin.label}}</label>
+                    {{form.nin}}
+                  </div>
+
+                  <div class="field flex">
+                    <label>{{ form.email.label}} </label>{{form.email}}
+                  </div>
+
+                  <div class="field">
+                    <label>Phone:</label>
+                    {{form.phone_number}}
+                  </div>
+                  <div class="field">
+                    <label>gender</label>
+                    {{form.gender}}
+                  </div>
+                  <div class="field">
+                    <label>Date of Birth</label>
+                    {{form.date_of_birth}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="school">
+            <h2>Games Teacher</h2>
+            <hr />
+            <div class="fields">
+              <div class="left">
+                <div class="imgbox">
+                  <div class="field">
+                    <label>Photo </label>
+                    {% if form.instance.gphoto %}
+                    <img
+                      src="{{ form.instance.gphoto.url }}"
+                      id="image-preview"
+                      alt="Current Photo"
+                    />
+                    {% else %}
+
+                    <img
+                      src="{% static 'images/profile.png'%}"
+                      id="image-preview"
+                      alt="No Photo"
+                    />
+                    {% endif %}
+                  </div>
+                  <div class="field">
+                    <input
+                      type="file"
+                      name="badge"
+                      accept="image/*"
+                      onchange="displayImage(this);"
+                      id="id_badge"
+                    />
+                  </div>
+                </div>
+                <div class="fiil">
+                  <div class="field flex">
+                    <label>First name</label>
+                    {{form.gfname}}
+                  </div>
+                  <div class="field flex">
+                    <label>Last name</label>
+                    {{form.glname}}
+                  </div>
+
+                  <div class="field">
+                    <label>NIN:</label>
+                    {{form.gnin}}
+                  </div>
+                  <div class="field flex">
+                    <label>Email </label>{{form.gemail}}
+                  </div>
+
+                  <div class="field">
+                    <label>Phone</label>
+                    {{form.gphone}}
+                  </div>
+                  <div class="field">
+                    <label>Gender</label>
+                    {{form.ggender}}
+                  </div>
+                  <div class="field">
+                    <label>Date of birth</label>
+                    {{form.gdate_of_birth}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {% if form.non_field_errors %}
           <div class="alert alert-danger">
             {{ form.non_field_errors.as_ul }}
           </div>
-          {% endif %}-->
+          {% endif %}
           <button type="submit" class="btn-submit">Save profile</button>
         </form>
       </div>
