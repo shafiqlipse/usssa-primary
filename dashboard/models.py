@@ -92,7 +92,8 @@ class School(models.Model):
         blank=True,
         null=True,
     )
-
+    def __str__(self):
+        return self.school_name
 
 class school_official(models.Model):
     school = models.ForeignKey(School, related_name="school", on_delete=models.CASCADE)
