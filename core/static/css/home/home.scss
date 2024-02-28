@@ -1,0 +1,47 @@
+.home-page {
+  margin-top: -100px;
+  width: 100%;
+  padding: 20% 5%;
+  //   padding-top: 150px;
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(0, 0, 150, 1) 51%,
+    rgba(0, 112, 255, 1) 100%
+  );
+  background-size: cover;
+  .hero {
+    align-items: center;
+    .left {
+      img {
+        width: 100%;
+      }
+      color: white;
+      span {
+        font-size: 20px;
+        text-transform: uppercase;
+        margin: 20px 0;
+      }
+      h1 {
+        font-size: 3.4em;
+        text-transform: capitalize;
+        font-weight: bold;
+      }
+      p{
+        margin: 10px 0;
+
+      }
+      .btns{
+        width: 350px;
+        .btn-submit{
+            font-size: 17px;
+            i{
+                margin-left: 20px;
+            }
+            border: solid 1px #fff;
+            margin:20px 20px 0 0 ;
+        }
+      }
+    }
+  }
+}

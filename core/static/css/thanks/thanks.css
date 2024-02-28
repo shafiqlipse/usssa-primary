@@ -1,0 +1,33 @@
+.school-thanks {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #d1d1d1;
+}
+.school-thanks .thanks {
+  width: 60%;
+  background-color: #fff;
+  padding: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.school-thanks .thanks h1 {
+  font-size: 10em;
+  color: green;
+}
+.school-thanks .thanks h4 {
+  font-size: 30px;
+  color: green;
+}
+.school-thanks .thanks p {
+  margin: 10px;
+  text-align: center;
+}
+.school-thanks .thanks p span {
+  font-weight: bold;
+  font-size: 18px;
+  color: green;
+}/*# sourceMappingURL=thanks.css.map */

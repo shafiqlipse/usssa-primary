@@ -1,249 +1,237 @@
-<html lang="en">
-  {%load static%}
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>School-Registration | USSSA</title>
-    <link rel="icon" href="{%static 'images/upsa.png'%}" sizes="35x35" />
-    <link rel="stylesheet" href="{% static 'css/profile/school_new.css'%}" />
-    <link rel="stylesheet" href="{% static 'css/main/main.css'%}" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <div class="profile-update">
-      <div class="school-long">
-        <form
-          action=""
-          method="POST"
-          class="form-ctrl"
-          enctype="multipart/form-data"
-        >
-          {% csrf_token %}
-          <div class="school">
-            <h2>School Info</h2>
-            <hr />
-            <div class="fields">
-              <div class="left">
-                <div class="imgbox">
-                  <div class="field">
-                    <label>{{form.badge.label}} </label>
-                    {% if form.instance.badge %}
-                    <img
-                      src="{{ form.instance.badge.url }}"
-                      id="image-preview"
-                      alt="Current Photo"
-                    />
-                    {% else %}
+{% extends "core/base.html" %}
+<!---->
+{%load static%}
+<!---->
+{% block title %}Create School{% endblock %}
+<!---->
+{% block content %}
+<div class="profile-update">
+  <div class="school-long">
+    <form
+      action=""
+      method="POST"
+      class="form-ctrl"
+      enctype="multipart/form-data"
+    >
+      {% csrf_token %}
+      <div class="school">
+        <h2>School Info</h2>
+        <hr />
+        <div class="fields">
+          <div class="left">
+            <div class="imgbox">
+              <div class="field">
+                <label>{{form.badge.label}} </label>
+                {% if form.instance.badge %}
+                <img
+                  src="{{ form.instance.badge.url }}"
+                  id="image-preview"
+                  alt="Current Photo"
+                />
+                {% else %}
 
-                    <img
-                      src="{% static 'images/bade.png'%}"
-                      id="image-preview"
-                      alt="No Photo"
-                    />
-                    {% endif %}
-                  </div>
-                  <div class="field">
-                    <input
-                      type="file"
-                      name="badge"
-                      accept="image/*"
-                      onchange="displayImage(this);"
-                      id="id_badge"
-                    />
-                  </div>
-                </div>
-                <div class="fiil">
-                  <div class="field flex">
-                    <label>{{ form.school_name.label}}</label>
-                    {{form.school_name}}
-                  </div>
-                  <div class="field flex">
-                    <label>{{ form.center_number.label}}</label>
-                    {{form.center_number}}
-                  </div>
+                <img
+                  src="{% static 'images/bade.png'%}"
+                  id="image-preview"
+                  alt="No Photo"
+                />
+                {% endif %}
+              </div>
+              <div class="field">
+                <input
+                  type="file"
+                  name="badge"
+                  accept="image/*"
+                  onchange="displayImage(this);"
+                  id="id_badge"
+                />
+              </div>
+            </div>
+            <div class="fiil">
+              <div class="field flex">
+                <label>{{ form.school_name.label}}</label>
+                {{form.school_name}}
+              </div>
+              <div class="field flex">
+                <label>{{ form.center_number.label}}</label>
+                {{form.center_number}}
+              </div>
 
-                  <div class="field flex">
-                    <label>{{ form.EMIS.label}} </label>{{form.EMIS}}
-                  </div>
+              <div class="field flex">
+                <label>{{ form.EMIS.label}} </label>{{form.EMIS}}
+              </div>
 
-                  <div class="field">
-                    <label>Region:</label>
-                    {{form.region}}
-                  </div>
-                  <div class="field">
-                    <label for="district">{{form.district.label }}</label>
-                    {{form.district}}
-                  </div>
-                  <div class="field">
-                    <label for="county">{{form.municipality.label }}</label>
-                    {{form.municipality}}
-                  </div>
-                  <div class="field">
-                    <label for="subcounty">{{form.city.label }}</label>
-                    {{form.city}}
-                  </div>
-                </div>
+              <div class="field">
+                <label>Region:</label>
+                {{form.region}}
+              </div>
+              <div class="field">
+                <label for="district">{{form.district.label }}</label>
+                {{form.district}}
+              </div>
+              <div class="field">
+                <label for="county">{{form.municipality.label }}</label>
+                {{form.municipality}}
+              </div>
+              <div class="field">
+                <label for="subcounty">{{form.city.label }}</label>
+                {{form.city}}
               </div>
             </div>
           </div>
-          <div class="school">
-            <h2>HEad Teacher</h2>
-            <hr />
-            <div class="fields">
-              <div class="left">
-                <div class="imgbox">
-                  <div class="field">
-                    <label>{{form.photo.label}} </label>
-                    {% if form.instance.photo %}
-                    <img
-                      src="{{ form.instance.photo.url }}"
-                      id="image-preview"
-                      alt="Current Photo"
-                    />
-                    {% else %}
-
-                    <img
-                      src="{% static 'images/profile.png'%}"
-                      id="image-preview"
-                      alt="No Photo"
-                    />
-                    {% endif %}
-                  </div>
-                  <div class="field">
-                    <input
-                      type="file"
-                      name="badge"
-                      accept="image/*"
-                      onchange="displayImage(this);"
-                      id="id_badge"
-                    />
-                  </div>
-                </div>
-                <div class="fiil">
-                  <div class="field flex">
-                    <label>First Name</label>
-                    {{form.fname}}
-                  </div>
-                  <div class="field flex">
-                    <label>Last Name</label>
-                    {{form.lname}}
-                  </div>
-                  <div class="field flex">
-                    <label>{{ form.nin.label}}</label>
-                    {{form.nin}}
-                  </div>
-
-                  <div class="field flex">
-                    <label>{{ form.email.label}} </label>{{form.email}}
-                  </div>
-
-                  <div class="field">
-                    <label>Phone:</label>
-                    {{form.phone_number}}
-                  </div>
-                  <div class="field">
-                    <label>gender</label>
-                    {{form.gender}}
-                  </div>
-                  <div class="field">
-                    <label>Date of Birth</label>
-                    {{form.date_of_birth}}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="school">
-            <h2>Games Teacher</h2>
-            <hr />
-            <div class="fields">
-              <div class="left">
-                <div class="imgbox">
-                  <div class="field">
-                    <label>Photo </label>
-                    {% if form.instance.gphoto %}
-                    <img
-                      src="{{ form.instance.gphoto.url }}"
-                      id="image-preview"
-                      alt="Current Photo"
-                    />
-                    {% else %}
-
-                    <img
-                      src="{% static 'images/profile.png'%}"
-                      id="image-preview"
-                      alt="No Photo"
-                    />
-                    {% endif %}
-                  </div>
-                  <div class="field">
-                    <input
-                      type="file"
-                      name="badge"
-                      accept="image/*"
-                      onchange="displayImage(this);"
-                      id="id_badge"
-                    />
-                  </div>
-                </div>
-                <div class="fiil">
-                  <div class="field flex">
-                    <label>First name</label>
-                    {{form.gfname}}
-                  </div>
-                  <div class="field flex">
-                    <label>Last name</label>
-                    {{form.glname}}
-                  </div>
-
-                  <div class="field">
-                    <label>NIN:</label>
-                    {{form.gnin}}
-                  </div>
-                  <div class="field flex">
-                    <label>Email </label>{{form.gemail}}
-                  </div>
-
-                  <div class="field">
-                    <label>Phone</label>
-                    {{form.gphone}}
-                  </div>
-                  <div class="field">
-                    <label>Gender</label>
-                    {{form.ggender}}
-                  </div>
-                  <div class="field">
-                    <label>Date of birth</label>
-                    {{form.gdate_of_birth}}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {% if form.non_field_errors %}
-          <div class="alert alert-danger">
-            {{ form.non_field_errors.as_ul }}
-          </div>
-          {% endif %}
-          <button type="submit" class="btn-submit">Save profile</button>
-        </form>
+        </div>
       </div>
-    </div>
-    <script
-      src="https://code.jquery.com/jquery-3.7.1.min.js"
-      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="{% static 'scripts/app.js'%}"></script>
-    <script>
-      $(document).ready(function () {
-        $("#id_region,#id_district,#id_municipality,#id_city").select2();
-      });
-    </script>
-  </body>
-</html>
+      <div class="school">
+        <h2>HEad Teacher</h2>
+        <hr />
+        <div class="fields">
+          <div class="left">
+            <div class="imgbox">
+              <div class="field">
+                <label>{{form.photo.label}} </label>
+                {% if form.instance.photo %}
+                <img
+                  src="{{ form.instance.photo.url }}"
+                  id="image-preview"
+                  alt="Current Photo"
+                />
+                {% else %}
+
+                <img
+                  src="{% static 'images/profile.png'%}"
+                  id="image-preview"
+                  alt="No Photo"
+                />
+                {% endif %}
+              </div>
+              <div class="field">
+                <input
+                  type="file"
+                  name="badge"
+                  accept="image/*"
+                  onchange="displayImage(this);"
+                  id="id_badge"
+                />
+              </div>
+            </div>
+            <div class="fiil">
+              <div class="field flex">
+                <label>First Name</label>
+                {{form.fname}}
+              </div>
+              <div class="field flex">
+                <label>Last Name</label>
+                {{form.lname}}
+              </div>
+              <div class="field flex">
+                <label>{{ form.nin.label}}</label>
+                {{form.nin}}
+              </div>
+
+              <div class="field flex">
+                <label>{{ form.email.label}} </label>{{form.email}}
+              </div>
+
+              <div class="field">
+                <label>Phone:</label>
+                {{form.phone_number}}
+              </div>
+              <div class="field">
+                <label>gender</label>
+                {{form.gender}}
+              </div>
+              <div class="field">
+                <label>Date of Birth</label>
+                {{form.date_of_birth}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="school">
+        <h2>Games Teacher</h2>
+        <hr />
+        <div class="fields">
+          <div class="left">
+            <div class="imgbox">
+              <div class="field">
+                <label>Photo </label>
+                {% if form.instance.gphoto %}
+                <img
+                  src="{{ form.instance.gphoto.url }}"
+                  id="image-preview"
+                  alt="Current Photo"
+                />
+                {% else %}
+
+                <img
+                  src="{% static 'images/profile.png'%}"
+                  id="image-preview"
+                  alt="No Photo"
+                />
+                {% endif %}
+              </div>
+              <div class="field">
+                <input
+                  type="file"
+                  name="badge"
+                  accept="image/*"
+                  onchange="displayImage(this);"
+                  id="id_badge"
+                />
+              </div>
+            </div>
+            <div class="fiil">
+              <div class="field flex">
+                <label>First name</label>
+                {{form.gfname}}
+              </div>
+              <div class="field flex">
+                <label>Last name</label>
+                {{form.glname}}
+              </div>
+
+              <div class="field">
+                <label>NIN:</label>
+                {{form.gnin}}
+              </div>
+              <div class="field flex"><label>Email </label>{{form.gemail}}</div>
+
+              <div class="field">
+                <label>Phone</label>
+                {{form.gphone}}
+              </div>
+              <div class="field">
+                <label>Gender</label>
+                {{form.ggender}}
+              </div>
+              <div class="field">
+                <label>Date of birth</label>
+                {{form.gdate_of_birth}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {% if form.non_field_errors %}
+      <div class="alert alert-danger">{{ form.non_field_errors.as_ul }}</div>
+      {% endif %}
+      <button type="submit" class="btn-submit">Save profile</button>
+    </form>
+  </div>
+</div>
+<script
+  src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+  crossorigin="anonymous"
+></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="{% static 'scripts/app.js'%}"></script>
+<script>
+  $(document).ready(function () {
+    $("#id_region,#id_district,#id_municipality,#id_city").select2();
+  });
+</script>
+
+{% endblock %}

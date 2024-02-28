@@ -1,0 +1,81 @@
+<html lang="en">
+  {% load static %}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UPSSA | {% block title %}{% endblock title %}</title>
+    <link rel="icon" href="{%static 'images/upsa.png'%}" sizes="35x35" />
+    <link rel="stylesheet" href="{% static 'css/profile/school_new.css'%}" />
+
+    <link rel="stylesheet" href="{% static 'css/base/base.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/thanks/thanks.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/home/home.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/main/main.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/css/all.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/css/all.min.css'%}" />
+  </head>
+  <body>
+    <header class="header">
+      <nav class="navbar">
+        <a href="/" class="nav-logo">
+          <img src="{% static 'images/upsa.png'%}" alt="" />
+        </a>
+        <ul class="nav-menu flex">
+          <li class="nav-item">
+            <a href="#" class="nav-link">About</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">Overview</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">School</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">Athletes</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">Contact</a>
+          </li>
+          <li class="nav-item">
+            {% if user.is_authenticated %}
+            <!---->
+            {% if user.is_school %}
+            <a href="{% url 'school_dashboard'%}" class="btn-submit"
+              >Dashboard</a
+            >{% else %}
+            <a href="{% url 'dashboard'%}" class="btn-submit">Dashboard</a
+            >{%endif %} {% else %}
+            <a href="{% url 'login'%}" class="btn-submit">Login</a>
+            {% endif %}
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'new_school'%}" class="btn-submit"
+              >Register school</a
+            >
+          </li>
+        </ul>
+        <div class="hamburger">
+          <i class="fa fa-bars"></i>
+        </div>
+      </nav>
+    </header>
+
+    <div class="content">{% block content %} {% endblock %}</div>
+    <footer class="footer">footer</footer>
+    <script src="{%static 'js/nav.js'%}"></script>
+    <script>
+      // change color on scroll
+
+      window.addEventListener("scroll", function () {
+        const header = document.querySelector(".header");
+        if (window.scrollY >= 100) {
+          header.classList.add("white-bg");
+          console.log(header.classList);
+          console.log(window.scrollY);
+        } else {
+          header.classList.remove("white-bg");
+        }
+      });
+    </script>
+  </body>
+</html>

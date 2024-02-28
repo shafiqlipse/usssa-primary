@@ -1,0 +1,40 @@
+.home-page {
+  margin-top: -100px;
+  width: 100%;
+  padding: 20% 5%;
+  background: linear-gradient(90deg, rgb(2, 0, 36) 0%, rgb(0, 0, 150) 51%, rgb(0, 112, 255) 100%);
+  background-size: cover;
+}
+.home-page .hero {
+  align-items: center;
+}
+.home-page .hero .left {
+  color: white;
+}
+.home-page .hero .left img {
+  width: 100%;
+}
+.home-page .hero .left span {
+  font-size: 20px;
+  text-transform: uppercase;
+  margin: 20px 0;
+}
+.home-page .hero .left h1 {
+  font-size: 3.4em;
+  text-transform: capitalize;
+  font-weight: bold;
+}
+.home-page .hero .left p {
+  margin: 10px 0;
+}
+.home-page .hero .left .btns {
+  width: 350px;
+}
+.home-page .hero .left .btns .btn-submit {
+  font-size: 17px;
+  border: solid 1px #fff;
+  margin: 20px 20px 0 0;
+}
+.home-page .hero .left .btns .btn-submit i {
+  margin-left: 20px;
+}/*# sourceMappingURL=home.css.map */

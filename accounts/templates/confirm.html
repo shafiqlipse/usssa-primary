@@ -1,12 +1,14 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <div class="school">
-        Thank You
-    </div>
-</body>
-</html>
+{% extends "core/base.html" %} {% load static %}
+<!---->
+{% block content %}
+<div class="school-thanks">
+  <div class="thanks">
+    <h1><i class="fa fa-check"></i></h1>
+    <h4>School created succesfully</h4>
+    <p>
+      Please check your email for your login credentials or use email:
+      <span>{{user}}</span> and password: <span>123Pass</span>
+    </p>
+  </div>
+</div>
+{% endblock %}

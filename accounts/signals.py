@@ -6,6 +6,7 @@ from django.contrib.auth.hashers import make_password
 from django.core.mail import send_mail
 from django.contrib.auth import get_user_model
 
+
 @receiver(post_save, sender=School)
 def create_school_admin(sender, instance, created, **kwargs):
     if created:
@@ -25,6 +26,7 @@ def create_school_admin(sender, instance, created, **kwargs):
             is_school=True,
         )
         instance.user = school_admin_user
+
         instance.save()
 
 

@@ -4,10 +4,12 @@ from django.conf.urls.static import static
 from django.urls import path, include
 from dashboard.views import *
 from accounts.views import *
+from core.views import *
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", user_login, name="login"),
+    path("login/", user_login, name="login"),
+    path("", home, name="home"),
     path("change_password/", change_password, name="change_password"),
     path("confirmation/", confirmation, name="confirmation"),
     path("register/", school_registration, name="register"),

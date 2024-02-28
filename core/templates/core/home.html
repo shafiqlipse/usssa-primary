@@ -1,0 +1,29 @@
+{% extends "core/Base.html" %}
+<!---->
+{% load static %} {% block content %}
+<div class="home-page">
+  <div class="hero grid2">
+    <div class="left">
+      <span>_Uganda primary schools sports association</span>
+      <h1>schools online registration system</h1>
+      <p>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illum ea
+        molestiae aperiam quae eveniet voluptatibus? Optio asperiores sint
+        ratione voluptas!
+      </p>
+      <div class="btns flex">
+        <a href="" class="btn-submit">contact</a>
+        <a href="{% url 'new_school'%}" class="btn-submit">
+          get started <i class="fa fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+    <div class="left">
+      <img
+        src="https://i.pinimg.com/originals/67/0c/27/670c27d0d775138fbad0768843dcc76f.jpg"
+        alt=""
+      />
+    </div>
+  </div>
+</div>
+{% endblock content %}

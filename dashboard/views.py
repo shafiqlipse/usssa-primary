@@ -6,6 +6,8 @@ from accounts.forms import *
 from .models import *
 from .forms import *
 from accounts.forms import *
+from django.utils import timezone
+
 from .filters import *
 from django.contrib import messages
 from django.http import JsonResponse
@@ -20,8 +22,10 @@ import traceback
 # Create your views here.
 @staff_required
 def Overview(request):
+    # today = timezone.now().date()
     schools = School.objects.all()
     schools_count = School.objects.all().count
+    # schools_today = School.objects.filter(created_at__date=today).count
     athletes = Athlete.objects.all()
     athletes_count = Athlete.objects.all().count
     officials_count = school_official.objects.all().count
@@ -33,6 +37,7 @@ def Overview(request):
         "athletes": athletes,
         "schools": schools,
         "athletes_count": athletes_count,
+        # "schools_today": schools_today,
         "schools_count": schools_count,
         "athletes_bcount": athletes_bcount,
         "athletes_gcount": athletes_gcount,
