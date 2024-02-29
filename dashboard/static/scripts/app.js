@@ -80,11 +80,26 @@ const ToggleAccount = () => {
 // }
 
 // });
-
 function displayImage(input) {
   var reader = new FileReader();
   reader.onload = function (e) {
     document.getElementById("image-preview").src = e.target.result;
+    document.getElementById("image-previews").src = e.target.result; // Corrected ID
+    document.getElementById("image-previewg").src = e.target.result;
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+function displayImage1(input) {
+  var reader = new FileReader();
+  reader.onload = function (e) {
+    document.getElementById("image-previews").src = e.target.result;
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+function displayImage2(input) {
+  var reader = new FileReader();
+  reader.onload = function (e) {
+    document.getElementById("image-previewg").src = e.target.result; // Corrected ID
   };
   reader.readAsDataURL(input.files[0]);
 }

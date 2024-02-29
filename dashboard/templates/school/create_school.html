@@ -1,4 +1,4 @@
-{% extends "core/base.html" %}
+{% extends "core/Base.html" %}
 <!---->
 {%load static%}
 <!---->
@@ -92,14 +92,14 @@
                 {% if form.instance.photo %}
                 <img
                   src="{{ form.instance.photo.url }}"
-                  id="image-preview"
+                  id="image-previewg"
                   alt="Current Photo"
                 />
                 {% else %}
 
                 <img
                   src="{% static 'images/profile.png'%}"
-                  id="image-preview"
+                  id="image-previewg"
                   alt="No Photo"
                 />
                 {% endif %}
@@ -109,8 +109,8 @@
                   type="file"
                   name="badge"
                   accept="image/*"
-                  onchange="displayImage(this);"
-                  id="id_badge"
+                  onchange="displayImage2(this);"
+                  id="id_photo"
                 />
               </div>
             </div>
@@ -159,14 +159,14 @@
                 {% if form.instance.gphoto %}
                 <img
                   src="{{ form.instance.gphoto.url }}"
-                  id="image-preview"
+                  id="image-previews"
                   alt="Current Photo"
                 />
                 {% else %}
 
                 <img
                   src="{% static 'images/profile.png'%}"
-                  id="image-preview"
+                  id="image-previews"
                   alt="No Photo"
                 />
                 {% endif %}
@@ -176,8 +176,8 @@
                   type="file"
                   name="badge"
                   accept="image/*"
-                  onchange="displayImage(this);"
-                  id="id_badge"
+                  onchange="displayImage1(this);"
+                  id="id_gphoto"
                 />
               </div>
             </div>
