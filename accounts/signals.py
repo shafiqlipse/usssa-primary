@@ -28,27 +28,9 @@ def create_school_admin(sender, instance, created, **kwargs):
         instance.user = school_admin_user
 
         instance.save()
-
-
-@receiver(post_save, sender=school_official)
-def update_school_admin_credentials(sender, instance, created, **kwargs):
-    if (
-        created
-        and instance.school.user
-        and instance.school.school_officials.count() == 1
-    ):
-        # Update school admin user's email and username only for the first school official
-        school_admin_user = instance.school.user
-        school_admin_user.email = instance.email
-        school_admin_user.username = (
-            instance.email
-        )  # You might want to customize this logic
-        school_admin_user.save()
-
-        # Send an email to the user with login credentials
         subject = "Your School Admin Account Details"
-        message = f"Username: {school_admin_user.email}\nPassword: {school_admin_user.password}"
-        from_email = "your_email@example.com"  # Replace with your email
+        message = f"Username: {school_admin_user.email},Password: 123Pass"
+        from_email = "noreply@usssaonline.com"  # Replace with your email
         recipient_list = [school_admin_user.email]
 
         send_mail(subject, message, from_email, recipient_list)
