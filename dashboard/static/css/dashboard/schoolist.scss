@@ -1,10 +1,11 @@
 .schools-dew {
   width: 100%;
   padding: 20px;
-  .grid-5 {
+  .grid45 {
     display: grid;
+    align-items: center;
     grid-template-columns: repeat(5, 1fr);
-    gap: 20px;
+    column-gap: 20px;
   }
   .head {
     overflow: hidden;
@@ -59,11 +60,12 @@
     }
     .official-list {
       width: 100%;
-      padding: 10px;
+      padding:0 10px;
       border-collapse: collapse;
       text-transform: uppercase;
-      .school {
-        padding: 15px 10px;
+      .schodol {
+        padding: 10px 10px;
+        margin: 0 !important;
         &:first-child {
           width: 450px;
         }

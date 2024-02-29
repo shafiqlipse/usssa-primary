@@ -2,10 +2,12 @@
   width: 100%;
   padding: 20px;
 }
-.schools-dew .grid-5 {
+.schools-dew .grid45 {
   display: grid;
+  align-items: center;
   grid-template-columns: repeat(5, 1fr);
-  gap: 20px;
+  -moz-column-gap: 20px;
+       column-gap: 20px;
 }
 .schools-dew .head {
   overflow: hidden;
@@ -61,31 +63,32 @@
 }
 .schools-dew .filterlist .official-list {
   width: 100%;
-  padding: 10px;
+  padding: 0 10px;
   border-collapse: collapse;
   text-transform: uppercase;
 }
-.schools-dew .filterlist .official-list .school {
-  padding: 15px 10px;
+.schools-dew .filterlist .official-list .schodol {
+  padding: 10px 10px;
+  margin: 0 !important;
 }
-.schools-dew .filterlist .official-list .school:first-child {
+.schools-dew .filterlist .official-list .schodol:first-child {
   width: 450px;
 }
-.schools-dew .filterlist .official-list .school a {
+.schools-dew .filterlist .official-list .schodol a {
   color: inherit;
 }
-.schools-dew .filterlist .official-list .school span {
+.schools-dew .filterlist .official-list .schodol span {
   color: inherit;
   font-size: 12px;
   font-weight: 400;
   text-transform: uppercase;
 }
-.schools-dew .filterlist .official-list .school span:hover {
+.schools-dew .filterlist .official-list .schodol span:hover {
   color: rgba(10, 0, 115, 0.8941176471);
   font-size: 12px;
   font-weight: bold;
 }
-.schools-dew .filterlist .official-list .school:hover {
+.schools-dew .filterlist .official-list .schodol:hover {
   background-color: rgba(59, 59, 59, 0.1058823529);
 }
 .schools-dew .filterlist .official-list hr {

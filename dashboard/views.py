@@ -146,7 +146,7 @@ def Schoolnew(request):
     return render(request, "school/create_school.html", context)
 
 
-@staff_required
+# @staff_required
 def school_detail(request, id):
     school = School.objects.get(id=id)
     officials = school_official.objects.filter(school_id=id)
@@ -217,6 +217,29 @@ def school_detail(request, id):
         "off": off,
     }
     return render(request, "school/school.html", context)
+
+
+# schools list, tuple or array
+@school_required
+def Official(request):
+    if request.method == "POST":
+        form = OfficialForm(request.POST, request.FILES)
+        if form.is_valid():
+            try:
+                official = form.save(commit=False)
+                official.school = request.user.school_profile.first()
+                official.save()
+                messages.success(request, "Official added successfully!")
+                return redirect("officials")
+            except Exception as e:
+                messages.error(request, f"Error adding athlete: {str(e)}")
+        else:
+            messages.error(request, "Form is not valid. Please check your input.")
+    else:
+        form = OfficialForm()
+
+    context = {"form": form}
+    return render(request, "school/NOfficial.html", context)
 
 
 # schools list, tuple or array

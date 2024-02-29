@@ -14,7 +14,7 @@
   <div class="filterlist glue">
     <div class="lo">
       <div class="filter">
-        <form action="" method="get" class="formis grid-5">
+        <form action="" method="get" class="formis grid45">
           <div class="field flex">
             <label>{{myFilter.form.school_name.label}}</label>
             {{myFilter.form.school_name}}
@@ -35,7 +35,7 @@
         </form>
       </div>
 
-      <div class="titles grid-5">
+      <div class="titles grid45">
         <span>School</span>
         <span>EMIS number</span>
         <span>center number</span>
@@ -46,7 +46,7 @@
       <div class="official-list">
         {% for school in schoollist%}
         <hr />
-        <div class="school grid-5">
+        <div class="schodol grid45">
           <a href="{% url 'schooldetail' school.id%}">
             <span>{{school.school_name}} </span> </a
           ><span>{{school.EMIS}}</span>

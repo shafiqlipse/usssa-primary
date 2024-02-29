@@ -13,6 +13,10 @@
     <link rel="stylesheet" href="{% static 'css/main/main.css'%}" />
     <link rel="stylesheet" href="{% static 'css/css/all.css'%}" />
     <link rel="stylesheet" href="{% static 'css/css/all.min.css'%}" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/css/select2.min.css"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <header class="header">
@@ -61,7 +65,35 @@
     </header>
 
     <div class="content">{% block content %} {% endblock %}</div>
-    <footer class="footer">footer</footer>
+    <footer class="footer py-4">
+      <div class="container-fluid">
+        <div class="row align-items-center justify-content-lg-between">
+          <div class="col-lg-6 mb-lg-0 mb-4">
+            <div class="copyright text-center text-sm text-muted text-lg-start">
+              USSSA Copyright ©
+              <script>
+                document.write(new Date().getFullYear());
+              </script>
+              , All Rights Reserved.
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="{% static 'scripts/app.js'%}"></script>
+    <script>
+      $(document).ready(function () {
+        $("#id_region,#id_district,#id_municipality,#id_city").select2();
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
     <script src="{%static 'js/nav.js'%}"></script>
     <script>
       // change color on scroll

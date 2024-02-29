@@ -14,13 +14,35 @@
   justify-content: center;
   flex-direction: column;
 }
+@media (max-width: 998px) {
+  .school-thanks .thanks {
+    width: 80%;
+  }
+}
+@media (max-width: 798px) {
+  .school-thanks .thanks {
+    width: 90%;
+    padding: 20px;
+  }
+}
 .school-thanks .thanks h1 {
   font-size: 10em;
   color: green;
 }
+@media (max-width: 498px) {
+  .school-thanks .thanks h1 {
+    font-size: 5em;
+  }
+}
 .school-thanks .thanks h4 {
+  text-align: center;
   font-size: 30px;
   color: green;
+}
+@media (max-width: 498px) {
+  .school-thanks .thanks h4 {
+    font-size: 20px;
+  }
 }
 .school-thanks .thanks p {
   margin: 10px;
