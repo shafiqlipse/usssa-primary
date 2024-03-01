@@ -17,6 +17,8 @@ urlpatterns = [
     path("dashboard/", Overview, name="dashboard"),
     path("school/", Dash, name="school_dashboard"),
     path("dashboard/", include("dashboard.urls")),
+    # email
+    # path('send_email/', Sendmail, name='send_email'),
     # path("pdf_report/", some_view, name="pdfreport"),
     # path("album/", album, name="album"),
     path("select2/", include("django_select2.urls")),

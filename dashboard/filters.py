@@ -18,7 +18,7 @@ class schoolsFilter(django_filters.FilterSet):
 class districtsFilter(django_filters.FilterSet):
     class Meta:
         model = District
-        fields = ("id", "name")
+        fields = ("id", "name","region")
 
 
 class AthleteFilter(django_filters.FilterSet):

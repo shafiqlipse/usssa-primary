@@ -5,6 +5,8 @@ from dashboard.models import School, school_official
 from django.contrib.auth.hashers import make_password
 from django.core.mail import send_mail
 from django.contrib.auth import get_user_model
+from django.utils.html import strip_tags
+from django.template.loader import render_to_string
 
 
 @receiver(post_save, sender=School)
@@ -28,8 +30,10 @@ def create_school_admin(sender, instance, created, **kwargs):
         instance.user = school_admin_user
 
         instance.save()
+        html_message = render_to_string("core/email.html")
+        plain_message = strip_tags(html_message)
         subject = "Your School Admin Account Details"
-        message = f"Username: {school_admin_user.email},Password: 123Pass"
+        message = plain_message
         from_email = "noreply@usssaonline.com"  # Replace with your email
         recipient_list = [school_admin_user.email]
 

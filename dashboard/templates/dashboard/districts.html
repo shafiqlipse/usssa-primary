@@ -18,6 +18,10 @@
             <label>Name</label>
             {{myFilter.form.name}}
           </div>
+          <div class="field flex">
+            <label>Region</label>
+            {{myFilter.form.region}}
+          </div>
           <button type="submit" class="btn-submit">filter</button>
         </form>
       </div>
@@ -27,6 +31,7 @@
             <tr>
               <th>#</th>
               <th>name</th>
+              <th>Region</th>
               <th>Schools</th>
             </tr>
           </thead>
@@ -35,6 +40,7 @@
             <tr>
               <td>{{athlete.id}}</td>
               <td>{{athlete.name}}</td>
+              <td>{{athlete.region}}</td>
               <td>{{athlete.district.all.count}}</td>
             </tr>
             {%endfor%}
