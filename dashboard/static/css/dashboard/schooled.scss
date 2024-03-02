@@ -1,0 +1,11 @@
+.sooverview{
+    padding: 20px;
+    background-color: rgb(237, 237, 237);
+    .school-box{
+        padding: 10px;
+        .attr{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+    }
+    }
+}
