@@ -57,29 +57,10 @@ def schools(request):
 
     schools = School.objects.all()
 
-    myFilter = schoolsFilter(request.GET, queryset=schools)
-
-    schoollist = myFilter.qs
-
-    items_per_page = 10
-
-    paginator = Paginator(schoollist, items_per_page)
-    page = request.GET.get("page")
-
-    try:
-        schoollist = paginator.page(page)
-    except PageNotAnInteger:
-        # If the page is not an integer, deliver the first page
-        schoollist = paginator.page(1)
-    except EmptyPage:
-        # If the page is out of range, deliver the last page
-        schoollist = paginator.page(paginator.num_pages)
+    
     context = {
-        "schoollist": schoollist,
-        # "teamsFilter": teamsFilter,
-        "myFilter": myFilter,
-        # "teamlist": teamlist,
         "schools": schools,
+        # "teamsFilter": teams
     }
     return render(request, "dashboard/schools.html", context)
 
