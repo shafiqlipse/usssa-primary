@@ -10,9 +10,9 @@
     enctype="multipart/form-data"
   >
     {% csrf_token %}
+    
     <div class="fields grid2">
       <div class="left">
-        <h2>Athlete Info</h2>
         <div class="field">
           <label>{{form.photo.label}} </label>{% if form.instance.photo %}
           <img

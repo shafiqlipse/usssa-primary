@@ -13,72 +13,34 @@
 
   <div class="filterlist glue">
     <div class="lo">
-      <div class="filter">
-        <form action="" method="get" class="formis grid45">
-          <div class="field flex">
-            <label>{{myFilter.form.school_name.label}}</label>
-            {{myFilter.form.school_name}}
-          </div>
-          <div class="field flex">
-            <label>{{myFilter.form.EMIS.label}}</label>
-            {{myFilter.form.EMIS}}
-          </div>
-          <div class="field flex">
-            <label>{{myFilter.form.region.label}}</label>
-            {{myFilter.form.region}}
-          </div>
-          <div class="field flex">
-            <label>{{myFilter.form.district.label}}</label>
-            {{myFilter.form.district}}
-          </div>
-          <button type="submit" class="btn-submit">filter</button>
-        </form>
-      </div>
-
-      <div class="titles grid45">
-        <span>School</span>
-        <span>EMIS number</span>
-        <span>center number</span>
-        <span>Region</span>
-        <span>District</span>
-      </div>
-
       <div class="official-list">
-        {% for school in schoollist%}
-        <hr />
-        <div class="schodol grid45">
-          <a href="{% url 'schooldetail' school.id%}">
-            <span>{{school.school_name}} </span> </a
-          ><span>{{school.EMIS}}</span>
-          <span>{{school.center_number}}</span>
-          <span>{{school.region}} </span>
-          <span>{{school.district}}</span>
-        </div>
+        <table id="myTable" class="display">
+          <thead>
+            <tr>
+              <th>School</th>
+              <th>Emis</th>
+              <th>Center number</th>
+              <th>region</th>
+              <th>district</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for school in schoollist%}
+            <tr>
+              <td>
+                <a href="{% url 'schooldetail' school.id%}"
+                  >{{school.school_name}}</a
+                >
+              </td>
+              <td>{{school.EMIS}}</td>
+              <td>{{school.center_number}}</td>
+              <td>{{school.region}}</td>
+              <td>{{school.district}}</td>
+            </tr>
 
-        {%endfor%}
-      </div>
-
-      <div class="pagination">
-        <span class="step-links">
-          {% if schoollist.has_previous %}
-          <a href="?page=1">&laquo; first</a>
-          <a href="?page={{ schoollist.previous_page_number }}">previous</a>
-          {% endif %}
-
-          <span class="current">
-            Page {{schoollist.number }} of {{schoollist.paginator.num_pages}}
-          </span>
-
-          {% if schoollist.has_next %}
-          <a href="?page={{ schoollist.next_page_number }}">next</a>
-          {% for page_num in schoollist.paginator.page_range %}
-          <a href="?page={{ page_num }}" class="btn-green">{{ page_num }}</a>
-          {% endfor %}
-          <a href="?page={{ schoollist.paginator.num_pages }}">last &raquo;</a>
-          {% endif %} {% if schoollist.has_next %}
-          <!---->
-           {% endif %}
-        </span>
+            {%endfor%}
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
