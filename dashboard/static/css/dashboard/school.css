@@ -6,66 +6,23 @@
   border-radius: 5px;
   font-size: 80%;
 }
-.soverview .school-box .attr {
-  display: grid;
-  grid-template-columns: 190px 1fr;
-  margin: 15px 0;
-  font-weight: bold;
-  text-transform: capitalize;
+.soverview .school-box .school h1 {
+  font-size: 18px;
 }
-.soverview .school-box .attr span {
-  font-weight: 400;
-}
-@media (max-width: 990px) {
-  .soverview .school-box .attr {
-    grid-template-columns: 100px 1fr;
-  }
-}
-.soverview .official-poy {
-  position: absolute;
-  top: 0;
+.soverview .school-box .school img {
   width: 100%;
-  background-color: rgba(63, 63, 63, 0.071);
-  -webkit-backdrop-filter: blur(2em);
-          backdrop-filter: blur(2em);
-  padding: 100px;
-}
-@media (max-width: 990px) {
-  .soverview .official-poy {
-    padding: 10px;
-  }
-}
-.soverview .official-poy .lop {
-  font-size: 2em;
-  padding: 10px;
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-.soverview .official-poy .form-cotrl {
-  padding: 20px;
-  width: 100%;
-}
-.soverview .official-poy .form-cotrl .fields .left .field {
-  flex-direction: column;
-  margin: 15px 0;
-  text-align: left;
-  align-items: flex-start;
-}
-.soverview .official-poy .form-cotrl .fields .left .field input,
-.soverview .official-poy .form-cotrl .fields .left .field select {
-  width: 100%;
-  padding: 12px;
-  border-radius: 3px;
-}
-.soverview .official-poy .form-cotrl .fields .left .field img {
-  width: 300px;
-  height: 400px;
+  height: 200px;
   -o-object-fit: cover;
      object-fit: cover;
 }
-.soverview .school-off {
-  display: none;
+.soverview .school-box .school .attr {
+  margin: 10px 0;
+  font-weight: 500;
+  font-size: 10px;
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 20px;
+  font-size: 15px;
 }
 .soverview .dextails {
   margin: 10px 0;
