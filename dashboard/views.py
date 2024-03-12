@@ -76,6 +76,19 @@ def all_athletes(request):
     return render(request, "dashboard/athletes.html", context)
 
 
+
+# schools list, tuple or array
+@staff_required
+def all_officials(request):
+
+    officilas = school_official.objects.all()
+
+    context = {
+        "officilas": officilas,
+    }
+    return render(request, "dashboard/officials.html", context)
+
+
 def Schoolnew(request):
     regions = Region.objects.all()
 

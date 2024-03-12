@@ -9,6 +9,7 @@ urlpatterns = [
     # venues
     path("schools/", schools, name="schools"),
     path("all_athletes/", all_athletes, name="athletex"),
+    path("all_officials/", all_officials, name="all_officials"),
     path("tournaments/", Tournaments, name="tournaments"),
     path("districts/", districts, name="districts"),
     path("zones/", municipalities, name="zones"),
