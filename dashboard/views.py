@@ -57,7 +57,6 @@ def schools(request):
 
     schools = School.objects.all()
 
-    
     context = {
         "schools": schools,
         # "teamsFilter": teams
@@ -71,35 +70,10 @@ def all_athletes(request):
 
     athletes = Athlete.objects.all()
 
-    myFilter = AthletesFilter(request.GET, queryset=athletes)
-
-    athletelist = myFilter.qs
-
-    items_per_page = 10
-
-    paginator = Paginator(athletelist, items_per_page)
-    page = request.GET.get("page")
-
-    try:
-        athletelist = paginator.page(page)
-    except PageNotAnInteger:
-        # If the page is not an integer, deliver the first page
-        athletelist = paginator.page(1)
-    except EmptyPage:
-        # If the page is out of range, deliver the last page
-        athletelist = paginator.page(paginator.num_pages)
     context = {
-        "athletelist": athletelist,
-        # "teamsFilter": teamsFilter,
-        "myFilter": myFilter,
-        # "teamlist": teamlist,
         "athletes": athletes,
     }
     return render(request, "dashboard/athletes.html", context)
-
-
-# Import the traceback module for logging
-from django.contrib.auth.models import AnonymousUser
 
 
 def Schoolnew(request):

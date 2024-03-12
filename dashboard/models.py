@@ -56,17 +56,15 @@ class School(models.Model):
         blank=True,
     )
     # headteacher
-    lname = models.CharField(max_length=100, null=True, blank=True, default="")
-    fname = models.CharField(max_length=100, null=True, blank=True, default="")
-    email = models.EmailField(null=True, blank=True, default="")
-    phone_number = models.CharField(max_length=15, null=True, blank=True, default="")
-    nin = models.CharField(max_length=20, default="")
+    lname = models.CharField(max_length=100)
+    fname = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone_number = models.CharField(max_length=15)
+    nin = models.CharField(max_length=20)
     date_of_birth = models.DateField()
     gender = models.CharField(
         max_length=1,
         choices=[("M", "Male"), ("F", "Female")],
-        null=True,
-        blank=True,
     )
     photo = models.ImageField(
         upload_to="badge/",
@@ -92,8 +90,10 @@ class School(models.Model):
         blank=True,
         null=True,
     )
+
     def __str__(self):
         return self.school_name
+
 
 class school_official(models.Model):
     school = models.ForeignKey(School, related_name="school", on_delete=models.CASCADE)
@@ -177,7 +177,7 @@ class AthleteManager(models.Manager):
             calculated_age__gte=min_age, calculated_age__lte=max_age
         )
 
-
+from PIL import Image
 class Athlete(models.Model):
     fname = models.CharField(max_length=255)
     mname = models.CharField(max_length=255)
@@ -195,30 +195,22 @@ class Athlete(models.Model):
     classroom = models.ForeignKey(
         Classroom, related_name="classroom", on_delete=models.CASCADE
     )
-    age = models.ForeignKey(
-        Age, related_name="age", blank=True, null=True, on_delete=models.CASCADE
-    )
-    photo = models.ImageField(upload_to="athlete_photos/", blank=True, null=True)
+    age = models.ForeignKey(Age, related_name="age", on_delete=models.CASCADE)
+    photo = models.ImageField(upload_to="athlete_photos/")
 
-    Parent_fname = models.CharField(max_length=100, null=True, blank=True, default="")
-    Parent_lname = models.CharField(max_length=100, null=True, blank=True, default="")
-    parent_phone_number = models.CharField(
-        max_length=15, null=True, blank=True, default=""
-    )
-    parent_nin = models.CharField(max_length=20, null=True, blank=True, default="")
-    address = models.CharField(max_length=20, null=True, blank=True, default="")
-    designation = models.CharField(max_length=20, null=True, blank=True, default="")
+    Parent_fname = models.CharField(max_length=100)
+    Parent_lname = models.CharField(max_length=100)
+    parent_phone_number = models.CharField(max_length=15)
+    parent_nin = models.CharField(max_length=20)
+    address = models.CharField(max_length=20)
+    designation = models.CharField(max_length=20)
     relationship = models.CharField(
         max_length=15,
         choices=[("Father", "Father"), ("Mother", "Mother"), ("Other", "Other")],
         null=True,
         blank=True,
     )
-    is_paid = models.BooleanField(
-        default=False,
-        null=True,
-        blank=True,
-    )  # New field to track payment status
+    # New field to track payment status
 
     status = models.CharField(
         max_length=10,
@@ -228,6 +220,21 @@ class Athlete(models.Model):
         default="Active",
     )
     objects = AthleteManager()
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        # Open the uploaded image
+        img = Image.open(self.photo.path)
+
+        # Set the maximum size you want for the image
+        max_size = (300, 300)
+
+        # Resize the image
+        img.thumbnail(max_size)
+
+        # Save the resized image back to the same path
+        img.save(self.photo.path)
 
     def save(self, *args, **kwargs):
         # Find the corresponding age range and assign it to the athlete
