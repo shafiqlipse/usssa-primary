@@ -76,7 +76,6 @@ def all_athletes(request):
     return render(request, "dashboard/athletes.html", context)
 
 
-
 # schools list, tuple or array
 @staff_required
 def all_officials(request):
@@ -288,10 +287,26 @@ def municipalities(request):
 def Dash(request):
     user = request.user
     school = School.objects.get(user_id=user.id)
-    officials_count = school_official.objects.filter(school_id=school.id).count
+    officials_count = school_official.objects.filter(school_id=school.id).count()
+    athletes_count = Athlete.objects.filter(school_id=school.id).count()
+    officials_bcount = school_official.objects.filter(
+        school_id=school.id, gender="M"
+    ).count()
+    officials_gcount = school_official.objects.filter(
+        school_id=school.id, gender="F"
+    ).count()
+    athletes_gcount = Athlete.objects.filter(
+        school_id=school.id, gender="Female"
+    ).count()
+    athletes_bcount = Athlete.objects.filter(school_id=school.id, gender="Male").count()
     officials = school_official.objects.filter(school_id=school.id)
     context = {
         "officials_count": officials_count,
+        "officials_bcount": officials_bcount,
+        "officials_gcount": officials_gcount,
+        "athletes_count": athletes_count,
+        "athletes_bcount": athletes_bcount,
+        "athletes_gcount": athletes_gcount,
         "officials": officials,
         "school": school,
     }
@@ -391,10 +406,9 @@ def athletes(request):
         # Handle the case where the user is not associated with any school
         athletes = Athlete.objects.none()
     # officialFilter = OfficialFilter(request.GET, queryset=officials)
- 
+
     context = {
         "athletes": athletes,
-       
     }
 
     return render(request, "school/athletes.html", context)
@@ -413,7 +427,7 @@ def school_offs(request):
         # Handle the case where the user is not associated with any school
         school_offs = school_official.objects.none()
     # officialFilter = OfficialFilter(request.GET, queryset=officials)
-    
+
     context = {
         "school_offs": school_offs,
     }

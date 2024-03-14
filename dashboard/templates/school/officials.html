@@ -28,10 +28,10 @@
             </tr>
           </thead>
           <tbody>
-            {% for official in officials%}
+            {% for official in school_offs%}
             <tr>
               <td>
-                <a href="{% url 'official' school_offs.id%}"
+                <a href="{% url 'official' official.id%}"
                   >{{official.name}}</a
                 >
               </td>
