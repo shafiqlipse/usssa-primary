@@ -9,96 +9,44 @@
 <div class="schools-dew">
   <div class="head flex">
     <h1>Athletes</h1>
-    
+
     <a href="{% url 'addathlete'%}" class="btn-submit">Add Athlete</a>
   </div>
+
   <div class="filterlist glue">
     <div class="lo">
-      <div class="filter">
-        <form action="" method="get" class="formis grid5">
-          <div class="field flex">
-            <label>First Name</label>
-            {{myFilter.form.fname}}
-          </div>
-          <div class="field flex">
-            <label>{{myFilter.form.sport.label}}</label>
-            {{myFilter.form.sport}}
-          </div>
-          <div class="field flex">
-            <label>Class</label>
-            {{myFilter.form.classroom}}
-          </div>
-          <div class="field flex">
-            <label>{{myFilter.form.gender.label}}</label>
-            {{myFilter.form.gender}}
-          </div>
-          <button type="submit" class="btn-submit">filter</button>
-        </form>
-      </div>
-      <div class="table-responsive">
-        <table class="table custom-table">
+      <div class="official-list">
+        <table id="myTable" class="display">
           <thead>
             <tr>
-              <th scope="col">
-                <label class="control control--checkbox">
-                  <input type="checkbox" class="js-check-all" />
-                  <div class="control__indicator"></div>
-                </label>
-              </th>
-              <th>names</th>
-              <th>lin</th>
-              <th>sport</th>
-              <th>class</th>
-              <th>gender</th>
+              <th>Names</th>
+              <th>Lin</th>
+              <th>School</th>
+              <th>Gender</th>
+              <th>Sport</th>
+              <th>Age</th>
             </tr>
           </thead>
           <tbody>
-            {% for athlete in athletelist%}
+            {% for athlete in athletes%}
             <tr>
-              <th scope="row">
-                <label class="control control--checkbox">
-                  <input
-                    type="checkbox"
-                    class="js-check-single"
-                    data-athlete-id="{{ athlete.id }}"
-                  />
-                  <div class="control__indicator"></div>
-                </label>
-              </th>
-
               <td>
                 <a href="{% url 'athlete' athlete.id%}"
-                  ><span>{{athlete.fname}} {{athlete.lname}} </span>
-                </a>
+                  >{{athlete.fname}} {{athlete.lname}}</a
+                >
               </td>
               <td>{{athlete.lin}}</td>
-              <td>{{athlete.sport}}</td>
-              <td>{{athlete.classroom}}</td>
+              <td>{{athlete.school}}</td>
               <td>{{athlete.gender}}</td>
+              <td>{{athlete.sport}}</td>
+              <td>{{athlete.age}}</td>
             </tr>
+
             {%endfor%}
           </tbody>
         </table>
       </div>
-
-      <div class="pagination">
-        <span class="step-links">
-          {% if athletelist.has_previous %}
-          <a href="?page=1">&laquo; first</a>
-          <a href="?page={{ athletelist.previous_page_number }}">previous</a>
-          {% endif %}
-
-          <span class="current">
-            Page {{athletelist.number }} of {{athletelist.paginator.num_pages}}
-          </span>
-
-          {% if officiallist.has_next %}
-          <a href="?page={{ athletelist.next_page_number }}">next</a>
-          <a href="?page={{ athletelist.paginator.num_pages }}">last &raquo;</a>
-          {% endif %}
-        </span>
-      </div>
     </div>
-  </div>  
+  </div>
 </div>
 {% endblock %}

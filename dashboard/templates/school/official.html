@@ -9,7 +9,7 @@
 <div class="athlete-dew">
   <div class="athlete grid3">
     <div class="img glue">
-      {% if athlete.photo %}
+      {% if official.photo %}
       <img src="{{official.photo.url}}" alt="" />
       {% else %}
       <img src="{% static 'images/profile.png'%}" alt="" />{% endif %}

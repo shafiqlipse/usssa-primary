@@ -12,66 +12,43 @@
     <a href="{% url 'addofficial'%}" class="btn-submit">Add Official</a>
   </div>
   <div class="filterlist glue">
-    <div class="lo">
-      <div class="filter">
-        <form action="" method="get" class="formis grid3">
-          <div class="field flex">
-            <label>{{myFilter.form.role.label}}</label>
-            {{myFilter.form.role}}
-          </div>
-          <div class="field flex">
-            <label>{{myFilter.form.gender.label}}</label>
-            {{myFilter.form.gender}}
-          </div>
-          <button type="submit" class="btn-submit">filter</button>
-        </form>
-      </div>
-      <div class="table-responsive">
-        <table class="table custom-table">
+    
+   
+    <div class="filterlist glue">
+      <div class="official-list">
+        <table id="myTable" class="display">
           <thead>
             <tr>
               <th>names</th>
+              <th>school</th>
               <th>nin</th>
-              <th>email</th>
-              <th>role</th>
-              <th>gender</th>
+              <th>contact</th>
+              <th>Email</th>
+              <th>Gender</th>
             </tr>
           </thead>
           <tbody>
-            {% for offs in offslist%}
+            {% for official in officials%}
             <tr>
               <td>
-                <a href="{% url 'official' offs.id%}"
-                  ><span>{{offs.name}} </span>
-                </a>
+                <a href="{% url 'official' school_offs.id%}"
+                  >{{official.name}}</a
+                >
               </td>
-              <td>{{offs.phone_number}}</td>
-              <td>{{offs.email}}</td>
-              <td>{{offs.role}}</td>
-              <td>{{offs.gender}}</td>
+              <td>{{official.school}}</td>
+              <td>{{official.nin}}</td>
+              <td>{{official.phone_number}}</td>
+              <td>{{official.email}}</td>
+              <td>{{official.gender}}</td>
             </tr>
+  
             {%endfor%}
           </tbody>
         </table>
       </div>
+    </div>
+    
 
-      <div class="pagination">
-        <span class="step-links">
-          {% if offslist.has_previous %}
-          <a href="?page=1">&laquo; first</a>
-          <a href="?page={{ offslist.previous_page_number }}">previous</a>
-          {% endif %}
-
-          <span class="current">
-            Page {{offslist.number }} of {{offslist.paginator.num_pages}}
-          </span>
-
-          {% if officiallist.has_next %}
-          <a href="?page={{ offslist.next_page_number }}">next</a>
-          <a href="?page={{ offslist.paginator.num_pages }}">last &raquo;</a>
-          {% endif %}
-        </span>
-      </div>
     </div>
   </div>
 </div>

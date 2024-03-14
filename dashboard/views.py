@@ -391,28 +391,10 @@ def athletes(request):
         # Handle the case where the user is not associated with any school
         athletes = Athlete.objects.none()
     # officialFilter = OfficialFilter(request.GET, queryset=officials)
-    myFilter = AthleteFilter(request.GET, queryset=athletes)
-
-    athletelist = myFilter.qs
-
-    items_per_page = 10
-
-    paginator = Paginator(athletelist, items_per_page)
-    page = request.GET.get("page")
-
-    try:
-        athletelist = paginator.page(page)
-    except PageNotAnInteger:
-        # If the page is not an integer, deliver the first page
-        athletelist = paginator.page(1)
-    except EmptyPage:
-        # If the page is out of range, deliver the last page
-        athletelist = paginator.page(paginator.num_pages)
+ 
     context = {
-        "athletelist": athletelist,
-        # "teamsFilter": teamsFilter,
-        "myFilter": myFilter,
-        # "teamlist": teamlist,
+        "athletes": athletes,
+       
     }
 
     return render(request, "school/athletes.html", context)
@@ -431,28 +413,9 @@ def school_offs(request):
         # Handle the case where the user is not associated with any school
         school_offs = school_official.objects.none()
     # officialFilter = OfficialFilter(request.GET, queryset=officials)
-    myFilter = OfficialFilter(request.GET, queryset=school_offs)
-
-    offslist = myFilter.qs
-
-    items_per_page = 10
-
-    paginator = Paginator(offslist, items_per_page)
-    page = request.GET.get("page")
-
-    try:
-        offslist = paginator.page(page)
-    except PageNotAnInteger:
-        # If the page is not an integer, deliver the first page
-        offslist = paginator.page(1)
-    except EmptyPage:
-        # If the page is out of range, deliver the last page
-        offslist = paginator.page(paginator.num_pages)
+    
     context = {
-        "offslist": offslist,
-        # "teamsFilter": teamsFilter,
-        "myFilter": myFilter,
-        # "teamlist": teamlist,
+        "school_offs": school_offs,
     }
 
     return render(request, "school/officials.html", context)
