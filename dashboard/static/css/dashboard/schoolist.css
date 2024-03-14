@@ -2,13 +2,6 @@
   width: 100%;
   padding: 20px;
 }
-.schools-dew .grid45 {
-  display: grid;
-  align-items: center;
-  grid-template-columns: repeat(5, 1fr);
-  -moz-column-gap: 20px;
-       column-gap: 20px;
-}
 .schools-dew .head {
   overflow: hidden;
 }
@@ -25,72 +18,6 @@
   overflow-x: auto;
   margin: auto;
 }
-@media (max-width: 768px) {
-  .schools-dew .filterlist .lo {
-    width: 768px;
-  }
-}
-.schools-dew .filterlist .filter {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 10px 0;
-}
-.schools-dew .filterlist .filter .formis {
-  margin: 10px;
-}
-.schools-dew .filterlist .filter .formis .field {
-  flex-direction: column;
-  align-items: flex-start;
-}
-.schools-dew .filterlist .filter .formis .field input,
-.schools-dew .filterlist .filter .formis .field select {
-  width: 100%;
-  border-radius: 3px;
-}
-.schools-dew .filterlist .filter .formis .field label {
-  text-transform: uppercase;
-  font-weight: 600;
-}
-.schools-dew .filterlist .filter .formis .btn-submit {
-  margin: 0;
-}
-.schools-dew .filterlist .titles {
-  width: 100%;
-  border-collapse: collapse;
-  padding: 10px 20px;
-  text-transform: uppercase;
-  font-weight: 600;
-}
 .schools-dew .filterlist .official-list {
-  width: 100%;
-  padding: 0 10px;
-  border-collapse: collapse;
-  text-transform: uppercase;
-}
-.schools-dew .filterlist .official-list .schodol {
-  padding: 10px 10px;
-  margin: 0 !important;
-}
-.schools-dew .filterlist .official-list .schodol:first-child {
-  width: 450px;
-}
-.schools-dew .filterlist .official-list .schodol a {
-  color: inherit;
-}
-.schools-dew .filterlist .official-list .schodol span {
-  color: inherit;
-  font-size: 12px;
-  font-weight: 400;
-  text-transform: uppercase;
-}
-.schools-dew .filterlist .official-list .schodol span:hover {
-  color: rgba(10, 0, 115, 0.8941176471);
-  font-size: 12px;
-  font-weight: bold;
-}
-.schools-dew .filterlist .official-list .schodol:hover {
-  background-color: rgba(59, 59, 59, 0.1058823529);
-}
-.schools-dew .filterlist .official-list hr {
-  border: solid 1px rgba(238, 238, 238, 0.1921568627);
+  text-transform: none;
 }/*# sourceMappingURL=schoolist.css.map */
