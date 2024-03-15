@@ -115,73 +115,14 @@ def Schoolnew(request):
 
 # @staff_required
 def school_detail(request, id):
-    school = School.objects.get(id=id)
+    school = get_object_or_404(School, id=id)
     officials = school_official.objects.filter(school_id=id)
-    off = school_official.objects.filter(school_id=id).count
     athletes = Athlete.objects.filter(school_id=id)
-    ath = Athlete.objects.filter(school_id=id).count
-    new_official = None
 
-    # new_comment_reply = None
-
-    if request.method == "POST":
-        cform = OfficialForm(request.POST, request.FILES)
-
-        if cform.is_valid():
-            new_official = cform.save(commit=False)
-            new_official.school = school
-            new_official.save()
-            return redirect("schooldetail", id)
-    else:
-        cform = OfficialForm()
-
-    myFilter = OfficialFilter(request.GET, queryset=officials)
-
-    officialist = myFilter.qs
-
-    items_per_page = 10
-
-    paginator = Paginator(officialist, items_per_page)
-    page = request.GET.get("page")
-
-    try:
-        officialist = paginator.page(page)
-    except PageNotAnInteger:
-        # If the page is not an integer, deliver the first page
-        officialist = paginator.page(1)
-    except EmptyPage:
-        # If the page is out of range, deliver the last page
-        officialist = paginator.page(paginator.num_pages)
-
-    myAFilter = AthleteFilter(request.GET, queryset=athletes)
-
-    athletelist = myAFilter.qs
-
-    items_per_page = 10
-
-    paginator = Paginator(athletelist, items_per_page)
-    page = request.GET.get("page")
-
-    try:
-        athletelist = paginator.page(page)
-    except PageNotAnInteger:
-        # If the page is not an integer, deliver the first page
-        athletelist = paginator.page(1)
-    except EmptyPage:
-        # If the page is out of range, deliver the last page
-        athletelist = paginator.page(paginator.num_pages)
     context = {
-        "officialist": officialist,
-        "athletelist": athletelist,
-        # "teamsFilter": teamsFilter,
-        "myFilter": myFilter,
-        "myAFilter": myAFilter,
-        # "teamlist": teamlist,
-        "schools": schools,
         "school": school,
-        "cform": cform,
-        "ath": ath,
-        "off": off,
+        "athletes": athletes,
+        "officials": officials,
     }
     return render(request, "school/school.html", context)
 

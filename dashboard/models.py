@@ -177,12 +177,19 @@ class AthleteManager(models.Manager):
             calculated_age__gte=min_age, calculated_age__lte=max_age
         )
 
+
 from PIL import Image
+
+
 class Athlete(models.Model):
     fname = models.CharField(max_length=255)
-    mname = models.CharField(max_length=255)
+    mname = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+    )
     lname = models.CharField(max_length=255)
-    lin = models.CharField(max_length=255)
+    lin = models.CharField(max_length=255, unique=True)
 
     sport = models.ForeignKey(Sport, related_name="sport", on_delete=models.CASCADE)
     school = models.ForeignKey(

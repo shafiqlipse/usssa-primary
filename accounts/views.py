@@ -9,7 +9,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from .models import User
 from django.contrib import messages
 from .forms import SchoolRegistrationForm
-from dashboard.models import school_official, School
+from dashboard.models import school_official, School,Athlete
 
 
 @staff_required
@@ -282,3 +282,27 @@ def change_password(request):
 #     elif payment_provider == 'mtn':
 #         return 'your_mtn_api_key'
 #     # Add other cases as needed
+# form dashboard.models import Athlete
+
+def reg_athletes(request):
+    user = request.user
+    school_profile = user.school_profile.first()
+    if school_profile:
+        school_id = school_profile.id
+        athletes = Athlete.objects.filter(school_id=school_id)
+        for athlete in athletes:
+            athlete.amount = 1500
+    else:
+        athletes = Athlete.objects.none()
+
+    if request.method == 'POST':
+        selected_athletes = request.POST.getlist('selected_athletes')
+        number_of_athletes = int(request.POST.get('number_of_athletes', 0))
+        total_amount = number_of_athletes * 1500
+        return render(request, 'accounts/payment.html', {'total_amount': total_amount})
+
+    context = {
+        "athletes": athletes,
+    }
+
+    return render(request, "accounts/registration.html", context)

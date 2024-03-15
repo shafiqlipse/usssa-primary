@@ -3,6 +3,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 from .views import *
+from accounts.views import *
 
 
 urlpatterns = [
@@ -28,7 +29,7 @@ urlpatterns = [
   
     # competition
     
-    path('athlete-list/', athlete_list, name='athlete_list'),
+    path('athlete-list/', reg_athletes, name='athlete_list'),
     path('payment-page/', payment_page, name='payment_page'),
     path('process-payment/', process_payment, name='process_payment'),  # Add this line
 
