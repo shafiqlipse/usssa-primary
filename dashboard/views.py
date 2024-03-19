@@ -64,6 +64,98 @@ def schools(request):
     return render(request, "dashboard/schools.html", context)
 
 
+# hegfhjgfjdhfjhfjdjjjjjjjjjjjjjjjjjjjjjjjj
+
+import csv
+from django.http import HttpResponse
+from .models import School
+
+
+def export_csv(request):
+    response = HttpResponse(content_type="text/csv")
+    response["Content-Disposition"] = 'attachment; filename="schools.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(["School Name", "EMIS", "Contact", "District"])  # CSV header
+
+    # Fetch data from the database and write it to the CSV file
+    schools = School.objects.all()
+    for school in schools:
+        writer.writerow(
+            [school.school_name, school.EMIS, school.phone_number, school.district]
+        )
+
+    return response
+
+
+# schools list, tuple or array
+# schools list, tuple or array
+from reportlab.lib import colors
+from reportlab.lib.pagesizes import letter
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
+from django.http import HttpResponse
+from .models import School
+
+
+def export_pdf(request):
+    # Create a response object with PDF content type
+    response = HttpResponse(content_type="application/pdf")
+    # Set the content disposition to force download
+    response["Content-Disposition"] = 'attachment; filename="schools.pdf"'
+
+    # Fetch data from the database
+    schools = School.objects.all()
+
+    # Create a list to hold the data for the table
+    data = [
+        ["#", "School Name", "EMIS", "Contact", "District"]
+    ]  # Added "#" for numbering
+
+    # Populate the data list with school details
+    for idx, school in enumerate(schools, start=1):
+        data.append(
+            [
+                idx,
+                school.school_name,
+                school.EMIS,
+                school.phone_number,
+                school.district.name if school.district else "N/A",
+            ]
+        )
+
+    # Create a PDF document
+    doc = SimpleDocTemplate(response, pagesize=letter)
+    # Create a table with the school data
+    table = Table(data)
+
+    # Add style to the table
+    style = TableStyle(
+        [
+            ("BACKGROUND", (0, 0), (-1, 0), colors.darkred),
+            ("TEXTCOLOR", (0, 0), (-1, 0), colors.whitesmoke),
+            ("ALIGN", (0, 0), (-1, -1), "LEFT"),
+            ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
+            ("BOTTOMPADDING", (0, 0), (-1, 0), 12),
+            ("BACKGROUND", (0, 1), (-1, -1), colors.white),
+            ("GRID", (0, 0), (-1, -1), 1, colors.black),
+            ("BOX", (0, 0), (-1, -1), 1, colors.black),
+        ]
+    )
+
+    # Set column widths
+    table_width = doc.width
+    col_widths = [table_width * 1] + [table_width * 1] * (
+        len(data[0]) - 1
+    )  # Adjusted the column widths
+    table.setStyle(TableStyle([("WIDTH", (0, 0), (0, 0), col_widths)]))
+
+    table.setStyle(style)
+    # Add the table to the PDF document
+    doc.build([table])
+
+    return response
+
+
 # schools list, tuple or array
 @staff_required
 def all_athletes(request):
@@ -110,6 +202,22 @@ def Schoolnew(request):
         form = SchoolProfileForm()
 
     context = {"form": form, "regions": regions}
+    return render(request, "school/create_school.html", context)
+
+
+@staff_required
+def school_update(request, id):
+    school = School.objects.get(id=id)
+
+    if request.method == "POST":
+        form = SchoolProfileForm(request.POST, instance=school)
+        if form.is_valid():
+            form.save()
+
+            return redirect("schools")
+    else:
+        form = SchoolProfileForm(instance=school)
+    context = {"form": form}
     return render(request, "school/create_school.html", context)
 
 
