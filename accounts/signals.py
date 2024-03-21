@@ -14,6 +14,7 @@ def create_school_admin(sender, instance, created, **kwargs):
     if created:
         # Generate school admin credentials
         school_admin_email = instance.email
+        school_games_email = instance.gemail
         school_admin_username = instance.email
         school_admin_password = (
             "123Pass"  # You might want to generate a more secure password
@@ -35,7 +36,7 @@ def create_school_admin(sender, instance, created, **kwargs):
         subject = "Your School Admin Account Details"
         message = plain_message
         from_email = "noreply@usssaonline.com"  # Replace with your email
-        recipient_list = [school_admin_user.email]
+        recipient_list = [school_admin_user.email,school_games_email]
 
         send_mail(subject, message, from_email, recipient_list)
 

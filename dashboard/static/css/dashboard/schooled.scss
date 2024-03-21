@@ -1,11 +1,27 @@
-.sooverview{
-    padding: 20px;
-    background-color: rgb(237, 237, 237);
-    .school-box{
-        padding: 10px;
-        .attr{
+.sooverview {
+  padding: 20px;
+  background-color: rgb(237, 237, 237);
+
+  .boxed {
+    .btn-green {
+      // margin: 20px 0;
+      background-color: #00338b;
+      padding: 10px;
+      width: 200px;
+      font-size: 15px;
+      i {
+        margin-right: 20px;
+      }
+    }
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 40px;
+    .school-box {
+      padding: 10px;
+      .attr {
         display: grid;
-        grid-template-columns: repeat(2,1fr);
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
-    }
+  }
 }

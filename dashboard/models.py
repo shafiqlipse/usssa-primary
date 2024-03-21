@@ -18,7 +18,7 @@ class School(models.Model):
     status = models.CharField(
         max_length=19,
         choices=[("Active", "Active"), ("Inactive", "Inactive")],
-        default="Active",
+        default="Inactive",
     )
     badge = models.ImageField(
         upload_to="badge/",

@@ -2,10 +2,24 @@
   padding: 20px;
   background-color: rgb(237, 237, 237);
 }
-.sooverview .school-box {
+.sooverview .boxed {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 40px;
+}
+.sooverview .boxed .btn-green {
+  background-color: #00338b;
+  padding: 10px;
+  width: 200px;
+  font-size: 15px;
+}
+.sooverview .boxed .btn-green i {
+  margin-right: 20px;
+}
+.sooverview .boxed .school-box {
   padding: 10px;
 }
-.sooverview .school-box .attr {
+.sooverview .boxed .school-box .attr {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 }/*# sourceMappingURL=schooled.css.map */

@@ -221,6 +221,22 @@ def school_update(request, id):
     return render(request, "school/create_school.html", context)
 
 
+@login_required
+def schoolupdate(request, id):
+    school = School.objects.get(id=id)
+
+    if request.method == "POST":
+        form = SchoolProfileForm(request.POST, instance=school)
+        if form.is_valid():
+            form.save()
+
+            return redirect("school_dashboard")
+    else:
+        form = SchoolProfileForm(instance=school)
+    context = {"form": form}
+    return render(request, "school/create_school.html", context)
+
+
 # @staff_required
 def school_detail(request, id):
     school = get_object_or_404(School, id=id)
@@ -551,16 +567,23 @@ def payment_page(request):
     return render(request, "school/payment_page.html", context)
 
 
-def process_payment(request):
-    # Retrieve the payment record for processing
-    payment = Payment.objects.filter(is_paid=False).first()
+import requests
+from django.conf import settings
 
-    if payment:
-        # Process payment logic here (e.g., connect to payment gateway API, mark payment as paid)
-        # ...
+def initiate_payment(request):
+    # Retrieve Airtel Money credentials from settings
+    client_id = settings.AIRTEL_MONEY_CLIENT_ID
+    client_secret = settings.AIRTEL_MONEY_CLIENT_SECRET
 
-        # After successful payment processing, mark the payment as paid
-        payment.is_paid = True
-        payment.save()
+    # Your payment initiation logic here
+    # Make requests to Airtel Money API using client_id, client_secret, etc.
+    # Example:
+    response = requests.post('https://openapiuat.airtel.africa/', data={'client_id': client_id, 'client_secret': client_secret,})
 
-    return redirect("payment_page")
+    # Process the response and handle accordingly
+    # Example:
+    if response.status_code == 200:
+        return HttpResponse('Payment initiated successfully')
+    else:
+        return HttpResponse('Failed to initiate payment')
+

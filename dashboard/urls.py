@@ -17,6 +17,7 @@ urlpatterns = [
     path("addschool/", Schoolnew, name="new_school"),
     path("school/<int:id>", school_detail, name="schooldetail"),
     path("editschool/<int:id>", school_update, name="schoolupdate"),
+    path("edit_school/<int:id>", schoolupdate, name="schoolpdate"),
     path("athletes", athletes, name="athletes"),
     path("officials", school_offs, name="officials"),
     path("athlete/<int:id>", AthleteDetail, name="athlete"),
@@ -32,6 +33,6 @@ urlpatterns = [
     # competition
     path("athlete-list/", reg_athletes, name="athlete_list"),
     path("payment-page/", payment_page, name="payment_page"),
-    path("process-payment/", process_payment, name="process_payment"),  # Add this line
+    # path("process-payment/", process_payment, name="process_payment"),  # Add this line
     # Add more URLs as ne
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

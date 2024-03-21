@@ -6,27 +6,12 @@
 <!---->
 {% block content %}
 
-<form method="post">
+<h2>Payment Details</h2>
+<p>Total Amount: {{ payment.total_amount }}</p>
+<form method="post" action="">
   {% csrf_token %}
-  <label for="number_of_athletes">Number of Athletes:</label>
-  <input
-    type="number"
-    id="number_of_athletes"
-    name="number_of_athletes"
-    min="1"
-  /><br /><br />
-
-  <label for="phone_number">Phone Number to Debit:</label>
-  <input type="text" id="phone_number" name="phone_number" /><br /><br />
-
-  <label for="selected_athletes">Select Athletes:</label>
-  <select name="selected_athletes" id="selected_athletes" multiple>
-    {% for athlete in athletes %}
-    <option value="{{ athlete.id }}">{{ athlete.name }}</option>
-    {% endfor %}</select
-  ><br /><br />
-
-  <button type="submit">Calculate Total</button>
+  <button type="submit">Process Payment</button>
 </form>
+
 
 {% endblock %}
