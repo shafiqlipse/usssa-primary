@@ -68,6 +68,32 @@ def schools(request):
     return render(request, "dashboard/schools.html", context)
 
 
+# schools list, tuple or array
+@staff_required
+def activeschools(request):
+
+    schools = School.objects.filter(status="Active")
+
+    context = {
+        "schools": schools,
+        # "teamsFilter": teams
+    }
+    return render(request, "dashboard/active.html", context)
+
+
+# schools list, tuple or array
+@staff_required
+def inactiveschools(request):
+
+    schools = School.objects.filter(status="Inactive")
+
+    context = {
+        "schools": schools,
+        # "teamsFilter": teams
+    }
+    return render(request, "dashboard/inactive.html", context)
+
+
 # hegfhjgfjdhfjhfjdjjjjjjjjjjjjjjjjjjjjjjjj
 
 import csv

@@ -9,6 +9,8 @@ from accounts.views import *
 urlpatterns = [
     # venues
     path("schools/", schools, name="schools"),
+    path("inactiveschools/", inactiveschools, name="inactiveschools"),
+    path("activeschools/", activeschools, name="activeschools"),
     path("all_athletes/", all_athletes, name="athletex"),
     path("all_officials/", all_officials, name="all_officials"),
     path("tournaments/", Tournaments, name="tournaments"),
