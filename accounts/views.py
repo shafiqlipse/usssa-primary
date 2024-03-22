@@ -155,35 +155,6 @@ def create_athlete_card(p, athlete, x, y, header_text, watermark_text):
         p.drawInlineImage(image_path, x + 10, y + 20, width=100, height=120)
 
     # Add athlete information to the card on the right
-    p.drawString(x + 120, y + 130, f"Names: {athlete.fname} {athlete.lname}")
-    p.drawString(x + 120, y + 110, f"LIN: {athlete.lin}")
-    p.drawString(x + 120, y + 90, f"Clas: {athlete.classroom}")
-    p.drawString(x + 120, y + 70, f"Sport: {athlete.sport}")
-    p.drawString(x + 120, y + 50, f"Age: {athlete.age}")
-    p.drawString(x + 120, y + 30, f"Gender: {athlete.gender}")
-
-
-def create_athlete_card(p, athlete, x, y, header_text, watermark_text):
-    # Draw a border for the card
-    p.rect(x, y, 240, 150)
-
-    # Add header
-    p.setFont("Helvetica-Bold", 12)
-    p.drawString(x + 10, y + 160, header_text)
-
-    # Add watermark
-    p.setFont("Helvetica", 8)
-    p.setFillColorRGB(0.7, 0.7, 0.7)
-    p.rotate(45)
-    p.drawString(50, -100, watermark_text)
-    p.rotate(-45)
-
-    # Add image to the card on the left
-    if athlete.photo:
-        image_path = athlete.photo.path
-        p.drawInlineImage(image_path, x + 10, y + 20, width=100, height=120)
-
-    # Add athlete information to the card on the right
     p.setFont("Helvetica", 10)
     p.drawString(x + 120, y + 130, f"Names: {athlete.fname} {athlete.lname}")
     p.drawString(x + 120, y + 110, f"LIN: {athlete.lin}")

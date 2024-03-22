@@ -11,7 +11,7 @@
     <h1>Athletes</h1>
     <div class="ass">
       <a href="{% url 'addathlete'%}" class="btn-submit">Add Athlete</a>
-      {% if school_profile.status == "Active" %}
+      {% if school_profile.status == "Inactive" %}
       <a href="{% url 'pdfreport'%}" class="btn-submit">generate album</a>
       {% endif %}
     </div>
