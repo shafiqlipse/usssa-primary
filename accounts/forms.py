@@ -53,6 +53,59 @@ class SchoolProfileForm(forms.ModelForm):
             "gemail",
             "ggender",
             "gdate_of_birth",
+            
+        ]
+
+        widgets = {
+            "city": Select2Widget,
+            "district": Select2Widget,
+            "municipality": Select2Widget,
+            "date_of_birth": forms.DateInput(attrs={"type": "date"}),
+            "gdate_of_birth": forms.DateInput(attrs={"type": "date"}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(SchoolProfileForm, self).__init__(*args, **kwargs)
+        self.fields["badge"].widget.attrs["onchange"] = "displayImage(this);"
+
+    def __init__(self, *args, **kwargs):
+        super(SchoolProfileForm, self).__init__(*args, **kwargs)
+        self.fields["photo"].widget.attrs["onchange"] = "displayImage(this);"
+
+    def __init__(self, *args, **kwargs):
+        super(SchoolProfileForm, self).__init__(*args, **kwargs)
+        self.fields["gphoto"].widget.attrs["onchange"] = "displayImage(this);"
+
+
+class SchoolEditForm(forms.ModelForm):
+    class Meta:
+        model = School
+        fields = [
+            "school_name",
+            "EMIS",
+            "center_number",
+            "badge",
+            "region",
+            "district",
+            "municipality",
+            "city",
+            "fname",
+            "lname",
+            "nin",
+            "photo",
+            "phone_number",
+            "email",
+            "gender",
+            "date_of_birth",
+            "gfname",
+            "glname",
+            "gnin",
+            "gphoto",
+            "gphone",
+            "gemail",
+            "ggender",
+            "gdate_of_birth",
+            "status",
         ]
 
         widgets = {

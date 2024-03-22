@@ -9,7 +9,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from .models import User
 from django.contrib import messages
 from .forms import SchoolRegistrationForm
-from dashboard.models import school_official, School,Athlete
+from dashboard.models import school_official, School, Athlete
 
 
 @staff_required
@@ -124,73 +124,113 @@ def change_password(request):
 
 # reportlab pdf generation of reports certificates and albums
 
-# from dashboard.models import Athlete
+from dashboard.models import Athlete
 
-# from django.http import FileResponse
-# from reportlab.pdfgen import canvas
-# from reportlab.lib.pagesizes import A4
-# from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Image
-# from reportlab.lib import colors
-# import io
-
-
-# def create_athlete_card(p, athlete, x, y):
-#     # Draw a border for the card
-#     p.rect(x, y, 240, 150)
-
-#     # Add image to the card on the left
-#     if athlete.photo:
-#         image_path = athlete.photo.path
-#         p.drawInlineImage(image_path, x + 10, y + 70, width=100, height=60)
-
-#     # Add athlete information to the card on the right
-#     p.drawString(
-#         x + 120, y + 130, f"Name: {athlete.fname} {athlete.lname}"
-#     )
-#     p.drawString(x + 120, y + 110, f"ID: {athlete.lin}")
-#     p.drawString(x + 120, y + 90, f"Classroom: {athlete.classroom}")
-#     p.drawString(x + 120, y + 70, f"Sport: {athlete.sport}")
-#     p.drawString(x + 120, y + 50, f"Age: {athlete.age}")
-#     p.drawString(x + 120, y + 30, f"Gender: {athlete.gender}")
+from django.http import FileResponse
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import A4
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Image
+from reportlab.lib import colors
+import io
 
 
-# def some_view(request):
-#     # Create a file-like buffer to receive PDF data.
-#     buffer = io.BytesIO()
+def create_athlete_card(p, athlete, x, y, header_text, watermark_text):
+    # Draw a border for the card
+    p.rect(x, y, 240, 150)
 
-#     # Create the PDF object, using the buffer as its "file."
-#     p = canvas.Canvas(buffer, pagesize=A4)
-#     width, height = A4
+    # Add header
+    p.setFont("Helvetica-Bold", 12)
+    p.drawString(x + 10, y + 160, header_text)
 
-#     # Set starting position for the first card
-#     x_start = 20
-#     y_start = height - 20 - 150  # Start from 20px below the top of the page
+    # Add watermark
+    p.setFont("Helvetica", 8)
+    p.setFillColorRGB(0.7, 0.7, 0.7)
+    p.rotate(45)
+    p.drawString(50, -100, watermark_text)
+    p.rotate(-45)
 
-#     # Draw things on the PDF. Here's where the PDF generation happens.
-#     athletes = Athlete.objects.all()
+    # Add image to the card on the left
+    if athlete.photo:
+        image_path = athlete.photo.path
+        p.drawInlineImage(image_path, x + 10, y + 20, width=100, height=120)
 
-#     # Iterate through each athlete and create a card
-#     for i, athlete in enumerate(athletes):
-#         # Calculate the position for the current card
-#         x = (
-#             x_start + (i % 2) * 260
-#         )  # 260 is the width of each card plus 20 units spacing
-#         y = y_start - (i // 2) * 170  # 170 is the height of each card plus some spacing
+    # Add athlete information to the card on the right
+    p.drawString(x + 120, y + 130, f"Names: {athlete.fname} {athlete.lname}")
+    p.drawString(x + 120, y + 110, f"LIN: {athlete.lin}")
+    p.drawString(x + 120, y + 90, f"Clas: {athlete.classroom}")
+    p.drawString(x + 120, y + 70, f"Sport: {athlete.sport}")
+    p.drawString(x + 120, y + 50, f"Age: {athlete.age}")
+    p.drawString(x + 120, y + 30, f"Gender: {athlete.gender}")
 
-#         create_athlete_card(p, athlete, x, y)
 
-#         # Start a new page after every 8 cards
-#     if i > 0 and i % 7 == 0:
-#         p.showPage(top=height)  # Start new page at top of the page
-#         y_start = 20  # Adjust the starting y-coordinate for the new page
+def create_athlete_card(p, athlete, x, y, header_text, watermark_text):
+    # Draw a border for the card
+    p.rect(x, y, 240, 150)
 
-#     # Save the PDF
-#     p.save()
+    # Add header
+    p.setFont("Helvetica-Bold", 12)
+    p.drawString(x + 10, y + 160, header_text)
 
-#     # FileResponse sets the Content-Disposition header so that browsers
-#     # present the option to save the file.
-#     buffer.seek(0)
-#     return FileResponse(buffer, as_attachment=True, filename="athlete_cards.pdf")
+    # Add watermark
+    p.setFont("Helvetica", 8)
+    p.setFillColorRGB(0.7, 0.7, 0.7)
+    p.rotate(45)
+    p.drawString(50, -100, watermark_text)
+    p.rotate(-45)
+
+    # Add image to the card on the left
+    if athlete.photo:
+        image_path = athlete.photo.path
+        p.drawInlineImage(image_path, x + 10, y + 20, width=100, height=120)
+
+    # Add athlete information to the card on the right
+    p.setFont("Helvetica", 10)
+    p.drawString(x + 120, y + 130, f"Names: {athlete.fname} {athlete.lname}")
+    p.drawString(x + 120, y + 110, f"LIN: {athlete.lin}")
+    p.drawString(x + 120, y + 90, f"Class: {athlete.classroom}")
+    p.drawString(x + 120, y + 70, f"Sport: {athlete.sport}")
+    p.drawString(x + 120, y + 50, f"Age: {athlete.age}")
+    p.drawString(x + 120, y + 30, f"Gender: {athlete.gender}")
+
+def some_view(request):
+    # Create a file-like buffer to receive PDF data.
+    buffer = io.BytesIO()
+
+    # Create the PDF object, using the buffer as its "file."
+    p = canvas.Canvas(buffer, pagesize=A4)
+    width, height = A4
+
+    # Set starting position for the first card
+    x_start = 20
+    y_start = height - 20 - 150  # Start from 20px below the top of the page
+
+    # Draw things on the PDF. Here's where the PDF generation happens.
+    athletes = Athlete.objects.all()
+
+    # Iterate through each athlete and create a card
+    for i, athlete in enumerate(athletes):
+        # Calculate the position for the current card
+        x = (
+            x_start + (i % 2) * 260
+        )  # 260 is the width of each card plus 20 units spacing
+        y = y_start - (i // 2) * 170  # 170 is the height of each card plus some spacing
+
+        header_text = "Athlete Card"
+        watermark_text = "Confidential"
+        create_athlete_card(p, athlete, x, y, header_text, watermark_text)
+
+        # Start a new page after every 8 cards
+        if i > 0 and i % 7 == 0:
+            p.showPage(top=height)  # Start new page at top of the page
+            y_start = 20  # Adjust the starting y-coordinate for the new page
+
+    # Save the PDF
+    p.save()
+
+    # FileResponse sets the Content-Disposition header so that browsers
+    # present the option to save the file.
+    buffer.seek(0)
+    return FileResponse(buffer, as_attachment=True, filename="athlete_cards.pdf")
 
 
 # def album(request):
@@ -284,6 +324,7 @@ def change_password(request):
 #     # Add other cases as needed
 # form dashboard.models import Athlete
 
+
 def reg_athletes(request):
     user = request.user
     school_profile = user.school_profile.first()
@@ -295,11 +336,11 @@ def reg_athletes(request):
     else:
         athletes = Athlete.objects.none()
 
-    if request.method == 'POST':
-        selected_athletes = request.POST.getlist('selected_athletes')
-        number_of_athletes = int(request.POST.get('number_of_athletes', 0))
+    if request.method == "POST":
+        selected_athletes = request.POST.getlist("selected_athletes")
+        number_of_athletes = int(request.POST.get("number_of_athletes", 0))
         total_amount = number_of_athletes * 1500
-        return render(request, 'accounts/payment.html', {'total_amount': total_amount})
+        return render(request, "accounts/payment.html", {"total_amount": total_amount})
 
     context = {
         "athletes": athletes,

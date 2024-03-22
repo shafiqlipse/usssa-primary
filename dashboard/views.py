@@ -207,18 +207,18 @@ def Schoolnew(request):
 
 @staff_required
 def school_update(request, id):
-    school = School.objects.get(id=id)
+    school = get_object_or_404(School, id=id)
 
     if request.method == "POST":
-        form = SchoolProfileForm(request.POST, instance=school)
+        form = SchoolEditForm(request.POST, instance=school)
         if form.is_valid():
             form.save()
-
             return redirect("schools")
     else:
-        form = SchoolProfileForm(instance=school)
-    context = {"form": form}
-    return render(request, "school/create_school.html", context)
+        form = SchoolEditForm(instance=school)
+    
+    context = {"form": form, "school": school}
+    return render(request, "dashboard/editschool.html", context)
 
 
 @login_required
@@ -517,6 +517,18 @@ def AthleteUpdate(request, id):
 
 
 # # Athletes details......................................................
+# # Athletes details......................................................
+@login_required(login_url="login")
+def DeleteAthlete(request, id):
+    stud = Athlete.objects.get(id=id)
+    if request.method == "POST":
+        stud.delete()
+        return redirect("athletes")
+
+    return render(request, "dashboard/deleteath.html", {"obj": stud})
+
+
+# # Athletes details......................................................
 def OfficialDetail(request, id):
     official = get_object_or_404(school_official, id=id)
     relatedathletes = school_official.objects.filter(school=official.school).exclude(
@@ -570,6 +582,7 @@ def payment_page(request):
 import requests
 from django.conf import settings
 
+
 def initiate_payment(request):
     # Retrieve Airtel Money credentials from settings
     client_id = settings.AIRTEL_MONEY_CLIENT_ID
@@ -578,12 +591,17 @@ def initiate_payment(request):
     # Your payment initiation logic here
     # Make requests to Airtel Money API using client_id, client_secret, etc.
     # Example:
-    response = requests.post('https://openapiuat.airtel.africa/', data={'client_id': client_id, 'client_secret': client_secret,})
+    response = requests.post(
+        "https://openapiuat.airtel.africa/",
+        data={
+            "client_id": client_id,
+            "client_secret": client_secret,
+        },
+    )
 
     # Process the response and handle accordingly
     # Example:
     if response.status_code == 200:
-        return HttpResponse('Payment initiated successfully')
+        return HttpResponse("Payment initiated successfully")
     else:
-        return HttpResponse('Failed to initiate payment')
-
+        return HttpResponse("Failed to initiate payment")
