@@ -24,6 +24,8 @@ import traceback
 def Overview(request):
     # today = timezone.now().date()
     schools = School.objects.all()
+    active_schools = School.objects.filter(status ="Active").count
+    inactive_schools = School.objects.filter(status ="Inactive").count
     schools_count = School.objects.all().count
     # schools_today = School.objects.filter(created_at__date=today).count
     athletes = Athlete.objects.all()
@@ -44,6 +46,8 @@ def Overview(request):
         "officials_count": officials_count,
         "officials_bcount": officials_bcount,
         "officials_gcount": officials_gcount,
+        "active_schools": active_schools,
+        "inactive_schools": inactive_schools,
     }
     return render(request, "dashboard/overview.html", context)
 
