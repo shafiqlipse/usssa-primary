@@ -192,6 +192,7 @@ def create_athlete_card(p, athlete, x, y, header_text, watermark_text):
     p.drawString(x + 120, y + 50, f"Age: {athlete.age}")
     p.drawString(x + 120, y + 30, f"Gender: {athlete.gender}")
 
+
 def some_view(request):
     # Create a file-like buffer to receive PDF data.
     buffer = io.BytesIO()
@@ -205,7 +206,10 @@ def some_view(request):
     y_start = height - 20 - 150  # Start from 20px below the top of the page
 
     # Draw things on the PDF. Here's where the PDF generation happens.
-    athletes = Athlete.objects.all()
+    user = request.user
+    school_profile = user.school_profile.first()
+    school_id = school_profile.id
+    athletes = Athlete.objects.filter(school_id=school_id)
 
     # Iterate through each athlete and create a card
     for i, athlete in enumerate(athletes):
@@ -233,6 +237,11 @@ def some_view(request):
     return FileResponse(buffer, as_attachment=True, filename="athlete_cards.pdf")
 
 
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from dashboard.filters import *
+
+
+# @login_required(login_url="login")
 # def album(request):
 # if request.method == 'POST':
 #     form = AthleteFilterForm(request.POST)

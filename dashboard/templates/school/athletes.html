@@ -9,8 +9,12 @@
 <div class="schools-dew">
   <div class="head flex">
     <h1>Athletes</h1>
-
-    <a href="{% url 'addathlete'%}" class="btn-submit">Add Athlete</a>
+    <div class="ass">
+      <a href="{% url 'addathlete'%}" class="btn-submit">Add Athlete</a>
+      {% if school_profile.status == "Active" %}
+      <a href="{% url 'pdfreport'%}" class="btn-submit">generate album</a>
+      {% endif %}
+    </div>
   </div>
 
   <div class="filterlist glue">

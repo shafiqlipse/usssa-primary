@@ -1,0 +1,80 @@
+{% extends "dashboard/school_dashboard.html" %}
+
+<!--static-->
+{% block title %}Athletes{% endblock %}
+<!--static-->
+{% load static %}
+<!--khfufufu-->
+{% block content %}
+<div class="officials-page glue">
+  <div class="off flex">
+    <h1>Athletes</h1>
+    <a href="{% url 'addathlete'%}" class="btn-submit">Add Athlete</a>
+  </div>
+  <div class="officiallist ">
+    <div class="filter">
+      <form action="" method="get" class="formis grid5">
+        <div class="field flex">
+          <label>{{myFilter.form.name.label}}</label>
+          {{myFilter.form.name}}
+        </div>
+        <div class="field flex">
+          <label>{{myFilter.form.sport.label}}</label>
+          {{myFilter.form.sport}}
+        </div>
+        <div class="field flex">
+          <label>{{myFilter.form.age.label}}</label>
+          {{myFilter.form.age}}
+        </div>
+        <div class="field flex">
+          <label>{{myFilter.form.gender.label}}</label>
+          {{myFilter.form.gender}}
+        </div>
+        <button type="submit" class="btn-submit">filter</button>
+      </form>
+    </div>
+    <div class="titles grid5">
+      <span>Photo</span>
+      <span>name</span>
+      <span>age</span>
+      <span>sport</span>
+      <span>gender</span>
+    </div>
+    <hr />
+    <div class="official-list">
+      {% for athlete in athletelist%}
+      <div class="officiall grid5">
+        {% if athlete.photo %}
+        <img src="{{athlete.photo.url}}" alt="" />
+        {% else %}
+        <img src="{% static "images/profile.png" %}" alt="">
+        {% endif %}
+        <a href="{% url 'athlete' athlete.id%}">
+          <span>{{athlete.name}} </span> </a
+        ><span>{{athlete.age}}</span>
+        <span>{{athlete.sport}} </span>
+        <span>{{athlete.gender}}</span>
+      </div>
+      <hr />
+      {%endfor%}
+    </div>
+    <div class="pagination">
+      <span class="step-links">
+        {% if athletelist.has_previous %}
+        <a href="?page=1">&laquo; first</a>
+        <a href="?page={{ athletelist.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+          Page {{athletelist.number }} of {{athletelist.paginator.num_pages}}
+        </span>
+
+        {% if officiallist.has_next %}
+        <a href="?page={{ athletelist.next_page_number }}">next</a>
+        <a href="?page={{ athletelist.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+      </span>
+    </div>
+  </div>
+</div>
+{% endblock %}

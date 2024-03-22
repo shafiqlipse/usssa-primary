@@ -503,7 +503,7 @@ def athletes(request):
     # officialFilter = OfficialFilter(request.GET, queryset=officials)
 
     context = {
-        "athletes": athletes,
+        "athletes": athletes,"school_profile":school_profile
     }
 
     return render(request, "school/athletes.html", context)
