@@ -1,15 +1,24 @@
-from django.shortcuts import render
 from django.shortcuts import render, redirect
-from django.contrib.auth import logout
+from django.contrib.auth import logout, login
 from accounts.decorators import school_required, anonymous_required, staff_required
 from django.http import JsonResponse
-from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.forms import AuthenticationForm
 from .models import User
+from django.http import FileResponse
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import A4
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Image
+from reportlab.lib import colors
+import io
 from django.contrib import messages
 from .forms import SchoolRegistrationForm
 from dashboard.models import school_official, School, Athlete
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
+
+
+# from accounts.forms import AthleteFilterForm
 
 
 @staff_required
@@ -74,14 +83,32 @@ def custom_404(request, exception):
     return render(request, "account/custom404.html", {}, status=404)
 
 
-from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth import update_session_auth_hash
-from django.shortcuts import render, redirect
-from django.contrib import messages
+from django.shortcuts import render
+from xhtml2pdf import pisa
+from django.template.loader import get_template
+from django.http import HttpResponse
 
-# from accounts.forms import AthleteFilterForm
+from django.conf import settings
 
-from django.contrib.auth.decorators import login_required
+
+def generate_album(request):
+    user = request.user
+    school = user.school_profile.first()
+    athletes = Athlete.objects.filter(school=school)
+    # Get template
+    template = get_template("accounts/Albums.html")
+
+    context = {"athletes": athletes, "school": school, "MEDIA_URL": settings.MEDIA_URL}
+    html = template.render(context)
+
+    # Create a PDF
+    response = HttpResponse(content_type="application/pdf")
+    response["Content-Disposition"] = 'attachment; filename="output.pdf"'
+
+    pisa_status = pisa.CreatePDF(html, dest=response)
+    if pisa_status.err:
+        return HttpResponse("We had some errors <pre>" + html + "</pre>")
+    return response
 
 
 #  auth views
@@ -124,92 +151,26 @@ def change_password(request):
 
 # reportlab pdf generation of reports certificates and albums
 
-from dashboard.models import Athlete
 
-from django.http import FileResponse
-from reportlab.pdfgen import canvas
-from reportlab.lib.pagesizes import A4
-from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Image
-from reportlab.lib import colors
-import io
+# from django.http import HttpResponse
+# from django.template.loader import render_to_string
+# import pdfkit
 
+# def generate_album(request):
+#     # Retrieve school data from the database
+#     user = request.user
+#     school = user.school_profile.first()
 
-def create_athlete_card(p, athlete, x, y, header_text, watermark_text):
-    # Draw a border for the card
-    p.rect(x, y, 240, 150)
+#     # Render HTML template with school data
+#     html_content = render_to_string('accounts/Albums.html', {'school': school})
 
-    # Add header
-    p.setFont("Helvetica-Bold", 12)
-    p.drawString(x + 10, y + 160, header_text)
+#     # Generate PDF from HTML content
+#     pdf = pdfkit.from_string(html_content, False)
 
-    # Add watermark
-    p.setFont("Helvetica", 8)
-    p.setFillColorRGB(0.7, 0.7, 0.7)
-    p.rotate(45)
-    p.drawString(50, -100, watermark_text)
-    p.rotate(-45)
-
-    # Add image to the card on the left
-    if athlete.photo:
-        image_path = athlete.photo.path
-        p.drawInlineImage(image_path, x + 10, y + 20, width=100, height=120)
-
-    # Add athlete information to the card on the right
-    p.setFont("Helvetica", 10)
-    p.drawString(x + 120, y + 130, f"Names: {athlete.fname} {athlete.lname}")
-    p.drawString(x + 120, y + 110, f"LIN: {athlete.lin}")
-    p.drawString(x + 120, y + 90, f"Class: {athlete.classroom}")
-    p.drawString(x + 120, y + 70, f"Sport: {athlete.sport}")
-    p.drawString(x + 120, y + 50, f"Age: {athlete.age}")
-    p.drawString(x + 120, y + 30, f"Gender: {athlete.gender}")
-
-
-def some_view(request):
-    # Create a file-like buffer to receive PDF data.
-    buffer = io.BytesIO()
-
-    # Create the PDF object, using the buffer as its "file."
-    p = canvas.Canvas(buffer, pagesize=A4)
-    width, height = A4
-
-    # Set starting position for the first card
-    x_start = 20
-    y_start = height - 20 - 150  # Start from 20px below the top of the page
-
-    # Draw things on the PDF. Here's where the PDF generation happens.
-    user = request.user
-    school_profile = user.school_profile.first()
-    school_id = school_profile.id
-    athletes = Athlete.objects.filter(school_id=school_id)
-
-    # Iterate through each athlete and create a card
-    for i, athlete in enumerate(athletes):
-        # Calculate the position for the current card
-        x = (
-            x_start + (i % 2) * 260
-        )  # 260 is the width of each card plus 20 units spacing
-        y = y_start - (i // 2) * 170  # 170 is the height of each card plus some spacing
-
-        header_text = "Athlete Card"
-        watermark_text = "Confidential"
-        create_athlete_card(p, athlete, x, y, header_text, watermark_text)
-
-        # Start a new page after every 8 cards
-        if i > 0 and i % 7 == 0:
-            p.showPage(top=height)  # Start new page at top of the page
-            y_start = 20  # Adjust the starting y-coordinate for the new page
-
-    # Save the PDF
-    p.save()
-
-    # FileResponse sets the Content-Disposition header so that browsers
-    # present the option to save the file.
-    buffer.seek(0)
-    return FileResponse(buffer, as_attachment=True, filename="athlete_cards.pdf")
-
-
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from dashboard.filters import *
+#     # Return PDF as a downloadable attachment
+#     response = HttpResponse(pdf, content_type='application/pdf')
+#     response['Content-Disposition'] = f'attachment; filename="{school.name}_profile.pdf"'
+#     return response
 
 
 # @login_required(login_url="login")
