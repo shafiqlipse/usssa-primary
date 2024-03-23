@@ -87,7 +87,8 @@ from django.shortcuts import render
 from xhtml2pdf import pisa
 from django.template.loader import get_template
 from django.http import HttpResponse
-
+from django.contrib.staticfiles import finders
+import base64
 from django.conf import settings
 
 
@@ -95,6 +96,13 @@ def generate_album(request):
     user = request.user
     school = user.school_profile.first()
     athletes = Athlete.objects.filter(school=school)
+    # Get template
+    # Get template
+    image_path = finders.find('images/upsa.png')
+
+    # Read the image file and encode it as base64
+    with open(image_path, "rb") as image_file:
+        encoded_image = base64.b64encode(image_file.read()).decode('utf-8')
     # Get template
     template = get_template("accounts/Albums.html")
 
