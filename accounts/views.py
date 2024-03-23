@@ -103,12 +103,20 @@ def generate_album(request):
 
     # Create a PDF
     response = HttpResponse(content_type="application/pdf")
-    response["Content-Disposition"] = 'attachment; filename="output.pdf"'
+    response["Content-Disposition"] = 'attachment; filename="Album.pdf"'
 
     pisa_status = pisa.CreatePDF(html, dest=response)
     if pisa_status.err:
         return HttpResponse("We had some errors <pre>" + html + "</pre>")
     return response
+
+
+def album(request):
+    user = request.user
+    school = user.school_profile.first()
+    athletes = Athlete.objects.filter(school=school)
+    context = {"athletes": athletes, "school": school}
+    return render(request, "accounts/Albums.html", context)
 
 
 #  auth views

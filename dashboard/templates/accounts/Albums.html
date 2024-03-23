@@ -1,21 +1,56 @@
 <html lang="en">
+  {% load static %}
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="{%static 'css/main/album.css'%}" />
+    <link rel="stylesheet" href="{%static 'css/main/main.css'%}" />
   </head>
   <body>
-    <h1 style="color: red">Hello Kampala</h1>
-    <hr />
-    <h3>{{school.school_name}}</h3>
-    <h3>{{school.EMIS}}</h3>
-    <h3>{{school.district}}</h3>
-    <div class="athletes">
-      {% for athlete in athletes %}
-      <h1>{{athlete.fname}}</h1>
-      <img src="{{ athlete.photo.url }}" alt="" />
+    <div class="header">
+      <img src="{% static 'images/upsa.png'%}" alt="" />
+      <h1>uganda primary schools sports association</h1>
 
-      {% endfor %}
+      <h3>{{school.school_name}}</h3>
+      <p>EMIS: {{school.EMIS}}</p>
+      <p>{{school.region}}, {{school.district}}</p>
+      <hr style="border: solid 4px red; margin:20px; />
+      <div
+        style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 10px"
+      >
+        <div class="headtexher">
+          <div class="head-card flex">
+            {% if school.photo %}
+            <img src="{{school.photo.path}}" alt="{{school.school_name}}" />
+            {% else %}
+            <img
+              src="{%static 'images/profile.png'%}"
+              alt="{{school.school_name}}"
+            />
+            {% endif %}
+            <div class="txt">
+              <h1>Head Teacher</h1>
+              <h2>{{school.fname}} {{school.lname}}</h2>
+            </div>
+          </div>
+          <div class="head-card flex">
+            {% if school.photo %}
+            <img src="{{school.photo.path}}" alt="{{school.school_name}}" />
+            {% else %}
+            <img
+              src="{%static 'images/profile.png'%}"
+              alt="{{school.school_name}}"
+            />
+            {% endif %}
+            <div class="txt">
+              <h1>Head Teacher</h1>
+              <h2>{{school.fname}} {{school.lname}}</h2>
+            </div>
+          </div>
+        </div>
+        <div class="headtexher"></div>
+      </div>
     </div>
   </body>
 </html>
