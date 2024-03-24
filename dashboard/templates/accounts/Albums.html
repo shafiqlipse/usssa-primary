@@ -19,22 +19,36 @@
         text-transform: uppercase;
       }
       .geda {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-gap: 10px;
+        width: 100%;
+        display: table;
+      }
+      .headtexher {
+        display: table-row;
+      }
+      .headtexher > div {
+        display: table-cell;
+        width: 50%;
       }
       .header .headtexher {
         display: flex;
         align-items: center;
       }
+      .header .headexher h1 {
+        text-transform: uppercase;
+      }
       table tbody tr td {
         width: 50%;
-        text-lign: left;
+        text-align: left;
         padding: 10px;
       }
-      table tbody tr td .det{
-        text-align:left;
+      table tbody tr td .det {
+        text-align: left;
       }
+      table tbody tr td .det h3,
+      table tbody tr td h5 {
+        text-transform: capitalize;
+      }
+
       table tbody tr td img {
         width: 200px;
       }
@@ -81,56 +95,33 @@
         </div>
       </div>
       <div class="headexher">
-        <h1>Athletes</h1>
+        <h1 style="font-size: 2em">ATHLETES</h1>
+        <hr />
         <div class="athletes">
-          {% for athlete in athletes %}
-
           <table id="myTable" class="display">
             <tbody>
+              {% for athlete in athletes %}
               <tr>
                 <td>
                   {% if athlete.photo %}
-                  <img
-                    src="{{athlete.photo.url}}"
-                    alt="{{athlete.school_name}}"
-                  />
+                  <img src="{{athlete.photo.path}}" alt="{{athlete.fname}}" />
                   {% else %}
                   <img
                     src="{%static 'images/profile.png'%}"
-                    alt="{{athlete.school_name}}"
+                    alt="{{athlete.fname}}"
                   />
                   {% endif %}
                 </td>
                 <td>
                   <div class="det">
-                    <h3>{{athlete.fname}}{{athlete.lname}}</h3>
-                    <h5>{{athlete.lin}}</h5>
-                  </div>
-                </td>
-                <td>
-                  {% if school.photo %}
-                  <img
-                    src="{{school.photo.path}}"
-                    alt="{{school.school_name}}"
-                  />
-                  {% else %}
-                  <img
-                    src="{%static 'images/profile.png'%}"
-                    alt="{{school.school_name}}"
-                  />
-                  {% endif %}
-                </td>
-                <td>
-                  <div class="det">
-                    <h3>{{athlete.fname}}{{athlete.lname}}</h3>
+                    <h3>{{athlete.fname}} {{athlete.lname}}</h3>
                     <h5>{{athlete.lin}}</h5>
                   </div>
                 </td>
               </tr>
+              {% endfor %}
             </tbody>
           </table>
-
-          {% endfor %}
         </div>
       </div>
     </div>
