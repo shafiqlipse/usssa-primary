@@ -27,6 +27,17 @@
         display: flex;
         align-items: center;
       }
+      table tbody tr td {
+        width: 50%;
+        text-lign: left;
+        padding: 10px;
+      }
+      table tbody tr td .det{
+        text-align:left;
+      }
+      table tbody tr td img {
+        width: 200px;
+      }
     </style>
     <div class="header">
       <img src="{% static 'images/upsa.png'%}" alt="" />
@@ -68,7 +79,59 @@
             </div>
           </div>
         </div>
-        <div class="headtexher"></div>
+      </div>
+      <div class="headexher">
+        <h1>Athletes</h1>
+        <div class="athletes">
+          {% for athlete in athletes %}
+
+          <table id="myTable" class="display">
+            <tbody>
+              <tr>
+                <td>
+                  {% if school.photo %}
+                  <img
+                    src="{{school.photo.path}}"
+                    alt="{{school.school_name}}"
+                  />
+                  {% else %}
+                  <img
+                    src="{%static 'images/profile.png'%}"
+                    alt="{{school.school_name}}"
+                  />
+                  {% endif %}
+                </td>
+                <td>
+                  <div class="det">
+                    <h3>{{athlete.fname}}{{athlete.lname}}</h3>
+                    <h5>{{athlete.lin}}</h5>
+                  </div>
+                </td>
+                <td>
+                  {% if school.photo %}
+                  <img
+                    src="{{school.photo.path}}"
+                    alt="{{school.school_name}}"
+                  />
+                  {% else %}
+                  <img
+                    src="{%static 'images/profile.png'%}"
+                    alt="{{school.school_name}}"
+                  />
+                  {% endif %}
+                </td>
+                <td>
+                  <div class="det">
+                    <h3>{{athlete.fname}}{{athlete.lname}}</h3>
+                    <h5>{{athlete.lin}}</h5>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          {% endfor %}
+        </div>
       </div>
     </div>
   </body>
