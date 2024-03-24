@@ -89,15 +89,15 @@
             <tbody>
               <tr>
                 <td>
-                  {% if school.photo %}
+                  {% if athlete.photo %}
                   <img
-                    src="{{school.photo.path}}"
-                    alt="{{school.school_name}}"
+                    src="{{athlete.photo.url}}"
+                    alt="{{athlete.school_name}}"
                   />
                   {% else %}
                   <img
                     src="{%static 'images/profile.png'%}"
-                    alt="{{school.school_name}}"
+                    alt="{{athlete.school_name}}"
                   />
                   {% endif %}
                 </td>
