@@ -2,9 +2,7 @@
 <!---->
 {% load static %} {% block content %}
 <div class="sooverview">
-  <div class="boxed"> <a href="{% url 'schoolpdate' school.id%}" class='btn-green'
-      ><i class="fa fa-pencil-square" aria-hidden="true"></i>Edit profile
-    </a>
+  <div class="boxed"> 
     <div class="school-box glue">
       <div class="attr"><span>Name : </span>{{school.school_name}}</div>
       <div class="attr"><span>EMIS : </span>{{school.EMIS}}</div>
@@ -80,5 +78,8 @@
       </div>
     </div>
   </div>
+  <a href="{% url 'schoolpdate' school.id%}" class='btn-green'
+      ><i class="fa fa-pencil-square" aria-hidden="true"></i>Edit profile
+    </a>
 </div>
 {% endblock %}
