@@ -162,4 +162,18 @@ h3 {
   .grid6 {
     grid-template-columns: repeat(1, 1fr);
   }
+}
+
+.ad {
+  padding: 10px;
+  margin: 20px 0;
+}
+.ad img {
+  width: 50%;
+  border-radius: 20px;
+}
+@media (max-width: 768px) {
+  .ad img {
+    width: 100%;
+  }
 }/*# sourceMappingURL=main.css.map */

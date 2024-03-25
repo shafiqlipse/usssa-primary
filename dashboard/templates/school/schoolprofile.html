@@ -2,7 +2,10 @@
 <!---->
 {% load static %} {% block content %}
 <div class="sooverview">
-  <div class="boxed"> 
+  <div class="ad">
+    <img src="{%static 'images/upssa.png'%}" alt="" />
+  </div>
+  <div class="boxed">
     <div class="school-box glue">
       <div class="attr"><span>Name : </span>{{school.school_name}}</div>
       <div class="attr"><span>EMIS : </span>{{school.EMIS}}</div>
@@ -15,7 +18,6 @@
         <span>Municipality : </span>{{school.municipality}}
       </div>
       <div class="attr"><span>City : </span>{{school.city}}</div>
-     
     </div>
     <div class="row">
       <div class="col-xl-6 col-sm-6 mb-xl-0 mb-4">
@@ -78,8 +80,8 @@
       </div>
     </div>
   </div>
-  <a href="{% url 'schoolpdate' school.id%}" class='btn-green'
-      ><i class="fa fa-pencil-square" aria-hidden="true"></i>Edit profile
-    </a>
+  <a href="{% url 'schoolpdate' school.id%}" class="btn-green"
+    ><i class="fa fa-pencil-square" aria-hidden="true"></i>Edit profile
+  </a>
 </div>
 {% endblock %}
