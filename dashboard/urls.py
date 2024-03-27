@@ -8,6 +8,8 @@ from accounts.views import *
 
 urlpatterns = [
     # venues
+
+    path("activate/<int:id>", activate_school, name="activate"),
     path("schools/", schools, name="schools"),
     path("inactiveschools/", inactiveschools, name="inactiveschools"),
     path("activeschools/", activeschools, name="activeschools"),

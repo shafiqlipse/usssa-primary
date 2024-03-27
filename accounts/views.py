@@ -166,7 +166,12 @@ def change_password(request):
 
 
 # reportlab pdf generation of reports certificates and albums
-
+from django.shortcuts import get_object_or_404
+def activate_school(request, id):
+    school = get_object_or_404(School, id=id)
+    school.status = 'Active'
+    school.save()
+    return HttpResponse("School activated successfully.")
 
 # from django.http import HttpResponse
 # from django.template.loader import render_to_string

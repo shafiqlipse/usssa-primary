@@ -51,3 +51,14 @@ def create_school_admin(sender, instance, created, **kwargs):
 #             instance.email
 #         )  # You might want to customize this logic
 #         school_admin_user.save()
+# signals.py
+
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+# from .models import School
+
+@receiver(post_save, sender=School)
+def set_school_active(sender, instance, **kwargs):
+    if instance.status == 'inactive':
+        instance.status = 'active'
+        instance.save()
