@@ -27,6 +27,7 @@ urlpatterns = [
     path("athlete/<int:id>", AthleteDetail, name="athlete"),
     path("official/<int:id>", OfficialDetail, name="official"),
     path("updateathlete/<int:id>", AthleteUpdate, name="updateathlete"),
+    path("deleteathlete/<int:id>", DeleteAthlete, name="delathlete"),
     path("addathlete", newAthlete, name="addathlete"),
     path("addofficial", Official, name="addofficial"),
     # path("updateofficial/<int:id>", update_official, name="updateofficial"),

@@ -29,6 +29,8 @@
               <th>Gender</th>
               <th>Sport</th>
               <th>Age</th>
+              <th>Edit</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -44,6 +46,14 @@
               <td>{{athlete.gender}}</td>
               <td>{{athlete.sport}}</td>
               <td>{{athlete.age}}</td>
+              <td>
+                <a href="" class="del"><i class="fa fa-pencil"></i></a>
+              </td>
+              <td>
+                <a href="{% url 'delathlete' athlete.id %}" class="del"
+                  ><i class="fa fa-trash"></i
+                ></a>
+              </td>
             </tr>
 
             {%endfor%}
