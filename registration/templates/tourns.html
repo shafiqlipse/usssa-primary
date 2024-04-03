@@ -2,14 +2,14 @@
 <!---->
 {% load static %}
 <!---->
-{%block title%}Schools{% endblock %}
+{%block title%}Tournaments{% endblock %}
 <!---->
 {% block content %}
 <div class="schools-dew">
   <div class="head flex">
-    <h1>Schools</h1>
+    <h1>Tournaments</h1>
     <div class="report">
-      <a href="{% url 'exportp_csv'%}"
+      <a href="{% url 'export_csv'%}"
         ><i class="fa fa-download" aria-hidden="true"></i>
       </a>
       <a href="{% url 'export_pdf'%}"
@@ -24,33 +24,31 @@
         <table id="myTable" class="display">
           <thead>
             <tr>
-              <th>School</th>
-              <th>Emis</th>
-              <th>Status</th>
-              <th>region</th>
-              <th>District</th>
+              <th>Tournament</th>
+              <th>Host</th>
+              <th>Start date</th>
+              <th>End Date</th>
+
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {% for school in schools%}
+            {% for tournament in tournaments%}
             <tr>
               <td>
-                <a href="{% url 'schooldetail' school.id%}"
-                  >{{school.school_name}}</a
+                <a href="{% url 'schooldetail' tournament.id%}"
+                  >{{tournament.name}}</a
                 >
               </td>
-              <td>{{school.EMIS}}</td>
-              <td>{{school.status}}</td>
-              <td>{{school.region}}</td>
-              <td>{{school.district}}</td>
+              <td>{{tournament.host}}</td>
+              <td>{{tournament.start_date}}</td>
+              <td>{{tournament.end_date}}</td>
+
               <td>
-                <div class="report">
-                  <a href="{% url 'schoolupdate' school.id%}"
-                    ><i class="fa fa-pencil-square" aria-hidden="true"></i>
-                  </a>
-                  <a href=""
-                    ><i class="fa fa-trash" aria-hidden="true"></i>
+                <div class="btn-ji">
+                  <a href="{% url 'enschool' tournament.id%}"
+                    ><i class="fa fa-pencil-square" aria-hidden="true"></i
+                    >Enroll School
                   </a>
                 </div>
               </td>

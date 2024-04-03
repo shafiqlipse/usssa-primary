@@ -35,6 +35,7 @@ urlpatterns = [
     # path("official/<int:id>", official_details, name="official"),
     # path("deleteofficial/<int:id>", delete_official, name="deleteofficial"),
     path("export-csv/", export_csv, name="export_csv"),
+    path("exportp-csv/", exportp_csv, name="exportp_csv"),
     path("export-pdf/", export_pdf, name="export_pdf"),
     # competition
     path("athlete-list/", reg_athletes, name="athlete_list"),

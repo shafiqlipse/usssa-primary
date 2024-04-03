@@ -118,6 +118,24 @@ def export_csv(request):
     return response
 
 
+
+def exportp_csv(request):
+    response = HttpResponse(content_type="text/csv")
+    response["Content-Disposition"] = 'attachment; filename="schools.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(["School Name", "EMIS", "Contact", "District"])  # CSV header
+
+    # Fetch data from the database and write it to the CSV file
+    schools = School.objects.filter(status="Active")
+    for school in schools:
+        writer.writerow(
+            [school.school_name, school.EMIS, school.phone_number, school.district]
+        )
+
+    return response
+
+
 # schools list, tuple or array
 # schools list, tuple or array
 from reportlab.lib import colors
@@ -308,32 +326,9 @@ def Official(request):
 # schools list, tuple or array
 def Tournaments(request):
 
-    # schools = school.objects.all()
+    tournaments = Tournament.objects.all()
 
-    # # schoolFilter = schoolFilter(request.GET, queryset=schools)
-    # myFilter = schoolFilter(request.GET, queryset=schools)
-
-    # schoollist = myFilter.qs
-
-    # items_per_page = 10
-
-    # paginator = Paginator(schoollist, items_per_page)
-    # page = request.GET.get("page")
-
-    # try:
-    #     schoollist = paginator.page(page)
-    # except PageNotAnInteger:
-    #     # If the page is not an integer, deliver the first page
-    #     schoollist = paginator.page(1)
-    # except EmptyPage:
-    #     # If the page is out of range, deliver the last page
-    #     schoollist = paginator.page(paginator.num_pages)
-    context = {
-        #     "schoollist": schoollist,
-        #     # "teamsFilter": teamsFilter,
-        #     "myFilter": myFilter,
-        #     # "teamlist": teamlist,
-    }
+    context = {"tournaments": tournaments}
     return render(request, "dashboard/tournaments.html", context)
 
 
@@ -555,6 +550,7 @@ def DeleteAthlete(request, id):
         return redirect("athletes")
 
     return render(request, "dashboard/deleteath.html", {"obj": stud})
+
 
 # # Athletes details......................................................
 @login_required(login_url="login")

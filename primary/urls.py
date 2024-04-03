@@ -17,6 +17,7 @@ urlpatterns = [
     path("dashboard/", Overview, name="dashboard"),
     path("school/", Dash, name="school_dashboard"),
     path("dashboard/", include("dashboard.urls")),
+    path("enrollment/", include("registration.urls")),
     # email
     # path('send_email/', Sendmail, name='send_email'),
     path("pdf_report/", generate_album, name="pdfreport"),
