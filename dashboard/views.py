@@ -24,8 +24,8 @@ import traceback
 def Overview(request):
     # today = timezone.now().date()
     schools = School.objects.all()
-    active_schools = School.objects.filter(status ="Active").count
-    inactive_schools = School.objects.filter(status ="Inactive").count
+    active_schools = School.objects.filter(status="Active").count
+    inactive_schools = School.objects.filter(status="Inactive").count
     schools_count = School.objects.all().count
     # schools_today = School.objects.filter(created_at__date=today).count
     athletes = Athlete.objects.all()
@@ -118,6 +118,24 @@ def export_csv(request):
     return response
 
 
+
+def exportp_csv(request):
+    response = HttpResponse(content_type="text/csv")
+    response["Content-Disposition"] = 'attachment; filename="schools.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(["School Name", "EMIS", "Contact", "District"])  # CSV header
+
+    # Fetch data from the database and write it to the CSV file
+    schools = School.objects.filter(status="Active")
+    for school in schools:
+        writer.writerow(
+            [school.school_name, school.EMIS, school.phone_number, school.district]
+        )
+
+    return response
+
+
 # schools list, tuple or array
 # schools list, tuple or array
 from reportlab.lib import colors
@@ -149,7 +167,7 @@ def export_pdf(request):
                 school.school_name,
                 school.EMIS,
                 school.phone_number,
-                school.district.name if school.district else "N/A",
+                school.district if school.district else "N/A",
             ]
         )
 
@@ -177,7 +195,7 @@ def export_pdf(request):
     col_widths = [table_width * 1] + [table_width * 1] * (
         len(data[0]) - 1
     )  # Adjusted the column widths
-    table.setStyle(TableStyle([("WIDTH", (0, 0), (0, 0), col_widths)]))
+    table.setStyle(TableStyle([("WIDTH", (1, 1), (0, 0), col_widths)]))
 
     table.setStyle(style)
     # Add the table to the PDF document
@@ -246,7 +264,7 @@ def school_update(request, id):
             return redirect("schools")
     else:
         form = SchoolEditForm(instance=school)
-    
+
     context = {"form": form, "school": school}
     return render(request, "dashboard/editschool.html", context)
 
@@ -268,6 +286,7 @@ def schoolupdate(request, id):
 
 
 # @staff_required
+@login_required
 def school_detail(request, id):
     school = get_object_or_404(School, id=id)
     officials = school_official.objects.filter(school_id=id)
@@ -307,32 +326,9 @@ def Official(request):
 # schools list, tuple or array
 def Tournaments(request):
 
-    # schools = school.objects.all()
+    tournaments = Tournament.objects.all()
 
-    # # schoolFilter = schoolFilter(request.GET, queryset=schools)
-    # myFilter = schoolFilter(request.GET, queryset=schools)
-
-    # schoollist = myFilter.qs
-
-    # items_per_page = 10
-
-    # paginator = Paginator(schoollist, items_per_page)
-    # page = request.GET.get("page")
-
-    # try:
-    #     schoollist = paginator.page(page)
-    # except PageNotAnInteger:
-    #     # If the page is not an integer, deliver the first page
-    #     schoollist = paginator.page(1)
-    # except EmptyPage:
-    #     # If the page is out of range, deliver the last page
-    #     schoollist = paginator.page(paginator.num_pages)
-    context = {
-        #     "schoollist": schoollist,
-        #     # "teamsFilter": teamsFilter,
-        #     "myFilter": myFilter,
-        #     # "teamlist": teamlist,
-    }
+    context = {"tournaments": tournaments}
     return render(request, "dashboard/tournaments.html", context)
 
 
@@ -502,9 +498,7 @@ def athletes(request):
         athletes = Athlete.objects.none()
     # officialFilter = OfficialFilter(request.GET, queryset=officials)
 
-    context = {
-        "athletes": athletes,"school_profile":school_profile
-    }
+    context = {"athletes": athletes, "school_profile": school_profile}
 
     return render(request, "school/athletes.html", context)
 
@@ -556,6 +550,17 @@ def DeleteAthlete(request, id):
         return redirect("athletes")
 
     return render(request, "dashboard/deleteath.html", {"obj": stud})
+
+
+# # Athletes details......................................................
+@login_required(login_url="login")
+def DeleteSchool(request, id):
+    stud = School.objects.get(id=id)
+    if request.method == "POST":
+        stud.delete()
+        return redirect("schools")
+
+    return render(request, "dashboard/deletesch.html", {"obj": stud})
 
 
 # # Athletes details......................................................

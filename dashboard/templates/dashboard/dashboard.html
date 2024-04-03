@@ -24,6 +24,7 @@
     />
     <link rel="stylesheet" href="{% static 'css/dashboard/dashboard.css'%}" />
     <link rel="stylesheet" href="{% static 'css/dashboard/school.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/dashboard/delete.css'%}" />
     <link rel="stylesheet" href="{% static 'css/dashboard/schooled.css'%}" />
     <link rel="stylesheet" href="{% static 'css/dashboard/schoolist.css'%}" />
     <link rel="stylesheet" href="{% static 'css/css/all.min.css'%}" />
@@ -169,6 +170,16 @@
             >
               Enrollment
             </h6>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="{% url 'tourns' %}">
+              <div
+                class="text-white text-center me-2 d-flex align-items-center justify-content-center"
+              >
+                <i class="fa fa-map"></i>
+              </div>
+              <span class="nav-link-text ms-1">Config </span>
+            </a>
           </li>
           <li class="nav-item">
             <a class="nav-link text-white" href="">

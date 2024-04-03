@@ -1,0 +1,66 @@
+.delete {
+  width: 100%;
+  height: 80vh;
+  background-color: rgba(100, 100, 100, 0.3882352941);
+  top: 50px;
+  z-index: 1999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.delete .confirm {
+  width: 60%;
+  padding: 100px;
+  background-color: #fff;
+  border-radius: 20px;
+}
+@media (max-width: 768px) {
+  .delete .confirm {
+    padding: 20px;
+  }
+}
+.delete .confirm .formdelete hr {
+  border: solid 1px rgb(1, 29, 113);
+}
+.delete .confirm .formdelete .btns {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+@media (max-width: 568px) {
+  .delete .confirm .formdelete .btns {
+    flex-direction: column;
+  }
+}
+.delete .confirm .formdelete .btns input {
+  padding: 8px;
+  width: 200px;
+  background-color: red;
+  border: 0;
+  border-radius: 5px;
+  color: white;
+  text-transform: capitalize;
+  text-align: center;
+}
+@media (max-width: 568px) {
+  .delete .confirm .formdelete .btns input {
+    width: 100%;
+    margin: 10px 0;
+  }
+}
+.delete .confirm .formdelete .btns a {
+  padding: 8px;
+  width: 200px;
+  background-color: green;
+  border-radius: 5px;
+  color: white;
+  text-transform: capitalize;
+  text-align: center;
+}
+@media (max-width: 568px) {
+  .delete .confirm .formdelete .btns a {
+    width: 100%;
+    margin: 10px 0;
+  }
+}/*# sourceMappingURL=delete.css.map */
