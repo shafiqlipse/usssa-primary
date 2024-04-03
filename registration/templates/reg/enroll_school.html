@@ -1,0 +1,15 @@
+{% extends "dashboard/dashboard.html" %}
+<!---->
+{% load static %}
+<!---->
+{%block title%}Tournaments{% endblock %}
+<!---->
+{% block content %}
+<div class="schools-dew">
+  <form action="" class="form-control" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit" class="btn-submit">Enroll athletes</button>
+  </form>
+</div>
+{% endblock %}

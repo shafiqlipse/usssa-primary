@@ -1,0 +1,64 @@
+{% extends "dashboard/dashboard.html" %}
+<!---->
+{% load static %}
+<!---->
+{%block title%}Tournaments{% endblock %}
+<!---->
+{% block content %}
+<div class="schools-dew">
+  <div class="head flex">
+    <h1>Tournaments</h1>
+    <div class="report">
+      <a href="{% url 'export_csv'%}"
+        ><i class="fa fa-download" aria-hidden="true"></i>
+      </a>
+      <a href="{% url 'export_pdf'%}"
+        ><i class="fa fa-file-pdf" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+
+  <div class="filterlist glue">
+    <div class="lo">
+      <div class="official-list">
+        <table id="myTable" class="display">
+          <thead>
+            <tr>
+              <th>Tournament</th>
+              <th>Host</th>
+              <th>Start date</th>
+              <th>End Date</th>
+
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for tournament in tournaments%}
+            <tr>
+              <td>
+                <a href="{% url 'schooldetail' tournament.id%}"
+                  >{{tournament.name}}</a
+                >
+              </td>
+              <td>{{tournament.host}}</td>
+              <td>{{tournament.start_date}}</td>
+              <td>{{tournament.end_date}}</td>
+
+              <td>
+                <div class="btn-ji">
+                  <a href="{% url 'enschool' tournament.id%}"
+                    ><i class="fa fa-pencil-square" aria-hidden="true"></i
+                    >Enroll School
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            {%endfor%}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
