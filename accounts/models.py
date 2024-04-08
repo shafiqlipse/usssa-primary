@@ -47,7 +47,7 @@ class User(AbstractUser):
     is_school = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
-    is_officer = models.BooleanField(default=False)
+
     thumbnail = models.ImageField(upload_to="profile/", blank=True, null=True)
 
 
