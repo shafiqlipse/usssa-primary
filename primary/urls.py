@@ -15,6 +15,7 @@ urlpatterns = [
     path("register/", school_registration, name="register"),
     path("logout/", user_logout, name="logout"),
     path("dashboard/", Overview, name="dashboard"),
+    path("officer/", Officer, name="officer"),
     path("school/", Dash, name="school_dashboard"),
     path("dashboard/", include("dashboard.urls")),
     # path("enrollment/", include("registration.urls")),
