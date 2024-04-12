@@ -92,17 +92,44 @@ import base64
 from django.conf import settings
 
 
+def generate_scalbum(request, id):
+
+    school = School.objects.get(id=id)
+    athletes = Athlete.objects.filter(school=school)
+    # Get template
+    # Get template
+    image_path = finders.find("images/upsa.png")
+
+    # Read the image file and encode it as base64
+    with open(image_path, "rb") as image_file:
+        encoded_image = base64.b64encode(image_file.read()).decode("utf-8")
+    # Get template
+    template = get_template("accounts/Albums.html")
+
+    context = {"athletes": athletes, "school": school, "MEDIA_URL": settings.MEDIA_URL}
+    html = template.render(context)
+
+    # Create a PDF
+    response = HttpResponse(content_type="application/pdf")
+    response["Content-Disposition"] = 'attachment; filename="Album.pdf"'
+
+    pisa_status = pisa.CreatePDF(html, dest=response)
+    if pisa_status.err:
+        return HttpResponse("We had some errors <pre>" + html + "</pre>")
+    return response
+
+
 def generate_album(request):
     user = request.user
     school = user.school_profile.first()
     athletes = Athlete.objects.filter(school=school)
     # Get template
     # Get template
-    image_path = finders.find('images/upsa.png')
+    image_path = finders.find("images/upsa.png")
 
     # Read the image file and encode it as base64
     with open(image_path, "rb") as image_file:
-        encoded_image = base64.b64encode(image_file.read()).decode('utf-8')
+        encoded_image = base64.b64encode(image_file.read()).decode("utf-8")
     # Get template
     template = get_template("accounts/Albums.html")
 
@@ -167,11 +194,14 @@ def change_password(request):
 
 # reportlab pdf generation of reports certificates and albums
 from django.shortcuts import get_object_or_404
+
+
 def activate_school(request, id):
     school = get_object_or_404(School, id=id)
-    school.status = 'Active'
+    school.status = "Active"
     school.save()
     return HttpResponse("School activated successfully.")
+
 
 # from django.http import HttpResponse
 # from django.template.loader import render_to_string

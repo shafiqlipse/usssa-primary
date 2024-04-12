@@ -22,6 +22,7 @@ urlpatterns = [
     # email
     # path('send_email/', Sendmail, name='send_email'),
     path("pdf_report/", generate_album, name="pdfreport"),
+    path("pdfreport/<int:id>", generate_scalbum, name="pdreport"),
     # path("album/", album, name="album"),
     path("select2/", include("django_select2.urls")),
     path("calculate_age_choices/", calculate_age_choices, name="calculate_age_choices"),

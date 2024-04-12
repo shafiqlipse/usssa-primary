@@ -26,6 +26,8 @@
         <span>Municipality : </span><article>{{school.municipality}}
       </article></div>
       <div class="attr"><span>City : </span><article>{{school.city}}</article></div>
+      <a href="{% url 'pdreport' school.id %}" class="btn-submit">generate album</a>
+
     </div>
 
     <div class="school">
@@ -46,7 +48,6 @@
         <span>Date of Birth : </span><article>{{school.date_of_birth}}</article>
       </div>
     </div>
-
     <div class="school">
       <h1>Games Teacher</h1>{% if school.gphoto %}
         <img src="{{school.gphoto.url}}" alt="">
