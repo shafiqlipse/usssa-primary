@@ -1,0 +1,46 @@
+{% extends "dashboard/dashboard.html" %}
+<!---->
+{% load static %}
+<!---->
+{%block title%}Users{% endblock %}
+<!---->
+{% block content %}
+<div class="schools-dew">
+  <div class="head flex">
+    <h1>Users</h1>
+    <div class="report"></div>
+  </div>
+
+  <div class="filterlist glue">
+    <div class="lo">
+      <div class="official-list">
+        <table id="myTable" class="display">
+          <thead>
+            <tr>
+              <th>Names</th>
+              <th>username</th>
+              <th>email</th>
+              <th>school</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for user in users%}
+            <tr>
+              <td>{{user.firstname}}</td>
+              <td>{{user.username}}</td>
+              <td>{{user.email}}</td>
+              {% if user.school_profile%}
+              <td>{{ user.school_profile.first.EMIS}}</td>
+              {% else %}
+              <td>No school assigned</td>
+              {% endif %}
+            </tr>
+
+            {%endfor%}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

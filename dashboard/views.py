@@ -57,6 +57,20 @@ def Overview(request):
 
 # schools list, tuple or array
 @staff_required
+def users(request):
+
+    users = User.objects.all()
+
+    context = {
+        "users": users,
+        # "teamsFilter": teams
+    }
+    return render(request, "dashboard/users.html", context)
+
+
+
+# schools list, tuple or array
+@staff_required
 def schools(request):
 
     schools = School.objects.all()

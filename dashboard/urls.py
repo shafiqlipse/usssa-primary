@@ -11,6 +11,7 @@ urlpatterns = [
 
     path("activate/<int:id>", activate_school, name="activate"),
     path("schools/", schools, name="schools"),
+    path("users/", users, name="users"),
     path("inactiveschools/", inactiveschools, name="inactiveschools"),
     path("activeschools/", activeschools, name="activeschools"),
     path("all_athletes/", all_athletes, name="athletex"),
