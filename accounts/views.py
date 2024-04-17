@@ -89,60 +89,72 @@ from django.template.loader import get_template
 from django.http import HttpResponse
 from django.contrib.staticfiles import finders
 import base64
+import os
 from django.conf import settings
+from django.core.files.storage import default_storage
+from django.http import HttpResponse
+from django.template.loader import get_template
+from xhtml2pdf import pisa
+from PIL import Image
+from io import BytesIO
 
 
-def generate_scalbum(request, id):
-
-    school = School.objects.get(id=id)
-    athletes = Athlete.objects.filter(school=school)
-    # Get template
-    # Get template
-    image_path = finders.find("images/upsa.png")
-
-    # Read the image file and encode it as base64
-    with open(image_path, "rb") as image_file:
-        encoded_image = base64.b64encode(image_file.read()).decode("utf-8")
-    # Get template
-    template = get_template("accounts/Albums.html")
-
-    context = {"athletes": athletes, "school": school, "MEDIA_URL": settings.MEDIA_URL}
-    html = template.render(context)
-
-    # Create a PDF
-    response = HttpResponse(content_type="application/pdf")
-    response["Content-Disposition"] = 'attachment; filename="Album.pdf"'
-
-    pisa_status = pisa.CreatePDF(html, dest=response)
-    if pisa_status.err:
-        return HttpResponse("We had some errors <pre>" + html + "</pre>")
-    return response
+def compress_image(image_data, quality=85):
+    img = Image.open(BytesIO(image_data))
+    if img.mode in ("RGBA", "P"):
+        img = img.convert("RGB")
+    output = BytesIO()
+    img.save(output, format="JPEG", quality=quality)
+    compressed_image_data = output.getvalue()
+    return compressed_image_data
 
 
 def generate_album(request):
-    user = request.user
-    school = user.school_profile.first()
+    school = request.user.school_profile.first()
     athletes = Athlete.objects.filter(school=school)
-    # Get template
-    # Get template
-    image_path = finders.find("images/upsa.png")
 
-    # Read the image file and encode it as base64
-    with open(image_path, "rb") as image_file:
-        encoded_image = base64.b64encode(image_file.read()).decode("utf-8")
     # Get template
     template = get_template("accounts/Albums.html")
 
-    context = {"athletes": athletes, "school": school, "MEDIA_URL": settings.MEDIA_URL}
+    # Compress school photo
+    if school.photo:
+        with default_storage.open(school.photo.path, "rb") as image_file:
+            school_photo_data = image_file.read()
+        compressed_school_photo_data = compress_image(school_photo_data)
+        school_photo_base64 = base64.b64encode(compressed_school_photo_data).decode(
+            "utf-8"
+        )
+
+    # Compress athletes' photos
+    for athlete in athletes:
+        if athlete.photo:
+            with default_storage.open(athlete.photo.path, "rb") as image_file:
+                athlete_photo_data = image_file.read()
+            compressed_athlete_photo_data = compress_image(athlete_photo_data)
+            athlete.photo_base64 = base64.b64encode(
+                compressed_athlete_photo_data
+            ).decode("utf-8")
+
+    # Prepare context
+    context = {
+        "athletes": athletes,
+        "school": school,
+        "school_photo_base64": school_photo_base64 if school.photo else None,
+        "MEDIA_URL": settings.MEDIA_URL,
+    }
+
+    # Render HTML
     html = template.render(context)
 
     # Create a PDF
     response = HttpResponse(content_type="application/pdf")
     response["Content-Disposition"] = 'attachment; filename="Album.pdf"'
 
+    # Generate PDF from HTML
     pisa_status = pisa.CreatePDF(html, dest=response)
     if pisa_status.err:
         return HttpResponse("We had some errors <pre>" + html + "</pre>")
+
     return response
 
 
@@ -341,16 +353,19 @@ def reg_athletes(request):
     return render(request, "accounts/registration.html", context)
 
 
-
 from django.urls import reverse_lazy
 from django.contrib.auth.views import PasswordResetView
 from django.contrib.messages.views import SuccessMessageMixin
+
+
 class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
-    template_name = 'password_reset.html'
-    email_template_name = 'password_reset_email.html'
-    subject_template_name = 'password_reset_subject.txt'
-    success_message = "We've emailed you instructions for setting your password, " \
-                      "if an account exists with the email you entered. You should receive them shortly." \
-                      " If you don't receive an email, " \
-                      "please make sure you've entered the address you registered with, and check your spam folder."
-    success_url = reverse_lazy('home')
+    template_name = "password_reset.html"
+    email_template_name = "password_reset_email.html"
+    subject_template_name = "password_reset_subject.txt"
+    success_message = (
+        "We've emailed you instructions for setting your password, "
+        "if an account exists with the email you entered. You should receive them shortly."
+        " If you don't receive an email, "
+        "please make sure you've entered the address you registered with, and check your spam folder."
+    )
+    success_url = reverse_lazy("home")

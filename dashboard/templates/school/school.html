@@ -26,7 +26,7 @@
         <span>Municipality : </span><article>{{school.municipality}}
       </article></div>
       <div class="attr"><span>City : </span><article>{{school.city}}</article></div>
-      <a href="{% url 'pdreport' school.id %}" class="btn-submit">generate album</a>
+      {% comment %} <a href="{% url 'pdreport' school.id %}" class="btn-submit">generate album</a> {% endcomment %}
 
     </div>
 
