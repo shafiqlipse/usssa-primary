@@ -10,6 +10,7 @@ urlpatterns = [
     # venues
 
     path("activate/<int:id>", activate_school, name="activate"),
+    path("octivate/<int:id>", activate_officer, name="octivate"),
     path("schools/", schools, name="schools"),
     path("users/", users, name="users"),
     path("inactiveschools/", inactiveschools, name="inactiveschools"),
@@ -32,6 +33,8 @@ urlpatterns = [
     path("deleteschool/<int:id>", DeleteSchool, name="delschool"),
     path("addathlete", newAthlete, name="addathlete"),
     path("addofficial", Official, name="addofficial"),
+
+
     # path("updateofficial/<int:id>", update_official, name="updateofficial"),
     # path("official/<int:id>", official_details, name="official"),
     # path("deleteofficial/<int:id>", delete_official, name="deleteofficial"),

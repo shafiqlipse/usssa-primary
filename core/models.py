@@ -1,5 +1,6 @@
 from django.db import models
 from accounts.models import *
+from dashboard.models import Athlete
 
 # Create your models here.
 
@@ -14,6 +15,8 @@ class Officer(models.Model):
         max_length=19,
         choices=[("Active", "Active"), ("Inactive", "Inactive")],
         default="Inactive",
+        null=True,
+        blank=True,
     )
     photo = models.ImageField(
         upload_to="photo/",
@@ -22,6 +25,13 @@ class Officer(models.Model):
     district = models.ForeignKey(
         District,
         related_name="districto",
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+    )
+    city = models.ForeignKey(
+        District,
+        related_name="cito",
         on_delete=models.CASCADE,
         null=True,
         blank=True,
@@ -44,4 +54,17 @@ class Officer(models.Model):
     )
 
     def __str__(self):
-        return self.school_name
+        return self.email
+
+
+class Team(models.Model):
+    team_officer = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    team_sport = models.ForeignKey(Sport, on_delete=models.CASCADE, null=True)
+    team_gender = models.CharField(
+        max_length=1,
+        choices=[("M", "Male"), ("F", "Female")],
+    )
+    athletes = models.ManyToManyField(Athlete)
+
+    def __str__(self):
+        return str(self.district)

@@ -1,0 +1,107 @@
+{% extends "dashboard/dashboard.html" %}
+<!--static-->
+{% block title %}Officers{% endblock %}
+<!--static-->
+{% load static %}
+<!--khfufufu-->
+{% block content %}
+<div class="schools-dew">
+  <div class="head flex">
+    <h1>Officers</h1>
+    <div class="ass">
+      {% if school_profile.status == "Active" %}
+      <a href="{% url 'pdfreport'%}" class="btn-submit">generate album</a>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="filterlist glue">
+    <div class="lo">
+      <div class="official-list">
+        <table id="myTable" class="display">
+          <thead>
+            <tr>
+              <th>Names</th>
+              <th>NIN</th>
+              <th>Status</th>
+              <th>District/City</th>
+              <th>Gender</th>
+
+              <th>Edit</th>
+              <th>Activate</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for officer in officers %}
+            <tr>
+              <td>
+                <a href="">{{officer.first_name}} {{officer.last_name}}</a>
+              </td>
+              <td>{{officer.nin}}</td>
+              <td>{{officer.status}}</td>
+              <td>{{officer.district}}/{{officer.city}}</td>
+
+              <td>{{officer.gender}}</td>
+              <td>
+                <a href="" class="del"><i class="fa fa-pencil"></i></a>
+              </td>
+              <td>
+                {% if officer.status == "Inactive" %}
+                <a
+                  href="{% url 'octivate' officer.id %}"
+                  class="btn btn-success activate-btn"
+                  >Activate</a
+                >
+                {% endif %}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <img src="..." class="rounded mr-2" alt="..." />
+        <strong class="mr-auto">Bootstrap</strong>
+        <small class="text-muted">2 seconds ago</small>
+        <button
+          type="button"
+          class="ml-2 mb-1 close"
+          data-dismiss="toast"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="toast-body">Officer activated successfully!</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Function to show toast
+  function showToast() {
+    $(".toast").toast("show");
+  }
+
+  // Event listener for clicking the activation button
+  $(".activate-btn").click(function (event) {
+    event.preventDefault();
+    // Make an AJAX request to activate the officer
+    $.ajax({
+      url: $(this).attr("href"),
+      method: "GET",
+      success: function (response) {
+        // If activation is successful, show the toast
+        showToast();
+      },
+      error: function (xhr, status, error) {
+        // Handle errors if any
+        console.error(xhr.responseText);
+      },
+    });
+  });
+</script>
+
+{% endblock %}

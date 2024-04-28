@@ -87,6 +87,10 @@
                 <label for="district">{{form.district.label }}</label>
                 {{form.district}}
               </div>
+              <div class="field">
+                <label for="city">{{form.city.label }}</label>
+                {{form.city}}
+              </div>
               {% if form.non_field_errors %}
               <div class="alert alert-danger">
                 {{ form.non_field_errors.as_ul }}

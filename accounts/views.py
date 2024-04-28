@@ -51,19 +51,6 @@ def user_login(request):
             user = form.get_user()
             login(request, user)
 
-            # Check if the user is a school and has a school profile
-            if user.is_school:
-                try:
-                    school = School.objects.get(user=user)
-                    return redirect(
-                        "school_dashboard"
-                    )  # Adjust the URL name for your school dashboard view
-                except School.DoesNotExist:
-                    return redirect(
-                        "new_school"
-                    )  # Adjust the URL name for your create school view
-
-            # If the user is not a school, log in and redirect to dashboard
             messages.success(request, "Login successful.")
             return redirect("dashboard")  # Adjust the URL name for your dashboard view
         else:
@@ -206,6 +193,7 @@ def change_password(request):
 
 # reportlab pdf generation of reports certificates and albums
 from django.shortcuts import get_object_or_404
+from core.models import Officer
 
 
 def activate_school(request, id):
@@ -213,6 +201,17 @@ def activate_school(request, id):
     school.status = "Active"
     school.save()
     return HttpResponse("School activated successfully.")
+
+
+from django.http import JsonResponse
+
+
+def activate_officer(request, id):
+    officer = get_object_or_404(Officer, id=id)
+    officer.status = "Active"
+    officer.save()
+    response_data = {"message": "School activated successfully."}
+    return JsonResponse(response_data)
 
 
 # from django.http import HttpResponse

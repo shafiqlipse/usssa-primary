@@ -1,0 +1,21 @@
+{% extends "dashboard/dashboard.html" %}
+<!--static-->
+{% block title %}Officers{% endblock %}
+<!--static-->
+{% load static %}
+<!--khfufufu-->
+{% block content %}
+<div class="schools-dew">
+  <div class="head flex">
+    <h1>New Team</h1>
+<form action="">
+    {% csrf_token %}
+    {{form.media}}
+    {{form.as_p}}
+    <button type="submit" class="btn btn-primary">submit</button>
+</form>
+</div>
+
+
+
+{% endblock %}
