@@ -1,0 +1,20 @@
+{% extends 'dashboard/school_dashboard.html'%}
+
+<!--static-->
+{% comment %} {% load for %} {% load if %} {% endcomment %}
+
+<!--static-->
+{% load static %}
+<!--khfufufu-->
+{% block content %}
+<div class="newathlete-page">
+  <h1>Create new team</h1>
+  <div class="form">
+    <form action="" class="form-ctrl" method="POST">
+      {% csrf_token %} {{form.as_div}}
+
+      <button class="btn" type="submit">Save Student</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

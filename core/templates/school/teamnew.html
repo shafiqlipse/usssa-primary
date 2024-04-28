@@ -1,6 +1,6 @@
 {% extends "dashboard/dashboard.html" %}
 <!--static-->
-{% block title %}Officers{% endblock %}
+{% block title %}New Team{% endblock %}
 <!--static-->
 {% load static %}
 <!--khfufufu-->
@@ -8,14 +8,26 @@
 <div class="schools-dew">
   <div class="head flex">
     <h1>New Team</h1>
-<form action="">
-    {% csrf_token %}
-    {{form.media}}
-    {{form.as_p}}
-    <button type="submit" class="btn btn-primary">submit</button>
-</form>
+    {% if errors %}
+    <ul>
+      {% for field, error_list in errors.items %} {% for error in error_list %}
+      <li>{{ field }}: {{ error }}</li>
+      {% endfor %} {% endfor %}
+    </ul>
+    {% endif %}
+
+    <form method="post">
+      {% csrf_token %} {{ form.as_p }}
+      <button type="submit" class='btn btn-primary'>Submit</button>
+    </form>
+  </div>
+
+  <script>
+    $(document).ready(function () {
+      $(".select2").select2();
+    });
+  </script>
+  <script src="{%static 'scripts/api.js'%}"></script>
+
+  {% endblock %}
 </div>
-
-
-
-{% endblock %}

@@ -38,24 +38,18 @@
               </td>
               <td>{{team.team_sport}}</td>
               <td>{{team.team_gender}}</td>
-              <td></td>
+              <td>{{team.athletes.count}} athletes</td>
 
-              <td>{{officer.gender}}</td>
-              <td>
-                <a href="" class="del"><i class="fa fa-pencil"></i></a>
-              </td>
-              <td>
-      
-              </td>
+              <td>Album</td>
+              <td>Accreditation</td>
+              <td><a href="{%url 'deleteteam' team.id%}" class="btn btn-danger">Delete</a></td>
             </tr>
             {% endfor %}
           </tbody>
         </table>
       </div>
     </div>
-  
   </div>
 </div>
-
 
 {% endblock %}

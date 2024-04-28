@@ -67,4 +67,4 @@ class Team(models.Model):
     athletes = models.ManyToManyField(Athlete)
 
     def __str__(self):
-        return str(self.district)
+        return str(self.team_officer.district)

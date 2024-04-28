@@ -29,7 +29,11 @@
     <link rel="stylesheet" href="{% static 'css/dashboard/schoolist.css'%}" />
     <link rel="stylesheet" href="{% static 'css/css/all.min.css'%}" />
     <link rel="stylesheet" href="{% static 'css/profile/school_new.css'%}" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
 
     <link rel="stylesheet" href="{% static 'css/profile/athlete.css'%}" />
     <link rel="stylesheet" href="{% static 'css/profile/athletes.css'%}" />
@@ -122,17 +126,7 @@
               <span class="nav-link-text ms-1">Officials</span>
             </a>
           </li>
-<!--
-          <li class="nav-item">
-            <a class="nav-link text-white" href="{%url 'athlete_list'%}">
-              <div
-                class="text-white text-center me-2 d-flex align-items-center justify-content-center"
-              >
-                <i class="fa fa-map"></i>
-              </div>
-              <span class="nav-link-text ms-1">Registration </span>
-            </a>
-          </li>-->
+
           {% else %}
           <li class="nav-item">
             <a class="nav-link text-white" href="{%url 'users'%}">
@@ -172,6 +166,17 @@
                 <i class="fa fa-map"></i>
               </div>
               <span class="nav-link-text ms-1">Officials </span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link text-white" href="{%url 'teams'%}">
+              <div
+                class="text-white text-center me-2 d-flex align-items-center justify-content-center"
+              >
+                <i class="fa fa-map"></i>
+              </div>
+              <span class="nav-link-text ms-1">Teams </span>
             </a>
           </li>
           {% endif %}
@@ -580,6 +585,14 @@
       });
     </script>
     <!--   Core JS Files   -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/css/select2.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/js/select2.min.js"></script>
+
+    <!--   Core JS Files   -->
 
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script>
@@ -595,7 +608,10 @@
     <script src="{% static 'assets/js/plugins/perfect-scrollbar.min.js'%}"></script>
     <script src="{% static 'assets/js/plugins/smooth-scrollbar.min.js'%}"></script>
     <script src="{% static 'assets/js/plugins/chartjs.min.js'%}"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/toastify-js"
+    ></script>
 
     <script src="{% static 'scripts/app.js'%}"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>

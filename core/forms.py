@@ -1,14 +1,16 @@
 from django import forms
 from dashboard.models import *
 from core.models import *
-from django_select2.forms import Select2MultipleWidget,Select2Widget
+from django_select2.forms import Select2Widget
+
 
 class TeamForm(forms.ModelForm):
     class Meta:
         model = Team
-        fields = ["team_gender","team_sport","athletes"]
+        fields = ["team_gender", "team_sport", "athletes"]
+
         widgets = {
-            "athletes": Select2MultipleWidget,
+            "athletes": forms.CheckboxSelectMultiple(),
         }
 
 

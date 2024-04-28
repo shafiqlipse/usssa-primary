@@ -23,8 +23,11 @@ urlpatterns = [
     # email
     # path('send_email/', Sendmail, name='send_email'),
     path("teams/", Teams, name="teams"),
-    path('newteam/', CreateTeamView.as_view(), name='teamnew'),
-    path('officers/', officers, name='officers'),
+    path("newteam/", create_team, name="teamnew"),
+    path("updateteam/<int:id>", update_team, name="updateteam"),
+    path("team/<int:id>", team_details, name="team"),
+    path("deleteteam/<int:id>", delete_team, name="deleteteam"),
+    path("officers/", officers, name="officers"),
     path("pdf_report/", generate_album, name="pdfreport"),
     # path("pdfreport/<int:id>", generate_scalbum, name="pdreport"),
     # path("album/", album, name="album"),
@@ -38,8 +41,12 @@ urlpatterns = [
         ),
         name="password_reset_confirm",
     ),
-    path('password-reset-complete/',
-         auth_views.PasswordResetCompleteView.as_view(template_name='password_reset_complete.html'),
-         name='password_reset_complete'),
+    path(
+        "password-reset-complete/",
+        auth_views.PasswordResetCompleteView.as_view(
+            template_name="password_reset_complete.html"
+        ),
+        name="password_reset_complete",
+    ),
     #
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

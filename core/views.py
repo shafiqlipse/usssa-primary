@@ -99,21 +99,67 @@ def get_athletes(request):
 from django.views import View
 
 
-class CreateTeamView(View):
-    def get(self, request):
-        form = TeamForm()
-        return render(request, "school/teamnew.html", {"form": form})
-
-    def post(self, request):
+def create_team(request):
+    errors = None
+    if request.method == "POST":
         form = TeamForm(request.POST)
         if form.is_valid():
-            team = form.save()
-            form.save_m2m()  # Save many-to-many relationships
-            return redirect(
-                "team_detail", team_id=team.pk
-            )  # Redirect to team detail page
+            team = form.save(commit=False)
+            team.team_officer = request.user
+            team.save()
+            return redirect("teams")
+        else:
+            # Attach errors to the form for display in the template
+            errors = form.errors
+    else:
+        form = TeamForm()
 
-        return render(request, "school/teamnew.html", {"form": form})
+    return render(request, "school/teamnew.html", {"form": form, "errors": errors})
+
+
+# @school_required
+def update_team(request, id):
+    team = get_object_or_404(Team, pk=id)
+
+    if request.method == "POST":
+        form = TeamForm(request.POST, instance=team)
+        if form.is_valid():
+            form.save()
+            # Get selected athletes from the form
+            athletes = form.cleaned_data.get("athletes")
+            print("Athletes:", athletes)  # Debugging
+
+            # Associate selected athletes with the team
+            team.athletes.set(athletes)
+            print("Team athletes:", team.athletes.all())  # Debugging
+            return redirect("teams")  # Redirect to the team list page or another URL
+    else:
+        form = TeamForm(instance=team)
+
+    return render(request, "teams/newteam.html", {"form": form, "team": team})
+
+
+# from competitions.models import Fixture
+
+
+def team_details(request, id):
+    team = Team.objects.get(id=id)
+
+    context = {"team": team}
+    return render(request, "teams/team.html", context)
+
+
+# # delete team
+
+
+def delete_team(request, id):
+    team = get_object_or_404(Team, pk=id)
+
+    if request.method == "POST":
+        team.delete()
+        return redirect("teams")  # Redirect to the team list page or another URL
+
+    return render(request, "school/delete_team.html", {"team": team})
 
 
 def Teams(request):

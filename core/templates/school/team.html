@@ -1,0 +1,72 @@
+{% extends 'main/Base.html'%}
+<!--  -->
+{%load static%}
+<!--  -->
+{%block title%}{{team.name}}{%endblock%}
+<!--  -->
+{%block content%}
+<div class="team-page">
+  <div class="team-head flex">
+    <img src="{{team.school.school_profile.badge.url}}" alt="" />
+    <div class="team-text">
+      <h1>{{team.school.school_profile.school_name}}</h1>
+      <p>{{team.name}}</p>
+    </div>
+  </div>
+
+  <hr />
+  <div class="team-grid grid3">
+    <div class="left"></div>
+    <div class="center">
+      <div class="fixture-groups">
+        {% regroup fixtures by season.competition as competition_list %}
+        <!--  -->
+        {% for competition in competition_list %}
+        <div class="fixture-group glue">
+          <h2>{{ competition.grouper }}</h2>
+          <hr />
+          <div class="fixtures">
+            {% for fixture in competition.list %}
+            <div class="fixtue flex">
+              <a href="{% url 'team' fixture.team1.id%}" class="fixture flex">
+                {{ fixture.team1 }}<img
+                  src=" {{fixture.team1.school.school.badge.url}}"
+                  alt=""
+                />
+              </a>
+              <h4>{{fixture.date|date:"H:i"}}</h4>
+              <a href="{% url 'team' fixture.team2.id%}" class="fixture flex">
+                <img
+                  src=" {{fixture.team2.school.school.badge.url}}"
+                  alt=""
+                />{{ fixture.team2 }}
+              </a>
+            </div>
+            <div class="date">{{fixture.date|date}}</div>
+            <hr />
+            {% endfor %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="right">
+      <h1>Athletes</h1>
+      <div class="righ glue">
+        {% if athletes %} {% for athlete in athletes %}
+        <div class="athlete flex">
+          <img src="{{athlete.photo.url}}" alt="" />
+          <div class="name">
+            <a href="{% url 'athlete' athlete.id%}">{{ athlete.name }}</a>
+            <p>{{athlete.lin}} | {{athlete.classroom}}</p>
+          </div>
+        </div>
+        <hr />
+        {% endfor %} {% else %}
+        <p>No athletes found for this team.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {%endblock%}
+</div>
