@@ -2,5 +2,5 @@ settings.py
 /accounts/migrations/
 /dashboard/migrations/
 /registration/migrations/
-/core/migrations/
+#/core/migrations/
 .env
