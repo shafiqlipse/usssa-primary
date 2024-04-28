@@ -264,7 +264,7 @@ def Schoolnew(request):
         form = SchoolProfileForm()
 
     context = {"form": form, "regions": regions}
-    return render(request, "school/create_school.html", context)
+    return render(request, "accounts/closed.html", context)
 
 
 @staff_required
@@ -436,7 +436,7 @@ def newAthlete(request):
     else:
         form = NewAthleteForm()
 
-    return render(request, "school/newAthlete.html", {"form": form})
+    return render(request, "accounts/closed.html", {"form": form})
 
 
 # a confirmation of credentials
