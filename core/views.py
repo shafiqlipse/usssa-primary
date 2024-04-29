@@ -107,6 +107,11 @@ def create_team(request):
             team = form.save(commit=False)
             team.team_officer = request.user
             team.save()
+            athletes = form.cleaned_data.get(
+                "athletes"
+            )  # Replace 'athletes' with the actual form field name
+            team.athletes.set(athletes)
+            team.save()
             return redirect("teams")
         else:
             # Attach errors to the form for display in the template
@@ -159,10 +164,85 @@ def delete_team(request, id):
         team.delete()
         return redirect("teams")  # Redirect to the team list page or another URL
 
-    return render(request, "school/delete_team.html", {"team": team})
+    return render(request, "teams/delete_team.html", {"team": team})
 
 
 def Teams(request):
     teams = Team.objects.all()
     context = {"teams": teams}
     return render(request, "school/teams.html", context)
+
+from django.shortcuts import render
+from xhtml2pdf import pisa
+from django.template.loader import get_template
+from django.http import HttpResponse
+from django.contrib.staticfiles import finders
+import base64
+import os
+from django.conf import settings
+from django.core.files.storage import default_storage
+from django.http import HttpResponse
+from django.template.loader import get_template
+from xhtml2pdf import pisa
+from PIL import Image
+from io import BytesIO
+
+
+def compress_image(image_data, quality=85):
+    img = Image.open(BytesIO(image_data))
+    if img.mode in ("RGBA", "P"):
+        img = img.convert("RGB")
+    output = BytesIO()
+    img.save(output, format="JPEG", quality=quality)
+    compressed_image_data = output.getvalue()
+    return compressed_image_data
+
+
+def generate_dalbum(request):
+    school = request.user.school_profile.first()
+    athletes = Athlete.objects.filter(school=school)
+
+    # Get template
+    template = get_template("school/Albums.html")
+
+    # Compress school photo
+    if school.photo:
+        with default_storage.open(school.photo.path, "rb") as image_file:
+            school_photo_data = image_file.read()
+        compressed_school_photo_data = compress_image(school_photo_data)
+        school_photo_base64 = base64.b64encode(compressed_school_photo_data).decode(
+            "utf-8"
+        )
+
+    # Compress athletes' photos
+    for athlete in athletes:
+        if athlete.photo:
+            with default_storage.open(athlete.photo.path, "rb") as image_file:
+                athlete_photo_data = image_file.read()
+            compressed_athlete_photo_data = compress_image(athlete_photo_data)
+            athlete.photo_base64 = base64.b64encode(
+                compressed_athlete_photo_data
+            ).decode("utf-8")
+
+    # Prepare context
+    context = {
+        "athletes": athletes,
+        "school": school,
+        "school_photo_base64": school_photo_base64 if school.photo else None,
+        "MEDIA_URL": settings.MEDIA_URL,
+    }
+
+    # Render HTML
+    html = template.render(context)
+
+    # Create a PDF
+    response = HttpResponse(content_type="application/pdf")
+    response["Content-Disposition"] = 'attachment; filename="District Album.pdf"'
+
+    # Generate PDF from HTML
+    pisa_status = pisa.CreatePDF(html, dest=response)
+    if pisa_status.err:
+        return HttpResponse("We had some errors <pre>" + html + "</pre>")
+
+    return response
+

@@ -51,6 +51,10 @@ def user_login(request):
             user = form.get_user()
             login(request, user)
 
+            # Check if the user is a school
+            if user.is_school:
+
+                return redirect("school_dashboard")
             messages.success(request, "Login successful.")
             return redirect("dashboard")  # Adjust the URL name for your dashboard view
         else:
