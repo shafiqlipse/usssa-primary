@@ -6,4 +6,6 @@ settings.py
 /athlete_photos
 /champImages
 /badge
+/profile
+/photo
 .env
