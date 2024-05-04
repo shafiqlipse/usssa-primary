@@ -2,5 +2,8 @@ settings.py
 /accounts/migrations/
 /dashboard/migrations/
 /registration/migrations/
-#/core/migrations/
+/core/migrations/
+/athlete_photos
+/champImages
+/badge
 .env
