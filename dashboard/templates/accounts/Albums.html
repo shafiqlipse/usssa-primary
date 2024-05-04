@@ -52,11 +52,15 @@
       .header .headexher .athletes table tbody tr td img {
         width: 200px;
       }
-      .header .headexher .athletes table tbody tr td h5 {
+      .header .headexher .athletes table tbody tr td li {
         margin: 0;
+        list-style: none;
+      }.header .headexher .athletes table tbody tr td ul{
+        list-style: none;
       }
-      .header .headexher .athletes table tbody tr td h5 span {
+      .header .headexher .athletes table tbody tr td ul li {
         font-weight: bold;
+        list-style: none;
       }
     </style>
     <div class="header">
@@ -152,38 +156,50 @@
         <h1 style="font-size: 2em">ATHLETES</h1>
         <hr />
         <div class="athletes">
-          <table id="myTable" class="display">
+          <table>
             <tbody>
               {% for athlete in athletes %}
+              <!---->
+              {% if forloop.counter0|divisibleby:2 %}
+              <!-- Start a new row for every even-numbered athlete -->
               <tr>
+                {% endif %}
                 <td>
-                  {% if athlete.photo %}
-                  <img src="{{athlete.photo.path}}" alt="{{athlete.fname}}" />
-                  {% else %}
-                  <img
-                    src="{%static 'images/profile.png'%}"
-                    alt="{{athlete.fname}}"
-                  />
-                  {% endif %}
+                  <table>
+                    <tr>
+                      <td>
+                        <li style="text-transform: uppercase;">LIN: {{ athlete.lin }}</li>
+                        {% if athlete.photo %}
+                        <img
+                          src="{{ athlete.photo.path }}"
+                          alt="{{ athlete.fname }}"
+                        />
+                        {% else %}
+                        <img
+                          src="{% static 'images/profile.png' %}"
+                          alt="{{ athlete.fname }}"
+                        />
+                        {% endif %}
+                        <li style="text-transform: uppercase;">Date of birth: {{ athlete.date_of_birth }}</li>
+                        <li style="text-transform: uppercase;">Age: {{ athlete.age }}</li>
+                      </td>
+                      <td>
+                        <ul>
+                          <li style="text-transform: uppercase;">
+                            Names: {{ athlete.fname }} {{ athlete.lname }}
+                          </li style="text-transform: uppercase;">
+                          <li style="text-transform: uppercase;">LIN: {{ athlete.lin }}</li>
+                          <li style="text-transform: uppercase;">School: {{ athlete.school }}</li>
+                          <li style="text-transform: uppercase;">Sport: {{ athlete.sport }}</li>
+                        </ul>
+                      </td>
+                    </tr>
+                  </table>
                 </td>
-                <td>
-                  <div class="det">
-                    <h3>
-                      Names: <span>{{athlete.fname}} {{athlete.lname}}</span>
-                    </h3>
-                    <h5>LIN: <span>{{athlete.lin}}</span></h5>
-                    <h5>Class: <span>{{athlete.classroom}}</span></h5>
-                    <h5>
-                      Date of birth: <span>{{athlete.date_of_birth}}</span>
-                    </h5>
-                    <h5>Age: <span>{{athlete.age}}</span></h5>
-                  </div>
-                </td>
-                <td>
-                  <div class="det"></div>
-                </td>
+                {% if forloop.last or forloop.counter0|add:1|divisibleby:2 %}
+                <!-- End the row for the last or odd-numbered athlete -->
               </tr>
-              {% endfor %}
+              {% endif %} {% endfor %}
             </tbody>
           </table>
         </div>

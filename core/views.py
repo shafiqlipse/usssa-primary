@@ -25,7 +25,7 @@ def Officera(request):
             # Assign the currently logged-in user
             form.save()
             messages.success(request, "Account completed successfully!")
-            return redirect("confirmation")
+            return redirect("offcom")
 
         else:
             # Add form-specific error messages for individual fields
@@ -43,6 +43,38 @@ def officers(request):
     officers = Officer.objects.all()
     context = {"officers": officers}
     return render(request, "school/officers.html", context)
+
+
+def officer_details(request, id):
+    officer = Officer.objects.get(id=id)
+
+    context = {"officer": officer}
+    return render(request, "teams/team.html", context)
+
+
+# # delete team
+
+
+def delete_officer(request, id):
+    officer = get_object_or_404(Officer, id=id)
+
+    if request.method == "POST":
+        officer.delete()
+        return redirect("officers")  # Redirect to the team list page or another URL
+
+    return render(request, "school/delete_team.html", {"officer": officer})
+
+
+def AllTeams(request):
+    teams = Team.objects.filter(team_officer=request.user)
+    context = {"teams": teams}
+    return render(request, "school/teams.html", context)
+
+
+def Teams(request):
+    teams = Team.objects.all()
+    context = {"teams": teams}
+    return render(request, "school/teams.html", context)
 
 
 def district(request):
@@ -164,13 +196,14 @@ def delete_team(request, id):
         team.delete()
         return redirect("teams")  # Redirect to the team list page or another URL
 
-    return render(request, "teams/delete_team.html", {"team": team})
+    return render(request, "school/delete_team.html", {"team": team})
 
 
 def Teams(request):
     teams = Team.objects.all()
     context = {"teams": teams}
     return render(request, "school/teams.html", context)
+
 
 from django.shortcuts import render
 from xhtml2pdf import pisa
@@ -198,21 +231,15 @@ def compress_image(image_data, quality=85):
     return compressed_image_data
 
 
-def generate_dalbum(request):
-    school = request.user.school_profile.first()
-    athletes = Athlete.objects.filter(school=school)
+def generate_dalbum(request, id):
+
+    team = Team.objects.get(id=id)
+    athletes = team.athletes.all()
 
     # Get template
     template = get_template("school/Albums.html")
 
     # Compress school photo
-    if school.photo:
-        with default_storage.open(school.photo.path, "rb") as image_file:
-            school_photo_data = image_file.read()
-        compressed_school_photo_data = compress_image(school_photo_data)
-        school_photo_base64 = base64.b64encode(compressed_school_photo_data).decode(
-            "utf-8"
-        )
 
     # Compress athletes' photos
     for athlete in athletes:
@@ -227,8 +254,6 @@ def generate_dalbum(request):
     # Prepare context
     context = {
         "athletes": athletes,
-        "school": school,
-        "school_photo_base64": school_photo_base64 if school.photo else None,
         "MEDIA_URL": settings.MEDIA_URL,
     }
 
@@ -246,3 +271,43 @@ def generate_dalbum(request):
 
     return response
 
+
+def accreditation(request, id):
+
+    team = Team.objects.get(id=id)
+    athletes = team.athletes.all()
+
+    # Get template
+    template = get_template("school/accred.html")
+
+    # Compress school photo
+
+    # Compress athletes' photos
+    for athlete in athletes:
+        if athlete.photo:
+            with default_storage.open(athlete.photo.path, "rb") as image_file:
+                athlete_photo_data = image_file.read()
+            compressed_athlete_photo_data = compress_image(athlete_photo_data)
+            athlete.photo_base64 = base64.b64encode(
+                compressed_athlete_photo_data
+            ).decode("utf-8")
+
+    # Prepare context
+    context = {
+        "athletes": athletes,
+        "MEDIA_URL": settings.MEDIA_URL,
+    }
+
+    # Render HTML
+    html = template.render(context)
+
+    # Create a PDF
+    response = HttpResponse(content_type="application/pdf")
+    response["Content-Disposition"] = 'attachment; filename="Accreditation.pdf"'
+
+    # Generate PDF from HTML
+    pisa_status = pisa.CreatePDF(html, dest=response)
+    if pisa_status.err:
+        return HttpResponse("We had some errors <pre>" + html + "</pre>")
+
+    return response

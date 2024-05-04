@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Album</title>
-
   </head>
 
   <body>
@@ -47,58 +46,77 @@
       }
 
       .header .headexher .athletes table tbody tr td img {
-        width: 200px;
+        width: 120px;
+        height: 140px;
       }
-      .header .headexher .athletes table tbody tr td h5 {
+      .header .headexher .athletes table tbody tr td li {
         margin: 0;
+        list-style: none;
       }
-      .header .headexher .athletes table tbody tr td h5 span {
+      .header .headexher .athletes table tbody tr td ul li {
         font-weight: bold;
+        list-style: none;
       }
     </style>
     <div class="header">
       <img src="{% static 'images/upsa.png'%}" alt="" />
-      <h1 style="font-size: 30px; color: #00338b">
+      <h1 style="font-size: 20px; color: #00338b">
         UGANDA PRIMARY SCHOOLS SPORTS ASSOCIATION (UPSSA)
       </h1>
 
-      <h3 style="font-size: 25px; color: #00338b">{{school.school_name}}</h3>
-      <p>EMIS: {{school.EMIS}}</p>
-      <p>{{school.region}}, {{school.district}}</p>
+      <h3 style="font-size: 25px; color: #00338b">{{officer}}</h3>
+      <p>{{official}}</p>
+      <p>{{official.region}}, {{official.district}}</p>
       <hr />
 
       <div class="headexher">
         <h1 style="font-size: 2em">ATHLETES</h1>
         <hr />
         <div class="athletes">
-          <table id="myTable" class="display">
+          <table>
             <tbody>
               {% for athlete in athletes %}
+              <!---->
+              {% if forloop.counter0|divisibleby:2 %}
+              <!-- Start a new row for every even-numbered athlete -->
               <tr>
+                {% endif %}
                 <td>
-                  {% if athlete.photo %}
-                  <img src="{{athlete.photo.path}}" alt="{{athlete.fname}}" />
-                  {% else %}
-                  <img
-                    src="{%static 'images/profile.png'%}"
-                    alt="{{athlete.fname}}"
-                  />
-                  {% endif %}
+                  <table>
+                    <tr>
+                      <td>
+                        <li style="text-transform: uppercase;">LIN: {{ athlete.lin }}</li>
+                        {% if athlete.photo %}
+                        <img
+                          src="{{ athlete.photo.path }}"
+                          alt="{{ athlete.fname }}"
+                        />
+                        {% else %}
+                        <img
+                          src="{% static 'images/profile.png' %}"
+                          alt="{{ athlete.fname }}"
+                        />
+                        {% endif %}
+                       
+                      </td>
+                      <td>
+                        <ul>
+                          <li style="text-transform: uppercase;">
+                            Names: {{ athlete.fname }} {{ athlete.lname }}
+                          </li style="text-transform: uppercase;">
+                          <li style="text-transform: uppercase;">School: {{ athlete.school }}</li>
+                          <li style="text-transform: uppercase;">Date of birth: {{ athlete.date_of_birth }}</li>
+                          <li style="text-transform: uppercase;">Age: {{ athlete.age }}</li>
+                          <li style="text-transform: uppercase;">Sport: {{ athlete.sport }}</li>
+                        </ul>
+                      </td>
+                    </tr>
+                  </table>
                 </td>
-                <td>
-                  <h3>Names:</h3>
-                  <span>{{athlete.fname}} {{athlete.lname}}</span>
-                  <h5>LIN:</h5>
-                  <span>{{athlete.lin}}</span>
-                  <h5>Class:</h5>
-                  <span>{{athlete.classroom}}</span>
-                  <h5>Date of birth:</h5>
-                  <span>{{athlete.date_of_birth}}</span>
-                  <h5>Age:</h5>
-                  <span>{{athlete.age}}</span>
-                </td>
+                {% if forloop.last or forloop.counter0|add:1|divisibleby:2 %}
+                <!-- End the row for the last or odd-numbered athlete -->
               </tr>
-              {% endfor %}
+              {% endif %} {% endfor %}
             </tbody>
           </table>
         </div>

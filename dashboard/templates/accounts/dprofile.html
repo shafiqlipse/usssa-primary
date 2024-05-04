@@ -1,0 +1,86 @@
+{% extends "dashboard/dashboard.html" %}
+<!---->
+{% load static %} {% block content %}
+<div class="sooverview">
+  <div class="boxed">
+    <div class="school-box flex">
+      <div class="left">
+        <img src="{{officer.photo.url}}" alt="" />
+      </div>
+      <div class="left">
+        <div class="attr">
+          <span>Name : </span>{{officer.first_name}}{{officer.last_name}}
+        </div>
+        <div class="attr"><span>EMIS : </span>{{officer.nin}}</div>
+        <div class="attr">
+          <span>Center Number : </span>{{officer.date_of_birth}}
+        </div>
+        <div class="attr"><span>Region : </span>{{officer.region}}</div>
+        <div class="attr"><span>District : </span>{{officer.district}}</div>
+        <div class="attr"><span>Municipality : </span>{{officer.email}}</div>
+        <div class="attr"><span>City : </span>{{officer.phone_number}}</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xl-6 col-sm-6 mb-xl-0 mb-4">
+        <div class="card">
+          <div class="card-header p-3 pt-2">
+            <div
+              class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute"
+            >
+              <i class="fa fa-user"></i>
+            </div>
+            <div class="text-end pt-1">
+              <p class="text-sm mb-0 text-capitalize">Athletes</p>
+              <h4 class="mb-0">{{athletes_count}}</h4>
+            </div>
+          </div>
+          <hr class="dark horizontal my-0" />
+          <div class="card-footer p-3 flex">
+            <p class="mb-0">
+              <span class="text-success text-sm font-weight-bolder"
+                >+{{athletes_bcount}} </span
+              >Boys
+            </p>
+            <p class="mb-0">
+              <span class="text-success text-sm font-weight-bolder"
+                >+{{athletes_gcount}} </span
+              >Girls
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-6 col-sm-6 mb-xl-0 mb-6">
+        <div class="card">
+          <div class="card-header p-3 pt-2">
+            <div
+              class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute"
+            >
+              <i class="fa fa-user-secret"></i>
+            </div>
+            <div class="text-end pt-1">
+              <p class="text-sm mb-0 text-capitalize">Officials</p>
+              <h4 class="mb-0">{{officials_count}}</h4>
+            </div>
+          </div>
+          <hr class="dark horizontal my-0" />
+          <div class="card-footer p-3 flex">
+            <p class="mb-0">
+              <span class="text-danger text-sm font-weight-bolder"
+                >{{officials_bcount}}</span
+              >
+              Male
+            </p>
+            <p class="mb-0">
+              <span class="text-danger text-sm font-weight-bolder"
+                >{{officials_gcount}}</span
+              >
+              Female
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

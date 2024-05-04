@@ -27,7 +27,7 @@
               <th>District/City</th>
               <th>Gender</th>
 
-              <th>Edit</th>
+              <th>Delete</th>
               <th>Activate</th>
             </tr>
           </thead>
@@ -43,7 +43,7 @@
 
               <td>{{officer.gender}}</td>
               <td>
-                <a href="" class="del"><i class="fa fa-pencil"></i></a>
+                <a href="{%url 'deleted' officer.id%}" class="btn btn-danger">Delete</i></a>
               </td>
               <td>
                 {% if officer.status == "Inactive" %}

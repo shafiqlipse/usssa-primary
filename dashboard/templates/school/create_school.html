@@ -5,6 +5,12 @@
 {% block title %}Create School{% endblock %}
 <!---->
 {% block content %}
+<script src="//code.jquery.com/jquery.min.js"></script>
+
+<link rel="stylesheet" href="jquery.dropdown.css" />
+
+<script src="jquery.dropdown.js"></script>
+
 <div class="profile-update">
   <div class="school-long">
     <form
@@ -213,14 +219,13 @@
           </div>
         </div>
       </div>
-
       {% if form.non_field_errors %}
       <div class="alert alert-danger">{{ form.non_field_errors.as_ul }}</div>
       {% endif %}
       <button type="submit" class="btn-submit">Save profile</button>
     </form>
   </div>
+  1
 </div>
-
 
 {% endblock %}

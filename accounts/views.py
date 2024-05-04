@@ -47,16 +47,20 @@ def user_login(request):
     if request.method == "POST":
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
-            # Get the user without logging in
             user = form.get_user()
             login(request, user)
 
-            # Check if the user is a school
             if user.is_school:
-
+                messages.success(request, "School login successful.")
                 return redirect("school_dashboard")
-            messages.success(request, "Login successful.")
-            return redirect("dashboard")  # Adjust the URL name for your dashboard view
+            elif user.is_admin:
+                messages.success(request, "Officer login successful.")
+                return redirect("officer_dashboard")
+            else:
+                messages.success(request, "Login successful.")
+                return redirect(
+                    "dashboard"
+                )  # Adjust the URL name for your dashboard view
         else:
             messages.error(request, "Error in login. Please check your credentials.")
     else:

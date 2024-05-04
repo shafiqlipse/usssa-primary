@@ -178,7 +178,43 @@ class AthleteManager(models.Manager):
         )
 
 
-from PIL import Image
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
+from PIL import Image, ExifTags
+import io
+import os
+from django.core.files.uploadedfile import InMemoryUploadedFile
+
+
+def optimize_image(image):
+    """
+    Resize the image, correct orientation, and compress it to be less than 100KB.
+    """
+    img = Image.open(image)
+
+    # Correct orientation if needed
+    if hasattr(img, "_getexif"):  # Only present in JPEGs
+        for orientation in ExifTags.TAGS.keys():
+            if ExifTags.TAGS[orientation] == "Orientation":
+                break
+        exif = dict(img._getexif().items())
+
+        if orientation in exif:
+            if exif[orientation] == 3:
+                img = img.rotate(180, expand=True)
+            elif exif[orientation] == 6:
+                img = img.rotate(270, expand=True)
+            elif exif[orientation] == 8:
+                img = img.rotate(90, expand=True)
+
+    # Resize the image
+    img.thumbnail((500, 500))  # Adjust the size as per your requirement
+
+    # Compress the image to be less than 100KB
+    with io.BytesIO() as output:
+        img.save(output, format="JPEG", quality=100)  # Adjust the quality as needed
+        output.seek(0)
+        return output.getvalue()
 
 
 class Athlete(models.Model):
@@ -229,21 +265,6 @@ class Athlete(models.Model):
     objects = AthleteManager()
 
     def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-
-        # Open the uploaded image
-        img = Image.open(self.photo.path)
-
-        # Set the maximum size you want for the image
-        max_size = (300, 300)
-
-        # Resize the image
-        img.thumbnail(max_size)
-
-        # Save the resized image back to the same path
-        img.save(self.photo.path)
-
-    def save(self, *args, **kwargs):
         # Find the corresponding age range and assign it to the athlete
         age = date.today().year - self.date_of_birth.year
         age_range = Age.objects.filter(min_age__lte=age, max_age__gte=age).first()
@@ -253,6 +274,20 @@ class Athlete(models.Model):
 
     def __str__(self):
         return self.fname
+
+
+@receiver(pre_save, sender=Athlete)
+def optimize_photo(sender, instance, **kwargs):
+    if instance.photo:
+        image_data = optimize_image(instance.photo)
+        instance.photo.file = InMemoryUploadedFile(
+            io.BytesIO(image_data),
+            None,
+            "%s.jpg" % instance.photo.name.split(".")[0],
+            "image/jpeg",
+            len(image_data),
+            None,
+        )
 
 
 class Payment(models.Model):

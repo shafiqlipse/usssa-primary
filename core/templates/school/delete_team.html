@@ -3,7 +3,7 @@
   <div class="confirm">
     <form action="" class="formdelete" method="POST">
       {% csrf_token %}
-      <p>Are you sure you want to delete <span>"{{obj}}"</span>?</p>
+      <p>Are you sure you want to delete <span>"{{officer}}"</span>?</p>
       <div class="btns">
         <input type="submit" value="confirm" />
         <a href="{{request.META.HTTP_REFERER}}" class="btn-flux">cancel</a>

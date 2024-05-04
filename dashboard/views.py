@@ -68,7 +68,6 @@ def users(request):
     return render(request, "dashboard/users.html", context)
 
 
-
 # schools list, tuple or array
 @staff_required
 def schools(request):
@@ -113,6 +112,7 @@ def inactiveschools(request):
 import csv
 from django.http import HttpResponse
 from .models import School
+from core.models import *
 
 
 def export_csv(request):
@@ -130,7 +130,6 @@ def export_csv(request):
         )
 
     return response
-
 
 
 def exportp_csv(request):
@@ -264,7 +263,7 @@ def Schoolnew(request):
         form = SchoolProfileForm()
 
     context = {"form": form, "regions": regions}
-    return render(request, "accounts/closed.html", context)
+    return render(request, "school/create_school.html", context)
 
 
 @staff_required
@@ -418,6 +417,27 @@ def Dash(request):
     return render(request, "school/schoolprofile.html", context)
 
 
+# @school_required
+def Officerdash(request):
+    user = request.user
+    officer = Officer.objects.get(user_id=user.id)
+    district = officer.district
+    schools = School.objets.filter(district=district)
+    athletes = Athlete.objects.filter(school__in=schools)
+    schools_cout = School.objets.filter(district=district).count()
+    athletes_count = Athlete.objects.filter(school__in=schools).count()
+
+    context = {
+        "officer": officer,
+        "district": district,
+        "schools": schools,
+        "schools_cout": schools_cout,
+        "athletes": athletes,
+        "athletes_count": athletes_count,
+    }
+    return render(request, "accounts/dprofile.html", context)
+
+
 @login_required
 def newAthlete(request):
     if request.method == "POST":
@@ -436,7 +456,7 @@ def newAthlete(request):
     else:
         form = NewAthleteForm()
 
-    return render(request, "accounts/closed.html", {"form": form})
+    return render(request, "school/newAthlete.html", {"form": form})
 
 
 # a confirmation of credentials
@@ -445,6 +465,12 @@ def confirmation(request):
     user = request.user
     context = {"user": user}
     return render(request, "confirm.html", context)
+
+
+def offcom(request):
+    user = request.user
+    context = {"user": user}
+    return render(request, "offcom.html", context)
 
 
 from django.http import JsonResponse

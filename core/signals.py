@@ -19,17 +19,16 @@ def activate_officer(sender, instance, created, **kwargs):
 
         if not user_exists:
             # Generate a stronger random password
-            import secrets
-            import string
+   
 
-            password = "123Pass"
+            password = "123Office"
 
             try:
                 # Create user with username and password
                 user = User.objects.create_user(
-                    username=username, password=password, email=email
+                    username=username, password=password, email=email, is_admin=True
                 )
-
+                instance.user = user
                 # Send email to officer
                 subject = "Your account has been activated"
                 message = render_to_string(

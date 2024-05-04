@@ -43,7 +43,8 @@ urlpatterns = [
     path("athlete-list/", reg_athletes, name="athlete_list"),
     path("payment-page/", payment_page, name="payment_page"),
     path("album/", album, name="album"),
-    path("dalbum/", generate_dalbum, name="dalbum"),
+    path("dalbum/<int:id>", generate_dalbum, name="dalbum"),
+    path("accred/<int:id>", accreditation, name="accred"),
     # path("process-payment/", process_payment, name="process_payment"),  # Add this line
     # Add more URLs as ne
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
