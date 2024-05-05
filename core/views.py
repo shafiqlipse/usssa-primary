@@ -49,7 +49,7 @@ def officer_details(request, id):
     officer = Officer.objects.get(id=id)
 
     context = {"officer": officer}
-    return render(request, "teams/team.html", context)
+    return render(request, "school/officer.html", context)
 
 
 # # delete team

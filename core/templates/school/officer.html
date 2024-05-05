@@ -1,0 +1,24 @@
+{% extends "dashboard/dashboard.html" %}
+<!--static-->
+{% block title %}Teams{% endblock %}
+<!--static-->
+{% load static %}
+<!--khfufufu-->
+{% block content %}
+<div class="schools-dew">
+  <div class="head flex">
+    <h1>{{officer.first_name}} {{officer.last_name}}</h1>
+  </div>
+  <div class="image-box flex">
+    <img src="{{officer.photo.url}}" alt="" />
+    <div class="details">
+      <li>{{officer.nin}}</li>
+      <li>{{officer.email}}</li>
+      <li>{{officer.district}}</li>
+      <li>{{officer.gender}}</li>
+      <li>{{officer.phone_number}}</li>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
