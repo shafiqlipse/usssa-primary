@@ -112,13 +112,7 @@ def generate_album(request):
     template = get_template("accounts/Albums.html")
 
     # Compress school photo
-    if school.photo:
-        with default_storage.open(school.photo.path, "rb") as image_file:
-            school_photo_data = image_file.read()
-        compressed_school_photo_data = compress_image(school_photo_data)
-        school_photo_base64 = base64.b64encode(compressed_school_photo_data).decode(
-            "utf-8"
-        )
+   
 
     # Compress athletes' photos
     for athlete in athletes:
