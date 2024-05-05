@@ -134,8 +134,7 @@ def generate_album(request):
     context = {
         "athletes": athletes,
         "school": school,
-        "school_photo_base64": school_photo_base64 if school.photo else None,
-        "MEDIA_URL": settings.MEDIA_URL,
+     
     }
 
     # Render HTML
