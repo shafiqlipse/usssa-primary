@@ -422,9 +422,9 @@ def Officerdash(request):
     user = request.user
     officer = Officer.objects.get(user_id=user.id)
     district = officer.district
-    schools = School.objets.filter(district=district)
+    schools = School.objects.filter(district=district)
     athletes = Athlete.objects.filter(school__in=schools)
-    schools_cout = School.objets.filter(district=district).count()
+    schools_cout = School.objects.filter(district=district).count()
     athletes_count = Athlete.objects.filter(school__in=schools).count()
 
     context = {

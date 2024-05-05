@@ -1,0 +1,69 @@
+<html lang="en">
+  {% load static %}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Album</title>
+  </head>
+
+  <body>
+    <style>
+      @media print {
+        @page {
+          size: A4 portrait; /* Set the size of the page to A4 in portrait orientation */
+          margin: 0; /* Remove default margin */
+        }
+
+        body {
+          margin: 0; /* Remove default body margin */
+          padding: 0; /* Remove default body padding */
+        }
+
+        .athletes table {
+          display: grid;
+          grid-template-rows: repeat(2, 1fr); /* Two rows */
+          grid-template-columns: repeat(2, 1fr); /* Two columns */
+          gap: 10px; /* Adjust the gap between grid items */
+        }
+      }
+      .header .athletes table tbody tr td {
+        width: 100%;
+        padding-top: 300px;
+        padding-bottom: 300px;
+        margin-left: 700px;
+      }
+      .header .athletes table tbody tr td .cert {
+        width: 500px;
+        height: 200px;
+        padding: 10px;
+      }
+    </style>
+    <div class="header">
+      <div class="athletes">
+        <table>
+          <tbody>
+            {% for athlete in athletes %}
+            <!---->
+
+            <!-- Start a new row for every even-numbered athlete -->
+            <tr>
+              <td>
+                <div class="cert">
+                  <h2>{{athlete.fname}} {{athlete.lname}}</h2>
+                  <h2>{{athlete.sport}}({{athlete.age}})</h2>
+
+                  <h2>{{athlete.school}}</h2>
+
+                  <img src="{{athlete.photo.path}}" alt="" />
+                </div>
+              </td>
+
+              <!-- End the row for the last or odd-numbered athlete -->
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

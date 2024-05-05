@@ -144,7 +144,7 @@ def create_team(request):
             )  # Replace 'athletes' with the actual form field name
             team.athletes.set(athletes)
             team.save()
-            return redirect("teams")
+            return redirect("allteams")
         else:
             # Attach errors to the form for display in the template
             errors = form.errors
@@ -304,6 +304,46 @@ def accreditation(request, id):
     # Create a PDF
     response = HttpResponse(content_type="application/pdf")
     response["Content-Disposition"] = 'attachment; filename="Accreditation.pdf"'
+
+    # Generate PDF from HTML
+    pisa_status = pisa.CreatePDF(html, dest=response)
+    if pisa_status.err:
+        return HttpResponse("We had some errors <pre>" + html + "</pre>")
+
+    return response
+
+def cert(request, id):
+
+    team = Team.objects.get(id=id)
+    athletes = team.athletes.all()
+
+    # Get template
+    template = get_template("school/cert.html")
+
+    # Compress school photo
+
+    # Compress athletes' photos
+    for athlete in athletes:
+        if athlete.photo:
+            with default_storage.open(athlete.photo.path, "rb") as image_file:
+                athlete_photo_data = image_file.read()
+            compressed_athlete_photo_data = compress_image(athlete_photo_data)
+            athlete.photo_base64 = base64.b64encode(
+                compressed_athlete_photo_data
+            ).decode("utf-8")
+
+    # Prepare context
+    context = {
+        "athletes": athletes,
+        "MEDIA_URL": settings.MEDIA_URL,
+    }
+
+    # Render HTML
+    html = template.render(context)
+
+    # Create a PDF
+    response = HttpResponse(content_type="application/pdf")
+    response["Content-Disposition"] = 'attachment; filename="Certificate.pdf"'
 
     # Generate PDF from HTML
     pisa_status = pisa.CreatePDF(html, dest=response)

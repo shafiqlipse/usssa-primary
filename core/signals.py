@@ -29,10 +29,11 @@ def activate_officer(sender, instance, created, **kwargs):
                     username=username, password=password, email=email, is_admin=True
                 )
                 instance.user = user
+                instance.save() 
                 # Send email to officer
                 subject = "Your account has been activated"
                 message = render_to_string(
-                    "activation_email.html",
+                    "core/activation_email.html",
                     {
                         "username": username,
                         "password": password,

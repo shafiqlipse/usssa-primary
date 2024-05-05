@@ -2,28 +2,73 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Account Activation</title>
+    <title>UPSSA ACCOUNT ACTIVATION</title>
+    <style>
+      /* Basic styling */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        color: #333;
+      }
+
+      /* Header */
+      header {
+        background-color: #f0f0f0;
+        padding: 20px;
+        text-align: center;
+      }
+
+      header h1 {
+        font-size: 20px;
+        margin: 0;
+      }
+
+      /* Content */
+      .content {
+        padding: 20px;
+      }
+
+      p {
+        line-height: 1.5;
+      }
+
+      /* Footer */
+      footer {
+        background-color: #f0f0f0;
+        padding: 10px;
+        text-align: center;
+      }
+
+      footer a {
+        color: #333;
+        text-decoration: none;
+      }
+    </style>
   </head>
   <body>
-    <p>Hello {{ username }},</p>
+    <header>
+      <h1>UGANDA PRIMARY SCHOOLS SPORTS ASSOCIATION</h1>
+    </header>
 
-    <p>
-      Your account has been successfully activated. Here are your login
-      credentials:
-    </p>
+    <div class="content">
+      <p>Hello {{ username }},</p>
 
-    <ul>
-      <li><strong>Username:</strong> {{ username }}</li>
-      <li><strong>Password:</strong> {{ password }}</li>
-    </ul>
+      <p>
+        Your account has been successfully activated. Here are your login
+        credentials:
+      </p>
 
-    <p>
-      You can now log in using the provided credentials. Please remember to
-      change your password after logging in for security reasons.
-    </p>
+      <ul>
+        <li><strong>Username:</strong> {{ username }}</li>
+        <li><strong>Password:</strong> {{ password }}</li>
+      </ul>
+    </div>
 
-    <p>Thank you!</p>
+    <footer>
+      <p>Copyright &copy; 2024 Your Company Name</p>
+      <a href="#">Unsubscribe</a>
+    </footer>
   </body>
 </html>

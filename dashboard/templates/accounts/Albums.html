@@ -52,19 +52,21 @@
       .header .headexher .athletes table tbody tr td img {
         width: 200px;
       }
-      .header .headexher .athletes table tbody tr td li {
-        margin: 0;
-        list-style: none;
+      .header .headexher .athletes table tbody tr td table tr td img {
+        width: 200px;
+        height: 250px;
+       
       }.header .headexher .athletes table tbody tr td ul{
         list-style: none;
       }
-      .header .headexher .athletes table tbody tr td ul li {
+      .header .headexher .athletes table tbody tr td  ul h2 {
         font-weight: bold;
         list-style: none;
+        text-transform: uppercase;
       }
     </style>
     <div class="header">
-      <img src="{% static 'images/upsa.png'%}" alt="" />
+      <img src="http://localhost:8000/static/images/upsa.png" alt="" />
       <h1 style="font-size: 30px; color: #00338b">
         UGANDA PRIMARY SCHOOLS SPORTS ASSOCIATION (UPSSA)
       </h1>
@@ -168,7 +170,7 @@
                   <table>
                     <tr>
                       <td>
-                        <li style="text-transform: uppercase;">LIN: {{ athlete.lin }}</li>
+                        <h2 style="text-transform: uppercase;">LIN: {{ athlete.lin }}</h2>
                         {% if athlete.photo %}
                         <img
                           src="{{ athlete.photo.path }}"
@@ -180,17 +182,17 @@
                           alt="{{ athlete.fname }}"
                         />
                         {% endif %}
-                        <li style="text-transform: uppercase;">Date of birth: {{ athlete.date_of_birth }}</li>
-                        <li style="text-transform: uppercase;">Age: {{ athlete.age }}</li>
+                        
+                        
                       </td>
                       <td>
                         <ul>
-                          <li style="text-transform: uppercase;">
+                          <h2 style="text-transform: uppercase;">
                             Names: {{ athlete.fname }} {{ athlete.lname }}
-                          </li style="text-transform: uppercase;">
-                          <li style="text-transform: uppercase;">LIN: {{ athlete.lin }}</li>
-                          <li style="text-transform: uppercase;">School: {{ athlete.school }}</li>
-                          <li style="text-transform: uppercase;">Sport: {{ athlete.sport }}</li>
+                          </h2 style="text-transform: uppercase;">
+                          <h2 style="text-transform: uppercase;">School: {{ athlete.school }}</h2>
+                          <h2 style="text-transform: uppercase;">Sport: {{ athlete.sport }}</h2>
+                          <h2 style="text-transform: uppercase;">Date of birth: {{ athlete.date_of_birth }} ({{ athlete.age }})</h2>
                         </ul>
                       </td>
                     </tr>
