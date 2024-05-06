@@ -69,7 +69,7 @@ def users(request):
 
 
 # schools list, tuple or array
-@staff_required
+#@staff_required
 def schools(request):
 
     schools = School.objects.all()

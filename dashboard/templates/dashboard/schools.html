@@ -29,7 +29,8 @@
               <th>Status</th>
               <th>region</th>
               <th>District</th>
-              <th>Actions</th>
+              {% if user.is_staff %}
+              <th>Actions</th>{% endif %}
             </tr>
           </thead>
           <tbody>
@@ -44,6 +45,7 @@
               <td>{{school.status}}</td>
               <td>{{school.region}}</td>
               <td>{{school.district}}</td>
+              {% if user.is_staff %}
               <td>
                 <div class="report">
                   <a href="{% url 'schoolupdate' school.id%}"
@@ -56,7 +58,7 @@
                     ><i class="fa fa-th" aria-hidden="true"></i>
                   </a>
                 </div>
-              </td>
+              </td>{% endif %}
             </tr>
 
             {%endfor%}
