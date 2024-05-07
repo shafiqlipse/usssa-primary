@@ -57,6 +57,31 @@ class Officer(models.Model):
         return self.email
 
 
+class TOfficer(models.Model):
+    user = models.ForeignKey(
+        User, related_name="tuser", on_delete=models.CASCADE, null=True
+    )
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+
+    photo = models.ImageField(
+        upload_to="photo/",
+    )
+
+    email = models.EmailField(unique=True)
+    phone_number = models.CharField(max_length=15)
+    role = models.CharField(max_length=25)
+    nin = models.CharField(max_length=20, unique=True)
+    date_of_birth = models.DateField()
+    gender = models.CharField(
+        max_length=10,
+        choices=[("Male", "Male"), ("Female", "Female")],
+    )
+
+    def __str__(self):
+        return self.email
+
+
 class Team(models.Model):
     team_officer = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     team_sport = models.ForeignKey(Sport, on_delete=models.CASCADE, null=True)

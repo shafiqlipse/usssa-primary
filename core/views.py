@@ -39,10 +39,49 @@ def Officera(request):
     return render(request, "school/newofficial.html", context)
 
 
+def newTofficer(request):
+
+    if request.method == "POST":
+        form = TOfficerForm(request.POST, request.FILES)
+
+        if form.is_valid():
+
+            # Assign the currently logged-in user
+            tform = form.save(commit=False)
+            tform.user = request.user
+            tform.save()
+            messages.success(request, "Account completed successfully!")
+            return redirect("tofficers")
+
+        else:
+            # Add form-specific error messages for individual fields
+            messages.error(request, "Form is not valid. Please check your input.")
+            print(f"Form errors: {form.errors}")
+
+    else:
+        form = TOfficerForm()
+
+    context = {"form": form}
+    return render(request, "school/newofficial.html", context)
+
+
 def officers(request):
     officers = Officer.objects.all()
     context = {"officers": officers}
     return render(request, "school/officers.html", context)
+
+
+def tofficers(request):
+    tofficers = TOfficer.objects.filter(user=request.user)
+    context = {"tofficers": tofficers}
+    return render(request, "school/tofficers.html", context)
+
+
+def tofficer_details(request, id):
+    tofficer = TOfficer.objects.get(id=id)
+
+    context = {"tofficer": tofficer}
+    return render(request, "school/tofficer.html", context)
 
 
 def officer_details(request, id):
@@ -311,6 +350,7 @@ def accreditation(request, id):
         return HttpResponse("We had some errors <pre>" + html + "</pre>")
 
     return response
+
 
 def cert(request, id):
 

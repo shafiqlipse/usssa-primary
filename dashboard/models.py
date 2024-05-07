@@ -186,37 +186,6 @@ import os
 from django.core.files.uploadedfile import InMemoryUploadedFile
 
 
-def optimize_image(image):
-    """
-    Resize the image, correct orientation, and compress it to be less than 100KB.
-    """
-    img = Image.open(image)
-
-    # Correct orientation if needed
-    if hasattr(img, "_getexif"):  # Only present in JPEGs
-        for orientation in ExifTags.TAGS.keys():
-            if ExifTags.TAGS[orientation] == "Orientation":
-                break
-        exif = dict(img._getexif().items())
-
-        if orientation in exif:
-            if exif[orientation] == 3:
-                img = img.rotate(180, expand=True)
-            elif exif[orientation] == 6:
-                img = img.rotate(270, expand=True)
-            elif exif[orientation] == 8:
-                img = img.rotate(90, expand=True)
-
-    # Resize the image
-    img.thumbnail((500, 500))  # Adjust the size as per your requirement
-
-    # Compress the image to be less than 100KB
-    with io.BytesIO() as output:
-        img.save(output, format="JPEG", quality=100)  # Adjust the quality as needed
-        output.seek(0)
-        return output.getvalue()
-
-
 class Athlete(models.Model):
     fname = models.CharField(max_length=255)
     mname = models.CharField(
@@ -276,18 +245,7 @@ class Athlete(models.Model):
         return f"{self.fname} {self.lname} {self.lin}"
 
 
-@receiver(pre_save, sender=Athlete)
-def optimize_photo(sender, instance, **kwargs):
-    if instance.photo:
-        image_data = optimize_image(instance.photo)
-        instance.photo.file = InMemoryUploadedFile(
-            io.BytesIO(image_data),
-            None,
-            "%s.jpg" % instance.photo.name.split(".")[0],
-            "image/jpeg",
-            len(image_data),
-            None,
-        )
+
 
 
 class Payment(models.Model):

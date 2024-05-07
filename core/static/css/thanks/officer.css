@@ -3,4 +3,12 @@
 }
 .schools-den .image-box img {
   width: 300px;
+}
+.schools-den .image-box .details {
+  list-style: none;
+}
+.schools-den .image-box .details li {
+  text-transform: capitalize;
+  margin: 10px;
+  font-size: 18px;
 }/*# sourceMappingURL=officer.css.map */

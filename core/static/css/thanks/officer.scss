@@ -4,5 +4,13 @@
     img {
       width: 300px;
     }
+    .details{
+      list-style: none;
+      li{
+        text-transform: capitalize;
+        margin: 10px;
+        font-size: 18px;
+      }
+    }
   }
 }
