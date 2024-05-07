@@ -28,21 +28,17 @@
     <link rel="stylesheet" href="{% static 'css/dashboard/schooled.css'%}" />
     <link rel="stylesheet" href="{% static 'css/dashboard/schoolist.css'%}" />
     <link rel="stylesheet" href="{% static 'css/css/all.min.css'%}" />
-    <link rel="stylesheet" href="{% static 'css/profile/school_new.css'%}" />
-    <link rel="stylesheet" href="{% static 'css/thanks/officer.css'%}" />
     <link
       rel="stylesheet"
-      type="text/css"
-      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+      href="{% static 'css/css/base/multi-select-tag.css'%}"
     />
+    <link rel="stylesheet" href="{% static 'css/profile/school_new.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/thanks/officer.css'%}" />
 
     <link rel="stylesheet" href="{% static 'css/profile/athlete.css'%}" />
     <link rel="stylesheet" href="{% static 'css/profile/athletes.css'%}" />
     <link rel="stylesheet" href="{% static 'css/profile/newAthlete.css'%}" />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/css/select2.min.css"
-      rel="stylesheet"
-    />
+
     <link
       rel="stylesheet"
       href="https://cdn.datatables.net/2.0.1/css/dataTables.dataTables.css"
@@ -54,8 +50,9 @@
     />
     <link
       rel="stylesheet"
-      href="{% static 'css/base/jquery.multi-select.css'%}"
+      href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.0.1/dist/css/multi-select-tag.css"
     />
+    <script src="{% static 'js/multiselect-bs4.js' %}" defer></script>
   </head>
 
   <body class="g-sidenav-show bg-gray-200">
@@ -609,10 +606,9 @@
     </div>
     <!--   Select2   -->
 
-    <script src="{%static 'js/jquery.multi-select.js'%}"></script>
+    <script src="{%static 'js/multi-select-tag.js'%}"></script>
     <!--   Core JS Files   -->
-
-
+    <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.0.1/dist/js/multi-select-tag.js"></script>
     <!--   Core JS Files   -->
 
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
@@ -631,9 +627,8 @@
     <script src="{% static 'assets/js/plugins/smooth-scrollbar.min.js'%}"></script>
     <script src="{% static 'assets/js/plugins/chartjs.min.js'%}"></script>
 
-
     <script src="{% static 'scripts/app.js'%}"></script>
-  
+
     <script>
       var win = navigator.platform.indexOf("Win") > -1;
       if (win && document.querySelector("#sidenav-scrollbar")) {
