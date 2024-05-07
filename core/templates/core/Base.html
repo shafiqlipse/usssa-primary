@@ -13,14 +13,6 @@
     <link rel="stylesheet" href="{% static 'css/main/main.css'%}" />
     <link rel="stylesheet" href="{% static 'css/css/all.css'%}" />
     <link rel="stylesheet" href="{% static 'css/css/all.min.css'%}" />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/css/select2.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/css/select2.min.css"
-      rel="stylesheet"
-    />
 
     <link
       rel="stylesheet"
@@ -94,6 +86,15 @@
         </div>
       </div>
     </footer>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+
+
+
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
     <script
       src="https://code.jquery.com/jquery-3.7.1.min.js"
       integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
@@ -101,14 +102,9 @@
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="{% static 'scripts/app.js'%}"></script>
-    <script>
-      $(document).ready(function () {
-        $("#id_region,#id_district,#id_municipality,#id_city").select2();
-      });
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <script src="{%static 'js/nav.js'%}"></script>
+    
     <script>
       // change color on scroll
 
@@ -116,7 +112,6 @@
         const header = document.querySelector(".header");
         if (window.scrollY >= 100) {
           header.classList.add("white-bg");
-       
         } else {
           header.classList.remove("white-bg");
         }

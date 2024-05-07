@@ -28,42 +28,25 @@
           {{form.team_gender}}
         </div>
 
-        <table id="myTable" class="display">
-          <thead>
-            <tr>
-              <th>Names</th>
-              <th>Lin</th>
-              <th>School</th>
-              <th>Gender</th>
-              <th>Sport</th>
-              <th>Age</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for athlete in form.athletes%}
-            <tr>
-              <td>{{athlete}}</td>
-              <td>{{athlete.lin}}</td>
-              <td>{{athlete.school}}</td>
-              <td>{{athlete.gender}}</td>
-              <td>{{athlete.sport}}</td>
-              <td>{{athlete.age}}</td>
-            </tr>
-
-            {%endfor%}
-          </tbody>
-        </table>
+        <div class="field">
+          <label for="">{{ form.athletes.label }}</label>
+          <select
+            class="example"
+            multiple="multiple"
+            name="{{ form.athletes.name }}"
+            id="{{ form.athletes.id_for_label }}"
+          >
+            {% for athlete in form.athletes.field.queryset %}
+            <option value="{{ athlete.id }}">{{ athlete }}</option>
+            {% endfor %}
+          </select>
+        </div>
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>
 
-  <script>
-    $(document).ready(function () {
-      $(".select2").select2();
-    });
-  </script>
-  <script src="{%static 'scripts/api.js'%}"></script>
+
 
   {% endblock %}
 </div>

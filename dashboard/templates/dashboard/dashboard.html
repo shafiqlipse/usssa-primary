@@ -43,7 +43,6 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/css/select2.min.css"
       rel="stylesheet"
     />
-
     <link
       rel="stylesheet"
       href="https://cdn.datatables.net/2.0.1/css/dataTables.dataTables.css"
@@ -52,6 +51,10 @@
       id="pagestyle"
       href="{% static 'assets/css/material-dashboard.css'%}"
       rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'css/base/jquery.multi-select.css'%}"
     />
   </head>
 
@@ -605,18 +608,10 @@
       </div>
     </div>
     <!--   Select2   -->
-    <script>
-      $(document).ready(function () {
-        $("#id_region,#id_district,#sport,#id_school").select2();
-      });
-    </script>
+
+    <script src="{%static 'js/jquery.multi-select.js'%}"></script>
     <!--   Core JS Files   -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/css/select2.min.css"
-      rel="stylesheet"
-    />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/js/select2.min.js"></script>
+
 
     <!--   Core JS Files   -->
 
@@ -625,6 +620,7 @@
       $(document).ready(function () {
         $("#myTable").DataTable();
       });
+      $(".example").multiSelect();
     </script>
     <script src="{% static 'js/app.js'%}"></script>
     <script src="https://cdn.datatables.net/2.0.1/js/dataTables.js"></script>
@@ -634,13 +630,10 @@
     <script src="{% static 'assets/js/plugins/perfect-scrollbar.min.js'%}"></script>
     <script src="{% static 'assets/js/plugins/smooth-scrollbar.min.js'%}"></script>
     <script src="{% static 'assets/js/plugins/chartjs.min.js'%}"></script>
-    <script
-      type="text/javascript"
-      src="https://cdn.jsdelivr.net/npm/toastify-js"
-    ></script>
+
 
     <script src="{% static 'scripts/app.js'%}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  
     <script>
       var win = navigator.platform.indexOf("Win") > -1;
       if (win && document.querySelector("#sidenav-scrollbar")) {
