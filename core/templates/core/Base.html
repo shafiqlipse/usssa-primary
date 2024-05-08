@@ -52,8 +52,11 @@
             {% if user.is_school %}
             <a href="{% url 'school_dashboard'%}" class="btn-submit"
               >Dashboard</a
-            >{% else %}
-            <a href="{% url 'dashboard'%}" class="btn-submit">Dashboard</a
+            >{% elif user.is_school %}
+            <a href="{% url 'dashboard'%}" class="btn-submit">Dashboard</a>
+            {% elif user.is_admin %}
+            <a href="{% url 'officer_dashboard'%}" class="btn-submit"
+              >Dashboard</a
             >{%endif %} {% else %}
             <a href="{% url 'login'%}" class="btn-submit">Login</a>
             {% endif %}
@@ -88,8 +91,6 @@
     </footer>
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 
-
-
     <script
       src="https://code.jquery.com/jquery-3.7.1.min.js"
       integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
@@ -104,7 +105,7 @@
     <script src="{% static 'scripts/app.js'%}"></script>
 
     <script src="{%static 'js/nav.js'%}"></script>
-    
+
     <script>
       // change color on scroll
 
