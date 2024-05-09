@@ -7,11 +7,11 @@ from django_select2.forms import Select2Widget
 class TeamForm(forms.ModelForm):
     class Meta:
         model = Team
-        fields = ["team_gender", "team_sport", "athletes"]
+        fields = ["team_gender", "team_sport","team_age", "athletes"]
 
-        widgets = {
-            "athletes": forms.CheckboxSelectMultiple(),
-        }
+        # widgets = {
+        #     "athletes": forms.CheckboxSelectMultiple(),
+        # }
 
 
 class OfficerForm(forms.ModelForm):

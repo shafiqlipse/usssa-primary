@@ -1,6 +1,6 @@
 from django.db import models
 from accounts.models import *
-from dashboard.models import Athlete
+from dashboard.models import Athlete,Age
 
 # Create your models here.
 
@@ -85,6 +85,7 @@ class TOfficer(models.Model):
 class Team(models.Model):
     team_officer = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     team_sport = models.ForeignKey(Sport, on_delete=models.CASCADE, null=True)
+    team_age = models.ForeignKey(Age, on_delete=models.CASCADE, null=True)
     team_gender = models.CharField(
         max_length=1,
         choices=[("M", "Male"), ("F", "Female")],
@@ -92,4 +93,4 @@ class Team(models.Model):
     athletes = models.ManyToManyField(Athlete)
 
     def __str__(self):
-        return str(self.team_officer.district)
+        return str(self.team_officer)

@@ -391,3 +391,34 @@ def cert(request, id):
         return HttpResponse("We had some errors <pre>" + html + "</pre>")
 
     return response
+
+
+
+
+
+def get_athletes(request):
+    # Get the school associated with the logged-in user
+    
+
+    # sport_id = request.GET.get("team_sport_id")
+    # team_gender = request.GET.get("team_gender")
+    # age_id = request.GET.get("team_age_id")
+
+    # Start with the base queryset for athletes in the user's school
+    athletes = Athlete.objects.all()
+    # Apply additional filters for sport, gender, and age if provided
+
+    # if team_gender:
+    #     athletes = athletes.filter(gender=team_gender)
+
+    # if age_id:
+    #     athletes = athletes.filter(age_id=age_id)
+
+    # Retrieve only the necessary fields
+    athletes = athletes.values("id", "fname")
+
+    # Wrap the athletes array in a JSON object with a 'athletes' property
+    data = {"athletes": list(athletes)}
+
+    return JsonResponse(data)
+
