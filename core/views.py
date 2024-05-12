@@ -240,7 +240,7 @@ def delete_team(request, id):
 
 def Teams(request):
     teams = Team.objects.all()
-    
+
     context = {"teams": teams}
     return render(request, "school/teams.html", context)
 
@@ -316,7 +316,7 @@ def accreditation(request, id):
 
     team = Team.objects.get(id=id)
     athletes = team.athletes.all()
-
+    district = team.team_officer.user.first().district
     # Get template
     template = get_template("school/accred.html")
 
@@ -334,6 +334,7 @@ def accreditation(request, id):
 
     # Prepare context
     context = {
+        "district": district,
         "athletes": athletes,
         "MEDIA_URL": settings.MEDIA_URL,
     }
@@ -394,12 +395,8 @@ def cert(request, id):
     return response
 
 
-
-
-
 def get_athletes(request):
     # Get the school associated with the logged-in user
-    
 
     # sport_id = request.GET.get("team_sport_id")
     # team_gender = request.GET.get("team_gender")
@@ -422,4 +419,3 @@ def get_athletes(request):
     data = {"athletes": list(athletes)}
 
     return JsonResponse(data)
-
