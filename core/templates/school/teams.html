@@ -36,7 +36,7 @@
             {% for team in teams %}
             <tr>
               <td>
-                <a href="">{{team.team_officer.district}} </a>
+                <a href="">{{team.team_officer.user.first.district}} </a>
               </td>
               <td>{{team.team_sport}}</td>
               <td>{{team.team_gender}}</td>
