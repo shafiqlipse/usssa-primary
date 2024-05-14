@@ -61,5 +61,5 @@ class TOfficerForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
-        super(OfficerForm, self).__init__(*args, **kwargs)
+        super(TOfficerForm, self).__init__(*args, **kwargs)
         self.fields["photo"].widget.attrs["onchange"] = "displayImage(this);"

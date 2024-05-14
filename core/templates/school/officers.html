@@ -26,6 +26,7 @@
               <th>Status</th>
               <th>District/City</th>
               <th>Gender</th>
+              <th>Accred</th>
 
               <th>Delete</th>
               <th>Activate</th>
@@ -42,6 +43,7 @@
               <td>{{officer.district}}/{{officer.city}}</td>
 
               <td>{{officer.gender}}</td>
+              <td> <a href="{%url 'taccred' officer.id%}" class="btn btn-danger">Accred</i></a></td>
               <td>
                 <a href="{%url 'deleted' officer.id%}" class="btn btn-danger">Delete</i></a>
               </td>

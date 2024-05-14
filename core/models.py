@@ -9,6 +9,7 @@ class Officer(models.Model):
     user = models.ForeignKey(
         User, related_name="user", on_delete=models.CASCADE, null=True
     )
+    
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     status = models.CharField(
@@ -79,7 +80,7 @@ class TOfficer(models.Model):
     )
 
     def __str__(self):
-        return self.email
+        return self.first_name
 
 
 class Team(models.Model):
@@ -94,3 +95,5 @@ class Team(models.Model):
 
     def __str__(self):
         return str(self.team_officer)
+
+

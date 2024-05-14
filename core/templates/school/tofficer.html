@@ -1,0 +1,101 @@
+{% extends "dashboard/dashboard.html" %}
+<!---->
+{%load static%}
+<!---->
+{% block title %}Officer{% endblock %}
+<!---->
+{% block content %}
+<div class="profile-update">
+  <div class="school-long">
+ <form
+      action=""
+      method="POST"
+      class="form-ctrl"
+      enctype="multipart/form-data"
+    >
+      {% csrf_token %}
+      <div class="school">
+        <h2>Personal Info</h2>
+        <hr />
+      </div>
+      <div class="school">
+        <div class="fields">
+          <div class="left">
+            <div class="imgbox">
+              <div class="field">
+                <label>{{form.photo.label}} </label>
+                {% if form.instance.photo %}
+                <img
+                  src="{{ form.instance.photo.url }}"
+                  id="image-previewg"
+                  alt="Current Photo"
+                />
+                {% else %}
+
+                <img
+                  src="{% static 'images/profile.png'%}"
+                  id="image-previewg"
+                  alt="No Photo"
+                />
+                {% endif %}
+              </div>
+              <div class="field">
+                <input
+                  type="file"
+                  name="photo"
+                  accept="image/*"
+                  onchange="displayImage2(this);"
+                  id="id_photo"
+                />
+              </div>
+            </div>
+            <div class="fiil">
+              <div class="field flex">
+                <label>First Name</label>
+                {{form.first_name}}
+              </div>
+              <div class="field flex">
+                <label>Last Name</label>
+                {{form.last_name}}
+              </div>
+              <div class="field flex">
+                <label>{{ form.nin.label}}</label>
+                {{form.nin}}
+              </div>
+
+              <div class="field flex">
+                <label>{{ form.email.label}} </label>{{form.email}}
+              </div>
+
+              <div class="field">
+                <label>Phone:</label>
+                {{form.phone_number}}
+              </div><div class="field">
+                <label>Role:</label>
+                {{form.role}}
+              </div>
+              <div class="field">
+                <label>gender</label>
+                {{form.gender}}
+              </div>
+              <div class="field">
+                <label>Date of Birth</label>
+                {{form.date_of_birth}}
+              </div>
+     
+              </div>
+              {% if form.non_field_errors %}
+              <div class="alert alert-danger">
+                {{ form.non_field_errors.as_ul }}
+              </div>
+              {% endif %}
+              <button type="submit" class="btn-submit">Save profile</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

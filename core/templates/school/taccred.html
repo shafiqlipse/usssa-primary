@@ -1,0 +1,103 @@
+<html lang="en">
+  {% load static %}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Album</title>
+  </head>
+
+  <body>
+    <style>
+      @media print {
+        @page {
+          size: A4 portrait; /* Set the size of the page to A4 in portrait orientation */
+          margin: 0; /* Remove default margin */
+        }
+
+        body {
+          margin: 0; /* Remove default body margin */
+          padding: 0; /* Remove default body padding */
+        }
+
+        .tofficers table {
+          display: grid;
+          grid-template-rows: repeat(2, 1fr); /* Two rows */
+          grid-template-columns: repeat(2, 1fr); /* Two columns */
+          gap: 10px; /* Adjust the gap between grid items */
+        }
+      }
+      .header .tofficers table tbody tr td table tr .td {
+        padding-top: 120px;
+        padding-bottom: 40px;
+        padding-left: 70px;
+        padding-right: 50px;
+        margin: 0;
+      }
+      .header .tofficers table tbody tr td table tr .td .inner {
+        width: 220px;
+        text-align: center;
+
+        text-transform: uppercase;
+      }
+      .header .tofficers table tbody tr td table tr .td .inner img {
+        width: 130px;
+        height: 160px;
+      }
+    </style>
+    <div class="header">
+      <div class="tofficers">
+        <table>
+          <tbody>
+            {% for tofficer in tofficers %}
+            <!---->
+            {% if forloop.counter0|divisibleby:2 %}
+            <!-- Start a new row for every even-numbered tofficer -->
+            <tr>
+              {% endif %}
+              <td>
+                <table>
+                  <tr>
+                    <td class="td">
+                      <div class="inner">
+                        <span
+                          >{{ tofficer.nin|upper }}
+                          <!---->
+                          ({{tofficer.gender|upper }})</span
+                        >
+                        <br />
+                        {% if tofficer.photo %}
+                        <img
+                          src="{{ tofficer.photo.path }}"
+                          alt="{{ tofficer.first_name }}"
+                        />
+                        {% else %}
+                        <img
+                          src="{% static 'images/profile.png' %}"
+                          alt="{{ tofficer.first_name }}"
+                        />
+                        {% endif %}
+                        <br />
+                        <span
+                          >{{ tofficer.first_name|upper }}<!---->
+                          {{ tofficer.last_name|upper }}</span
+                        >
+                        <br />
+                        <span>{{ tofficer.role|upper }}</span><br />
+
+                        <span>{{ tofficer.tuser.user.officer.district }}</span><br />
+
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+              {% if forloop.last or forloop.counter0|add:1|divisibleby:2 %}
+              <!-- End the row for the last or odd-numbered tofficer -->
+            </tr>
+            {% endif %} {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

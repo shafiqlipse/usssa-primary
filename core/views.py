@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import *
 from django.contrib import messages
+from accounts.decorators import anonymous_required, staff_required
 from .models import *
 
 
@@ -50,25 +51,32 @@ def newTofficer(request):
             tform = form.save(commit=False)
             tform.user = request.user
             tform.save()
-            messages.success(request, "Account completed successfully!")
+            # messages.success(request, "Account completed successfully!")
             return redirect("tofficers")
 
         else:
+            # errors = form.errors
+            # pass
             # Add form-specific error messages for individual fields
             messages.error(request, "Form is not valid. Please check your input.")
-            print(f"Form errors: {form.errors}")
 
     else:
         form = TOfficerForm()
 
     context = {"form": form}
-    return render(request, "school/newofficial.html", context)
+    return render(request, "school/tofficer.html", context)
 
 
 def officers(request):
     officers = Officer.objects.all()
     context = {"officers": officers}
     return render(request, "school/officers.html", context)
+
+
+def Dofficers(request):
+    tofficers = TOfficer.objects.all()
+    context = {"tofficers": tofficers}
+    return render(request, "school/tofficers.html", context)
 
 
 def tofficers(request):
@@ -81,7 +89,7 @@ def tofficer_details(request, id):
     tofficer = TOfficer.objects.get(id=id)
 
     context = {"tofficer": tofficer}
-    return render(request, "school/tofficer.html", context)
+    return render(request, "school/tofficera.html", context)
 
 
 def officer_details(request, id):
@@ -110,6 +118,7 @@ def AllTeams(request):
     return render(request, "school/teams.html", context)
 
 
+@staff_required
 def Teams(request):
     teams = Team.objects.all()
     context = {"teams": teams}
@@ -233,7 +242,7 @@ def delete_team(request, id):
 
     if request.method == "POST":
         team.delete()
-        return redirect("teams")  # Redirect to the team list page or another URL
+        return redirect("allteams")  # Redirect to the team list page or another URL
 
     return render(request, "school/delete_team.html", {"team": team})
 
@@ -419,3 +428,44 @@ def get_athletes(request):
     data = {"athletes": list(athletes)}
 
     return JsonResponse(data)
+
+
+def taccreditation(request, id):
+
+    officer = Officer.objects.get(id=id)
+    tofficers = TOfficer.objects.filter(user_id=officer.user_id)
+    # Get template
+    template = get_template("school/taccred.html")
+
+    # Compress school photo
+
+    # Compress athletes' photos
+    for tofficer in tofficers:
+        if tofficer.photo:
+            with default_storage.open(tofficer.photo.path, "rb") as image_file:
+                athlete_photo_data = image_file.read()
+            compressed_athlete_photo_data = compress_image(athlete_photo_data)
+            tofficer.photo_base64 = base64.b64encode(
+                compressed_athlete_photo_data
+            ).decode("utf-8")
+
+    # Prepare context
+    context = {
+        "officer": officer,
+        "tofficers": tofficers,
+        "MEDIA_URL": settings.MEDIA_URL,
+    }
+
+    # Render HTML
+    html = template.render(context)
+
+    # Create a PDF
+    response = HttpResponse(content_type="application/pdf")
+    response["Content-Disposition"] = 'attachment; filename="OfficerAccreditation.pdf"'
+
+    # Generate PDF from HTML
+    pisa_status = pisa.CreatePDF(html, dest=response)
+    if pisa_status.err:
+        return HttpResponse("We had some errors <pre>" + html + "</pre>")
+
+    return response

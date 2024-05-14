@@ -8,8 +8,8 @@
 {% block content %}
 <div class="schools-dew">
   <div class="head flex">
-    <h1>Officials</h1>
-    <a href="{% url 'addofficial'%}" class="btn-submit">Add Official</a>
+    <h1>Officers</h1>
+    <a href="{% url 'districtoff'%}" class="btn-submit">Add Officer</a>
   </div>
   <div class="filterlist glue">
     
@@ -28,11 +28,11 @@
             </tr>
           </thead>
           <tbody>
-            {% for official in school_offs%}
+            {% for official in tofficers%}
             <tr>
               <td>
-                <a href="{% url 'official' official.id%}"
-                  >{{official.name}}</a
+                <a href="{% url 'toff' official.id%}"
+                  >{{official.first_name}} {{official.last_name}}</a
                 >
               </td>
               <td>{{official.role}}</td>

@@ -45,6 +45,7 @@ urlpatterns = [
     path("album/", album, name="album"),
     path("dalbum/<int:id>", generate_dalbum, name="dalbum"),
     path("accred/<int:id>", accreditation, name="accred"),
+    path("taccred/<int:id>", taccreditation, name="taccred"),
     path("cert/<int:id>", cert, name="cert"),
     # path("process-payment/", process_payment, name="process_payment"),  # Add this line
     # Add more URLs as ne

@@ -1,0 +1,24 @@
+{% extends "dashboard/dashboard.html" %}
+<!--static-->
+{% block title %}{{tofficer.first_name}} {{tofficer.last_name}}{% endblock %}
+<!--static-->
+{% load static %}
+<!--khfufufu-->
+{% block content %}
+<div class="schools-den">
+  <div class="head flex">
+    <h1>{{tofficer.first_name}} {{tofficer.last_name}}</h1>
+  </div>
+  <div class="image-box flex">
+    <img src="{{tofficer.photo.url}}" alt="" />
+    <div class="details">
+      <li>{{tofficer.nin}}</li>
+      <li>{{tofficer.email}}</li>
+      <li>{{tofficer.district}}</li>
+      <li>{{tofficer.gender}}</li>
+      <li>{{tofficer.phone_number}}</li>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
