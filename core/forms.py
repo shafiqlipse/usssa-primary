@@ -51,6 +51,7 @@ class TOfficerForm(forms.ModelForm):
             "photo",
             "phone_number",
             "email",
+            "district",
             "gender",
             "date_of_birth",
             "role",

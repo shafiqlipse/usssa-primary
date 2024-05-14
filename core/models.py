@@ -1,6 +1,6 @@
 from django.db import models
 from accounts.models import *
-from dashboard.models import Athlete,Age
+from dashboard.models import Athlete, Age
 
 # Create your models here.
 
@@ -9,7 +9,7 @@ class Officer(models.Model):
     user = models.ForeignKey(
         User, related_name="user", on_delete=models.CASCADE, null=True
     )
-    
+
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     status = models.CharField(
@@ -72,6 +72,7 @@ class TOfficer(models.Model):
     email = models.EmailField(unique=True)
     phone_number = models.CharField(max_length=15)
     role = models.CharField(max_length=25)
+    district = models.CharField(max_length=25, null=True, blank=True)
     nin = models.CharField(max_length=20, unique=True)
     date_of_birth = models.DateField()
     gender = models.CharField(
@@ -95,5 +96,3 @@ class Team(models.Model):
 
     def __str__(self):
         return str(self.team_officer)
-
-

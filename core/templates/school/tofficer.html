@@ -79,17 +79,21 @@
                 {{form.gender}}
               </div>
               <div class="field">
+                <label>District/City/MC</label>
+                {{form.district}}
+              </div>
+              <div class="field">
                 <label>Date of Birth</label>
                 {{form.date_of_birth}}
               </div>
-     
+     <button type="submit" class="btn-submit">Save profile</button>
               </div>
               {% if form.non_field_errors %}
               <div class="alert alert-danger">
                 {{ form.non_field_errors.as_ul }}
               </div>
               {% endif %}
-              <button type="submit" class="btn-submit">Save profile</button>
+              
             </div>
           </div>
         </div>
