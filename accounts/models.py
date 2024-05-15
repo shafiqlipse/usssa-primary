@@ -90,12 +90,12 @@ class TOfficer(models.Model):
         upload_to="photo/",
     )
 
-    email = models.EmailField(unique=True)
+    
     phone_number = models.CharField(max_length=15)
     role = models.CharField(max_length=25)
     district = models.CharField(max_length=25, null=True, blank=True)
     nin = models.CharField(max_length=20, unique=True)
-    date_of_birth = models.DateField()
+  
     gender = models.CharField(
         max_length=10,
         choices=[("Male", "Male"), ("Female", "Female")],
