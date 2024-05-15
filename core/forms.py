@@ -50,10 +50,10 @@ class TOfficerForm(forms.ModelForm):
             "nin",
             "photo",
             "phone_number",
-            "email",
+           
             "district",
             "gender",
-            "date_of_birth",
+            
             "role",
         ]
 
