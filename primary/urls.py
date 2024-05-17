@@ -39,6 +39,7 @@ urlpatterns = [
     path("tofficers/", tofficers, name="tofficers"),
     path("dofficers/", Dofficers, name="dofficers"),
     path("newtofficer/<int:id>", tofficer_details, name="toff"),
+    path("deloff/<int:id>", delloff, name="deloff"),
     # path("pdfreport/<int:id>", generate_scalbum, name="pdreport"),
     path("get_athletes/", get_athletes, name="get_athletes"),
     # path("album/", album, name="album"),

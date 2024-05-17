@@ -25,6 +25,7 @@
               <th>contact</th>
               <th>Email</th>
               <th>Gender</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -40,6 +41,7 @@
               <td>{{official.phone_number}}</td>
               <td>{{official.email}}</td>
               <td>{{official.gender}}</td>
+              <td><a href="{%url 'deloff' official.id%}">delete</a></td>
             </tr>
   
             {%endfor%}

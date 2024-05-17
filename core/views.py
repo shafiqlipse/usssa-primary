@@ -469,3 +469,13 @@ def taccreditation(request, id):
         return HttpResponse("We had some errors <pre>" + html + "</pre>")
 
     return response
+
+
+def delloff(request, id):
+    stud = TOfficer.objects.get(id=id)
+    if request.method == "POST":
+        stud.delete()
+        return redirect("tofficers")
+
+    return render(request, "dashboard/deleteath.html", {"obj": stud})
+
