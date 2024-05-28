@@ -28,9 +28,10 @@
               <th>Album</th>
               {% if user.is_staff %}
               <th>Accred</th>
-              {% endif %}
+
               <th>Delete</th>
             </tr>
+            {% endif %}
           </thead>
           <tbody>
             {% for team in teams %}
@@ -48,12 +49,13 @@
                 <a href="{%url 'accred' team.id %}">Accreditation</a>
                 <a href="{%url 'cert' team.id %}">Certificate</a>
               </td>
-              {% endif %}
+
               <td>
                 <a href="{%url 'deleteteam' team.id%}" class="btn btn-danger"
                   >Delete</a
                 >
               </td>
+              {% endif %}
             </tr>
             {% endfor %}
           </tbody>

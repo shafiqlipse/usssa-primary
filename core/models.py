@@ -61,6 +61,7 @@ class Officer(models.Model):
 class Team(models.Model):
     team_officer = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     team_sport = models.ForeignKey(Sport, on_delete=models.CASCADE, null=True)
+    championship = models.ForeignKey(Tournament, on_delete=models.CASCADE, null=True)
 
     team_gender = models.CharField(
         max_length=1,

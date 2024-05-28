@@ -41,20 +41,7 @@ class School(models.Model):
         null=True,
         blank=True,
     )
-    municipality = models.ForeignKey(
-        Municipality,
-        related_name="county",
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True,
-    )
-    city = models.ForeignKey(
-        City,
-        related_name="subcounty",
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True,
-    )
+
     # headteacher
     lname = models.CharField(max_length=100)
     fname = models.CharField(max_length=100)

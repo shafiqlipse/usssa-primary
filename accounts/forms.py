@@ -35,8 +35,6 @@ class SchoolProfileForm(forms.ModelForm):
             "badge",
             "region",
             "district",
-            "municipality",
-            "city",
             "fname",
             "lname",
             "nin",
@@ -53,13 +51,10 @@ class SchoolProfileForm(forms.ModelForm):
             "gemail",
             "ggender",
             "gdate_of_birth",
-            
         ]
 
         widgets = {
-            "city": Select2Widget,
             "district": Select2Widget,
-            "municipality": Select2Widget,
             "date_of_birth": forms.DateInput(attrs={"type": "date"}),
             "gdate_of_birth": forms.DateInput(attrs={"type": "date"}),
         }
@@ -87,8 +82,6 @@ class SchoolEditForm(forms.ModelForm):
             "badge",
             "region",
             "district",
-            "municipality",
-            "city",
             "fname",
             "lname",
             "nin",
@@ -109,9 +102,7 @@ class SchoolEditForm(forms.ModelForm):
         ]
 
         widgets = {
-            "city": Select2Widget,
             "district": Select2Widget,
-            "municipality": Select2Widget,
             "date_of_birth": forms.DateInput(attrs={"type": "date"}),
             "gdate_of_birth": forms.DateInput(attrs={"type": "date"}),
         }
