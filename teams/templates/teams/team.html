@@ -1,0 +1,61 @@
+{% extends "dashboard/dashboard.html" %}
+<!--  -->
+{%load static%}
+<!--  -->
+{%block title%}{{team.name}}{%endblock%}
+<!--  -->
+{%block content%}
+<div class="team-page">
+  <a href="{% url 'sdalbum' team.id %}"> Album</a>
+  <div class="filterlist glue">
+    <div class="lo">
+      <div class="official-list">
+        <table id="myTable" class="display">
+          <thead>
+            <tr>
+              <th>District</th>
+              <th>Sport</th>
+              <th>Gender</th>
+              <th>Athletes</th>
+              <th>Album</th>
+              {% if user.is_staff %}
+              <th>Accred</th>
+
+              <th>Delete</th>
+            </tr>
+            {% endif %}
+          </thead>
+          <tbody>
+            {% for athlete in team.athletes.all %}
+            <tr>
+              <td>
+                <a href="{% url 'athlete' athlete.id %}"
+                  >{{athlete.fname}} {{athlete.lname}}
+                </a>
+              </td>
+              <td>{{athlete.sport}}</td>
+              <td>{{athlete.gender}}</td>
+              <td>{{athlete.age}}</td>
+
+              <td><a href="{%url 'dalbum' team.id %}"> Album</a></td>
+              {% if user.is_staff %}
+              <td>
+                <a href="{%url 'accred' team.id %}">Accreditation</a>
+                <a href="{%url 'cert' team.id %}">Certificate</a>
+              </td>
+
+              <td>
+                <a href="{%url 'deleteteam' team.id%}" class="btn btn-danger"
+                  >Delete</a
+                >
+              </td>
+              {% endif %}
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{%endblock%}

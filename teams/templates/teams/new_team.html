@@ -1,0 +1,58 @@
+{% extends "dashboard/dashboard.html" %}
+<!---->
+{% load static %}
+<!---->
+<!--title starts-->
+{%block title%}Add Team {% endblock %}
+<!--title ends-->
+{% block content %}
+<div class="profile-update">
+  <h1>Add Team</h1>
+
+  <form
+    action=""
+    method="POST"
+    class="form-ctrl"
+    enctype="multipart/form-data"
+    id="teamform"
+  >
+    {% csrf_token %}
+    <div class="fields flex">
+      <div class="left">
+        <div class="field flex">
+          <label>{{ form.name.label}} </label>{{form.name}}
+        </div>
+        <div class="field flex">
+          <label>{{ form.sport.label}} </label>{{form.sport}}
+        </div>
+        <div class="field flex">
+          <label>{{ form.gender.label}} </label>{{form.gender}}
+        </div>
+        <div class="field flex">
+          <label>{{ form.age.label}} </label>{{form.age}}
+        </div>
+        <div class="field flex">
+          <label>{{ form.championship.label}} </label>{{form.championship}}
+        </div>
+      </div>
+      <div class="other-fields">
+        <div class="field flex">
+          <label>{{ form.athletes.label}} </label>
+          <div id="tid_athletes"></div>
+        </div>
+      </div>
+      <!---->
+    </div>
+    <button type="submit" class="btn-submit">Add team</button>
+    {% if form.errors %}
+    <ul class="errorlist">
+      {% for field, errors in form.errors.items %} {% for error in errors %}
+      <li>{{ field|title }}: {{ error }}</li>
+      {% endfor %} {% endfor %}
+    </ul>
+    {% endif %}
+  </form>
+
+  <script src="{% static '/js/api.js'%}"></script>
+</div>
+{% endblock %}

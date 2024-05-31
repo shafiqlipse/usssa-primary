@@ -23,6 +23,8 @@ urlpatterns = [
     path("school/", Dash, name="school_dashboard"),
     path("officeria/", Officerdash, name="officer_dashboard"),
     path("dashboard/", include("dashboard.urls")),
+    path("team/", include("teams.urls")),
+    path("get_athletes/", get_athletes, name="get_athletes"),
     # path("enrollment/", include("registration.urls")),
     # email
     # path('send_email/', Sendmail, name='send_email'),

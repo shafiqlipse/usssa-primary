@@ -2,7 +2,7 @@
 
 // const Theme = document.querySelector(".theme-toggler");
 const icon = document.getElementById("iconed");
-const wrapper = document.querySelector(".dashboard-main");
+const wrapper = document.querySelector(".dashboard-wrapper");
 
 const Toggletheme = () => {
   const isLightTheme = wrapper.classList.contains("light");
@@ -54,7 +54,7 @@ const ToggleAccount = () => {
     account.classList.add("account-off");
     account.classList.remove("account-on");
   }
-  // console.log(account.classList);
+  console.log(account.classList);
   // When the user clicks anywhere outside of the modal, close it
 };
 
@@ -63,41 +63,28 @@ const ToggleAccount = () => {
 //   if (!event.target.closest(".account-toggle")) {
 //     ToggleAccount();
 //   }accordion for sidebar
-// const accordionItems = document.querySelectorAll(".item-head");
+const accordionItems = document.querySelectorAll(".item-head");
 
-// for (const item of accordionItems) {
-//   item.addEventListener("click", () => {
-//     const answer = item.nextElementSibling;
-//     // const tog = document.querySelector(".tog");
-//     if (answer.classList.contains("menu-on")) {
-//       answer.classList.remove("menu-on");
-//       answer.classList.add("menu-off");
-//     } else {
-//       answer.classList.add("menu-on");
-//       answer.classList.remove("menu-off");
-//     }
-//   });
-// }
+for (const item of accordionItems) {
+  item.addEventListener("click", () => {
+    const answer = item.nextElementSibling;
+    // const tog = document.querySelector(".tog");
+    if (answer.classList.contains("menu-on")) {
+      answer.classList.remove("menu-on");
+      answer.classList.add("menu-off");
+    } else {
+      answer.classList.add("menu-on");
+      answer.classList.remove("menu-off");
+    }
+  });
+}
 
 // });
+
 function displayImage(input) {
   var reader = new FileReader();
   reader.onload = function (e) {
     document.getElementById("image-preview").src = e.target.result;
-  };
-  reader.readAsDataURL(input.files[0]);
-}
-function displayImage1(input) {
-  var reader = new FileReader();
-  reader.onload = function (e) {
-    document.getElementById("image-previews").src = e.target.result;
-  };
-  reader.readAsDataURL(input.files[0]);
-}
-function displayImage2(input) {
-  var reader = new FileReader();
-  reader.onload = function (e) {
-    document.getElementById("image-previewg").src = e.target.result; // Corrected ID
   };
   reader.readAsDataURL(input.files[0]);
 }
