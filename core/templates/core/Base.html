@@ -54,7 +54,7 @@
             {% if user.is_school %}
             <a href="{% url 'school_dashboard'%}" class="btn-submit"
               >Dashboard</a
-            >{% elif user.is_school %}
+            >{% elif user.is_staff %}
             <a href="{% url 'dashboard'%}" class="btn-submit">Dashboard</a>
             {% elif user.is_admin %}
             <a href="{% url 'officer_dashboard'%}" class="btn-submit"

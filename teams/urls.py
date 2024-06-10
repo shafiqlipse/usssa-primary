@@ -9,7 +9,7 @@ urlpatterns = [
   
     # # team
     path("new_team/", create_team, name="new_team"),
-    path("updateteam/<int:id>", update_team, name="updateteam"),
+    path("updateteam/<int:id>", update_team, name="updategteam"),
     path("teams/", teamlist, name="team_s"),
     path("team/<int:id>", team_details, name="steam"),
     path("sdalbum/<int:id>", generate_sdalbum, name="sdalbum"),

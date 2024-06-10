@@ -11,44 +11,36 @@
     <h1>Officials</h1>
     <a href="{% url 'addofficial'%}" class="btn-submit">Add Official</a>
   </div>
-  <div class="filterlist glue">
-    
-   
-    <div class="filterlist glue">
-      <div class="official-list">
-        <table id="myTable" class="display">
-          <thead>
-            <tr>
-              <th>names</th>
-              <th>Role</th>
-              <th>nin</th>
-              <th>contact</th>
-              <th>Email</th>
-              <th>Gender</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for official in school_offs%}
-            <tr>
-              <td>
-                <a href="{% url 'official' official.id%}"
-                  >{{official.name}}</a
-                >
-              </td>
-              <td>{{official.role}}</td>
-              <td>{{official.nin}}</td>
-              <td>{{official.phone_number}}</td>
-              <td>{{official.email}}</td>
-              <td>{{official.gender}}</td>
-            </tr>
-  
-            {%endfor%}
-          </tbody>
-        </table>
-      </div>
-    </div>
-    
 
+  <div class="filterlist glue">
+    <div class="official-list">
+      <table id="myTable" class="display">
+        <thead>
+          <tr>
+            <th>names</th>
+            <th>Role</th>
+            <th>nin</th>
+            <th>contact</th>
+            <th>Email</th>
+            <th>Gender</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for official in school_offs%}
+          <tr>
+            <td>
+              <a href="{% url 'official' official.id%}">{{official.name}}</a>
+            </td>
+            <td>{{official.role}}</td>
+            <td>{{official.nin}}</td>
+            <td>{{official.phone_number}}</td>
+            <td>{{official.email}}</td>
+            <td>{{official.gender}}</td>
+          </tr>
+
+          {%endfor%}
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

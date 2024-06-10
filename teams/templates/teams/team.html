@@ -13,11 +13,11 @@
         <table id="myTable" class="display">
           <thead>
             <tr>
-              <th>District</th>
+              <th>Athlete</th>
               <th>Sport</th>
               <th>Gender</th>
-              <th>Athletes</th>
-              <th>Album</th>
+              <th>Age</th>
+             
               {% if user.is_staff %}
               <th>Accred</th>
 
@@ -37,7 +37,7 @@
               <td>{{athlete.gender}}</td>
               <td>{{athlete.age}}</td>
 
-              <td><a href="{%url 'dalbum' team.id %}"> Album</a></td>
+            
               {% if user.is_staff %}
               <td>
                 <a href="{%url 'accred' team.id %}">Accreditation</a>

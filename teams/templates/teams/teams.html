@@ -26,8 +26,9 @@
               <th>Gender</th>
               <th>Athletes</th>
               <th>Album</th>
+              <th>edit</th>
               {% if user.is_staff %}
-              <th>Accred</th>
+              <th>acc</th>
 
               <th>Delete</th>
             </tr>
@@ -42,8 +43,9 @@
               <td>{{team.sport}}</td>
               <td>{{team.gender}}</td>
               <td>{{team.athletes.count}} athletes</td>
+              <td><a href="{%url 'updategteam' team.id%}">edit</a></td>
 
-              <td><a href="{%url 'dalbum' team.id %}"> Album</a></td>
+              <td><a href="{% url 'sdalbum' team.id %}"> Album</a></td>
               {% if user.is_staff %}
               <td>
                 <a href="{%url 'accred' team.id %}">Accreditation</a>

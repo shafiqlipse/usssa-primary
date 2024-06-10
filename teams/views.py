@@ -8,18 +8,22 @@ from django.contrib import messages
 # Create your views here.
 
 
+@school_required
 def get_athletes(request):
     # Get the school associated with the logged-in user
-    school_id = get_object_or_404(School, user=request.user)
+    school = get_object_or_404(School, user=request.user)
+    school_id = school.id
 
     sport_id = request.GET.get("sport_id")
     gender = request.GET.get("gender")
     age_id = request.GET.get("age_id")
 
     # Start with the base queryset for athletes in the user's school
-    athletes = Athlete.objects.filter(school=school_id, sport=sport_id)
+    athletes = Athlete.objects.filter(school_id=school_id)
 
     # Apply additional filters for sport, gender, and age if provided
+    if sport_id:
+        athletes = athletes.filter(sport_id=sport_id)
 
     if gender:
         athletes = athletes.filter(gender=gender)
@@ -28,12 +32,17 @@ def get_athletes(request):
         athletes = athletes.filter(age_id=age_id)
 
     # Retrieve only the necessary fields
-    athletes = athletes.values("id", "fname")
+    athletes = athletes.values("id", "name")
 
-    # Wrap the athletes array in a JSON object with a 'athletes' property
+    # Wrap the athletes array in a JSON object with an 'athletes' property
     data = {"athletes": list(athletes)}
 
+    
+
     return JsonResponse(data)
+
+
+
 
 
 def create_team(request):
@@ -46,9 +55,6 @@ def create_team(request):
             school_instance = get_object_or_404(School, user=request.user)
             # Assign the school instance to the team
             team.school = school_instance
-            team.save()
-            athletes = form.cleaned_data.get("athletes")
-            team.athletes.set(athletes)
             team.save()
 
             return redirect("team_s")
@@ -66,7 +72,7 @@ def create_team(request):
 
 # @school_required
 def update_team(request, id):
-    team = get_object_or_404(SchoolTeam, pk=id)
+    team = get_object_or_404(SchoolTeam, id=id)
 
     if request.method == "POST":
         form = SchoolTeamForm(request.POST, instance=team)
@@ -76,7 +82,7 @@ def update_team(request, id):
     else:
         form = SchoolTeamForm(instance=team)
 
-    return render(request, "teams/newteam.html", {"form": form, "team": team})
+    return render(request, "teams/update_team.html", {"form": form, "team": team})
 
 
 # # view team details
@@ -84,7 +90,6 @@ def update_team(request, id):
 
 def team_details(request, id):
     team = SchoolTeam.objects.get(id=id)
-
     athletes = team.athletes.all()
     context = {"team": team, "athletes": athletes}
     return render(request, "teams/team.html", context)

@@ -43,7 +43,7 @@ urlpatterns = [
     path("newtofficer/<int:id>", tofficer_details, name="toff"),
     path("deloff/<int:id>", delloff, name="deloff"),
     # path("pdfreport/<int:id>", generate_scalbum, name="pdreport"),
-    path("get_athletes/", get_athletes, name="get_athletes"),
+    # path("get_athletes/", get_athletes, name="get_athletes"),
     # path("album/", album, name="album"),
     path("select2/", include("django_select2.urls")),
     path("calculate_age_choices/", calculate_age_choices, name="calculate_age_choices"),
