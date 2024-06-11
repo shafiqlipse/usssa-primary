@@ -32,7 +32,7 @@ class Teacher(models.Model):
         max_length=40,
         choices=[
             ("HeadTeacher", "HeadTeacher"),
-            ("Assistant HeadTeacher", "Assistant HeadTeacher"),
+            ("Deputy HeadTeacher", "Deputy HeadTeacher"),
         ],
     )
 
