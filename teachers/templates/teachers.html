@@ -1,0 +1,55 @@
+{% extends "dashboard/dashboard.html" %}
+
+<!--static-->
+{% block title %}Officials{% endblock %}
+<!--static-->
+{% load static %}
+<!--khfufufu-->
+{% block content %}
+<div class="schools-dew">
+  <div class="head flex">
+    <h1>ASSHU</h1>
+    <a href="{% url 'teccred'%}" class="btn-submit">Accreditation</a>
+  </div>
+
+    
+   
+    <div class="filterlist glue">
+      <div class="official-list">
+        <table id="myTable" class="display">
+          <thead>
+            <tr>
+              <th>Names</th>
+              <th>School</th>
+              <th>Designation</th>
+              <th>contact</th>
+             
+              <th>Gender</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for official in teachers%}
+            <tr>
+              <td>
+                <a href="{% url 'toff' official.id%}"
+                  >{{official.first_name}} {{official.last_name}}</a
+                >
+              </td>
+              <td>{{official.school}}</td>
+              <td>{{official.designation}}</td>
+              <td>{{official.contact}}</td>
+              
+              <td>{{official.gender}}</td>
+              <td><a href="{%url 'deloff' official.id%}">delete</a></td>
+            </tr>
+  
+            {%endfor%}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+
+</div>
+{% endblock %}

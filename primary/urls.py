@@ -24,6 +24,7 @@ urlpatterns = [
     path("officeria/", Officerdash, name="officer_dashboard"),
     path("dashboard/", include("dashboard.urls")),
     path("team/", include("teams.urls")),
+    path("teachers/", include("teachers.urls")),
     path("get_athletes/", get_athletes, name="get_athletes"),
     # path("enrollment/", include("registration.urls")),
     # email
