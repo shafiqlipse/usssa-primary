@@ -146,34 +146,34 @@ from django.contrib import messages
 from django.http import JsonResponse
 
 
-def get_athletes(request):
-    # Get the school associated with the logged-in user
-    user = request.user
-    officer = user.officer
-    district = officer.district
+# def get_athletes(request):
+#     # Get the school associated with the logged-in user
+#     user = request.user
+#     officer = user.officer
+#     district = officer.district
 
-    # Get all schools within the district
-    schools = district.school_set.all()
+#     # Get all schools within the district
+#     schools = district.school_set.all()
 
-    sport_id = request.GET.get("team_sport_id")
-    gender = request.GET.get("team_gender")
+#     sport_id = request.GET.get("team_sport_id")
+#     gender = request.GET.get("team_gender")
 
-    # Start with the base queryset for athletes in schools within the district
-    athletes = Athlete.objects.filter(school__in=schools)
+#     # Start with the base queryset for athletes in schools within the district
+#     athletes = Athlete.objects.filter(school__in=schools)
 
-    # Apply additional filters for sport, gender, and age if provided
-    if sport_id:
-        athletes = athletes.filter(sport=sport_id)
-    if gender:
-        athletes = athletes.filter(gender=gender)
+#     # Apply additional filters for sport, gender, and age if provided
+#     if sport_id:
+#         athletes = athletes.filter(sport=sport_id)
+#     if gender:
+#         athletes = athletes.filter(gender=gender)
 
-    # Retrieve only the necessary fields
-    athletes = athletes.values("id", "name")
+#     # Retrieve only the necessary fields
+#     athletes = athletes.values("id", "name")
 
-    # Wrap the athletes array in a JSON object with an 'athletes' property
-    data = {"athletes": list(athletes)}
+#     # Wrap the athletes array in a JSON object with an 'athletes' property
+#     data = {"athletes": list(athletes)}
 
-    return JsonResponse(data)
+#     return JsonResponse(data)
 
 
 from django.views import View
@@ -404,30 +404,30 @@ def cert(request, id):
     return response
 
 
-def get_athletes(request):
-    # Get the school associated with the logged-in user
+# def get_athletes(request):
+#     # Get the school associated with the logged-in user
 
-    # sport_id = request.GET.get("team_sport_id")
-    # team_gender = request.GET.get("team_gender")
-    # age_id = request.GET.get("team_age_id")
+#     # sport_id = request.GET.get("team_sport_id")
+#     # team_gender = request.GET.get("team_gender")
+#     # age_id = request.GET.get("team_age_id")
 
-    # Start with the base queryset for athletes in the user's school
-    athletes = Athlete.objects.all()
-    # Apply additional filters for sport, gender, and age if provided
+#     # Start with the base queryset for athletes in the user's school
+#     athletes = Athlete.objects.all()
+#     # Apply additional filters for sport, gender, and age if provided
 
-    # if team_gender:
-    #     athletes = athletes.filter(gender=team_gender)
+#     # if team_gender:
+#     #     athletes = athletes.filter(gender=team_gender)
 
-    # if age_id:
-    #     athletes = athletes.filter(age_id=age_id)
+#     # if age_id:
+#     #     athletes = athletes.filter(age_id=age_id)
 
-    # Retrieve only the necessary fields
-    athletes = athletes.values("id", "fname")
+#     # Retrieve only the necessary fields
+#     athletes = athletes.values("id", "fname")
 
-    # Wrap the athletes array in a JSON object with a 'athletes' property
-    data = {"athletes": list(athletes)}
+#     # Wrap the athletes array in a JSON object with a 'athletes' property
+#     data = {"athletes": list(athletes)}
 
-    return JsonResponse(data)
+#     return JsonResponse(data)
 
 
 def taccreditation(request, id):

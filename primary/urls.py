@@ -6,6 +6,7 @@ from django.contrib.auth import views as auth_views
 from dashboard.views import *
 from accounts.views import *
 from core.views import *
+from teams.teviews import get_athletes
 
 urlpatterns = [
     path("admin/", admin.site.urls),

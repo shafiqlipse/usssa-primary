@@ -12,8 +12,8 @@ class SchoolTeam(models.Model):
     championship = models.ForeignKey(Tournament, on_delete=models.CASCADE, null=True)
     age = models.ForeignKey(Age, on_delete=models.CASCADE, null=True)
     gender = models.CharField(
-        max_length=1,
-        choices=[("M", "Male"), ("F", "Female")],
+        max_length=10,
+        choices=[("Male", "male"), ("Female", "female")],
     )
     status = models.CharField(
         max_length=10,
