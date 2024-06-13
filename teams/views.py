@@ -72,6 +72,15 @@ def teamlist(request):
     return render(request, "teams/teams.html", context)
 
 
+def allteamlist(request):
+  
+
+    teams = SchoolTeam.objects.all()
+
+    context = {"teams": teams}
+    return render(request, "teams/all_teams.html", context)
+
+
 # # delete team
 @school_required
 def delete_team(request, id):

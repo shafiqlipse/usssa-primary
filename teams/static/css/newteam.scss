@@ -1,0 +1,75 @@
+.teaming {
+  background-color: rgb(228, 228, 228);
+  padding: 20px;
+  .formiks {
+    padding: 20px;
+    .fields {
+      align-items: flex-start;
+      justify-content: flex-start;
+
+      @media (max-width: 800px) {
+        flex-direction: column;
+      }
+      .left {
+        width: 50%;
+
+        @media (max-width: 700px) {
+          margin: 0;
+          width: 100%;
+        }
+        .field {
+          flex-direction: column;
+          text-align: left;
+          align-items: flex-start;
+          input,
+          select {
+            width: 100%;
+            padding: 5px 10px;
+            margin-bottom: 20px;
+            outline: none;
+            border: solid 1px rgb(0, 102, 255);
+          }
+          label {
+            font-weight: bold;
+            font-size: 17px;
+          }
+        }
+      }
+      .other-fields {
+        margin-left: 100px;
+        padding: 20px;
+        width: 50%;
+        @media (max-width: 800px) {
+          margin-left: 20px;
+        }
+        @media (max-width: 700px) {
+          margin: 0;
+          width: 100%;
+        }
+        .field {
+          width: 100%;
+          flex-direction: column;
+          text-align: left;
+          align-items: flex-start;
+          .form-control {
+            width: 100%;
+            padding: 5px 10px;
+            margin-bottom: 20px;
+            outline: none;
+
+            div {
+              input {
+                width: 20px;
+                padding: 5px;
+                border: solid 1px rgb(0, 102, 255);
+              }
+              label {
+                text-transform: uppercase;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

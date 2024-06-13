@@ -60,6 +60,7 @@
     <link rel="stylesheet" href="{% static 'css/dashboard/schoolist.css'%}" />
     <link rel="stylesheet" href="{% static 'css/css/all.min.css'%}" />
     <link rel="stylesheet" href="{% static 'css/app.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/newteam.css'%}" />
     <link rel="stylesheet" href="{% static 'css/profile/school_new.css'%}" />
     <link rel="stylesheet" href="{% static 'css/thanks/officer.css'%}" />
     <link rel="stylesheet" href="{% static 'css/profile/athlete.css'%}" />
@@ -200,6 +201,18 @@
               </div>
 
               <span class="nav-link-text ms-1">Athletes</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link text-white" href="{%url 'allteam_s'%}">
+              <div
+                class="text-white text-center me-2 d-flex align-items-center justify-content-center"
+              >
+                <i class="material-icons opacity-10">notifications</i>
+              </div>
+
+              <span class="nav-link-text ms-1">School Teams</span>
             </a>
           </li>
 
@@ -345,19 +358,14 @@
             class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4"
             id="navbar"
           >
-            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-              <div class="input-group input-group-outline">
-                <label class="form-label">Type here...</label>
-                <input type="text" class="form-control" />
-              </div>
-            </div>
-            <ul class="navbar-nav justify-content-end">
+          
+            <ul class="navbar-nav justify-content-start">
               <li class="nav-item d-flex align-items-center">
                 <a
                   class="btn btn-outline-primary btn-sm mb-0 me-3"
                   target="_blank"
                   href="https://www.creative-tim.com/builder?ref=navbar-material-dashboard"
-                  >{{user.school_profile.school_name}}</a
+                  >UPSSA</a
                 >
               </li>
            
