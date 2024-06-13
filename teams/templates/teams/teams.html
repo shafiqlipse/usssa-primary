@@ -45,7 +45,13 @@
               <td>{{team.athletes.count}} athletes</td>
               <td><a href="{%url 'updategteam' team.id%}">edit</a></td>
 
-              <td><a href="{% url 'sdalbum' team.id %}"> Album</a></td>
+              <td>
+                {% if team.status == Active %}<a
+                  href="{% url 'sdalbum' team.id %}"
+                >
+                  Album</a
+                >{% else %}PAY TO ACTIVATE {% endif %}
+              </td>
               {% if user.is_staff %}
               <td>
                 <a href="{%url 'accred' team.id %}">Accreditation</a>

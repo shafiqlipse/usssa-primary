@@ -40,8 +40,8 @@
               <td>
                 <a href="{%url 'steam' team.id%}">{{team.school}} </a>
               </td>
-              <td>{{team.sport}}</td>
-              <td>{{team.gender}}</td>
+              <td>{{team.championship}} | {{team.sport}}</td>
+              <td>{{team.age}} {{team.gender}}</td>
               <td>{{team.athletes.count}} athletes</td>
               <td>
                 {% if team.status == "Inactive" %}
