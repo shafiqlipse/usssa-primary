@@ -21,12 +21,12 @@
         <table id="myTable" class="display">
           <thead>
             <tr>
-              <th>District</th>
-              <th>Sport</th>
-              <th>Gender</th>
-              <th>Athletes</th>
-              <th>Album</th>
-              <th>edit</th>
+              <th>TEAM</th>
+              <th>SPORT</th>
+              <th>GENDER</th>
+              <th>ATHLETES</th>
+              <th>ACTIONS</th>
+              <th>ALBUM</th>
               {% if user.is_staff %}
               <th>acc</th>
 
@@ -40,7 +40,7 @@
               <td>
                 <a href="{%url 'steam' team.id%}">{{team.school}} </a>
               </td>
-              <td>{{team.sport}}</td>
+              <td>{{team.championship}} | {{team.sport}}</td>
               <td>{{team.gender}}</td>
               <td>{{team.athletes.count}} athletes</td>
               <td><a href="{%url 'updategteam' team.id%}">edit</a></td>
