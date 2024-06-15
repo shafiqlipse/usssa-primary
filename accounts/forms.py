@@ -198,3 +198,25 @@ class NewAthleteForm(forms.ModelForm):
 #     tournament = forms.ModelChoiceField(
 #         queryset=Tournament.objects.all(), empty_label="Select a competition"
 #     )
+
+
+class UpdateAthleteForm(forms.ModelForm):
+    class Meta:
+        model = Athlete
+        fields = [
+            "fname",
+            "mname",
+            "lname",
+            "sport",
+            "gender",
+            "classroom",
+            "photo",
+            "Parent_fname",
+            "Parent_lname",
+            "parent_phone_number",
+            "parent_nin",
+            "address",
+            "relationship",
+            "designation",
+           
+        ]

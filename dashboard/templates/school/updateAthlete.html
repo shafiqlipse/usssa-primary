@@ -1,0 +1,124 @@
+{% extends "dashboard/dashboard.html" %}
+<!---->
+{% load static %} {% block content %}
+<div class="profileupdate">
+  <h1>Add Athlete</h1>
+  <form
+    action=""
+    method="POST"
+    class="form-ctrl glue"
+    enctype="multipart/form-data"
+  >
+    {% csrf_token %}
+    <div class="fields grid2">
+      <div class="left">
+        <h2>Athlete Info</h2>
+        <div class="field">
+          <label>{{ form.photo.label }}</label>
+          {% if form.instance.photo %}
+          <img
+            src="{{ form.instance.photo.url }}"
+            id="image-preview"
+            alt="Current Photo"
+          />
+          {% else %}
+          <img
+            src="{% static 'images/profile.png' %}"
+            id="image-preview"
+            alt="No Photo"
+          />
+          {% endif %}
+        </div>
+        <div class="field">
+          <input
+            type="file"
+            name="photo"
+            accept="image/*"
+            onchange="displayImage(this);"
+            id="id_photo"
+          />
+        </div>
+      </div>
+
+      <div class="left">
+        <div class="field-grid grid2">
+          <div class="field"><label>First Name</label>{{ form.fname }}</div>
+          <div class="field"><label>Middle Name</label>{{ form.mname }}</div>
+        </div>
+        <div class="field-grid grid2">
+          <div class="field"><label>Last Name</label>{{ form.lname }}</div>
+          <div class="field">
+            <label>LIN</label>
+            <input type="text" value="{{ form.instance.lin }}" readonly />
+            <input type="hidden" name="lin" value="{{ form.instance.lin }}" />
+          </div>
+        </div>
+        <div class="field-grid grid2">
+          <div class="field"><label>Sport</label>{{ form.sport }}</div>
+          <div class="field"><label>Gender</label>{{ form.gender }}</div>
+        </div>
+        <div class="field-grid grid2">
+          <div class="field"><label>Class</label>{{ form.classroom }}</div>
+          <div class="field">
+            <label for="date_of_birth">Date of Birth:</label>
+            <input
+              type="text"
+              value="{{ form.instance.date_of_birth }}"
+              readonly
+            />
+            <input
+              type="hidden"
+              name="date_of_birth"
+              value="{{ form.instance.date_of_birth }}"
+            />
+          </div>
+          <div class="field flex">
+            <label for="id_age">Age:</label>
+            <input type="text" value="{{ form.instance.age }}" readonly />
+            <input type="hidden" name="age" value="{{ form.instance.age }}" />
+          </div>
+        </div>
+        <h2>Parent/ Guardian Info</h2>
+        <div class="field-grid grid2">
+          <div class="field">
+            <label>Parent's First name</label>{{ form.Parent_fname }}
+          </div>
+          <div class="field">
+            <label>Parent's Last name</label>{{ form.Parent_lname }}
+          </div>
+        </div>
+        <div class="field-grid grid2">
+          <div class="field">
+            <label>Parent's NIN</label>{{ form.parent_nin }}
+          </div>
+          <div class="field">
+            <label>Parent's contact</label>{{ form.parent_phone_number }}
+          </div>
+        </div>
+        <div class="field-grid grid2">
+          <div class="field"><label>Address</label>{{ form.address }}</div>
+          <div class="field">
+            <label>Designation</label>{{ form.designation }}
+          </div>
+        </div>
+        <div class="field-grid grid2">
+          <div class="field">
+            <label>Relationship</label>{{ form.relationship }}
+          </div>
+        </div>
+        <button type="submit" class="btn-submit">Save athlete</button>
+      </div>
+    </div>
+  </form>
+
+  {% if form.errors %}
+  <div class="form-errors">
+    <ul>
+      {% for field, errors in form.errors.items %} {% for error in errors %}
+      <li>{{ field }}: {{ error }}</li>
+      {% endfor %} {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

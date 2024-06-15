@@ -69,7 +69,7 @@ def users(request):
 
 
 # schools list, tuple or array
-#@staff_required
+# @staff_required
 def schools(request):
 
     schools = School.objects.all()
@@ -564,20 +564,25 @@ def school_offs(request):
     return render(request, "school/officials.html", context)
 
 
-@staff_required
 def AthleteUpdate(request, id):
-    band = Athlete.objects.get(id=id)
+    athlete = get_object_or_404(Athlete, id=id)
 
     if request.method == "POST":
-        form = NewAthleteForm(request.POST, instance=band)
+        form = UpdateAthleteForm(request.POST, request.FILES, instance=athlete)
         if form.is_valid():
             form.save()
-
+            messages.success(request, "Athlete information updated successfully!")
             return redirect("athletes")
+        else:
+            messages.error(request, "Please correct the errors below.")
     else:
-        form = NewAthleteForm(instance=band)
-    context = {"form": form}
-    return render(request, "school/newAthlete.html", context)
+        form = UpdateAthleteForm(instance=athlete)
+
+    context = {
+        "form": form,
+        "athlete": athlete,
+    }
+    return render(request, "school/updateAthlete.html", context)
 
 
 # # Athletes details......................................................
