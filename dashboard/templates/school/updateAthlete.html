@@ -47,37 +47,13 @@
         </div>
         <div class="field-grid grid2">
           <div class="field"><label>Last Name</label>{{ form.lname }}</div>
-          <div class="field">
-            <label>LIN</label>
-            <input type="text" value="{{ form.instance.lin }}" readonly />
-            <input type="hidden" name="lin" value="{{ form.instance.lin }}" />
-          </div>
+          <div class="field"><label>Class</label>{{ form.classroom }}</div>
         </div>
         <div class="field-grid grid2">
           <div class="field"><label>Sport</label>{{ form.sport }}</div>
           <div class="field"><label>Gender</label>{{ form.gender }}</div>
         </div>
-        <div class="field-grid grid2">
-          <div class="field"><label>Class</label>{{ form.classroom }}</div>
-          <div class="field">
-            <label for="date_of_birth">Date of Birth:</label>
-            <input
-              type="text"
-              value="{{ form.instance.date_of_birth }}"
-              readonly
-            />
-            <input
-              type="hidden"
-              name="date_of_birth"
-              value="{{ form.instance.date_of_birth }}"
-            />
-          </div>
-          <div class="field flex">
-            <label for="id_age">Age:</label>
-            <input type="text" value="{{ form.instance.age }}" readonly />
-            <input type="hidden" name="age" value="{{ form.instance.age }}" />
-          </div>
-        </div>
+
         <h2>Parent/ Guardian Info</h2>
         <div class="field-grid grid2">
           <div class="field">
