@@ -6,7 +6,6 @@
 <!--  -->
 {%block content%}
 <div class="team-page">
-  <a href="{% url 'sdalbum' team.id %}"> Album</a>
   <div class="filterlist glue">
     <div class="lo">
       <div class="official-list">
@@ -17,7 +16,7 @@
               <th>Sport</th>
               <th>Gender</th>
               <th>Age</th>
-             
+
               {% if user.is_staff %}
               <th>Accred</th>
 
@@ -37,7 +36,6 @@
               <td>{{athlete.gender}}</td>
               <td>{{athlete.age}}</td>
 
-            
               {% if user.is_staff %}
               <td>
                 <a href="{%url 'accred' team.id %}">Accreditation</a>
