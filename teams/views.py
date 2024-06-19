@@ -84,11 +84,11 @@ def allteamlist(request):
 # # delete team
 @school_required
 def delete_team(request, id):
-    team = get_object_or_404(SchoolTeam, pk=id)
+    team = get_object_or_404(SchoolTeam, id=id)
 
     if request.method == "POST":
         team.delete()
-        return redirect("teams")  # Redirect to the team list page or another URL
+        return redirect("team_s")  # Redirect to the team list page or another URL
 
     return render(request, "teams/delete_team.html", {"team": team})
 
