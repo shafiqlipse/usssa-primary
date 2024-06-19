@@ -11,14 +11,12 @@ def get_athletes(request):
     user = request.user
     school = get_object_or_404(School, user=user)
 
-    sport_id = request.GET.get("sport_id")
+    
     gender = request.GET.get("gender")
     age_id = request.GET.get("age_id")
 
     athletes = Athlete.objects.filter(school=school)
 
-    if sport_id:
-        athletes = athletes.filter(sport_id=sport_id)
 
     if gender:
         athletes = athletes.filter(gender=gender)

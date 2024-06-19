@@ -1,5 +1,5 @@
 function get_athletes() {
-  var sport_select = document.getElementById("id_sport");
+  // var sport_select = document.getElementById("id_sport");
   var gender_select = document.getElementById("id_gender");
   var age_select = document.getElementById("id_age");
   var athlete_select = document.getElementById("id_athletes");
@@ -10,12 +10,12 @@ function get_athletes() {
   //   official_select.innerHTML = "<p>Loading officials...</p>";
 
   // Fetch athletes for the selected sport, gender, and age using AJAX
-  var sport_id = sport_select.value;
+  // var sport_id = sport_select.value/;
   var gender = gender_select.value;
   var age_id = age_select.value;
 
   // Fetch athletes
-  fetch(`/get_athletes/?sport_id=${sport_id}&gender=${gender}&age_id=${age_id}`)
+  fetch(`/get_athletes/?gender=${gender}&age_id=${age_id}`)
     .then((response) => response.json())
     .then((data) => {
       // Hide the loading indicator for athletes
@@ -51,7 +51,7 @@ function get_athletes() {
 }
 
 // Attach the get_athletes function to the onchange events of the sport, gender, and age elements
-document.getElementById("id_sport").onchange = get_athletes;
+// document.getElementById("id_sport").onchange = get_athletes;
 document.getElementById("id_gender").onchange = get_athletes;
 document.getElementById("id_age").onchange = get_athletes;
 
