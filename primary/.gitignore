@@ -1,5 +1,6 @@
 settings.py
-*/migrations/
+**/migrations/*
+!/migrations/__init__.py
 /athlete_photos
 /champImages
 /badge
