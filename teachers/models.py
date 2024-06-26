@@ -31,6 +31,7 @@ class Teacher(models.Model):
     designation = models.CharField(
         max_length=40,
         choices=[
+            ("Principal", "Principal"),
             ("HeadTeacher", "HeadTeacher"),
             ("Deputy HeadTeacher", "Deputy HeadTeacher"),
         ],
