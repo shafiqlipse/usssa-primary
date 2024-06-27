@@ -27,21 +27,24 @@
         }
       }
       .header .athletes table tbody tr td table tr .td {
-        padding-top: 125px;
+        padding-top: 105px;
         padding-bottom: 40px;
         padding-left: 70px;
         padding-right: 60px;
         margin: 0;
       }
       .header .athletes table tbody tr td table tr .td .inner {
-        width: 220px;
+        width: 250px;
         text-align: center;
 
         text-transform: uppercase;
       }
       .header .athletes table tbody tr td table tr .td .inner img {
-        width: 150px;
-        height: 150px;
+        width: 180px;
+        height: 210px;
+      }
+      .header .athletes table tbody tr td table tr .td .inner span {
+        font-size: 15px;
       }
     </style>
     <div class="header">
@@ -83,7 +86,7 @@
                         <br />
                         <span>{{ athlete.designation|upper }}</span><br />
                         <span>{{ athlete.school|upper }}</span><br />
-                        <span>{{ district|upper }}</span><br />
+                        <span>{{ athlete.district|upper }}</span><br />
                       </div>
                     </td>
                   </tr>

@@ -49,31 +49,57 @@ def Teachers(request):
     return render(request, "teachers.html", context)
 
 
+from django.http import HttpResponse
+from django.template.loader import get_template
+from xhtml2pdf import pisa
+from io import BytesIO
+from PyPDF2 import PdfReader, PdfWriter
+import math
+import zipfile
+
+
 def teccreditation(request):
-
     teachers = Teacher.objects.all()
-
-    # Get template
     template = get_template("acred.html")
-
-    # Compress school photo
-
-    # Prepare context
-    context = {
-        "teachers": teachers,
-    }
-
-    # Render HTML
+    context = {"teachers": teachers}
     html = template.render(context)
 
-    # Create a PDF
-    response = HttpResponse(content_type="application/pdf")
-    response["Content-Disposition"] = 'attachment; filename="Accreditation.pdf"'
+    # Create a PDF in memory
+    pdf_buffer = BytesIO()
+    pisa_status = pisa.CreatePDF(html, dest=pdf_buffer)
 
-    # Generate PDF from HTML
-    pisa_status = pisa.CreatePDF(html, dest=response)
     if pisa_status.err:
         return HttpResponse("We had some errors <pre>" + html + "</pre>")
+
+    pdf_buffer.seek(0)
+
+    # Split the PDF into segments
+    reader = PdfReader(pdf_buffer)
+    total_pages = len(reader.pages)
+    pages_per_segment = 500  # Adjust this value as needed
+    num_segments = math.ceil(total_pages / pages_per_segment)
+
+    response = HttpResponse(content_type="application/zip")
+    response["Content-Disposition"] = (
+        'attachment; filename="Accreditation_Segments.zip"'
+    )
+
+    with zipfile.ZipFile(response, "w") as zip_file:
+        for i in range(num_segments):
+            start_page = i * pages_per_segment
+            end_page = min((i + 1) * pages_per_segment, total_pages)
+
+            writer = PdfWriter()
+            for page_num in range(start_page, end_page):
+                writer.add_page(reader.pages[page_num])
+
+            segment_buffer = BytesIO()
+            writer.write(segment_buffer)
+            segment_buffer.seek(0)
+
+            zip_file.writestr(
+                f"Accreditation_Segment_{i+1}.pdf", segment_buffer.getvalue()
+            )
 
     return response
 
