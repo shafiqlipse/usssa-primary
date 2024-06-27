@@ -9,9 +9,20 @@
 <div class="schools-dew">
   <div class="head flex">
     <h1>ASSHU</h1>
-    <a href="{% url 'teccred'%}" class="btn-submit">Accreditation</a>
+    {% comment %} <a href="{% url 'teccred'%}" class="btn-submit">Accreditation</a> {% endcomment %}
   </div>
+  <h2>Filter Teachers</h2>
+  <form method="get">
+    {{ filter.form.as_p }}
+    <button type="submit">Apply Filter</button>
+  </form>
 
+ 
+
+  <form method="post">
+    {% csrf_token %}
+    <input type="submit" value="Generate PDF" />
+  </form>
   <div class="filterlist glue">
     <div class="official-list">
       <table id="myTable" class="display">
@@ -27,7 +38,7 @@
           </tr>
         </thead>
         <tbody>
-          {% for teacher in teachers%}
+          {% for teacher in filter.qs %}
           <tr>
             <td>
               <a href="{% url 'teacher' teacher.id%}"

@@ -43,10 +43,10 @@ def Teachera(request):
     return render(request, "teacher_new.html", context)
 
 
-def Teachers(request):
-    teachers = Teacher.objects.all()
-    context = {"teachers": teachers}
-    return render(request, "teachers.html", context)
+# def (request):
+#     teachers = Teacher.objects.all()
+#     context = {"teachers": teachers}
+#     return render(request, "teachers.html", context)
 
 
 from django.http import HttpResponse
@@ -57,34 +57,42 @@ from PyPDF2 import PdfReader, PdfWriter
 import math
 import zipfile
 
+from .filters import TeacherFilter  # Assume you have created this filter
 
-def teccreditation(request):
 
+def Teachers(request):
+    # Get all teachers
     teachers = Teacher.objects.all()
 
-    # Get template
-    template = get_template("acred.html")
+    # Apply the filter
+    teacher_filter = TeacherFilter(request.GET, queryset=teachers)
+    filtered_teachers = teacher_filter.qs
 
-    # Compress school photo
+    if request.method == "POST":
+        # Generate PDF
+        template = get_template("acred.html")
+        context = {"teachers": filtered_teachers}
+        html = template.render(context)
 
-    # Prepare context
-    context = {
-        "teachers": teachers,
-    }
+        # Create a PDF
+        pdf_buffer = BytesIO()
+        pisa_status = pisa.CreatePDF(html, dest=pdf_buffer)
 
-    # Render HTML
-    html = template.render(context)
+        if pisa_status.err:
+            return HttpResponse("We had some errors <pre>" + html + "</pre>")
 
-    # Create a PDF
-    response = HttpResponse(content_type="application/pdf")
-    response["Content-Disposition"] = 'attachment; filename="Accreditation.pdf"'
+        pdf_buffer.seek(0)
 
-    # Generate PDF from HTML
-    pisa_status = pisa.CreatePDF(html, dest=response)
-    if pisa_status.err:
-        return HttpResponse("We had some errors <pre>" + html + "</pre>")
-
-    return response
+        # Return the PDF as a response
+        response = HttpResponse(content_type="application/pdf")
+        response["Content-Disposition"] = (
+            'attachment; filename="Filtered_Accreditation.pdf"'
+        )
+        response.write(pdf_buffer.getvalue())
+        return response
+    else:
+        # Render the filter form
+        return render(request, "teachers.html", {"filter": teacher_filter})
 
 
 def teacher_details(request, id):
