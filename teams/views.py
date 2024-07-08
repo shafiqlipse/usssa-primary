@@ -73,7 +73,6 @@ def teamlist(request):
 
 
 def allteamlist(request):
-  
 
     teams = SchoolTeam.objects.all()
 
@@ -107,6 +106,45 @@ from django.template.loader import get_template
 from xhtml2pdf import pisa
 from PIL import Image
 from io import BytesIO
+from PIL import Image, ExifTags
+import io
+import base64
+from django.conf import settings
+from django.http import HttpResponse
+from django.template.loader import get_template
+from django.core.files.storage import default_storage
+from xhtml2pdf import pisa
+from .models import SchoolTeam  # Make sure to import your models
+
+
+def teamAccreditation(request, id):
+    team = SchoolTeam.objects.get(id=id)
+    athletes = team.athletes.all()
+
+    # Get template
+    template = get_template("albums/acred.html")
+
+    # Compress and fix rotation for athletes' photos
+
+    # Prepare context
+    context = {
+        "athletes": athletes,
+        "MEDIA_URL": settings.MEDIA_URL,
+    }
+
+    # Render HTML
+    html = template.render(context)
+
+    # Create a PDF
+    response = HttpResponse(content_type="application/pdf")
+    response["Content-Disposition"] = 'attachment; filename="Accreditation.pdf"'
+
+    # Generate PDF from HTML
+    pisa_status = pisa.CreatePDF(html, dest=response)
+    if pisa_status.err:
+        return HttpResponse("We had some errors <pre>" + html + "</pre>")
+
+    return response
 
 
 def compress_image(image_data, quality=85):
@@ -152,6 +190,47 @@ def generate_sdalbum(request, id):
     # Create a PDF
     response = HttpResponse(content_type="application/pdf")
     response["Content-Disposition"] = 'attachment; filename="District Album.pdf"'
+
+    # Generate PDF from HTML
+    pisa_status = pisa.CreatePDF(html, dest=response)
+    if pisa_status.err:
+        return HttpResponse("We had some errors <pre>" + html + "</pre>")
+
+    return response
+
+
+def TeamCert(request, id):
+
+    team = SchoolTeam.objects.get(id=id)
+    athletes = team.athletes.all()
+
+    # Get template
+    template = get_template("school/cert.html")
+
+    # Compress school photo
+
+    # Compress athletes' photos
+    for athlete in athletes:
+        if athlete.photo:
+            with default_storage.open(athlete.photo.path, "rb") as image_file:
+                athlete_photo_data = image_file.read()
+            compressed_athlete_photo_data = compress_image(athlete_photo_data)
+            athlete.photo_base64 = base64.b64encode(
+                compressed_athlete_photo_data
+            ).decode("utf-8")
+
+    # Prepare context
+    context = {
+        "athletes": athletes,
+        "MEDIA_URL": settings.MEDIA_URL,
+    }
+
+    # Render HTML
+    html = template.render(context)
+
+    # Create a PDF
+    response = HttpResponse(content_type="application/pdf")
+    response["Content-Disposition"] = 'attachment; filename="Certificate.pdf"'
 
     # Generate PDF from HTML
     pisa_status = pisa.CreatePDF(html, dest=response)

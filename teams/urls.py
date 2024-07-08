@@ -15,5 +15,7 @@ urlpatterns = [
     path("activate_team/<int:id>", activate_team, name="activate_team"),
     path("deactivate_team/<int:id>", deactivate_team, name="deactivate_team"),
     path("sdalbum/<int:id>", generate_sdalbum, name="sdalbum"),
+    path("team_accred/<int:id>", teamAccreditation, name="team_accred"),
+    path("team_cert/<int:id>", TeamCert, name="team_cert"),
     path("deleteteam/<int:id>", delete_team, name="delete_team"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

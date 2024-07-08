@@ -27,31 +27,28 @@
         }
       }
       .header .athletes table tbody tr td table tr .td {
-        padding-top: 105px;
+        padding-top: 125px;
         padding-bottom: 40px;
-        padding-left: 50px;
-        padding-right: 30px;
+        padding-left: 80px;
+        padding-right: 50px;
         margin: 0;
       }
       .header .athletes table tbody tr td table tr .td .inner {
-        width: 350px;
+        width: 220px;
         text-align: center;
+
         text-transform: uppercase;
       }
       .header .athletes table tbody tr td table tr .td .inner img {
-        width: 160px;
-        height: 180px;
-        image-orientation: from-image;
-        transform: rotate(0deg);
-      }
-      .header .athletes table tbody tr td table tr .td .inner span {
+        width: 150px;
+        height: 150px;
       }
     </style>
     <div class="header">
       <div class="athletes">
         <table>
           <tbody>
-            {% for athlete in teachers %}
+            {% for athlete in athletes %}
             <!---->
             {% if forloop.counter0|divisibleby:2 %}
             <!-- Start a new row for every even-numbered athlete -->
@@ -63,30 +60,29 @@
                     <td class="td">
                       <div class="inner">
                         <span
-                          >{{ athlete.contact|upper}}
-                          ({{athlete.gender|upper}})</span
+                          >{{ athlete.lin|upper }} ({{athlete.gender}})</span
                         >
                         <br />
                         {% if athlete.photo %}
                         <img
                           src="{{ athlete.photo.path }}"
-                          alt="{{ athlete.first_name }}"
+                          alt="{{ athlete.fname }}"
                         />
                         {% else %}
                         <img
                           src="{% static 'images/profile.png' %}"
-                          alt="{{ athlete.last_name }}"
+                          alt="{{ athlete.fname }}"
                         />
                         {% endif %}
                         <br />
                         <span
-                          >{{ athlete.first_name|upper }}
-                          {{athlete.last_name|upper }}
-                        </span>
+                          >{{ athlete.fname|upper }} {{ athlete.lname|upper  }}</span>
+                        
+                        
                         <br />
-                        <span>{{ athlete.designation|upper }}</span><br />
                         <span>{{ athlete.school|upper }}</span><br />
-                        <span>{{ athlete.district|upper }}</span><br />
+
+                        <span>{{ athlete.sport|upper }}({{athlete.age}})</span>
                       </div>
                     </td>
                   </tr>
