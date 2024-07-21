@@ -1,0 +1,67 @@
+<html lang="en">
+  {% load static %}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>certificate</title>
+    <style>
+      @page {
+        size: A4;
+        margin: 1cm;
+      }
+      body {
+        font-family: Arial, sans-serif;
+      }
+      .athletes {
+        width: 100%;
+      }
+      .athlete-card {
+        width: 500px;
+        height: 380px;
+        margin: 0 auto;
+        margin-top: 400px;
+        margin-bottom: 400px;
+        border-collapse: collapse;
+      }
+      .athlete-info {
+        width: 50%;
+        vertical-align: middle;
+        padding-right: 10px;
+      }
+      .athlete-photo {
+        width: 30%;
+        vertical-align: middle;
+      }
+      .athlete-photo img {
+        max-width: 100%;
+        max-height: 100%;
+      }
+      h2,
+      h3 {
+        margin: 5px 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="athletes">
+      {% for athlete in athletes %}
+      <table class="athlete-card">
+        <tr>
+          <td class="athlete-info">
+            <h2>{{athlete.fname|upper}} {{athlete.lname|upper}}</h2>
+            <h3>{{athlete.sport|upper}} ({{athlete.age}})</h3>
+            <h3>{{athlete.school|upper}}</h3>
+          </td>
+          <td class="athlete-photo">
+            <img
+              src="{{ athlete.photo.path }}"
+              alt="{{ athlete.fname }} {{ athlete.lname }}"
+            />
+          </td>
+        </tr>
+      </table>
+      {% endfor %}
+    </div>
+  </body>
+</html>

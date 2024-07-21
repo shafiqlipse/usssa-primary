@@ -34,7 +34,7 @@ function get_athletes() {
           input.type = "checkbox";
           input.value = athlete.id;
           input.name = "athletes"; // Ensure this is the correct name
-          label.innerText = athlete.fname;
+          label.innerText = `${athlete.fname} ${athlete.lname}`; // Include both first and last name
           div.appendChild(input);
           div.appendChild(label);
           athlete_select.appendChild(div);

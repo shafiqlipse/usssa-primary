@@ -6,17 +6,14 @@ from django.shortcuts import get_object_or_404
 
 # Create your views here.
 
-
 def get_athletes(request):
     user = request.user
     school = get_object_or_404(School, user=user)
 
-    
     gender = request.GET.get("gender")
     age_id = request.GET.get("age_id")
 
     athletes = Athlete.objects.filter(school=school)
-
 
     if gender:
         athletes = athletes.filter(gender=gender)
@@ -24,7 +21,7 @@ def get_athletes(request):
     if age_id:
         athletes = athletes.filter(age_id=age_id)
 
-    athletes = athletes.values("id", "fname")
+    athletes = athletes.values("id", "fname", "lname")
     data = {"athletes": list(athletes)}
 
     return JsonResponse(data)
