@@ -40,7 +40,7 @@
           {% for teacher in filter.qs %}
           <tr>
             <td>
-              <a href="{% url 'teacher' teacher.id%}"
+              <a href="{% url 'swimmer' teacher.id%}"
                 >{{teacher.first_name}} {{teacher.last_name}}</a
               >
             </td>
