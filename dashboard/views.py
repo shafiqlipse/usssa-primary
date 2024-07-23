@@ -376,17 +376,6 @@ def districts(request):
     return render(request, "dashboard/districts.html", context)
 
 
-# schools list, tuple or array
-def municipalities(request):
-
-    municipalities = Municipality.objects.all()
-
-    context = {
-        "municipalities": municipalities,
-    }
-    return render(request, "dashboard/zones.html", context)
-
-
 @school_required
 def Dash(request):
     user = request.user
@@ -404,6 +393,9 @@ def Dash(request):
     ).count()
     athletes_bcount = Athlete.objects.filter(school_id=school.id, gender="Male").count()
     officials = school_official.objects.filter(school_id=school.id)
+
+    # from django.contrib.auth.hashers import make_password
+    
     context = {
         "officials_count": officials_count,
         "officials_bcount": officials_bcount,
@@ -471,6 +463,11 @@ def offcom(request):
     user = request.user
     context = {"user": user}
     return render(request, "offcom.html", context)
+
+def ofifcom(request):
+    user = request.user
+    context = {"user": user}
+    return render(request, "ofifcom.html", context)
 
 
 from django.http import JsonResponse
@@ -568,7 +565,7 @@ def AthleteUpdate(request, id):
     athlete = get_object_or_404(Athlete, id=id)
 
     if request.method == "POST":
-        form = UpdateAthleteForm(request.POST, request.FILES, instance=athlete)
+        form = NewAthleteForm(request.POST, request.FILES, instance=athlete)
         if form.is_valid():
             form.save()
             messages.success(request, "Athlete information updated successfully!")
@@ -576,7 +573,7 @@ def AthleteUpdate(request, id):
         else:
             messages.error(request, "Please correct the errors below.")
     else:
-        form = UpdateAthleteForm(instance=athlete)
+        form = NewAthleteForm(instance=athlete)
 
     context = {
         "form": form,

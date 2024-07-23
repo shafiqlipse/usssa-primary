@@ -1,0 +1,24 @@
+{% extends "dashboard/dashboard.html" %}
+<!--static-->
+{% block title %}{{teacher.first_name}} {{teacher.last_name}}{% endblock %}
+<!--static-->
+{% load static %}
+<!--khfufufu-->
+{% block content %}
+<div class="schools-den">
+  <div class="head flex">
+    <h1>{{teacher.first_name}} {{teacher.last_name}}</h1>
+  </div>
+  <div class="image-box flex">
+    <img src="{{teacher.photo.url}}" alt="" />
+    <div class="details">
+      <li>{{teacher.nin}}</li>
+      <li>{{teacher.email}}</li>
+      <li>{{teacher.district}}</li>
+      <li>{{teacher.gender}}</li>
+      <li>{{teacher.phone_number}}</li>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

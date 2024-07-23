@@ -19,7 +19,6 @@ urlpatterns = [
     path("all_officials/", all_officials, name="all_officials"),
     path("tournaments/", Tournaments, name="tournaments"),
     path("districts/", districts, name="districts"),
-    path("zones/", municipalities, name="zones"),
     path("addschool/", Schoolnew, name="new_school"),
     path("school/<int:id>", school_detail, name="schooldetail"),
     path("editschool/<int:id>", school_update, name="schoolupdate"),

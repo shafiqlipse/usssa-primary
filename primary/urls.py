@@ -15,6 +15,7 @@ urlpatterns = [
     path("change_password/", change_password, name="change_password"),
     path("confirmation/", confirmation, name="confirmation"),
     path("offcom/", offcom, name="offcom"),
+    path("ofifcom/", ofifcom, name="ofifcom"),
     path("register/", school_registration, name="register"),
     path("logout/", user_logout, name="logout"),
     path("dashboard/", Overview, name="dashboard"),
@@ -26,6 +27,7 @@ urlpatterns = [
     path("dashboard/", include("dashboard.urls")),
     path("team/", include("teams.urls")),
     path("teachers/", include("teachers.urls")),
+    path("swimmers/", include("swimmers.urls")),
     path("get_athletes/", get_athletes, name="get_athletes"),
     # path("enrollment/", include("registration.urls")),
     # email
