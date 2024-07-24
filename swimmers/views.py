@@ -99,3 +99,4 @@ def delete_swimmer(request, id):
     
     context = {"swimmer": swimmer}
     return render(request, "delete_swimmer.html", context)
+
