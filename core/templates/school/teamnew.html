@@ -10,35 +10,38 @@
       {% endfor %} {% endfor %}
     </ul>
     {% endif %}
-
     <form method="post">
       {% csrf_token %}
       <div class="team-form">
         <div class="field">
-          <label for="">{{ form.team_sport.label }}</label>
+          <label for="{{ form.team_sport.id_for_label }}"
+            >{{ form.team_sport.label }}</label
+          >
           {{ form.team_sport }}
         </div>
         <div class="field">
-          <label for="">{{ form.team_gender.label }}</label>
+          <label for="{{ form.team_gender.id_for_label }}"
+            >{{ form.team_gender.label }}</label
+          >
           {{ form.team_gender }}
         </div>
         <div class="field">
-          <label for="">{{ form.team_age.label }}</label>
+          <label for="{{ form.team_age.id_for_label }}"
+            >{{ form.team_age.label }}</label
+          >
           {{ form.team_age }}
         </div>
 
         <div class="field">
+          <label for="id_athletes">Athletes</label>
           <select
             class="js-example-basic-multiple"
             multiple="multiple"
             name="athletes"
-            required=""
+            required
             id="id_athletes"
           >
-            {% for athlete in form.athletes %}
-            <option value="{{athlete.id}}">{{athlete}}</option>
-
-            {% endfor %}
+            <option>Select sport, gender, and age to load athletes</option>
           </select>
         </div>
       </div>
@@ -56,6 +59,70 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
 <script>
+  function get_athletes() {
+    var gender_select = document.getElementById(
+      "{{ form.team_gender.id_for_label }}"
+    );
+    var age_select = document.getElementById(
+      "{{ form.team_age.id_for_label }}"
+    );
+    var athlete_select = document.getElementById("id_athletes");
+
+    // Show loading indicator for athletes
+    athlete_select.innerHTML = "<option>Loading athletes...</option>";
+
+    var team_gender = gender_select.value;
+    var team_age = age_select.value;
+
+    // Fetch athletes
+    fetch(`/get_dist_athletes/?team_gender=${team_gender}&team_age=${team_age}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.text();
+      })
+      .then((text) => {
+        try {
+          return JSON.parse(text);
+        } catch (e) {
+          console.error("Server response is not JSON:", text);
+          throw new Error("The server's response was not valid JSON.");
+        }
+      })
+      .then((data) => {
+        console.log(data);
+        athlete_select.innerHTML = ""; // Clear previous content
+
+        // Update the 'athlete' select with the fetched data
+        if (data.athletes.length === 0) {
+          athlete_select.innerHTML = "<option>No athletes found.</option>";
+        } else {
+          data.athletes.forEach((athlete) => {
+            var option = document.createElement("option");
+            option.value = athlete.id;
+            option.textContent = `${athlete.fname} ${athlete.lname} (${athlete.lin})`;
+            athlete_select.appendChild(option);
+          });
+        }
+
+        // Reinitialize Select2 after populating options
+        $(athlete_select).select2();
+      })
+      .catch((error) => {
+        console.error("Error fetching athletes:", error);
+        athlete_select.innerHTML =
+          "<option>Error fetching athletes. Please try again.</option>";
+      });
+  }
+
+  // Attach the get_athletes function to the onchange events of the gender and age elements
+  document.getElementById("{{ form.team_gender.id_for_label }}").onchange =
+    get_athletes;
+  document.getElementById("{{ form.team_age.id_for_label }}").onchange =
+    get_athletes;
+
+  // Initialize Select2 on page load
   $(document).ready(function () {
     $(".js-example-basic-multiple").select2();
   });

@@ -29,6 +29,7 @@ urlpatterns = [
     path("teachers/", include("teachers.urls")),
     path("swimmers/", include("swimmers.urls")),
     path("get_athletes/", get_athletes, name="get_athletes"),
+    path("get_dist_athletes/", get_dist_athletes, name="get_dist_athletes"),
     # path("enrollment/", include("registration.urls")),
     # email
     # path('send_email/', Sendmail, name='send_email'),

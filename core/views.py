@@ -404,30 +404,38 @@ def cert(request, id):
     return response
 
 
-# def get_athletes(request):
-#     # Get the school associated with the logged-in user
+def get_dist_athletes(request):
+    # Get the officer associated with the logged-in user
+    try:
+        officer = Officer.objects.get(user=request.user)
+        location = officer.district
+    except Officer.DoesNotExist:
+        return JsonResponse(
+            {"error": "User is not associated with an officer"}, status=400
+        )
 
-#     # sport_id = request.GET.get("team_sport_id")
-#     # team_gender = request.GET.get("team_gender")
-#     # age_id = request.GET.get("team_age_id")
+    schools = School.objects.filter(district=location)
 
-#     # Start with the base queryset for athletes in the user's school
-#     athletes = Athlete.objects.all()
-#     # Apply additional filters for sport, gender, and age if provided
+    team_gender = request.GET.get("team_gender")
+    team_age = request.GET.get("team_age")  # Changed from age_id to team_age
 
-#     # if team_gender:
-#     #     athletes = athletes.filter(gender=team_gender)
+    # Start with the base queryset for athletes in the user's schools
+    athletes = Athlete.objects.filter(school__in=schools)
 
-#     # if age_id:
-#     #     athletes = athletes.filter(age_id=age_id)
+    # Apply additional filters for gender and age if provided
+    if team_gender:
+        athletes = athletes.filter(gender=team_gender)
 
-#     # Retrieve only the necessary fields
-#     athletes = athletes.values("id", "fname")
+    if team_age:
+        athletes = athletes.filter(age=team_age)  # Assuming the field is named 'age'
 
-#     # Wrap the athletes array in a JSON object with a 'athletes' property
-#     data = {"athletes": list(athletes)}
+    # Retrieve only the necessary fields
+    athletes = athletes.values("id", "fname", "lname", "lin")
 
-#     return JsonResponse(data)
+    # Wrap the athletes array in a JSON object with an 'athletes' property
+    data = {"athletes": list(athletes)}
+
+    return JsonResponse(data)
 
 
 def taccreditation(request, id):
@@ -478,4 +486,3 @@ def delloff(request, id):
         return redirect("tofficers")
 
     return render(request, "dashboard/deleteath.html", {"obj": stud})
-
