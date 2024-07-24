@@ -12,26 +12,49 @@
     {% endif %}
     <form method="post">
       {% csrf_token %}
-      <div class="team-form">
-        <div class="field">
-          <label for="{{ form.team_sport.id_for_label }}"
-            >{{ form.team_sport.label }}</label
-          >
-          {{ form.team_sport }}
+      <div class="team-form mb-12">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group mb-3">
+                <label
+                  for="{{ form.championship.id_for_label }}"
+                  class="form-label"
+                >
+                  {{ form.championship.label }}
+                </label>
+                {{ form.championship }}
+              </div>
+              <div class="form-group mb-3">
+                <label
+                  for="{{ form.team_sport.id_for_label }}"
+                  class="form-label"
+                >
+                  {{ form.team_sport.label }}
+                </label>
+                {{ form.team_sport }}
+              </div>
+              <div class="form-group mb-3">
+                <label
+                  for="{{ form.team_gender.id_for_label }}"
+                  class="form-label"
+                >
+                  {{ form.team_gender.label }}
+                </label>
+                {{ form.team_gender }}
+              </div>
+              <div class="form-group mb-3">
+                <label
+                  for="{{ form.team_age.id_for_label }}"
+                  class="form-label"
+                >
+                  {{ form.team_age.label }}
+                </label>
+                {{ form.team_age }}
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="field">
-          <label for="{{ form.team_gender.id_for_label }}"
-            >{{ form.team_gender.label }}</label
-          >
-          {{ form.team_gender }}
-        </div>
-        <div class="field">
-          <label for="{{ form.team_age.id_for_label }}"
-            >{{ form.team_age.label }}</label
-          >
-          {{ form.team_age }}
-        </div>
-
         <div class="field">
           <label for="id_athletes">Athletes</label>
           <select

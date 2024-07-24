@@ -32,6 +32,9 @@
       .header .headexher h1 {
         text-transform: uppercase;
       }
+      table tbody tr td table {
+        background-color: #e1e1e1;
+      }
       table tbody tr td {
         width: 50%;
         text-align: left;
@@ -49,29 +52,27 @@
         width: 120px;
         height: 140px;
       }
-      .header .headexher .athletes table tbody tr td li {
-        margin: 0;
-        list-style: none;
+      .header .headexher .athletes table tbody tr td ul {
+        margin-left: -30px;
       }
-      .header .headexher .athletes table tbody tr td ul li {
+      .header .headexher .athletes table tbody tr td ul span {
         font-weight: bold;
-        list-style: none;
+        margin: 10px;
       }
     </style>
     <div class="header">
-      <img src="https://upssa.usssaonline.com/static/images/upsa.png  " alt="" />
-      <h1 style="font-size: 20px; color: #00338b">
-        UGANDA PRIMARY SCHOOLS SPORTS ASSOCIATION (UPSSA)
-      </h1>
+      <img
+        src="https://lh3.googleusercontent.com/pw/AP1GczO3IsGqIyEcopQ7IyiLL7JXDNcoQTjl7Dsk-vJF98J6dA3HkS4t4RFcJcG9es_SM4IJdHOIDSHcU3zoBxy_yA9R-ERzzpqB_fHUo_2lVYmTr6sNYmAJa4SScEo9Uma-A-7N8CURlXFwAO8s81vVUNZg=w2241-h446-s-no-gm?authuser=0"
+        alt=""
+      />
 
-      <h3 style="font-size: 25px; color: #00338b">{{officer}}</h3>
-      <p>{{official}}</p>
-      <p>{{official.region}}, {{official.district}}</p>
+      <p></p>
+      <h2>
+        {{district|upper}}, {{team.team_gender|upper}},
+        {{team.team_sport|upper}}, {{team.team_age}}
+      </h2>
       <hr />
-
       <div class="headexher">
-        <h1 style="font-size: 2em">ATHLETES</h1>
-        <hr />
         <div class="athletes">
           <table>
             <tbody>
@@ -85,7 +86,6 @@
                   <table>
                     <tr>
                       <td>
-                        <li style="text-transform: uppercase;">LIN: {{ athlete.lin }}</li>
                         {% if athlete.photo %}
                         <img
                           src="{{ athlete.photo.path }}"
@@ -97,17 +97,25 @@
                           alt="{{ athlete.fname }}"
                         />
                         {% endif %}
-                       
                       </td>
                       <td>
                         <ul>
-                          <li style="text-transform: uppercase;">
-                            Names: {{ athlete.fname }} {{ athlete.lname }}
-                          </li style="text-transform: uppercase;">
-                          <li style="text-transform: uppercase;">School: {{ athlete.school }}</li>
-                          <li style="text-transform: uppercase;">Date of birth: {{ athlete.date_of_birth }}</li>
-                          <li style="text-transform: uppercase;">Age: {{ athlete.age }}</li>
-                          <li style="text-transform: uppercase;">Sport: {{ athlete.sport }}</li>
+                          <span>
+                            Names: {{ athlete.fname|upper }}
+                            {{athlete.lname|upper }} </span
+                          ><br />
+                          <span>LIN: {{ athlete.lin|upper }}</span
+                          ><br />
+                          <span>School: {{ athlete.school|upper }}</span
+                          ><br />
+                          <span
+                            >Date of birth:
+                            {{athlete.date_of_birth|upper}}</span
+                          ><br />
+                          <span>Age: {{ athlete.age|upper }}</span
+                          ><br />
+                          <span>Sport: {{ team.team_sport|upper }}</span
+                          ><br />
                         </ul>
                       </td>
                     </tr>

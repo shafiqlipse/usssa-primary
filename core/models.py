@@ -7,7 +7,7 @@ from dashboard.models import Athlete, Age
 
 class Officer(models.Model):
     user = models.ForeignKey(
-        User, related_name="user", on_delete=models.CASCADE, null=True
+        User, related_name="officer_profile", on_delete=models.CASCADE, null=True
     )
 
     first_name = models.CharField(max_length=100)

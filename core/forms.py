@@ -7,7 +7,22 @@ from django_select2.forms import Select2Widget
 class TeamForm(forms.ModelForm):
     class Meta:
         model = Team
-        fields = ["team_gender", "team_age", "team_sport", "athletes"]
+        fields = ["team_gender", "team_age", "team_sport", "athletes", "championship"]
+        widgets = {
+            "team_gender": forms.Select(attrs={"class": "form-select"}),
+            "team_age": forms.Select(attrs={"class": "form-select"}),
+            "team_sport": forms.Select(attrs={"class": "form-select"}),
+            "athletes": forms.SelectMultiple(
+                attrs={"class": "form-select", "multiple": "multiple"}
+            ),
+            "championship": forms.Select(attrs={"class": "form-select"}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(TeamForm, self).__init__(*args, **kwargs)
+        self.fields["athletes"].widget.attrs.update(
+            {"class": "js-example-basic-multiple"}
+        )
 
         # widgets = {
         #     "athletes": forms.CheckboxSelectMultiple(),
@@ -50,10 +65,8 @@ class TOfficerForm(forms.ModelForm):
             "nin",
             "photo",
             "phone_number",
-           
             "district",
             "gender",
-            
             "role",
         ]
 
