@@ -395,7 +395,7 @@ def Dash(request):
     officials = school_official.objects.filter(school_id=school.id)
 
     # from django.contrib.auth.hashers import make_password
-    
+
     context = {
         "officials_count": officials_count,
         "officials_bcount": officials_bcount,
@@ -464,6 +464,7 @@ def offcom(request):
     context = {"user": user}
     return render(request, "offcom.html", context)
 
+
 def ofifcom(request):
     user = request.user
     context = {"user": user}
@@ -508,6 +509,7 @@ def calculate_age_choices(request):
 
 
 # # Athletes details......................................................
+@login_required
 def AthleteDetail(request, id):
     athlete = get_object_or_404(Athlete, id=id)
     relatedathletes = Athlete.objects.filter(school=athlete.school).exclude(id=id)
@@ -521,7 +523,7 @@ def AthleteDetail(request, id):
     return render(request, "school/athlete.html", context)
 
 
-# @login_required(login_url="login")
+@login_required(login_url="login")
 def athletes(request):
     user = request.user
     school_profile = (
@@ -540,7 +542,7 @@ def athletes(request):
     return render(request, "school/athletes.html", context)
 
 
-# @login_required(login_url="login")
+@login_required(login_url="login")
 def school_offs(request):
     user = request.user
     school_profile = (
@@ -561,6 +563,7 @@ def school_offs(request):
     return render(request, "school/officials.html", context)
 
 
+@login_required
 def AthleteUpdate(request, id):
     athlete = get_object_or_404(Athlete, id=id)
 
@@ -579,7 +582,7 @@ def AthleteUpdate(request, id):
         "form": form,
         "athlete": athlete,
     }
-    return render(request, "school/updateAthlete.html", context)
+    return render(request, "school/newAthlete.html", context)
 
 
 # # Athletes details......................................................
@@ -623,30 +626,9 @@ def OfficialDetail(request, id):
 
 def athlete_list(request):
     athletes = Athlete.objects.all()
-    form = AthleteSelectionForm()
+   
 
-    if request.method == "POST":
-        form = AthleteSelectionForm(request.POST)
-        if form.is_valid():
-            selected_athletes = form.cleaned_data["athletes"]
-            total_amount = 1500 * len(selected_athletes)
-
-            # Update the payment total_amount
-            payment, created = Payment.objects.get_or_create(is_paid=False)
-            payment.total_amount += total_amount
-            payment.save()
-
-            # Add selected athletes to the payment without deleting them
-            payment.athletes.add(*selected_athletes)
-
-            # Mark selected athletes as paid
-            Athlete.objects.filter(
-                pk__in=[athlete.pk for athlete in selected_athletes]
-            ).update(is_paid=True)
-
-            return redirect("payment_page")
-
-    context = {"athletes": athletes, "form": form}
+    context = {"athletes": athletes}
     return render(request, "school/athlete_list.html", context)
 
 
