@@ -156,6 +156,7 @@ from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
 from django.http import HttpResponse
 from .models import School
+from django.db import IntegrityError
 
 
 def export_pdf(request):
@@ -248,15 +249,26 @@ def Schoolnew(request):
         form = SchoolProfileForm(request.POST, request.FILES)
 
         if form.is_valid():
-            # admin_user = User.objects.get_or_create(username="admin")
-            # Assign the currently logged-in user
-            form.save()
-            messages.success(request, "Account completed successfully!")
-            return redirect("confirmation")
-
+            try:
+                form.save()
+                messages.success(request, "Account completed successfully!")
+                return redirect("confirmation")
+            except IntegrityError as e:
+                if "EMIS" in str(e):
+                    messages.error(
+                        request, "A school with this EMIS number already exists."
+                    )
+                else:
+                    messages.error(
+                        request,
+                        "An error occurred while saving the school. Please fill all required fields.",
+                    )
         else:
-            # Add form-specific error messages for individual fields
-            messages.error(request, "Form is not valid. Please check your input.")
+            # Add more detailed error messages
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{field}: {error}")
+
             print(f"Form errors: {form.errors}")
 
     else:
@@ -441,10 +453,20 @@ def newAthlete(request):
                 new_athlete.save()
                 messages.success(request, "Athlete added successfully!")
                 return redirect("athletes")
+            except IntegrityError as e:
+                if "lin" in str(e).lower():
+                    messages.error(
+                        request,
+                        "An athlete with this Learner Identification Number (LIN) already exists.",
+                    )
+                else:
+                    messages.error(request, f"Error adding athlete: {str(e)}")
             except Exception as e:
                 messages.error(request, f"Error adding athlete: {str(e)}")
         else:
-            messages.error(request, "Form is not valid. Please check your input.")
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{field.capitalize()}: {error}")
     else:
         form = NewAthleteForm()
 
@@ -626,7 +648,6 @@ def OfficialDetail(request, id):
 
 def athlete_list(request):
     athletes = Athlete.objects.all()
-   
 
     context = {"athletes": athletes}
     return render(request, "school/athlete_list.html", context)
