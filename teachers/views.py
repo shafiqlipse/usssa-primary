@@ -43,11 +43,6 @@ def Teachera(request):
     return render(request, "teacher_new.html", context)
 
 
-# def (request):
-#     teachers = Teacher.objects.all()
-#     context = {"teachers": teachers}
-#     return render(request, "teachers.html", context)
-
 
 from django.http import HttpResponse
 from django.template.loader import get_template

@@ -90,6 +90,24 @@ function displayImage(input) {
 }
 
 //.tabs for profiles
+function displayImage2(input) {
+  var reader = new FileReader();
+  reader.onload = function (e) {
+    document.getElementById("image-previewg").src = e.target.result;
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+
+//.tabs for profiles
+function displayImage1(input) {
+  var reader = new FileReader();
+  reader.onload = function (e) {
+    document.getElementById("image-previews").src = e.target.result;
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+
+//.tabs for profiles
 
 const tabsContainer = document.querySelector(".tabs-container");
 const tabButtons = tabsContainer.querySelectorAll(".tab");

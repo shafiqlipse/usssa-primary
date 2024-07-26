@@ -9,7 +9,6 @@
 <div class="schools-dew">
   <div class="head flex">
     <h1>Swimming</h1>
-    {% comment %} <a href="{% url 'teccred'%}" class="btn-submit">Accreditation</a> {% endcomment %}
   </div>
   <h2>Filter Swimmers</h2>
   <form method="get">
@@ -17,11 +16,13 @@
     <button type="submit">Search</button>
   </form>
 
- 
-
   <form method="post">
     {% csrf_token %}
-    <input type="submit" value="Generate PDF" />
+    <input type="submit" name="Accreditation" value="Accreditation" />
+  </form>
+  <form method="post">
+    {% csrf_token %}
+    <input type="submit" name="Certificate" value="Certificate" />
   </form>
   <div class="filterlist glue">
     <div class="official-list">
@@ -57,6 +58,5 @@
       </table>
     </div>
   </div>
-  
 </div>
 {% endblock %}

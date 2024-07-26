@@ -51,10 +51,10 @@
       <div class="athletes">
         <table>
           <tbody>
-            {% for athlete in swimmers %}
+            {% for swimmer in swimmers %}
             <!---->
             {% if forloop.counter0|divisibleby:2 %}
-            <!-- Start a new row for every even-numbered athlete -->
+            <!-- Start a new row for every even-numbered swimmer -->
             <tr>
               {% endif %}
               <td>
@@ -63,37 +63,37 @@
                     <td class="td">
                       <div class="inner">
                         <span
-                          >{{ athlete.contact|upper}}
-                          ({{athlete.gender|upper}})</span
+                          >{{ swimmer.classroom|upper}}
+                          ({{swimmer.gender|upper}})</span
                         >
                         <br />
-                        {% if athlete.photo %}
+                        {% if swimmer.photo %}
                         <img
-                          src="{{ athlete.photo.path }}"
-                          alt="{{ athlete.first_name }}"
+                          src="{{ swimmer.photo.path }}"
+                          alt="{{ swimmer.first_name }}"
                         />
                         {% else %}
                         <img
                           src="{% static 'images/profile.png' %}"
-                          alt="{{ athlete.last_name }}"
+                          alt="{{ swimmer.last_name }}"
                         />
                         {% endif %}
                         <br />
                         <span
-                          >{{ athlete.first_name|upper }}
-                          {{athlete.last_name|upper }}
+                          >{{ swimmer.first_name|upper }}
+                          {{swimmer.last_name|upper }}
                         </span>
                         <br />
-                        <span>{{ athlete.designation|upper }}</span><br />
-                        <span>{{ athlete.school|upper }}</span><br />
-                        <span>{{ athlete.district|upper }}</span><br />
+                        <span>{{ swimmer.date_of_birth|upper }}</span><br />
+                        <span>{{ swimmer.school|upper }}</span><br />
+                        <span>{{ swimmer.category|upper }}</span><br />
                       </div>
                     </td>
                   </tr>
                 </table>
               </td>
               {% if forloop.last or forloop.counter0|add:1|divisibleby:2 %}
-              <!-- End the row for the last or odd-numbered athlete -->
+              <!-- End the row for the last or odd-numbered swimmer -->
             </tr>
             {% endif %} {% endfor %}
           </tbody>

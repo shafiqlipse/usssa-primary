@@ -23,6 +23,7 @@ from .forms import *
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
 
+
 def swimmera(request):
 
     if request.method == "POST":
@@ -56,8 +57,19 @@ def swimmers(request):
     filtered_swimmers = swimmer_filter.qs
 
     if request.method == "POST":
+        # Check which form was submitted
+        if "Accreditation" in request.POST:
+            template = get_template("sacred.html")
+            filename = "Filtered_Accreditation.pdf"
+        elif "Certificate" in request.POST:
+            template = get_template(
+                "certificate_temaplate.html"
+            )  # Your certificate template
+            filename = "Filtered_Certificate.pdf"
+        else:
+            return HttpResponse("Invalid form submission")
+
         # Generate PDF
-        template = get_template("acred.html")
         context = {"swimmers": filtered_swimmers}
         html = template.render(context)
 
@@ -72,9 +84,7 @@ def swimmers(request):
 
         # Return the PDF as a response
         response = HttpResponse(content_type="application/pdf")
-        response["Content-Disposition"] = (
-            'attachment; filename="Filtered_Accreditation.pdf"'
-        )
+        response["Content-Disposition"] = f'attachment; filename="{filename}"'
         response.write(pdf_buffer.getvalue())
         return response
     else:
@@ -91,12 +101,14 @@ def swimmer_details(request, id):
 
 def delete_swimmer(request, id):
     swimmer = get_object_or_404(Swimmer, id=id)
-    
-    if request.method == 'POST':
+
+    if request.method == "POST":
         swimmer.delete()
-        messages.success(request, f"Swimmer {swimmer.first_name} {swimmer.last_name} has been deleted.")
-        return redirect('swimmers')  # Redirect to the list of swimmers
-    
+        messages.success(
+            request,
+            f"Swimmer {swimmer.first_name} {swimmer.last_name} has been deleted.",
+        )
+        return redirect("swimmers")  # Redirect to the list of swimmers
+
     context = {"swimmer": swimmer}
     return render(request, "delete_swimmer.html", context)
-
