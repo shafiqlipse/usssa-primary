@@ -30,11 +30,11 @@ Team{% endblock %} {% block content %}
         </div>
       </div>
 
-      <div class="select2 select2-container select2-container--default">
-        <label for="{{ form.athletes.id_for_label }}"
-          >{{ form.athletes.label }}</label
-        >
-        {{ form.athletes }}
+      <div class="other-fields">
+        <div class="field flex">
+          <label>{{ form.athletes.label}} </label>
+          <div id="id_athletes" class="form-control athletes"></div>
+        </div>
       </div>
     </div>
     <button type="submit" class="btn-submit">Add team</button>
@@ -48,13 +48,6 @@ Team{% endblock %} {% block content %}
   </form>
 </div>
 
-<script>
-  $(document).ready(function () {
-    $(".select2-multiple").select2({
-      placeholder: "Select athletes",
-      allowClear: true,
-    });
-  });
-</script>
+
 <script src="{% static 'scripts/api.js'%}"></script>
 {% endblock %}
