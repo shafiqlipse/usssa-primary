@@ -61,6 +61,7 @@
     <link rel="stylesheet" href="{% static 'css/css/all.min.css'%}" />
     <link rel="stylesheet" href="{% static 'css/app.css'%}" />
     <link rel="stylesheet" href="{% static 'css/newteam.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/tprofile.css'%}" />
     <link rel="stylesheet" href="{% static 'css/profile/school_new.css'%}" />
     <link rel="stylesheet" href="{% static 'css/thanks/officer.css'%}" />
     <link rel="stylesheet" href="{% static 'css/profile/athlete.css'%}" />
@@ -287,7 +288,7 @@
               <div
                 class="text-white text-center me-2 d-flex align-items-center justify-content-center"
               >
-                <i class="material-icons opacity-10">login</i>
+                <i class="material-icons opacity-10">logout</i>
               </div>
 
               <span class="nav-link-text ms-1">Teams</span>
@@ -333,7 +334,7 @@
               <div
                 class="text-white text-center me-2 d-flex align-items-center justify-content-center"
               >
-                <i class="material-icons opacity-10">assignment</i>
+                <i class="material-icons opacity-10">logout</i>
               </div>
 
               <span class="nav-link-text ms-1">Logout</span>
@@ -436,6 +437,12 @@
     <script>
       $(document).ready(function () {
         $("#myTable").DataTable();
+      });
+    </script>
+       <!--   Core JS Files   -->
+    <script>
+      $(document).ready(function () {
+        $("#myaTable").DataTable();
       });
     </script>
     <script>

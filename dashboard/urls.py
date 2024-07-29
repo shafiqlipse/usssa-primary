@@ -34,6 +34,8 @@ urlpatterns = [
     path("addofficial", Official, name="addofficial"),
     # path("updateofficial/<int:id>", update_official, name="updateofficial"),
     # path("official/<int:id>", official_details, name="official"),
+    path("editofficer/<int:id>", profile_update, name="editofficer"),
+
     # path("deleteofficial/<int:id>", delete_official, name="deleteofficial"),
     path("export-csv/", export_csv, name="export_csv"),
     path("exportp-csv/", exportp_csv, name="exportp_csv"),

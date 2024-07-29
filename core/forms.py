@@ -13,20 +13,14 @@ class TeamForm(forms.ModelForm):
             "team_age": forms.Select(attrs={"class": "form-select"}),
             "team_sport": forms.Select(attrs={"class": "form-select"}),
             "athletes": forms.SelectMultiple(
-                attrs={"class": "form-select", "multiple": "multiple"}
+                attrs={"class": "form-select select2-multiple", "multiple": "multiple"}
             ),
             "championship": forms.Select(attrs={"class": "form-select"}),
         }
 
     def __init__(self, *args, **kwargs):
         super(TeamForm, self).__init__(*args, **kwargs)
-        self.fields["athletes"].widget.attrs.update(
-            {"class": "js-example-basic-multiple"}
-        )
-
-        # widgets = {
-        #     "athletes": forms.CheckboxSelectMultiple(),
-        # }
+        self.fields["athletes"].widget.attrs.update({"class": "select2-multiple"})
 
 
 class OfficerForm(forms.ModelForm):

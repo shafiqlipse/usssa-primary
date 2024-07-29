@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import *
 from django.contrib import messages
-from accounts.decorators import anonymous_required, staff_required
+from accounts.decorators import anonymous_required, admin_required, staff_required
 from .models import *
 
 
@@ -11,9 +11,20 @@ def home(request):
     return render(request, "core/home.html", context)
 
 
-def district(request):
-    context = {}
-    return render(request, "", context)
+@admin_required
+def profile_update(request, id):
+    officer = get_object_or_404(Officer, id=id)
+
+    if request.method == "POST":
+        form = OfficerForm(request.POST, instance=officer)
+        if form.is_valid():
+            form.save()
+            return redirect("officer_dashboard")
+    else:
+        form = OfficerForm(instance=officer)
+
+    context = {"form": form, "officer": officer}
+    return render(request, "accounts/editprofile.html", context)
 
 
 def Officera(request):
@@ -114,7 +125,9 @@ def delete_officer(request, id):
 
 def AllTeams(request):
     teams = Team.objects.filter(team_officer=request.user)
-    context = {"teams": teams}
+    officer = Officer.objects.get(user=request.user)
+    location = officer.district
+    context = {"teams": teams, "location": location}
     return render(request, "school/teams.html", context)
 
 
@@ -144,36 +157,6 @@ from django.http import JsonResponse
 from django.contrib import messages
 
 from django.http import JsonResponse
-
-
-# def get_athletes(request):
-#     # Get the school associated with the logged-in user
-#     user = request.user
-#     officer = user.officer
-#     district = officer.district
-
-#     # Get all schools within the district
-#     schools = district.school_set.all()
-
-#     sport_id = request.GET.get("team_sport_id")
-#     gender = request.GET.get("team_gender")
-
-#     # Start with the base queryset for athletes in schools within the district
-#     athletes = Athlete.objects.filter(school__in=schools)
-
-#     # Apply additional filters for sport, gender, and age if provided
-#     if sport_id:
-#         athletes = athletes.filter(sport=sport_id)
-#     if gender:
-#         athletes = athletes.filter(gender=gender)
-
-#     # Retrieve only the necessary fields
-#     athletes = athletes.values("id", "name")
-
-#     # Wrap the athletes array in a JSON object with an 'athletes' property
-#     data = {"athletes": list(athletes)}
-
-#     return JsonResponse(data)
 
 
 from django.views import View
@@ -286,7 +269,7 @@ def generate_dalbum(request, id):
     athletes = team.athletes.all()
     user = team.team_officer
     profile = user.officer_profile.first()
-    district= profile.district
+    district = profile.district
     # Get template
     template = get_template("school/Albums.html")
 

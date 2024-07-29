@@ -4,8 +4,9 @@
 <div class="sooverview">
   <div class="boxed">
     <div class="school-box flex">
-      <div class="left">
+      <div class="left flex">
         <img src="{{officer.photo.url}}" alt="" />
+        <a href="{% url 'editofficer' officer.id%}" class='btn btn-submit'>Edit profile</a>
       </div>
       <div class="left">
         <div class="attr">
@@ -17,68 +18,101 @@
         </div>
         <div class="attr"><span>Region : </span>{{officer.region}}</div>
         <div class="attr"><span>District : </span>{{officer.district}}</div>
-        <div class="attr"><span>Municipality : </span>{{officer.email}}</div>
-        <div class="attr"><span>City : </span>{{officer.phone_number}}</div>
+        <div class="attr"><span>Email : </span>{{officer.email}}</div>
+        <div class="attr"><span>Contact : </span>{{officer.phone_number}}</div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-xl-6 col-sm-6 mb-xl-0 mb-4">
-        <div class="card">
-          <div class="card-header p-3 pt-2">
-            <div
-              class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute"
-            >
-              <i class="fa fa-user"></i>
-            </div>
-            <div class="text-end pt-1">
-              <p class="text-sm mb-0 text-capitalize">Athletes</p>
-              <h4 class="mb-0">{{athletes_count}}</h4>
-            </div>
-          </div>
-          <hr class="dark horizontal my-0" />
-          <div class="card-footer p-3 flex">
-            <p class="mb-0">
-              <span class="text-success text-sm font-weight-bolder"
-                >+{{athletes_bcount}} </span
-              >Boys
-            </p>
-            <p class="mb-0">
-              <span class="text-success text-sm font-weight-bolder"
-                >+{{athletes_gcount}} </span
-              >Girls
-            </p>
-          </div>
-        </div>
+  </div>
+  <div class="filterlist glue">
+    <h2>Schools</h2>
+    <div class="lo">
+      <div class="official-list">
+        <table id="myaTable" class="display">
+          <thead>
+            <tr>
+              <th>School</th>
+              <th>Emis</th>
+              <th>Status</th>
+              <th>region</th>
+              <th>District</th>
+              {% if user.is_staff %}
+              <th>Actions</th>
+              {% endif %}
+            </tr>
+          </thead>
+          <tbody>
+            {% for school in schools%}
+            <tr>
+              <td>
+                <a href="{% url 'schooldetail' school.id%}"
+                  >{{school.school_name}}</a
+                >
+              </td>
+              <td>{{school.EMIS}}</td>
+              <td>{{school.status}}</td>
+              <td>{{school.region}}</td>
+              <td>{{school.district}}</td>
+              {% if user.is_staff %}
+              <td>
+                <div class="report">
+                  <a href="{% url 'schoolupdate' school.id%}"
+                    ><i class="fa fa-pencil-square" aria-hidden="true"></i>
+                  </a>
+                  <a href="{% url 'delschool' school.id%}"
+                    ><i class="fa fa-trash" aria-hidden="true"></i>
+                  </a>
+                  <a href="{%url 'activate' school.id %}"
+                    ><i class="fa fa-th" aria-hidden="true"></i>
+                  </a>
+                </div>
+              </td>
+              {% endif %}
+            </tr>
+
+            {%endfor%}
+          </tbody>
+        </table>
       </div>
-      <div class="col-xl-6 col-sm-6 mb-xl-0 mb-6">
-        <div class="card">
-          <div class="card-header p-3 pt-2">
-            <div
-              class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute"
-            >
-              <i class="fa fa-user-secret"></i>
-            </div>
-            <div class="text-end pt-1">
-              <p class="text-sm mb-0 text-capitalize">Officials</p>
-              <h4 class="mb-0">{{officials_count}}</h4>
-            </div>
-          </div>
-          <hr class="dark horizontal my-0" />
-          <div class="card-footer p-3 flex">
-            <p class="mb-0">
-              <span class="text-danger text-sm font-weight-bolder"
-                >{{officials_bcount}}</span
-              >
-              Male
-            </p>
-            <p class="mb-0">
-              <span class="text-danger text-sm font-weight-bolder"
-                >{{officials_gcount}}</span
-              >
-              Female
-            </p>
-          </div>
-        </div>
+    </div>
+  </div>
+  <div class="filterlist glue">
+    <h2>Athletes</h2>
+    <div class="lo">
+      <div class="official-list">
+        <table id="myTable" class="display">
+          <thead>
+            <tr>
+              <th>Names</th>
+              <th>Lin</th>
+              <th>School</th>
+              <th>Gender</th>
+              <th>Sport</th>
+              <th>Age</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for athlete in athletes%}
+            <tr>
+              <td>
+                <a href="{% url 'athlete' athlete.id%}"
+                  >{{athlete.fname}} {{athlete.lname}}</a
+                >
+              </td>
+              <td>{{athlete.lin}}</td>
+              <td>{{athlete.school}}</td>
+              <td>{{athlete.gender}}</td>
+              <td>{{athlete.sport}}</td>
+              <td>{{athlete.age}}</td>
+              <!--<td>
+                <a href="{% url 'updateathlete' athlete.id%}" class="del"
+                  ><i class="fa fa-pencil"></i
+                ></a>
+              </td>-->
+            </tr>
+
+            {%endfor%}
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
