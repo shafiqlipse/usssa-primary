@@ -59,7 +59,10 @@
                   <tr>
                     <td class="td">
                       <div class="inner">
-                        <span>{{ athlete.lin }} ({{athlete.gender}})</span>
+                        <span
+                          >{{ athlete.lin|upper }}
+                          ({{athlete.gender|upper}})</span
+                        >
                         <br />
                         {% if athlete.photo %}
                         <img
@@ -73,16 +76,15 @@
                         />
                         {% endif %}
                         <br />
-                        <span>{{ athlete.fname }} {{ athlete.lname }}</span>
+                        <span
+                          >{{ athlete.fname|upper }} {{ athlete.lname|upper}}</span
+                        >
                         <br />
-                        <span>{{ athlete.school }}</span><br />
-                        <span>
-                          {% for officer in team.team_officer.officer_profile.all %}
-                          <!---->
-                          {{officer.district}} 
-                          {% endfor %} </span
-                        ><br />
-                        <span>{{ athlete.sport }}({{athlete.age}})</span>
+                        <span>{{ athlete.school|upper }}</span><br />
+
+                        <span
+                          >{{ team.team_sport|upper}}({{athlete.age|upper}})</span
+                        >
                       </div>
                     </td>
                   </tr>

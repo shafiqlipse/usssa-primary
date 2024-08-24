@@ -317,21 +317,8 @@ def accreditation(request, id):
     # Get template
     template = get_template("school/accred.html")
 
-    # Compress school photo
-
-    # Compress athletes' photos
-    for athlete in athletes:
-        if athlete.photo:
-            with default_storage.open(athlete.photo.path, "rb") as image_file:
-                athlete_photo_data = image_file.read()
-            compressed_athlete_photo_data = compress_image(athlete_photo_data)
-            athlete.photo_base64 = base64.b64encode(
-                compressed_athlete_photo_data
-            ).decode("utf-8")
-
-    # Prepare context
     context = {
-        "district": district,
+        "team": team,
         "athletes": athletes,
         "MEDIA_URL": settings.MEDIA_URL,
     }
