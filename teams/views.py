@@ -92,6 +92,16 @@ def delete_team(request, id):
     return render(request, "teams/delete_team.html", {"team": team})
 
 
+def delete_tdeam(request, id):
+    team = get_object_or_404(Team, id=id)
+
+    if request.method == "POST":
+        team.delete()
+        return redirect("teams")  # Redirect to the team list page or another URL
+
+    return render(request, "teams/delete_team.html", {"team": team})
+
+
 from django.shortcuts import render
 from xhtml2pdf import pisa
 from django.template.loader import get_template

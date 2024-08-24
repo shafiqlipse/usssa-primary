@@ -76,7 +76,12 @@
                         <span>{{ athlete.fname }} {{ athlete.lname }}</span>
                         <br />
                         <span>{{ athlete.school }}</span><br />
-                        <span>{{ district }}</span><br />
+                        <span>
+                          {% for officer in team.team_officer.officer_profile.all %}
+                          {{officer.district}} {% empty %}
+                          <p>No district found</p>
+                          {% endfor %} </span
+                        ><br />
                         <span>{{ athlete.sport }}({{athlete.age}})</span>
                       </div>
                     </td>

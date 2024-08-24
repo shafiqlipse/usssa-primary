@@ -313,7 +313,7 @@ def accreditation(request, id):
 
     team = Team.objects.get(id=id)
     athletes = team.athletes.all()
-    district = team.team_officer.user.first().district
+    
     # Get template
     template = get_template("school/accred.html")
 
