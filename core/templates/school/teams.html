@@ -42,7 +42,12 @@
             {% for team in teams %}
             <tr>
               <td>
-                <a href="">{{team.team_officer.officer_profile.first_name}} </a>
+                <a href="">
+                  {% for officer in team.team_officer.officer_profile.all %}
+                  {{officer.district}} {% empty %}
+                  <p>No district found</p>
+                  {% endfor %}
+                </a>
               </td>
               <td>{{team.team_sport}}</td>
               <td>{{team.team_gender}}</td>
