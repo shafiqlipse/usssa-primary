@@ -6,7 +6,8 @@ from .teviews import *
 
 
 urlpatterns = [
-    # # team
+    #--------------------------------
+    #  # team
     path("new_team/", create_team, name="new_team"),
     path("updateteam/<int:id>", update_team, name="updategteam"),
     path("teams/", teamlist, name="team_s"),

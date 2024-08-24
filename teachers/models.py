@@ -21,7 +21,11 @@ class Teacher(models.Model):
         blank=True,
     )
 
-    contact = models.CharField(max_length=15)
+    contact = models.CharField(
+        max_length=15,
+        null=True,
+        blank=True,
+    )
     school = models.CharField(max_length=125)
 
     gender = models.CharField(
@@ -35,6 +39,8 @@ class Teacher(models.Model):
             ("HeadTeacher", "HeadTeacher"),
             ("Deputy HeadTeacher", "Deputy HeadTeacher"),
         ],
+        null=True,
+        blank=True,
     )
 
     def __str__(self):

@@ -3,17 +3,13 @@ from dashboard.models import *
 from .models import *
 
 
-
 class TeacherForm(forms.ModelForm):
     class Meta:
         model = Teacher
         fields = [
             "first_name",
             "last_name",
-            "designation",
             "photo",
-            "contact",
-            "district",
             "gender",
             "school",
         ]

@@ -19,29 +19,41 @@ from .models import *
 from .forms import *
 
 
+import base64
+from django.core.files.base import ContentFile
+
+
 def Teachera(request):
 
     if request.method == "POST":
         form = TeacherForm(request.POST, request.FILES)
 
         if form.is_valid():
-            # admin_user = User.objects.get_or_create(username="admin")
-            # Assign the currently logged-in user
-            form.save()
-            messages.success(request, "Account completed successfully!")
-            return redirect("offcom")
+            new_athlete = form.save(commit=False)
 
+            # Handle the cropped image
+            cropped_image_data = request.POST.get("croppedImage")
+            if cropped_image_data:
+                format, imgstr = cropped_image_data.split(";base64,")
+                ext = format.split("/")[-1]
+                image_data = base64.b64decode(imgstr)
+                new_athlete.photo = ContentFile(
+                    image_data, name=f"athlete_{new_athlete.id}.{ext}"
+                )
+
+            new_athlete.save()
+            messages.success(request, "Form submitted successfully.")
+            return redirect("addteacher")
         else:
-            # Add form-specific error messages for individual fields
-            messages.error(request, "Form is not valid. Please check your input.")
-            print(f"Form errors: {form.errors}")
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{field.capitalize()}: {error}")
 
     else:
         form = TeacherForm()
 
     context = {"form": form}
     return render(request, "teacher_new.html", context)
-
 
 
 from django.http import HttpResponse

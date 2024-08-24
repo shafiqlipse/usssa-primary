@@ -1,0 +1,101 @@
+.profile-update {
+    max-width: 1600px;
+    width: 100%;
+    background-color: rgba(73, 72, 72, 0.082);
+    backdrop-filter: blur(3em);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .school-long {
+      width: 80%;
+      background-color: #fff;
+      padding: 20px;
+      @media (max-width: 999px) {
+        width: 90%;
+      }
+      @media (max-width: 768px) {
+        width: 100%;
+        margin: 10px;
+      }
+      h2 {
+        text-transform: uppercase;
+        margin: 10px;
+      }
+      hr {
+        margin: 10px;
+      }
+      .form-ctrl {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        .school {
+          .fields {
+            width: 100%;
+            .left {
+              display: grid;
+              grid-template-columns: 350px 2fr;
+              gap: 20px;
+              width: 100%;
+              @media (max-width: 768px) {
+                grid-template-columns: repeat(1, 1fr);
+              }
+              @media (max-width: 508px) {
+                grid-template-columns: repeat(1, 1fr);
+              }
+              .fiil {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+                @media (max-width: 768px) {
+                  grid-template-columns: repeat(1, 1fr);
+                }
+                @media (max-width: 508px) {
+                  grid-template-columns: repeat(1, 1fr);
+                }
+                .field {
+                  display: flex;
+                  align-items: flex-start;
+                  justify-content: flex-start;
+                  flex-direction: column;
+                  width: 100%;
+                  input,
+                  select {
+                    padding: 8px 10px;
+                    border-radius: 3px;
+                    width: 100% !important;
+                    border: solid 1px rgba(49, 101, 255, 0.982);
+                  }
+                }
+              }
+              .lefta {
+                width: 320px;
+                .field {
+                  display: flex;
+                  align-items: flex-start;
+                  flex-direction: column;
+                  justify-content: center;
+                  width: 100%;
+                  img {
+                    width: 100%;
+                  }
+                }
+              }
+            }
+          }
+          p {
+            margin: 10px;
+            label {
+              text-transform: capitalize;
+            }
+            input,
+            select {
+              width: 100%;
+              padding: 8px;
+            }
+          }
+        }
+      }
+    }
+  }
+  
