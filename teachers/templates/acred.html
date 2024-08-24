@@ -62,11 +62,6 @@
                   <tr>
                     <td class="td">
                       <div class="inner">
-                        <span
-                          >{{ athlete.contact|upper}}
-                          ({{athlete.gender|upper}})</span
-                        >
-                        <br />
                         {% if athlete.photo %}
                         <img
                           src="{{ athlete.photo.path }}"
@@ -84,9 +79,7 @@
                           {{athlete.last_name|upper }}
                         </span>
                         <br />
-                        <span>{{ athlete.designation|upper }}</span><br />
                         <span>{{ athlete.school|upper }}</span><br />
-                        <span>{{ athlete.district|upper }}</span><br />
                       </div>
                     </td>
                   </tr>

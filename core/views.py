@@ -125,6 +125,7 @@ def delete_officer(request, id):
 
 def AllTeams(request):
     teams = Team.objects.filter(team_officer=request.user)
+    
     officer = Officer.objects.get(user=request.user)
     location = officer.district
     context = {"teams": teams, "location": location}

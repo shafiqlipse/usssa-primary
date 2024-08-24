@@ -42,7 +42,7 @@
             {% for team in teams %}
             <tr>
               <td>
-                <a href="">{{location}} </a>
+                <a href="">{{team.team_officer.officer_profile.first_name}} </a>
               </td>
               <td>{{team.team_sport}}</td>
               <td>{{team.team_gender}}</td>

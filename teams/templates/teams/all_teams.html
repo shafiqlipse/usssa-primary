@@ -38,7 +38,7 @@
             {% for team in teams %}
             <tr>
               <td>
-                <a href="{%url 'steam' team.id%}">{{team.school}} </a>
+                <a href="{%url 'steam' team.id%}">{{location}} </a>
               </td>
               <td>{{team.championship}} | {{team.sport}}</td>
               <td>{{team.age}} {{team.gender}}</td>
