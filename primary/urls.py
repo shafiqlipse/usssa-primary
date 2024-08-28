@@ -39,6 +39,7 @@ urlpatterns = [
     path("newteam/", create_team, name="teamnew"),
     path("updateteam/<int:id>", update_team, name="updateteam"),
     path("team/<int:id>", team_details, name="team"),
+    path("teamd/<int:id>", team_ddetails, name="dteam"),
     path("deleteam/<int:id>", delete_tdeam, name="deleteam"),
     path("officers/", officers, name="officers"),
     path("pdf_report/", generate_album, name="pdfreport"),

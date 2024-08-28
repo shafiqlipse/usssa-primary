@@ -237,6 +237,11 @@ def Teams(request):
     context = {"teams": teams}
     return render(request, "school/teams.html", context)
 
+def team_ddetails(request, id):
+    team = Team.objects.get(id=id)
+
+    context = {"team": team}
+    return render(request, "teams/team.html", context)
 
 from django.shortcuts import render
 from xhtml2pdf import pisa

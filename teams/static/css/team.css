@@ -1,0 +1,9 @@
+.team-page .teams .team .image img {
+  width: 200px;
+  height: 200px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.team-page .teams .team .content h2 {
+  font-size: 14px;
+}/*# sourceMappingURL=team.css.map */

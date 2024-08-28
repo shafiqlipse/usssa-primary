@@ -42,7 +42,7 @@
             {% for team in teams %}
             <tr>
               <td>
-                <a href="">
+                <a href="{%url 'dteam' team.id%}">
                   {% for officer in team.team_officer.officer_profile.all %}
                   {{officer.district}} {% empty %}
                   <p>No district found</p>
