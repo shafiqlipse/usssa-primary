@@ -1,18 +1,29 @@
 .home-page {
   margin-top: -100px;
   width: 100%;
-  padding: 20% 5%;
+  padding: 0 5%;
   background: linear-gradient(90deg, rgb(2, 0, 36) 0%, rgb(0, 0, 150) 51%, rgb(0, 112, 255) 100%);
   background-size: cover;
 }
 .home-page .hero {
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 .home-page .hero .left {
+  padding: 10% 0;
+  flex-direction: column;
   color: white;
+  width: 60%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
-.home-page .hero .left img {
-  width: 100%;
+@media (max-width: 768px) {
+  .home-page .hero .left {
+    width: 100%;
+    padding-top: 20%;
+  }
 }
 .home-page .hero .left span {
   font-size: 20px;
@@ -23,18 +34,41 @@
   font-size: 3.4em;
   text-transform: capitalize;
   font-weight: bold;
+  color: gold;
+}
+@media (max-width: 768px) {
+  .home-page .hero .left h1 {
+    font-size: 200%;
+  }
 }
 .home-page .hero .left p {
   margin: 10px 0;
+  font-size: 19px;
 }
 .home-page .hero .left .btns {
   width: 350px;
 }
 .home-page .hero .left .btns .btn-submit {
+  width: 100%;
   font-size: 17px;
   border: solid 1px #fff;
   margin: 20px 20px 0 0;
 }
 .home-page .hero .left .btns .btn-submit i {
   margin-left: 20px;
+}
+.home-page .hero .lefot {
+  margin-bottom: 100px;
+  width: 50%;
+  height: 600px;
+}
+@media (max-width: 768px) {
+  .home-page .hero .lefot {
+    width: 100%;
+  }
+}
+@media (max-width: 768px) {
+  .home-page .hero .lefot {
+    height: auto;
+  }
 }/*# sourceMappingURL=home.css.map */

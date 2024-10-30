@@ -157,6 +157,9 @@ from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
 from django.http import HttpResponse
 from .models import School
 from django.db import IntegrityError
+from django.db import IntegrityError
+from django.core.files.base import ContentFile
+import base64
 
 
 def export_pdf(request):
@@ -394,6 +397,7 @@ def Dash(request):
     school = School.objects.get(user_id=user.id)
     officials_count = school_official.objects.filter(school_id=school.id).count()
     athletes_count = Athlete.objects.filter(school_id=school.id).count()
+    athletes = Athlete.objects.filter(school_id=school.id)[:6]
     officials_bcount = school_official.objects.filter(
         school_id=school.id, gender="M"
     ).count()
@@ -417,6 +421,7 @@ def Dash(request):
         "athletes_gcount": athletes_gcount,
         "officials": officials,
         "school": school,
+        "athletes": athletes,
     }
     return render(request, "school/schoolprofile.html", context)
 
@@ -449,10 +454,32 @@ def newAthlete(request):
         if form.is_valid():
             try:
                 new_athlete = form.save(commit=False)
-                new_athlete.school = request.user.school_profile.first()
+
+                # Assign the school from the user profile
+                new_athlete.school = (
+                    request.user.school_profile.first()
+                )  # Ensure profile has a school
+
+                # Handle cropped image data for the "photo" field
+                cropped_data = request.POST.get("photo_cropped")
+                if cropped_data:
+                    try:
+                        format, imgstr = cropped_data.split(";base64,")
+                        ext = format.split("/")[-1]
+                        data = ContentFile(
+                            base64.b64decode(imgstr), name=f"photo.{ext}"
+                        )
+                        new_athlete.photo = data  # Assign cropped image
+                    except (ValueError, TypeError) as e:
+                        messages.error(request, "Invalid image data.")
+                        return render(
+                            request, "athletes/new_athletes.html", {"form": form}
+                        )
+
                 new_athlete.save()
                 messages.success(request, "Athlete added successfully!")
                 return redirect("athletes")
+
             except IntegrityError as e:
                 if "lin" in str(e).lower():
                     messages.error(
@@ -464,13 +491,45 @@ def newAthlete(request):
             except Exception as e:
                 messages.error(request, f"Error adding athlete: {str(e)}")
         else:
+            # Form validation error messages
             for field, errors in form.errors.items():
                 for error in errors:
                     messages.error(request, f"{field.capitalize()}: {error}")
+
     else:
         form = NewAthleteForm()
 
     return render(request, "school/newAthlete.html", {"form": form})
+
+
+# def newAthlete(request):
+#     if request.method == "POST":
+#         form = NewAthleteForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             try:
+#                 new_athlete = form.save(commit=False)
+#                 new_athlete.school = request.user.school_profile.first()
+#                 new_athlete.save()
+#                 messages.success(request, "Athlete added successfully!")
+#                 return redirect("athletes")
+#             except IntegrityError as e:
+#                 if "lin" in str(e).lower():
+#                     messages.error(
+#                         request,
+#                         "An athlete with this Learner Identification Number (LIN) already exists.",
+#                     )
+#                 else:
+#                     messages.error(request, f"Error adding athlete: {str(e)}")
+#             except Exception as e:
+#                 messages.error(request, f"Error adding athlete: {str(e)}")
+#         else:
+#             for field, errors in form.errors.items():
+#                 for error in errors:
+#                     messages.error(request, f"{field.capitalize()}: {error}")
+#     else:
+#         form = NewAthleteForm()
+
+#     return render(request, "school/newAthlete.html", {"form": form})
 
 
 # a confirmation of credentials

@@ -1,32 +1,166 @@
-.profileupdate {
+.content-wrapper h1 {
+  margin: 5px 0;
+  font-weight: bold;
+}
+.content-wrapper p span {
+  font-weight: bold;
+  font-size: 1.2em;
+  color: red;
+}
+.content-wrapper .form-ctrl {
   padding: 20px;
 }
-.profileupdate .form-ctrl {
-  padding: 20px;
-  width: 100%;
+@media (max-width: 550px) {
+  .content-wrapper .form-ctrl {
+    padding: 10px;
+  }
 }
-.profileupdate .form-ctrl .fields .left .field {
-  width: 100%;
-  flex-direction: column;
+.content-wrapper .form-ctrl .fields .leftp h2 {
   margin: 10px 0;
-  justify-content: flex-start;
-  align-items: flex-start;
+  font-size: 2em;
+  text-transform: capitalize;
+  font-weight: bold;
 }
-.profileupdate .form-ctrl .fields .left .field label {
-  margin: 0 15px 0 0;
-  font-size: 14px;
-  font-weight: 500;
+.content-wrapper .form-ctrl .fields .leftp .left0 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-.profileupdate .form-ctrl .fields .left .field input,
-.profileupdate .form-ctrl .fields .left .field select {
+@media (max-width: 768px) {
+  .content-wrapper .form-ctrl .fields .leftp .left0 {
+    flex-direction: column;
+  }
+}
+.content-wrapper .form-ctrl .fields .leftp .left0 .imgbox .field,
+.content-wrapper .form-ctrl .fields .leftp .left0 .imgbox .field-container,
+.content-wrapper .form-ctrl .fields .leftp .left0 .lefty .field,
+.content-wrapper .form-ctrl .fields .leftp .left0 .lefty .field-container {
+  margin-bottom: 10px;
+}
+.content-wrapper .form-ctrl .fields .leftp .left0 .imgbox .field .preview-container,
+.content-wrapper .form-ctrl .fields .leftp .left0 .imgbox .field-container .preview-container,
+.content-wrapper .form-ctrl .fields .leftp .left0 .lefty .field .preview-container,
+.content-wrapper .form-ctrl .fields .leftp .left0 .lefty .field-container .preview-container {
+  background-image: url("https://static.vecteezy.com/system/resources/thumbnails/036/594/092/small_2x/man-empty-avatar-photo-placeholder-for-social-networks-resumes-forums-and-dating-sites-male-and-female-no-photo-images-for-unfilled-user-profile-free-vector.jpg");
+  background-position: center center;
+  background-size: cover;
+  height: 300px;
   width: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+@media (max-width: 900px) {
+  .content-wrapper .form-ctrl .fields .leftp .left0 .imgbox .field .preview-container,
+  .content-wrapper .form-ctrl .fields .leftp .left0 .imgbox .field-container .preview-container,
+  .content-wrapper .form-ctrl .fields .leftp .left0 .lefty .field .preview-container,
+  .content-wrapper .form-ctrl .fields .leftp .left0 .lefty .field-container .preview-container {
+    width: 300px;
+  }
+}
+@media (max-width: 550px) {
+  .content-wrapper .form-ctrl .fields .leftp .left0 .imgbox .field .preview-container,
+  .content-wrapper .form-ctrl .fields .leftp .left0 .imgbox .field-container .preview-container,
+  .content-wrapper .form-ctrl .fields .leftp .left0 .lefty .field .preview-container,
+  .content-wrapper .form-ctrl .fields .leftp .left0 .lefty .field-container .preview-container {
+    width: 100%;
+    height: 250px;
+  }
+}
+.content-wrapper .form-ctrl .fields .leftp .left0 .imgbox .field input,
+.content-wrapper .form-ctrl .fields .leftp .left0 .imgbox .field select,
+.content-wrapper .form-ctrl .fields .leftp .left0 .imgbox .field-container input,
+.content-wrapper .form-ctrl .fields .leftp .left0 .imgbox .field-container select,
+.content-wrapper .form-ctrl .fields .leftp .left0 .lefty .field input,
+.content-wrapper .form-ctrl .fields .leftp .left0 .lefty .field select,
+.content-wrapper .form-ctrl .fields .leftp .left0 .lefty .field-container input,
+.content-wrapper .form-ctrl .fields .leftp .left0 .lefty .field-container select {
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 1px 1px 10px 1px #e4e3e3;
+}
+.content-wrapper .form-ctrl .fields .leftp .left0 .imgbox .field label,
+.content-wrapper .form-ctrl .fields .leftp .left0 .imgbox .field-container label,
+.content-wrapper .form-ctrl .fields .leftp .left0 .lefty .field label,
+.content-wrapper .form-ctrl .fields .leftp .left0 .lefty .field-container label {
+  margin: 0;
+  font-size: 13px;
+  color: #000000;
+}
+.content-wrapper .form-ctrl .fields .leftp .left0 .imgbox {
+  width: 30%;
+}
+@media (max-width: 768px) {
+  .content-wrapper .form-ctrl .fields .leftp .left0 .imgbox {
+    width: 100%;
+  }
+}
+.content-wrapper .form-ctrl .fields .leftp .left0 .lefty {
+  width: 70%;
+  margin: 20px;
+}
+@media (max-width: 800px) {
+  .content-wrapper .form-ctrl .fields .leftp .left0 .lefty {
+    width: 100%;
+  }
+}
+.content-wrapper .form-ctrl .fields .leftp .left1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+@media (max-width: 768px) {
+  .content-wrapper .form-ctrl .fields .leftp .left1 {
+    flex-direction: column;
+  }
+}
+.content-wrapper .form-ctrl .fields .leftp .left1 .lefte {
+  width: 100%;
+}
+.content-wrapper .form-ctrl .fields .leftp .left1 .lefte .field,
+.content-wrapper .form-ctrl .fields .leftp .left1 .lefte .field-container {
+  margin-bottom: 10px;
+}
+.content-wrapper .form-ctrl .fields .leftp .left1 .lefte .field input,
+.content-wrapper .form-ctrl .fields .leftp .left1 .lefte .field select,
+.content-wrapper .form-ctrl .fields .leftp .left1 .lefte .field-container input,
+.content-wrapper .form-ctrl .fields .leftp .left1 .lefte .field-container select {
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 1px 1px 10px 1px #e8e8e8;
+}
+.content-wrapper .form-ctrl .fields .leftp .left1 .lefte .field label,
+.content-wrapper .form-ctrl .fields .leftp .left1 .lefte .field-container label {
+  margin: 0;
+  font-size: 13px;
+  color: #000000;
+}
+.content-wrapper .form-ctrl .fields .leftp .left1 .imgbox {
+  width: 30%;
+}
+@media (max-width: 768px) {
+  .content-wrapper .form-ctrl .fields .leftp .left1 .imgbox {
+    width: 100%;
+  }
+}
+.content-wrapper .form-ctrl .fields .leftp .left1 .lefty {
+  width: 70%;
+  margin: 20px;
+}
+@media (max-width: 800px) {
+  .content-wrapper .form-ctrl .fields .leftp .left1 .lefty {
+    width: 100%;
+  }
+}
+.content-wrapper .form-ctrl .btn-submit {
+  padding: 10px;
+  width: 30%;
+  border: 0;
+  text-transform: capitalize;
+  background-color: rgb(0, 121, 185);
+  color: #fff;
   border-radius: 5px;
-  outline-color: rgba(51, 228, 255, 0.4);
 }
-.profileupdate .form-ctrl .fields .left .field input:focus,
-.profileupdate .form-ctrl .fields .left .field select:focus {
-  border: solid 1px;
-}
-.profileupdate .form-ctrl .fields .left .field img {
-  width: 100%;
+.content-wrapper .form-ctrl .btn-submit:hover {
+  background-color: rgb(251, 251, 251);
+  color: #e30000;
 }/*# sourceMappingURL=newAthlete.css.map */

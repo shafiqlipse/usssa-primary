@@ -1,36 +1,141 @@
-.profileupdate {
-    padding: 20px;
-
+.content-wrapper {
+  h1 {
+    margin: 5px 0;
+    font-weight: bold;
+  }
+  p {
+    span {
+      font-weight: bold;
+      font-size: 1.2em;
+      color: red;
+    }
+  }
   .form-ctrl {
     padding: 20px;
-    width: 100%;
+    @media (max-width: 550px) {
+      padding: 10px;
+    }
     .fields {
-      .left
-      {
-        .field {
-          width: 100%;
-          flex-direction: column;
+      .leftp {
+      
+
+        h2 {
           margin: 10px 0;
-          justify-content: flex-start;
-          align-items: flex-start;
-          label {
-            margin: 0 15px 0 0;
-            font-size: 14px;
-            font-weight: 500;
+          font-size: 2em;
+          text-transform: capitalize;
+          font-weight: bold;
+        }
+        .left0 {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+         
+          @media (max-width: 768px) {
+            flex-direction: column;
           }
-          input,
-          select {
-            width: 100%;
-            border-radius: 5px;
-            outline-color: #33e4ff66;
-            &:focus {
-              border: solid 1px;
+          .imgbox,
+          .lefty {
+            
+            .field,
+            .field-container {
+              margin-bottom: 10px;
+              .preview-container {
+                background-image: url("https://static.vecteezy.com/system/resources/thumbnails/036/594/092/small_2x/man-empty-avatar-photo-placeholder-for-social-networks-resumes-forums-and-dating-sites-male-and-female-no-photo-images-for-unfilled-user-profile-free-vector.jpg");
+                background-position: center center;
+                background-size: cover;
+                height: 300px;
+                width: 100%;
+                object-fit: contain;
+                @media (max-width: 900px) {
+                  width: 300px;
+                }
+                @media (max-width: 550px) {
+                  width: 100%;
+                  height: 250px;
+                }
+              }
+              input,
+              select {
+                width: 100%;
+                background-color: #fff;
+                box-shadow: 1px 1px 10px 1px #e4e3e3;
+              }
+              label {
+                margin: 0;
+                font-size: 13px;
+                color: #000000;
+              }
             }
           }
-          img {
-            width: 100%;
+          .imgbox {
+            width: 30%;
+            @media (max-width: 768px) {
+              width: 100%;
+            }
+          }
+          .lefty {
+            width: 70%;
+            margin: 20px;
+           
+            @media (max-width: 800px) {
+              width: 100%;
+            }
           }
         }
+        .left1 {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          @media (max-width: 768px) {
+            flex-direction: column;
+          }
+
+          .lefte {
+            width: 100%;
+            .field,
+            .field-container {
+              margin-bottom: 10px;
+
+              input,
+              select {
+                width: 100%;
+                background-color: #fff;
+                box-shadow: 1px 1px 10px 1px #e8e8e8;
+              }
+              label {
+                margin: 0;
+                font-size: 13px;
+                color: #000000;
+              }
+            }
+          }
+          .imgbox {
+            width: 30%;
+            @media (max-width: 768px) {
+              width: 100%;
+            }
+          }
+          .lefty {
+            width: 70%;
+            margin: 20px;
+            @media (max-width: 800px) {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+    .btn-submit {
+      padding: 10px;
+      width: 30%;
+      border: 0;
+      text-transform: capitalize;
+      background-color: rgb(0, 121, 185);
+      color: #fff;
+      border-radius: 5px;
+      &:hover {
+        background-color: rgb(251, 251, 251);
+        color: #e30000;
       }
     }
   }

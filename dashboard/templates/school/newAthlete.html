@@ -1,6 +1,7 @@
 {% extends "dashboard/dashboard.html" %}
 <!---->
 {% load static %} {% block content %}
+
 <style>
   .alert {
     padding: 10px;
@@ -19,18 +20,22 @@
     color: white;
   }
 </style>
-<div class="profileupdate">
+<div class="content-wrapper">
   <h1>Add Athlete</h1>
+  <p>All fields labeled with <span>*</span> must be filled.</p>
+  <hr />
   <form
     action=""
     method="POST"
-    class="form-ctrl glue"
+    class="form-ctrl card"
     enctype="multipart/form-data"
   >
     {% csrf_token %}
-    <div class="fields grid2">
-      <div class="left">
+    <div class="fields">
+      <div class="leftp">
         <h2>Athlete Info</h2>
+        <p>All fields labeled with <span>*</span> must be filled.</p>
+        <hr />
         {% if messages %}
         <div class="messages">
           {% for message in messages %}
@@ -42,161 +47,102 @@
           {% endfor %}
         </div>
         {% endif %}
-        <div class="field">
-          <label>{{form.photo.label}} </label>{% if form.instance.photo %}
-          <img
-            src="{{ form.instance.photo.url }}"
-            id="image-preview"
-            alt="Current Photo"
-          />
-          {% else %}
-
-          <img
-            src="{% static 'images/profile.png'%}"
-            id="image-preview"
-            alt="No Photo"
-          />
-          {% endif %}
-        </div>
-        <div class="field">
-          <input
-            type="file"
-            name="photo"
-            accept="image/*"
-            onchange="displayImage(this);"
-            id="id_photo"
-          />
-        </div>
-      </div>
-
-      <div class="left">
-        <div class="field-grid grid2">
-          <div class="field"><label>First Name</label>{{form.fname}}</div>
-          <div class="field"><label>Middle Name</label>{{form.mname}}</div>
-        </div>
-        <div class="field-grid grid2">
-          <div class="field"><label>Last Name</label>{{form.lname}}</div>
-          <div class="field"><label>LIN</label>{{form.lin}}</div>
-        </div>
-        <div class="field-grid grid2">
-          <div class="field"><label>Sport</label>{{form.sport}}</div>
-          <div class="field"><label>Gender</label>{{form.gender}}</div>
-        </div>
-        <div class="field-grid grid2">
-          <div class="field"><label>Class</label>{{form.classroom}}</div>
-          <div class="field">
-            <label for="date_of_birth">Date of Birth:</label>
-            <input
-              type="date"
-              id="id_date_of_birth"
-              name="date_of_birth"
-              onchange="get_age()"
-            />
+        <div class="left0">
+          <div class="imgbox">
+            <div class="field">
+              <label>{{form.photo.label}} </label>
+              <div id="photos_preview" class="preview-container"></div>
+            </div>
+            <div class="field">
+              <input type="file" name="photo" accept="image/*" id="id_photo" />
+            </div>
           </div>
 
-          <div class="field flex">
-            <label for="id_age">Age:</label>
-            <select id="id_age" name="age">
-              <!-- Options will be dynamically populated using JavaScript -->
-            </select>
+          <div class="lefty">
+            <div class="field-grid grid3">
+              <div class="field"><label>First Name</label>{{form.fname}}</div>
+              <div class="field"><label>Middle Name</label>{{form.mname}}</div>
+              <div class="field"><label>Last Name</label>{{form.lname}}</div>
+            </div>
+
+            <div class="field-grid grid2">
+              <div class="field">
+                <label>Learner's Identification Number</label>{{form.lin}}
+              </div>
+
+              <div class="field"><label>Sport</label>{{form.sport}}</div>
+              <div class="field"><label>Gender</label>{{form.gender}}</div>
+
+              <div class="field"><label>Class</label>{{form.classroom}}</div>
+              <div class="field">
+                <label for="date_of_birth">Date of Birth:</label>
+                {{form.date_of_birth}}
+              </div>
+              <div class="field"><label>Age</label>{{form.age}}</div>
+            </div>
           </div>
         </div>
+
         <h2>Parent/ Guardian Info</h2>
-        <div class="field-grid grid2">
-          <div class="field">
-            <label>Parent's First name</label>{{form.Parent_fname}}
-          </div>
-          <div class="field">
-            <label>Parent's Last name</label>{{form.Parent_lname}}
+        <p>
+          Ensure information provided below corresponds to that on official
+          documents.
+        </p>
+        <hr />
+        <div class="left1">
+          <div class="lefte">
+            <div class="field-grid grid3">
+              <div class="field">
+                <label>Parent's First name</label>{{form.Parent_fname}}
+              </div>
+              <div class="field">
+                <label>Parent's Last name</label>{{form.Parent_lname}}
+              </div>
+
+              <div class="field">
+                <label>Parent's NIN</label>{{form.parent_nin}}
+              </div>
+              <div class="field">
+                <label>Parent's contact</label>{{form.parent_phone_number}}
+              </div>
+
+              <div class="field"><label>Address</label>{{form.address}}</div>
+              
+              <div class="field"><label>Job</label>{{form.designation}}</div>
+
+              <div class="field">
+                <label>Relationship</label>{{form.relationship}}
+              </div>
+            </div>
           </div>
         </div>
-        <div class="field-grid grid2">
-          <div class="field">
-            <label>Parent's NIN</label>{{form.parent_nin}}
-          </div>
-          <div class="field">
-            <label>Parent's contact</label>{{form.parent_phone_number}}
-          </div>
-        </div>
-        <div class="field-grid grid2">
-          <div class="field"><label>Address</label>{{form.address}}</div>
-          <div class="field">
-            <label>Designation</label>{{form.designation}}
-          </div>
-        </div>
-        <div class="field-grid grid2">
-          <div class="field">
-            <label>Relationship</label>{{form.relationship}}
-          </div>
-        </div>
-        <button type="submit" class="btn-submit">Save athlete</button>
       </div>
     </div>
+    <button type="submit" class="btn-submit">Save athlete</button>
   </form>
-  {% if messages %}
-  <div class="messages">
+  <div
+    class="toast-container position-fixed bottom-0 end-0 p-3"
+    id="toast-container"
+  >
     {% for message in messages %}
-    <div class="{% if message.tags %}{{ message.tags }}{% endif %}">
-      {{ message }}
+    <div
+      class="toast align-items-center text-bg-{{ message.tags }} border-0"
+      role="alert"
+      aria-live="assertive"
+      aria-atomic="true"
+    >
+      <div class="d-flex">
+        <div class="toast-body">{{ message }}</div>
+        <button
+          type="button"
+          class="btn-close me-2 m-auto"
+          data-bs-dismiss="toast"
+          aria-label="Close"
+        ></button>
+      </div>
     </div>
     {% endfor %}
   </div>
-  {% endif %}
-  <script>
-    function get_age() {
-      var date_of_birth_select = document.getElementById("id_date_of_birth");
-      var age_select = document.getElementById("id_age"); // Make sure this ID matches the one in your HTML
-
-      // Show a loading indicator for ages
-      age_select.innerHTML =
-        "<option disabled selected>Loading age...</option>";
-
-      console.log("Selected date_of_birth:", date_of_birth_select.value);
-
-      // Fetch ages for the selected date_of_birth using AJAX
-      var date_of_birth = date_of_birth_select.value;
-      if (!date_of_birth) {
-        console.error("Date of birth is undefined or empty");
-        return;
-      }
-
-      fetch(`/calculate_age_choices/?date_of_birth=${date_of_birth}`)
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Failed to fetch age choices");
-          }
-          return response.json();
-        })
-        .then((data) => {
-          // Log the received data for debugging
-          console.log("Received data:", data);
-
-          // Hide the loading indicator
-          age_select.innerHTML = "";
-
-          // Log the received data for debugging
-          console.log("Received data:", data);
-
-          // Update the 'age' dropdown with the fetched data
-          if (data && data.ages && data.ages.length > 0) {
-            data.ages.forEach((ageArray) => {
-              var option = document.createElement("option");
-              option.value = ageArray[0]; // Use the first element as the value
-              option.text = ageArray[1]; // Use the second element as the text
-              age_select.add(option);
-            });
-          } else {
-            console.error("No valid age data found in the response:", data);
-            // Optionally, you can clear the dropdown or handle the absence of data in another way
-          }
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-          // Update the 'age' dropdown with an error message
-          age_select.innerHTML =
-            "<option disabled selected>Error loading ages</option>";
-        });
-    }
-  </script>
 </div>
+
 {% endblock %}

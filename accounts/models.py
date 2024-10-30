@@ -89,8 +89,7 @@ class TOfficer(models.Model):
     photo = models.ImageField(
         upload_to="photo/",
     )
-
-    
+   
     phone_number = models.CharField(max_length=15)
     role = models.CharField(max_length=25)
     district = models.CharField(max_length=25, null=True, blank=True)
