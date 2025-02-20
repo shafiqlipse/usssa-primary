@@ -1,4 +1,4 @@
-settings.py
+primary/settings.py
 **/migrations/*
 !/migrations/__init__.py
 /athlete_photos
