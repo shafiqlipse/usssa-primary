@@ -1,0 +1,160 @@
+{% extends "dashboard/dashboard.html" %}
+
+<!--static-->
+{% block title %}{{athlete.fname}} {{athlete.lname}}{% endblock %}
+<!--static-->
+{% load static %}
+<!--khfufufu-->
+{% block content %}
+<div id="app-content">
+  <!-- Container fluid -->
+  <div class="app-content-area">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-12">
+          <!-- Page header -->
+          <div class="mb-5">
+            <h3 class="mb-0">#UP000{{athlete.id}}</h3>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="row">
+          <div class="col-xl-5 mb-5">
+            <div class="card h-100">
+              <div
+                class="card-header d-flex justify-content-between align-items-center"
+              >
+                <h4 class="mb-0">{{athlete.fname}} {{athlete.lname}}</h4>
+                <div class="dropdown dropstart">
+                  <a
+                    href="#!"
+                    class="btn btn-ghost btn-icon btn-sm rounded-circle"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    <i data-feather="more-vertical" class="icon-xs"></i>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a
+                        class="dropdown-item d-flex align-items-center"
+                        href="#!"
+                        >Action</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        class="dropdown-item d-flex align-items-center"
+                        href="#!"
+                        >Another action</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        class="dropdown-item d-flex align-items-center"
+                        href="#!"
+                        >Something else here</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="card-body">
+                <div
+                  id=""
+                  class="d-flex justify-content-center"
+                  style="width: 100%"
+                >
+                  <img src="{{athlete.photo.url}}" alt="" style="width: 100%" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-7 mb-5">
+            <div class="card h-100">
+              <div
+                class="card-header d-flex justify-content-between align-items-center"
+              >
+                <h4 class="mb-0">Details</h4>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive table-card">
+                  <table class="table text-nowrap mb-0 table-centered">
+                    <tbody>
+                      <tr>
+                        <td>Learner's ID Number</td>
+                        <td>{{athlete.lin}}</td>
+                      </tr>
+                      <tr>
+                        <td>Date of Birth</td>
+                        <td>{{athlete.date_of_birth}}</td>
+                      </tr>
+                      <tr>
+                        <td>Age</td>
+                        <td>{{athlete.age}}</td>
+                      </tr>
+                      <tr>
+                        <td>Gender</td>
+                        <td>{{athlete.gender}}</td>
+                      </tr>
+                      <tr>
+                        <td>Sport</td>
+                        <td>{{athlete.sport}}</td>
+                      </tr>
+                      <tr>
+                        <td>Learner's Payment status</td>
+                        <td>{{athlete.status}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div
+                class="card-header d-flex justify-content-between align-items-center"
+              >
+                <h4 class="mb-0">Guardian's Details</h4>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive table-card">
+                  <table class="table text-nowrap mb-0 table-centered">
+                    <tbody>
+                      <tr>
+                        <td>Gurdian's Names</td>
+                        <td>
+                          {{athlete.Parent_fname}} {{athlete.Parent_lname}}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Gurdian's Phone Number</td>
+                        <td>{{athlete.parent_phone_number}}</td>
+                      </tr>
+                      <tr>
+                        <td>Gurdian's ID Number</td>
+                        <td>{{athlete.parent_nin}}</td>
+                      </tr>
+                      <tr>
+                        <td>Gurdian's Address</td>
+                        <td>{{athlete.address}}</td>
+                      </tr>
+                      <tr>
+                        <td>Gurdian's Job</td>
+                        <td>{{athlete.designation}}</td>
+                      </tr>
+                      <tr>
+                        <td>Relationship with athlete</td>
+                        <td>{{athlete.relationship}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

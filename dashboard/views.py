@@ -49,7 +49,7 @@ def Overview(request):
         "active_schools": active_schools,
         "inactive_schools": inactive_schools,
     }
-    return render(request, "dashboard/overview.html", context)
+    return render(request, "dashboard/analytics.html", context)
 
 
 # schools
@@ -78,33 +78,10 @@ def schools(request):
         "schools": schools,
         # "teamsFilter": teams
     }
-    return render(request, "dashboard/schools.html", context)
+    return render(request, "school/schools.html", context)
 
 
-# schools list, tuple or array
-@staff_required
-def activeschools(request):
 
-    schools = School.objects.filter(status="Active")
-
-    context = {
-        "schools": schools,
-        # "teamsFilter": teams
-    }
-    return render(request, "dashboard/active.html", context)
-
-
-# schools list, tuple or array
-@staff_required
-def inactiveschools(request):
-
-    schools = School.objects.filter(status="Inactive")
-
-    context = {
-        "schools": schools,
-        # "teamsFilter": teams
-    }
-    return render(request, "dashboard/inactive.html", context)
 
 
 # hegfhjgfjdhfjhfjdjjjjjjjjjjjjjjjjjjjjjjjj
@@ -156,6 +133,7 @@ from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
 from django.http import HttpResponse
 from .models import School
+# from teams.models import SchoolTeam
 from django.db import IntegrityError
 from django.db import IntegrityError
 from django.core.files.base import ContentFile
@@ -230,7 +208,7 @@ def all_athletes(request):
     context = {
         "athletes": athletes,
     }
-    return render(request, "dashboard/athletes.html", context)
+    return render(request, "athletes/athletes.html", context)
 
 
 # schools list, tuple or array
@@ -242,7 +220,7 @@ def all_officials(request):
     context = {
         "officilas": officilas,
     }
-    return render(request, "dashboard/officials.html", context)
+    return render(request, "officials/officials.html", context)
 
 
 def Schoolnew(request):
@@ -348,7 +326,7 @@ def Official(request):
         form = OfficialForm()
 
     context = {"form": form}
-    return render(request, "school/NOfficial.html", context)
+    return render(request, "officials/NOfficial.html", context)
 
 
 # schools list, tuple or array
@@ -407,8 +385,15 @@ def Dash(request):
     athletes_gcount = Athlete.objects.filter(
         school_id=school.id, gender="Female"
     ).count()
+    # teams_gcount = SchoolTeam.objects.filter(
+    #     school_id=school.id, gender="Female"
+    # # ).count()
+    # teams_bcount = SchoolTeam.objects.filter(
+    #     school_id=school.id, gender="Male"
+    # # ).count()
     athletes_bcount = Athlete.objects.filter(school_id=school.id, gender="Male").count()
     officials = school_official.objects.filter(school_id=school.id)
+    # teams = SchoolTeam.objects.filter(school_id=school.id).count
 
     # from django.contrib.auth.hashers import make_password
 
@@ -422,6 +407,9 @@ def Dash(request):
         "officials": officials,
         "school": school,
         "athletes": athletes,
+        # "teams": teams,
+        # "teams_gcount": teams_gcount,
+        # "teams_bcount": teams_bcount,
     }
     return render(request, "school/schoolprofile.html", context)
 
@@ -473,7 +461,7 @@ def newAthlete(request):
                     except (ValueError, TypeError) as e:
                         messages.error(request, "Invalid image data.")
                         return render(
-                            request, "athletes/new_athletes.html", {"form": form}
+                            request, "athletes/newAthlete.html", {"form": form}
                         )
 
                 new_athlete.save()
@@ -499,40 +487,10 @@ def newAthlete(request):
     else:
         form = NewAthleteForm()
 
-    return render(request, "school/newAthlete.html", {"form": form})
+    return render(request, "athletes/newAthlete.html", {"form": form})
 
 
-# def newAthlete(request):
-#     if request.method == "POST":
-#         form = NewAthleteForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             try:
-#                 new_athlete = form.save(commit=False)
-#                 new_athlete.school = request.user.school_profile.first()
-#                 new_athlete.save()
-#                 messages.success(request, "Athlete added successfully!")
-#                 return redirect("athletes")
-#             except IntegrityError as e:
-#                 if "lin" in str(e).lower():
-#                     messages.error(
-#                         request,
-#                         "An athlete with this Learner Identification Number (LIN) already exists.",
-#                     )
-#                 else:
-#                     messages.error(request, f"Error adding athlete: {str(e)}")
-#             except Exception as e:
-#                 messages.error(request, f"Error adding athlete: {str(e)}")
-#         else:
-#             for field, errors in form.errors.items():
-#                 for error in errors:
-#                     messages.error(request, f"{field.capitalize()}: {error}")
-#     else:
-#         form = NewAthleteForm()
 
-#     return render(request, "school/newAthlete.html", {"form": form})
-
-
-# a confirmation of credentials
 # @login_required
 def confirmation(request):
     user = request.user
@@ -601,7 +559,7 @@ def AthleteDetail(request, id):
         # "breadcrumbs": breadcrumbs,
     }
 
-    return render(request, "school/athlete.html", context)
+    return render(request, "athletes/athlete.html", context)
 
 
 @login_required(login_url="login")
@@ -620,7 +578,7 @@ def athletes(request):
 
     context = {"athletes": athletes, "school_profile": school_profile}
 
-    return render(request, "school/athletes.html", context)
+    return render(request, "athletes/athletes.html", context)
 
 
 @login_required(login_url="login")
@@ -641,7 +599,7 @@ def school_offs(request):
         "school_offs": school_offs,
     }
 
-    return render(request, "school/officials.html", context)
+    return render(request, "officials/officials.html", context)
 
 
 @login_required
@@ -702,7 +660,7 @@ def OfficialDetail(request, id):
         # "breadcrumbs": breadcrumbs,
     }
 
-    return render(request, "school/official.html", context)
+    return render(request, "officials/official.html", context)
 
 
 def athlete_list(request):

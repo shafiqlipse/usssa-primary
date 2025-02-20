@@ -1,138 +1,173 @@
+from django.shortcuts import render
 from django.shortcuts import render, redirect, get_object_or_404
-from accounts.decorators import school_required, anonymous_required
+from xhtml2pdf import pisa
+from django.template.loader import get_template
+from django.http import HttpResponse
+from django.contrib import messages
+from xhtml2pdf import pisa
+from io import BytesIO
 from .models import *
 from .forms import *
-from django.http import JsonResponse
-from django.contrib import messages
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+from accounts.decorators import admin_required
 
-# Create your views here.
+from django.http import HttpResponse
+from django.template.loader import get_template
+from xhtml2pdf import pisa
+from io import BytesIO
 
 
-def create_team(request):
+from .filters import SchoolEnrollmentFilter  # Assume you have created this filter
+
+
+def SchoolEnrollments(request):
+    # Get school from user profile
+    
+    user = request.user
+    school = School.objects.get(user_id=user.id) # Assuming profile has school attribute
+
+    # Get all enrollments for the school
+    enrollments = SchoolEnrollment.objects.filter(school=school)
+
     if request.method == "POST":
-        form = SchoolTeamForm(request.POST)
+        form = SchoolEnrollmentForm(request.POST, request.FILES)
+
         if form.is_valid():
-            team = form.save(commit=False)
-            # Assuming 'school' is the correct attribute name for the school in your Team model
-            # Retrieve the school instance associated with the current user
-            school_instance = get_object_or_404(School, user=request.user)
-            # Assign the school instance to the team
-            team.school = school_instance
-            team.save()
-            athletes = form.cleaned_data.get(
-                "athletes"
-            )  # Replace 'athletes' with the actual form field name
-            team.athletes.set(athletes)
-            team.save()
-
-            return redirect("team_s")
+            enrollment = form.save(commit=False)
+            enrollment.school = school
+            enrollment.save()
+            messages.success(request, "Enrollment created successfully!")
+            return redirect("school_enrollments")
         else:
-            # Attach errors to the form for display in the template
-            error_message = "There was an error in the form submission. Please correct the errors below."
+            messages.error(request, "Please correct the errors below.")
     else:
-        form = SchoolTeamForm()
-        error_message = None
+        form = SchoolEnrollmentForm()
 
-    return render(
-        request, "teams/new_team.html", {"form": form, "error_message": error_message}
+    context = {"form": form, "enrollments": enrollments}
+    return render(request, "enrollments/school_enrolls.html", context)
+
+
+def AllEnrollments(request):
+    # Get all school_enrolls
+    school_enrolls = SchoolEnrollment.objects.all()
+
+    # Apply the filter
+    # school_enroll_filter = SchoolEnrollmentFilter(request.GET, queryset=school_enrolls)
+    # filtered_school_enrolls = school_enroll_filter.qs
+
+    # Prepare context with athletes data
+    context = {
+        "school_enrolls": school_enrolls,
+    }
+
+    return render(request, "enrollments/enroll.html", context)
+
+
+def remove_athlete(request, enrollment_id, athlete_id):
+    athlete_enrollment = get_object_or_404(AthleteEnrollment, id=enrollment_id)
+    athlete = get_object_or_404(Athlete, id=athlete_id)
+
+    if request.method == "POST":
+        athlete_enrollment.athletes.remove(athlete)
+        return HttpResponseRedirect(
+            reverse("school_enrollment", args=[athlete_enrollment.school_enrollment.id])
+        )
+
+    return redirect(
+        "enrollments/school_enrollment", id=athlete_enrollment.school_enrollment.id
     )
 
 
-# @school_required
-def update_team(request, id):
-    team = get_object_or_404(SchoolTeam, id=id)
+def school_enrollment_details(request, id):
+    school_enrollment = get_object_or_404(SchoolEnrollment, id=id)
+    school = school_enrollment.school
+    if request.method == "POST":
+        form = AthleteEnrollmentForm(request.POST)
+        if form.is_valid():
+            athlete_enrollment = AthleteEnrollment.objects.create(
+                school_enrollment=school_enrollment
+            )
+            athlete_enrollment.athletes.set(form.cleaned_data["athletes"])
+            return HttpResponseRedirect(reverse("school_enrollment", args=[id]))
+    else:
+        form = AthleteEnrollmentForm()
+
+    athlete_enrollments = AthleteEnrollment.objects.filter(
+        school_enrollment=school_enrollment
+    )
+    all_athletes = Athlete.objects.filter(school=school, status="ACTIVE")
+
+    context = {
+        "school_enrollment": school_enrollment,
+        "form": form,
+        "athlete_enrollments": athlete_enrollments,
+        "all_athletes": all_athletes,
+    }
+    return render(request, "enrollments/school_enroll.html", context)
+
+
+def school_enrollment_update(request, id):
+    school_enrollment = get_object_or_404(SchoolEnrollment, id=id)
 
     if request.method == "POST":
-        form = SchoolTeamForm(request.POST, instance=team)
+        form = SchoolEnrollmentForm(
+            request.POST, request.FILES, instance=school_enrollment
+        )
         if form.is_valid():
             form.save()
-            return redirect("teams")  # Redirect to the team list page or another URL
+            messages.success(
+                request, "SchoolEnrollment information updated successfully!"
+            )
+            return redirect("school_enrollment", id=school_enrollment.id)
+        else:
+            messages.error(request, "Please correct the errors below.")
     else:
-        form = SchoolTeamForm(instance=team)
+        form = SchoolEnrollmentForm(instance=school_enrollment)
 
-    return render(request, "teams/update_team.html", {"form": form, "team": team})
-
-
-# # view team details
-
-
-def team_details(request, id):
-    team = SchoolTeam.objects.get(id=id)
-    athletes = team.athletes.all()
-    context = {"team": team, "athletes": athletes}
-    return render(request, "teams/team.html", context)
+    context = {
+        "form": form,
+        "school_enrollment": school_enrollment,
+    }
+    return render(request, "enrollments/update_school_enroll.html", context)
 
 
-def teamlist(request):
-    school_instance = get_object_or_404(School, user=request.user)
-
-    teams = SchoolTeam.objects.filter(school=school_instance)
-
-    context = {"teams": teams}
-    return render(request, "teams/teams.html", context)
-
-
-def allteamlist(request):
-
-    teams = SchoolTeam.objects.all()
-
-    context = {"teams": teams}
-    return render(request, "teams/all_teams.html", context)
-
-
-# # delete team
-@school_required
-def delete_team(request, id):
-    team = get_object_or_404(SchoolTeam, id=id)
-
+def school_enroll_delete(request, id):
+    stud = SchoolEnrollment.objects.get(id=id)
     if request.method == "POST":
-        team.delete()
-        return redirect("team_s")  # Redirect to the team list page or another URL
+        stud.delete()
+        return redirect("school_enrollments")
 
-    return render(request, "teams/delete_team.html", {"team": team})
-
-
-def delete_tdeam(request, id):
-    team = get_object_or_404(Team, id=id)
-
-    if request.method == "POST":
-        team.delete()
-        return redirect("teams")  # Redirect to the team list page or another URL
-
-    return render(request, "teams/delete_team.html", {"team": team})
+    return render(request, "enrollments/delete_school_enroll.html", {"obj": stud})
 
 
 from django.shortcuts import render
 from xhtml2pdf import pisa
 from django.template.loader import get_template
 from django.http import HttpResponse
-from django.contrib.staticfiles import finders
-import base64
-import os
 from django.conf import settings
-from django.core.files.storage import default_storage
 from django.http import HttpResponse
 from django.template.loader import get_template
 from xhtml2pdf import pisa
-from PIL import Image
 from io import BytesIO
-from PIL import Image, ExifTags
-import io
-import base64
 from django.conf import settings
 from django.http import HttpResponse
 from django.template.loader import get_template
-from django.core.files.storage import default_storage
+
 from xhtml2pdf import pisa
-from .models import SchoolTeam  # Make sure to import your models
+
+# Make sure to import your models
+
+admin_required
 
 
-def teamAccreditation(request, id):
-    team = SchoolTeam.objects.get(id=id)
-    athletes = team.athletes.all()
+def Accreditation(request, id):
+    team = get_object_or_404(SchoolEnrollment, id=id)
+    athlete_enrollments = AthleteEnrollment.objects.filter(school_enrollment=team)
+    athletes = Athlete.objects.filter(athleteenrollment__in=athlete_enrollments)
 
     # Get template
-    template = get_template("albums/acred.html")
+    template = get_template("reports/acred.html")
 
     # Compress and fix rotation for athletes' photos
 
@@ -157,40 +192,30 @@ def teamAccreditation(request, id):
     return response
 
 
-def compress_image(image_data, quality=85):
-    img = Image.open(BytesIO(image_data))
-    if img.mode in ("RGBA", "P"):
-        img = img.convert("RGB")
-    output = BytesIO()
-    img.save(output, format="JPEG", quality=quality)
-    compressed_image_data = output.getvalue()
-    return compressed_image_data
+def Albums(request, id):
+    team = get_object_or_404(SchoolEnrollment, id=id)
+    athlete_enrollments = AthleteEnrollment.objects.filter(school_enrollment=team)
+    athletes = Athlete.objects.filter(athleteenrollment__in=athlete_enrollments)
+    school = team.school
+    officials = school_official.objects.filter(school=school)
 
+    # Get athlete and official counts
+    athlete_count = athletes.count()
+    official_count = officials.count()
 
-def generate_sdalbum(request, id):
-
-    team = SchoolTeam.objects.get(id=id)
-    athletes = team.athletes.all()
+    # Create a unique filename
+    filename = f"{team.school} | {team.sport} .pdf"
 
     # Get template
-    template = get_template("albums/albums.html")
-
-    # Compress school photo
-
-    # Compress athletes' photos
-    for athlete in athletes:
-        if athlete.photo:
-            with default_storage.open(athlete.photo.path, "rb") as image_file:
-                athlete_photo_data = image_file.read()
-            compressed_athlete_photo_data = compress_image(athlete_photo_data)
-            athlete.photo_base64 = base64.b64encode(
-                compressed_athlete_photo_data
-            ).decode("utf-8")
+    template = get_template("reports/albums.html")
 
     # Prepare context
     context = {
         "team": team,
+        "official_count": official_count,
+        "athlete_count": athlete_count,
         "athletes": athletes,
+        "officials": officials,
         "MEDIA_URL": settings.MEDIA_URL,
     }
 
@@ -199,7 +224,7 @@ def generate_sdalbum(request, id):
 
     # Create a PDF
     response = HttpResponse(content_type="application/pdf")
-    response["Content-Disposition"] = 'attachment; filename="District Album.pdf"'
+    response["Content-Disposition"] = f'attachment; filename="{filename}"'
 
     # Generate PDF from HTML
     pisa_status = pisa.CreatePDF(html, dest=response)
@@ -209,14 +234,18 @@ def generate_sdalbum(request, id):
     return response
 
 
-def TeamCert(request, id):
+admin_required
 
-    team = SchoolTeam.objects.get(id=id)
-    athletes = team.athletes.all()
+
+def Certificate(request, id):
+    team = get_object_or_404(SchoolEnrollment, id=id)
+    athlete_enrollments = AthleteEnrollment.objects.filter(school_enrollment=team)
+    athletes = Athlete.objects.filter(athleteenrollment__in=athlete_enrollments)
 
     # Get template
-    template = get_template("albums/cert.html")
+    template = get_template("reports/cert.html")
 
+    # Compress and fix rotation for athletes' photos
 
     # Prepare context
     context = {
@@ -229,7 +258,7 @@ def TeamCert(request, id):
 
     # Create a PDF
     response = HttpResponse(content_type="application/pdf")
-    response["Content-Disposition"] = 'attachment; filename="Certificate.pdf"'
+    response["Content-Disposition"] = 'attachment; filename="Accreditation.pdf"'
 
     # Generate PDF from HTML
     pisa_status = pisa.CreatePDF(html, dest=response)

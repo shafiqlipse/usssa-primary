@@ -1,14 +1,10 @@
-
 {% extends "dashboard/dashboard.html" %}
 <!---->
-{% load static %}
-<!---->
-{%block title%}Edit school{% endblock %}
-<!---->
-{% block content %}
-
-<div class="profile-update">
-    <div class="school-long">
+{% load static %} {% block content %}
+<div id="app-content">
+  <div class="app-content-area">
+    <div class="container-fluid">
+      <div class="school-long">
         <form
           action=""
           method="POST"
@@ -33,7 +29,7 @@
                       alt="Current Photo"
                     />
                     {% else %}
-    
+
                     <img
                       src="{% static 'images/profile.png'%}"
                       id="image-previewg"
@@ -64,11 +60,11 @@
                     <label>{{ form.nin.label}}</label>
                     {{form.nin}}
                   </div>
-    
+
                   <div class="field flex">
                     <label>{{ form.email.label}} </label>{{form.email}}
                   </div>
-    
+
                   <div class="field">
                     <label>Phone:</label>
                     {{form.phone_number}}
@@ -105,6 +101,8 @@
           </div>
         </form>
       </div>
+    </div>
   </div>
+</div>
 
-  {% endblock %}
+{% endblock %}

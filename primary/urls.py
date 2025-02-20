@@ -7,7 +7,7 @@ from dashboard.views import *
 from accounts.views import *
 from core.views import *
 from teams.teviews import get_athletes
-from teams.views import delete_tdeam
+# from teams.views import delete_tdeam
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -25,10 +25,12 @@ urlpatterns = [
     path("deleteofficer/<int:id>", delete_officer, name="deleted"),
     path("school/", Dash, name="school_dashboard"),
     path("officeria/", Officerdash, name="officer_dashboard"),
+       # path("enrollment/", include("registration.urls")),
+    # email
+    # path('send_email/', Sendmail, name='send_email'),
     path("dashboard/", include("dashboard.urls")),
     path("team/", include("teams.urls")),
-    path("teachers/", include("teachers.urls")),
-    path("swimmers/", include("swimmers.urls")),
+
     path("get_athletes/", get_athletes, name="get_athletes"),
     path("get_dist_athletes/", get_dist_athletes, name="get_dist_athletes"),
     # path("enrollment/", include("registration.urls")),
@@ -40,7 +42,7 @@ urlpatterns = [
     path("updateteam/<int:id>", update_team, name="updateteam"),
     path("team/<int:id>", team_details, name="team"),
     path("teamd/<int:id>", team_ddetails, name="dteam"),
-    path("deleteam/<int:id>", delete_tdeam, name="deleteam"),
+    # path("deleteam/<int:id>", delete_tdeam, name="deleteam"),
     path("officers/", officers, name="officers"),
     path("pdf_report/", generate_album, name="pdfreport"),
     # path("pdfreport/<int:id>", generate_scalbum, name="pdreport"),

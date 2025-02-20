@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
   {% load static %}
   <head>
@@ -7,66 +8,61 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <link rel="shortcut icon" href="{% static 'images/logo.png'%}" />
+    <meta name="author" content="Codescandy" />
 
-    <title>USSSA | {% block title %}{% endblock %}</title>
-    <!-- plugins:css -->
-    <link
-      rel="stylesheet"
-      href="{% static 'vendors/mdi/css/materialdesignicons.min.css'%}"
-    />
-    <link
-      rel="stylesheet"
-      href="{% static 'vendors/css/vendor.bundle.base.css'%}"
-    />
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-M8S4MT3EYG"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
+      gtag("config", "G-M8S4MT3EYG");
+    </script>
+
+    <!-- Favicon icon-->
     <link
-      rel="stylesheet"
-      href="{% static 'vendors/jvectormap/jquery-jvectormap.css'%}"
-    />
-    <link
-      rel="stylesheet"
-      href="{% static 'vendors/flag-icon-css/css/flag-icon.min.css'%}"
-    />
-    <link
-      rel="stylesheet"
-      href="{% static 'vendors/owl-carousel-2/owl.carousel.min.css'%}"
-    />
-    <link
-      rel="stylesheet"
-      href="{% static 'vendors/owl-carousel-2/owl.theme.default.min.css'%}"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-      crossorigin="anonymous"
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="{% static 'images/fav.png' %}"
     />
 
-    <!-- End plugin css for this page -->
-    <!-- endinject -->
+    <!-- Color modes -->
+    <script src="{% static 'js/color-modes.js' %}"></script>
+
+    <!-- Libs CSS -->
     <link
-      href="https://cdn.datatables.net/v/dt/dt-2.0.1/datatables.min.css"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
       rel="stylesheet"
     />
-    <!-- Plugin css for this page -->  
-     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"
+      href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.95/css/materialdesignicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.css"
       rel="stylesheet"
     />
 
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap"
       rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/cropper/4.1.0/cropper.min.css"
     />
-    <!-- inject:css -->
-    <!-- endinject -->
+    <link href="{% static 'css/simplabar.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/main/main.css'%}" />
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="{% static 'css/theme.css' %}" />
     <!-- Layout styles -->
-    <link rel="stylesheet" href="{% static 'css/main/style.css'%}" />
-    <link rel="stylesheet" href="{% static 'css/styles.css'%}" />
+
     <link rel="icon" href="{%static 'images/upsaa.png'%}" sizes="35x35" />
     <link rel="stylesheet" href="{% static 'css/main/main.css'%}" />
     <link rel="stylesheet" href="{% static 'css/dashboard/dashboard.css'%}" />
@@ -74,8 +70,6 @@
     <link rel="stylesheet" href="{% static 'css/dashboard/delete.css'%}" />
     <link rel="stylesheet" href="{% static 'css/dashboard/schooled.css'%}" />
     <link rel="stylesheet" href="{% static 'css/dashboard/schoolist.css'%}" />
-    <link rel="stylesheet" href="{% static 'css/css/all.min.css'%}" />
-    <link rel="stylesheet" href="{% static 'css/app.css'%}" />
     <link rel="stylesheet" href="{% static 'css/newteam.css'%}" />
     <link rel="stylesheet" href="{% static 'css/team.css'%}" />
     <link rel="stylesheet" href="{% static 'css/tprofile.css'%}" />
@@ -84,674 +78,521 @@
     <link rel="stylesheet" href="{% static 'css/profile/athlete.css'%}" />
     <link rel="stylesheet" href="{% static 'css/profile/athletes.css'%}" />
     <link rel="stylesheet" href="{% static 'css/profile/newAthlete.css'%}" />
-    <link rel="stylesheet" href="{%static 'css/main/main.css'%}" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-      crossorigin="anonymous"
-    />
-    
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/cropper/4.1.0/cropper.min.css"
-    />
-    <!-- End layout styles -->
+
+    <title>UPSSA {% block title %}{% endblock title %}</title>
   </head>
+
   <body>
-    <div class="container-scroller">
-      <!-- partial:partials/_sidebar.html -->
-      <nav class="sidebar sidebar-offcanvas" id="sidebar">
-        <div
-          class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top"
-        >
-          <a class="sidebar-brand brand-logo" href="/"
-            ><img src="{% static 'images/upsa.png'%}" alt="logo"
-          /></a>
-          <a class="sidebar-brand" href="/"
-            ><img src="{% static 'images/upsa.png'%}" alt="logo"
-          /></a>
-        </div>
-        <ul class="nav">
-          <li class="nav-item profile">
-            <div class="profile-desc">
-              <div class="profile-pic">
-                <div class="count-indicator">
-                  <img
-                    class="img-xs rounded-circle"
-                    src="{% static 'images/upsa.png'%}"
-                    alt=""
-                  />
-                  <span class="count bg-success"></span>
-                </div>
-                <div class="profile-name">
-                  <h5 class="mb-0 font-weight-normal">UPSSA</h5>
-                  <span>schools sports</span>
-                </div>
-              </div>
-              <a href="#" id="profile-dropdown" data-toggle="dropdown"
-                ><i class="mdi mdi-dots-vertical"></i
-              ></a>
-              <div
-                class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list"
-                aria-labelledby="profile-dropdown"
+    <!-- Wrapper -->
+    <main id="main-wrapper" class="main-wrapper">
+      <div class="header">
+        <!-- navbar -->
+        <div class="navbar-custom navbar navbar-expand-lg">
+          <div class="container-fluid px-0">
+            <a class="navbar-brand d-block d-md-none" href="/">
+              <img src="{% static 'images/uni.png'%}" alt="Image" />
+            </a>
+
+            <a id="nav-toggle" href="#!" class="ms-auto ms-md-0 me-0 me-lg-3">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="28"
+                height="28"
+                fill="currentColor"
+                class="bi bi-text-indent-left text-muted"
+                viewBox="0 0 16 16"
               >
-                <a href="#" class="dropdown-item preview-item">
-                  <div class="preview-thumbnail">
-                    <div class="preview-icon bg-dark rounded-circle">
-                      <i class="mdi mdi-settings text-primary"></i>
-                    </div>
-                  </div>
-                  <div class="preview-item-content">
-                    <p class="preview-subject ellipsis mb-1 text-small">
-                      Account settings
-                    </p>
-                  </div>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item preview-item">
-                  <div class="preview-thumbnail">
-                    <div class="preview-icon bg-dark rounded-circle">
-                      <i class="mdi mdi-onepassword text-info"></i>
-                    </div>
-                  </div>
-                  <div class="preview-item-content">
-                    <p class="preview-subject ellipsis mb-1 text-small">
-                      Change Password
-                    </p>
-                  </div>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item preview-item">
-                  <div class="preview-thumbnail">
-                    <div class="preview-icon bg-dark rounded-circle">
-                      <i class="mdi mdi-calendar-today text-success"></i>
-                    </div>
-                  </div>
-                  <div class="preview-item-content">
-                    <p class="preview-subject ellipsis mb-1 text-small">
-                      To-do list
-                    </p>
-                  </div>
-                </a>
-              </div>
+                <path
+                  d="M2 3.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm.646 2.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L4.293 8 2.646 6.354a.5.5 0 0 1 0-.708zM7 6.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm-5 3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"
+                />
+              </svg>
+            </a>
+
+            <div class="d-none d-md-none d-lg-block">
+              <!-- Form -->
+               {% if user.is_school %}
+              <h3>{{user.school_profile.first }}</h3>
+              {% else %}
+              <h3>{{user.username|lower }}</h3>
+              {% endif %}
             </div>
-          </li>
-          <li class="nav-item nav-category">
-            <span class="nav-link">Navigation</span>
-          </li>
-          {% if user.is_school %}
-          <li class="nav-item menu-items">
-            <a class="nav-link" href="{% url 'school_dashboard'%}">
-              <span class="menu-icon">
-                <i class="mdi mdi-speedometer"></i>
-              </span>
-              <span class="menu-title">Dashboard</span>
-            </a>
-          </li>
-          {% elif user.is_staff %}
-          <li class="nav-item menu-items">
-            <a class="nav-link" href="{% url 'dashboard'%}">
-              <span class="menu-icon">
-                <i class="mdi mdi-playlist-play"></i>
-              </span>
-              <span class="menu-title">Overview</span>
-            </a>
-          </li>
-          {% endif %} {% if user.is_school %}
-          <li class="nav-item menu-items">
-            <a class="nav-link" href="{%url 'athletes'%}">
-              <span class="menu-icon">
-                <i class="mdi mdi-table-large"></i>
-              </span>
-              <span class="menu-title">Athletes</span>
-            </a>
-          </li>
-          <li class="nav-item menu-items">
-            <a class="nav-link" href="{%url 'officials'%}">
-              <span class="menu-icon">
-                <i class="mdi mdi-chart-bar"></i>
-              </span>
-              <span class="menu-title">Officials</span>
-            </a>
-          </li>
-          <li class="nav-item menu-items">
-            <a class="nav-link" href="{%url 'team_s'%}">
-              <span class="menu-icon">
-                <i class="mdi mdi-chart-bar"></i>
-              </span>
-              <span class="menu-title">Teams</span>
-            </a>
-          </li>
-          {% endif %} {% if user.is_staff %}
-          <li class="nav-item menu-items">
-            <a class="nav-link" href="{%url 'schools'%}">
-              <span class="menu-icon">
-                <i class="mdi mdi-chart-bar"></i>
-              </span>
-              <span class="menu-title">Schools</span>
-            </a>
-          </li>
-          <li class="nav-item menu-items">
-            <a class="nav-link" href="{%url 'users'%}">
-              <span class="menu-icon">
-                <i class="mdi mdi-chart-bar"></i>
-              </span>
-              <span class="menu-title">Users</span>
-            </a>
-          </li>
-          <li class="nav-item menu-items">
-            <a class="nav-link" href="{%url 'athletex'%}">
-              <span class="menu-icon">
-                <i class="mdi mdi-contacts"></i>
-              </span>
-              <span class="menu-title">Athletes</span>
-            </a>
-          </li>
-
-          <li class="nav-item menu-items">
-            <a class="nav-link" href="{%url 'allteam_s'%}">
-              <span class="menu-icon">
-                <i class="mdi mdi-file-document-box"></i>
-              </span>
-              <span class="menu-title">School Teams</span>
-            </a>
-          </li>
-
-          <li class="nav-item menu-items">
-            <a class="nav-link" href="{%url 'all_officials'%}">
-              <span class="menu-icon">
-                <i class="mdi mdi-file-document-box"></i>
-              </span>
-              <span class="menu-title">Officials</span>
-            </a>
-          </li>
-
-          <li class="nav-item menu-items">
-            <a class="nav-link" href="{%url 'officers'%}">
-              <span class="menu-icon">
-                <i class="mdi mdi-file-document-box"></i>
-              </span>
-              <span class="menu-title">Officers</span>
-            </a>
-          </li>
-
-          <li class="nav-item nav-category">
-            <span class="nav-link">Other</span>
-          </li>
-
-          <li class="nav-item menu-items">
-            <a
-              class="nav-link"
-              href="{%url 'dofficers'%}"
+            <!--Navbar nav -->
+            <ul
+              class="navbar-nav navbar-right-wrap ms-lg-auto d-flex nav-top-wrap align-items-center ms-4 ms-lg-0"
             >
-              <span class="menu-icon">
-                <i class="mdi mdi-file-document-box"></i>
-              </span>
-              <span class="menu-title">Other Officers</span>
-            </a>
-          </li>
-
-   
-
-          <li class="nav-item menu-items">
-            <a
-              class="nav-link"
-              href="{%url 'teams'%}"
-            >
-              <span class="menu-icon">
-                <i class="mdi mdi-file-document-box"></i>
-              </span>
-              <span class="menu-title">Teams</span>
-            </a>
-          </li>
-
-          {% endif %} {% if user.is_admin %}
-
-          <li class="nav-item menu-items">
-            <a
-              class="nav-link"
-              href="{%url 'allteams'%}"
-            >
-              <span class="menu-icon">
-                <i class="mdi mdi-file-document-box"></i>
-              </span>
-              <span class="menu-title">Teams</span>
-            </a>
-          </li>
-
-   
-
-          <li class="nav-item menu-items">
-            <a
-              class="nav-link"
-              href="{%url 'tofficers'%}"
-            >
-              <span class="menu-icon">
-                <i class="mdi mdi-file-document-box"></i>
-              </span>
-              <span class="menu-title">Officers</span>
-            </a>
-          </li>
-
-          {% endif %}
-
-          <li class="nav-item menu-items">
-            <a
-              class="nav-link"
-              href="{% url 'change_password'%}"
-            >
-              <span class="menu-icon">
-                <i class="mdi mdi-file-document-box"></i>
-              </span>
-              <span class="menu-title">Change password</span>
-            </a>
-          </li>
-
-   
-
-          <li class="nav-item menu-items">
-            <a
-              class="nav-link"
-              href="{% url 'logout'%}"
-            >
-              <span class="menu-icon">
-                <i class="mdi mdi-file-document-box"></i>
-              </span>
-              <span class="menu-title">Logout</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-      <!-- partial -->
-      <div class="container-fluid page-body-wrapper">
-        <!-- partial:partials/_navbar.html -->
-        <nav class="navbar p-0 fixed-top d-flex flex-row">
-          <div
-            class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center"
-          >
-            <a class="navbar-brand" href="/"
-              ><img src="{% static 'images/upsa.png'%}" alt="logo"
-            /></a>
-          </div>
-          <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
-            <button
-              class="navbar-toggler navbar-toggler align-self-center"
-              type="button"
-              data-toggle="minimize"
-            >
-              <span class="mdi mdi-menu"></span>
-            </button>
-            <ul class="navbar-nav w-100">
-              <li class="nav-item w-100">
-                <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Search products"
-                  />
-                </form>
-              </li>
-            </ul>
-            <ul class="navbar-nav navbar-nav-right">
-              <!-- <li class="nav-item dropdown d-none d-lg-block">
-                <a
-                  class="nav-link btn btn-success create-new-button"
-                  id="createbuttonDropdown"
-                  data-toggle="dropdown"
-                  aria-expanded="false"
-                  href="#"
-                  >+ Create New Project</a
-                >
-                <div
-                  class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-                  aria-labelledby="createbuttonDropdown"
-                >
-                  <h6 class="p-3 mb-0">Projects</h6>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <div class="preview-icon bg-dark rounded-circle">
-                        <i class="mdi mdi-file-outline text-primary"></i>
-                      </div>
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject ellipsis mb-1">
-                        Software Development
-                      </p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <div class="preview-icon bg-dark rounded-circle">
-                        <i class="mdi mdi-web text-info"></i>
-                      </div>
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject ellipsis mb-1">
-                        UI Development
-                      </p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <div class="preview-icon bg-dark rounded-circle">
-                        <i class="mdi mdi-layers text-danger"></i>
-                      </div>
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject ellipsis mb-1">
-                        Software Testing
-                      </p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <p class="p-3 mb-0 text-center">See all projects</p>
+              <li>
+                <div class="dropdown">
+                  <button
+                    class="btn btn-ghost btn-icon rounded-circle"
+                    type="button"
+                    aria-expanded="false"
+                    data-bs-toggle="dropdown"
+                    aria-label="Toggle theme (auto)"
+                  >
+                    <i class="bi theme-icon-active"></i>
+                    <span class="visually-hidden bs-theme-text"
+                      >Toggle theme</span
+                    >
+                  </button>
+                  <ul
+                    class="dropdown-menu dropdown-menu-end shadow"
+                    aria-labelledby="bs-theme-text"
+                  >
+                    <li>
+                      <button
+                        type="button"
+                        class="dropdown-item d-flex align-items-center"
+                        data-bs-theme-value="light"
+                        aria-pressed="false"
+                      >
+                        <i class="bi theme-icon bi-sun-fill"></i>
+                        <span class="ms-2">Light</span>
+                      </button>
+                    </li>
+                    <li>
+                      <button
+                        type="button"
+                        class="dropdown-item d-flex align-items-center"
+                        data-bs-theme-value="dark"
+                        aria-pressed="false"
+                      >
+                        <i class="bi theme-icon bi-moon-stars-fill"></i>
+                        <span class="ms-2">Dark</span>
+                      </button>
+                    </li>
+                    <li>
+                      <button
+                        type="button"
+                        class="dropdown-item d-flex align-items-center active"
+                        data-bs-theme-value="auto"
+                        aria-pressed="true"
+                      >
+                        <i class="bi theme-icon bi-circle-half"></i>
+                        <span class="ms-2">Auto</span>
+                      </button>
+                    </li>
+                  </ul>
                 </div>
-              </li>-->
-              <li class="nav-item nav-settings d-none d-lg-block">
-                <a class="nav-link" href="#">
-                  <i class="mdi mdi-view-grid"></i>
-                </a>
               </li>
-              <li class="nav-item dropdown border-left">
+
+              <li class="dropdown stopevent ms-2">
                 <a
-                  class="nav-link count-indicator dropdown-toggle"
-                  id="messageDropdown"
-                  href="#"
-                  data-toggle="dropdown"
+                  class="btn btn-ghost btn-icon rounded-circle"
+                  href="#!"
+                  role="button"
+                  id="dropdownNotification"
+                  data-bs-toggle="dropdown"
+                  aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  <i class="mdi mdi-email"></i>
-                  <span class="count bg-success"></span>
+                  <i class="icon-xs" data-feather="bell"></i>
                 </a>
                 <div
-                  class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-                  aria-labelledby="messageDropdown"
+                  class="dropdown-menu dropdown-menu-lg dropdown-menu-end"
+                  aria-labelledby="dropdownNotification"
                 >
-                  <h6 class="p-3 mb-0">Messages</h6>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <img
-                        src="images/faces/face4.jpg"
-                        alt="image"
-                        class="rounded-circle profile-pic"
-                      />
+                  <div>
+                    <div
+                      class="border-bottom px-3 pt-2 pb-3 d-flex justify-content-between align-items-center"
+                    >
+                      <p class="mb-0 text-dark fw-medium fs-4">Notifications</p>
+                      <a href="#!" class="text-muted">
+                        <span>
+                          <i class="me-1 icon-xs" data-feather="settings"></i>
+                        </span>
+                      </a>
                     </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject ellipsis mb-1">
-                        Mark send you a message
-                      </p>
-                      <p class="text-muted mb-0">1 Minutes ago</p>
+                    <div data-simplebar style="height: 250px">
+                      <!-- List group -->
+                      <ul
+                        class="list-group list-group-flush notification-list-scroll"
+                      >
+                        <!-- List group item -->
+                        <li class="list-group-item bg-light">
+                          <a href="#!" class="text-muted">
+                            <h5 class="mb-1">Rishi Chopra</h5>
+                            <p class="mb-0">
+                              Mauris blandit erat id nunc blandit, ac eleifend
+                              dolor pretium.
+                            </p>
+                          </a>
+                        </li>
+                        <!-- List group item -->
+                        <li class="list-group-item">
+                          <a href="#!" class="text-muted">
+                            <h5 class="mb-1">Neha Kannned</h5>
+                            <p class="mb-0">
+                              Proin at elit vel est condimentum elementum id in
+                              ante. Maecenas et sapien metus.
+                            </p>
+                          </a>
+                        </li>
+                        <!-- List group item -->
+                        <li class="list-group-item">
+                          <a href="#!" class="text-muted">
+                            <h5 class="mb-1">Nirmala Chauhan</h5>
+                            <p class="mb-0">
+                              Morbi maximus urna lobortis elit sollicitudin
+                              sollicitudieget elit vel pretium.
+                            </p>
+                          </a>
+                        </li>
+                        <!-- List group item -->
+                        <li class="list-group-item">
+                          <a href="#!" class="text-muted">
+                            <h5 class="mb-1">Sina Ray</h5>
+                            <p class="mb-0">
+                              Sed aliquam augue sit amet mauris volutpat
+                              hendrerit sed nunc eu diam.
+                            </p>
+                          </a>
+                        </li>
+                      </ul>
                     </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <img
-                        src="images/faces/face2.jpg"
-                        alt="image"
-                        class="rounded-circle profile-pic"
-                      />
+                    <div class="border-top px-3 py-2 text-center">
+                      <a href="#!" class="text-inherit"
+                        >View all Notifications</a
+                      >
                     </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject ellipsis mb-1">
-                        Cregh send you a message
-                      </p>
-                      <p class="text-muted mb-0">15 Minutes ago</p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <img
-                        src="images/faces/face3.jpg"
-                        alt="image"
-                        class="rounded-circle profile-pic"
-                      />
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject ellipsis mb-1">
-                        Profile picture updated
-                      </p>
-                      <p class="text-muted mb-0">18 Minutes ago</p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <p class="p-3 mb-0 text-center">4 new messages</p>
+                  </div>
                 </div>
               </li>
-              <li class="nav-item dropdown border-left">
+              <!-- List -->
+              <li class="dropdown ms-2">
                 <a
-                  class="nav-link count-indicator dropdown-toggle"
-                  id="notificationDropdown"
-                  href="#"
-                  data-toggle="dropdown"
+                  class="rounded-circle"
+                  href="#!"
+                  role="button"
+                  id="dropdownUser"
+                  data-bs-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
                 >
-                  <i class="mdi mdi-bell"></i>
-                  <span class="count bg-danger"></span>
-                </a>
-                <div
-                  class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-                  aria-labelledby="notificationDropdown"
-                >
-                  <h6 class="p-3 mb-0">Notifications</h6>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <div class="preview-icon bg-dark rounded-circle">
-                        <i class="mdi mdi-calendar text-success"></i>
-                      </div>
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject mb-1">Event today</p>
-                      <p class="text-muted ellipsis mb-0">
-                        Just a reminder that you have an event today
-                      </p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <div class="preview-icon bg-dark rounded-circle">
-                        <i class="mdi mdi-settings text-danger"></i>
-                      </div>
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject mb-1">Settings</p>
-                      <p class="text-muted ellipsis mb-0">Update dashboard</p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <div class="preview-icon bg-dark rounded-circle">
-                        <i class="mdi mdi-link-variant text-warning"></i>
-                      </div>
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject mb-1">Launch Admin</p>
-                      <p class="text-muted ellipsis mb-0">New admin wow!</p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <p class="p-3 mb-0 text-center">See all notifications</p>
-                </div>
-              </li>
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link"
-                  id="profileDropdown"
-                  href="#"
-                  data-toggle="dropdown"
-                >
-                  <div class="navbar-profile">
-                    {% if user.is_school %}
-                    {% with school_profile=user.school_profile.first %}
-                    {% if school_profile.badge %}
-                        <img class="img-xs rounded-circle"
-                             src="{{ school_profile.badge.url }}"
-                             alt="School badge"
-                        /> {% else %} <img class="img-xs rounded-circle" src="{%static 'images/logo.png'%}" alt="">
-                    {% endif %}
-                    <p class="mb-0 d-none d-sm-block navbar-profile-name">
-                        {{ school_profile|upper }}
-                    </p>
-                {% endwith %}
-                  {% else %}
-                    {% if user.thumbnail %}
-                      <img class="img-xs rounded-circle" src="{{ user.thumbnail.url }}" alt="" />
-                    {% endif %}
-                    <p class="mb-0 d-none d-sm-block navbar-profile-name">
-                      {{ user.username|upper }}
-                    </p>
-                  {% endif %}
-                  
+                  <div class="avatar avatar-md avatar-indicators avatar-online">
+                    {% if user.school_profile.first.badge %}
+                    <img
+                      alt="avatar"
+                      src="{{user.school_profile.first.badge.url }}"
+                      class="rounded-circle"
+                    />
+                    {% else %}
+                    <img
+                      alt="avatar"
+                      src="{% static 'images/fav.png'%}"
+                      class="rounded-circle"
+                    />{% endif %}
                   </div>
                 </a>
                 <div
-                  class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-                  aria-labelledby="profileDropdown"
+                  class="dropdown-menu dropdown-menu-end"
+                  aria-labelledby="dropdownUser"
                 >
-                  <h6 class="p-3 mb-0">Profile</h6>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <div class="preview-icon bg-dark rounded-circle">
-                        <i class="mdi mdi-settings text-success"></i>
-                      </div>
+                  <div class="px-4 pb-0 pt-2">
+                    <div class="lh-1">
+                      <h5 class="mb-1">{{user.school_profile.first }}</h5>
                     </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject mb-1">Settings</p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <div class="preview-icon bg-dark rounded-circle">
-                        <i class="mdi mdi-logout text-danger"></i>
-                      </div>
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject mb-1">Log out</p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <p class="p-3 mb-0 text-center">Advanced settings</p>
+                    <div class="dropdown-divider mt-3 mb-2"></div>
+                  </div>
+
+                  <ul class="list-unstyled">
+                    <li>
+                      <a
+                        class="dropdown-item d-flex align-items-center"
+                        href=""
+                      >
+                        <!--url 'schoolpdate' school.id -->
+                        <i
+                          class="me-2 icon-xxs dropdown-item-icon"
+                          data-feather="user"
+                        ></i>
+                        Edit Profile
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#!">
+                        <i
+                          class="me-2 icon-xxs dropdown-item-icon"
+                          data-feather="activity"
+                        ></i>
+                        Activity Log
+                      </a>
+                    </li>
+
+                    <li>
+                      <a
+                        class="dropdown-item d-flex align-items-center"
+                        href="#!"
+                      >
+                        <i
+                          class="me-2 icon-xxs dropdown-item-icon"
+                          data-feather="settings"
+                        ></i>
+                        Settings
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="{% url 'logout'%}">
+                        <i
+                          class="me-2 icon-xxs dropdown-item-icon"
+                          data-feather="power"
+                        ></i>
+                        Sign Out
+                      </a>
+                    </li>
+                  </ul>
                 </div>
               </li>
             </ul>
-            <button
-              class="navbar-toggler navbar-toggler-right d-lg-none align-self-center"
-              type="button"
-              data-toggle="offcanvas"
-            >
-              <span class="mdi mdi-format-line-spacing"></span>
-            </button>
           </div>
-        </nav>
-        <!-- partial -->
-        <div class="main-panel">
-          {% block content %}
-          <!-- content-wrapper ends -->{% endblock content %}
-          <!-- partial:partials/_footer.html -->
-          <footer class="footer"><div
-            class="d-sm-flex justify-content-center justify-content-sm-between"
-          >
-            <span
-              class="text-muted d-block text-center text-sm-left d-sm-inline-block"
-              > ©
-              <script>
-                document.write(new Date().getFullYear());
-              </script>
-              , A product of
-                <a
-                  href="https://www.bootstrapdash.com/bootstrap-admin-template/"
-                  target="_blank"
-                  >USSSA</a
-                  ></span
-            >
-            <span
-              class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"
-            >
-           
-                for school sports for better.</span
-            >
-          </div>
-       
-            </div>
-          </footer>
-          <!-- partial -->
         </div>
-        <!-- main-panel ends -->
       </div>
-      <!-- page-body-wrapper ends -->
-    </div>
-    <!-- container-scroller -->
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
+      <!-- navbar vertical -->
+      <!-- Sidebar -->
+
+      <div class="navbar-vertical navbar nav-dashboard">
+        <div class="h-100" data-simplebar>
+          <!-- Brand logo -->
+          <a class="navbar-brand" href="">
+            <img src="{% static 'images/upsa.png' %}" alt="UPSSA" />
+          </a>
+          <!-- Navbar nav -->
+          <ul class="navbar-nav flex-column" id="sideNavbar">
+            <!-- Nav item -->
+            {% if user.is_school %}
+            <!-- Nav item -->
+            <li class="nav-item">
+              <a class="nav-link has-arrow" href="{% url 'school_dashboard'%}">
+                <i data-feather="users" class="nav-icon me-2 icon-xxs"></i>
+                Dashboard</a
+              >
+            </li>
+            <!-- Nav item -->
+            <!-- Nav item -->
+            <li class="nav-item">
+              <a class="nav-link has-arrow" href="{% url 'athletes'%}">
+                <i data-feather="users" class="nav-icon me-2 icon-xxs"></i>
+                Athletes</a
+              >
+            </li>
+            <!-- Nav item -->
+            <!-- Nav item -->
+            <li class="nav-item">
+              <a class="nav-link has-arrow" href="{% url 'officials'%}">
+                <i data-feather="users" class="nav-icon me-2 icon-xxs"></i>
+                Officials</a
+              >
+            </li>
+            <!-- Nav item -->
+            <!-- Nav item -->
+            <li class="nav-item">
+              <a
+                class="nav-link has-arrow"
+                href="{% url 'school_enrollments'%}"
+              >
+                <i data-feather="users" class="nav-icon me-2 icon-xxs"></i>
+                Teams</a
+              >
+            </li>
+            <!-- Nav item -->
+            <!-- Nav item -->
+            <li class="nav-item">
+              <a class="nav-link has-arrow" href="{% url 'logout'%}">
+                <i data-feather="users" class="nav-icon me-2 icon-xxs"></i>
+                Change password</a
+              >
+            </li>
+            <!-- Nav item -->
+            <!-- Nav item -->
+            <li class="nav-item">
+              <a class="nav-link has-arrow" href="{% url 'logout'%}">
+                <i data-feather="users" class="nav-icon me-2 icon-xxs"></i>
+                Logout</a
+              >
+            </li>
+            <!-- Nav item -->
+            {% else %}
+            <!-- Nav item -->
+            <li class="nav-item">
+              <div class="navbar-heading">DASHBOARD</div>
+            </li>
+            <!-- Nav item -->
+            <li class="nav-item">
+              <a class="nav-link has-arrow" href="{% url 'dashboard'%}"
+                >Dashboard</a
+              >
+            </li>
+            <!-- Nav item -->
+            <li class="nav-item">
+              <a
+                class="nav-link has-arrow"
+                href="#!"
+                data-bs-toggle="collapse"
+                data-bs-target="#navecommerce"
+                aria-expanded="false"
+                aria-controls="navecommerce"
+              >
+                <i data-feather="users" class="nav-icon me-2 icon-xxs"></i>
+                School
+              </a>
+
+              <div
+                id="navecommerce"
+                class="collapse show"
+                data-bs-parent="#sideNavbar"
+              >
+                <ul class="nav flex-column">
+                  <li class="nav-item">
+                    <a
+                      class="nav-link has-arrow active"
+                      href="{% url 'schools'%}"
+                      >Schools</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      class="nav-link has-arrow"
+                      href="{% url 'all_officials'%}"
+                      >School Officials</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link has-arrow" href="{% url 'athletex'%}"
+                      >Athletes</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link has-arrow" href="{% url 'athletex'%}"
+                      >Enrollments</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <!-- Nav item -->
+            <li class="nav-item">
+              <a
+                class="nav-link has-arrow collapsed"
+                href="#!"
+                data-bs-toggle="collapse"
+                data-bs-target="#navEmail"
+                aria-expanded="false"
+                aria-controls="navEmail"
+              >
+                <i data-feather="mail" class="nav-icon me-2 icon-xxs"></i>
+                District
+              </a>
+
+              <div id="navEmail" class="collapse" data-bs-parent="#sideNavbar">
+                <ul class="nav flex-column">
+                  <li class="nav-item">
+                    <a class="nav-link has-arrow" href="../pages/mail.html"
+                      >Sports officers</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      class="nav-link has-arrow"
+                      href="../pages/mail-details.html"
+                      >Other Officers</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      class="nav-link has-arrow"
+                      href="../pages/mail-draft.html"
+                      >Teams</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <!-- Nav item -->
+            <li class="nav-item">
+              <a
+                class="nav-link has-arrow collapsed"
+                href="#!"
+                data-bs-toggle="collapse"
+                data-bs-target="#navKanban"
+                aria-expanded="false"
+                aria-controls="navKanban"
+              >
+                <i data-feather="layout" class="nav-icon me-2 icon-xxs"></i>
+                Kanban
+              </a>
+
+              <div id="navKanban" class="collapse" data-bs-parent="#sideNavbar">
+                <ul class="nav flex-column">
+                  <li class="nav-item">
+                    <a class="nav-link has-arrow" href="">Districts</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link has-arrow" href="">Championships</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link has-arrow" href="">Users</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link has-arrow" href="">Archives</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <!-- Nav item -->
+            <!-- Nav item -->
+            {% endif %}
+            <!-- Nav item -->
+            <li class="nav-item">
+              <a class="nav-link has-arrow" href="{% url 'dashboard'%}"
+                >Change password</a
+              >
+            </li>
+            <!-- Nav item -->
+            <li class="nav-item">
+              <a class="nav-link has-arrow" href="{% url 'dashboard'%}"
+                >Logout</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Page Content -->
+      {% block content %}{% endblock %}
+      <!-- Page Content -->
+    </main>
+
+    <!-- Modal -->
+
+    <!-- Scripts -->
+
+    <!-- Libs JS -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simplebar@6.2.1/dist/simplebar.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tippy.js@6.3.7/dist/tippy-bundle.umd.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
-    <script src="https://unpkg.com/cropperjs/dist/cropper.min.js"></script>
-    <script src="{% static 'scripts/opper.js' %}"></script>
-    <script src="{% static 'scripts/cropper.js' %}"></script>
-    <!-- container-scroller -->
     <script>
       $(document).ready(function () {
-        $("#myTable").DataTable();
+        $("#example").DataTable({ responsive: !0 });
       });
     </script>
-    <!--   Core JS Files   -->
-    <script>
-      $(document).ready(function () {
-        $("#myaTable").DataTable();
-      });
-    </script>
-    <script>
-      $("#myModal").on("shown.bs.modal", function () {
-        $("#myInput").trigger("focus");
-      });
-    </script>
-    <!-- plugins:js -->
-    <script src="{% static 'assets/js/core/popper.min.js'%}"></script>
-    <script src="{% static 'assets/js/core/bootstrap.min.js'%}"></script>
-    <script src="{% static 'assets/js/plugins/perfect-scrollbar.min.js'%}"></script>
-    <script src="{% static 'assets/js/plugins/smooth-scrollbar.min.js'%}"></script>
+    <script src="{% static 'js/main.js'%}"></script>
+    <script src="{% static 'js/feather.js'%}"></script>
+    <script src="{% static 'js/opper.js'%}"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.5.1/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsvectormap@1.9.0/dist/js/jsvectormap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsvectormap@1.9.0/dist/maps/world.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.41.0/dist/apexcharts.min.js"></script>
 
-
-    <!-- plugins:js -->
-
-    <script src="{% static 'vendors/js/vendor.bundle.base.js'%}"></script>
-    <!-- endinject -->
-    <script src="https://cdn.datatables.net/v/dt/dt-2.0.1/datatables.min.js"></script>
-    <!-- Plugin js for this page -->
-    <script src="{% static 'vendors/chart.js/Chart.min.js'%}"></script>
-    <script src="{% static 'vendors/progressbar.js/progressbar.min.js'%}"></script>
-    <script src="{% static 'vendors/jvectormap/jquery-jvectormap.min.js'%}"></script>
-    <script src="{% static 'vendors/jvectormap/jquery-jvectormap-world-mill-en.js'%}"></script>
-    <script src="{% static 'vendors/owl-carousel-2/owl.carousel.min.js'%}"></script>
-    <!-- End plugin js for this page -->
-    <!-- inject:js -->
-    <script src="{% static 'js/off-canvas.js'%}"></script>
-    <script src="{% static 'js/hoverable-collapse.js'%}"></script>
-    <script src="{% static 'js/misc.js'%}"></script>
-    <script src="{% static 'js/settings.js'%}"></script>
-    <script src="{% static 'js/todolist.js'%}"></script>
-    <!-- endinject -->
-    <!-- Custom js for this page -->
-    <script src="{% static 'js/dashboard.js'%}"></script>
-    <!-- End custom js for this page -->
-
-    <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-      crossorigin="anonymous"
-    ></script>
+    <script src="{% static 'js/chat.js'%}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/min/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js"></script>
   </body>
 </html>
