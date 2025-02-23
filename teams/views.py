@@ -16,7 +16,7 @@ from django.http import HttpResponse
 from django.template.loader import get_template
 from xhtml2pdf import pisa
 from io import BytesIO
-
+from django.db.models import Count
 
 from .filters import SchoolEnrollmentFilter  # Assume you have created this filter
 
@@ -28,7 +28,9 @@ def SchoolEnrollments(request):
     school = School.objects.get(user_id=user.id) # Assuming profile has school attribute
 
     # Get all enrollments for the school
-    enrollments = SchoolEnrollment.objects.filter(school=school)
+    enrollments = SchoolEnrollment.objects.filter(school=school).annotate(
+        athlete_count=Count('athlete_enrollments__athletes')
+    )
 
     if request.method == "POST":
         form = SchoolEnrollmentForm(request.POST, request.FILES)
@@ -47,16 +49,12 @@ def SchoolEnrollments(request):
     context = {"form": form, "enrollments": enrollments}
     return render(request, "enrollments/school_enrolls.html", context)
 
-
 def AllEnrollments(request):
-    # Get all school_enrolls
-    school_enrolls = SchoolEnrollment.objects.all()
+    # Get all school_enrolls with athlete count
+    school_enrolls = SchoolEnrollment.objects.annotate(
+        athlete_count=Count('athlete_enrollments__athletes')
+    )
 
-    # Apply the filter
-    # school_enroll_filter = SchoolEnrollmentFilter(request.GET, queryset=school_enrolls)
-    # filtered_school_enrolls = school_enroll_filter.qs
-
-    # Prepare context with athletes data
     context = {
         "school_enrolls": school_enrolls,
     }

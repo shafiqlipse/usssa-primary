@@ -5,11 +5,7 @@
 {% block title %}Create School{% endblock %}
 <!---->
 {% block content %}
-<script src="//code.jquery.com/jquery.min.js"></script>
 
-<link rel="stylesheet" href="jquery.dropdown.css" />
-
-<script src="jquery.dropdown.js"></script>
 <style>
   .alert {
     padding: 10px;
@@ -39,95 +35,73 @@
   }
 </style>
 <div class="profile-update">
-  <div class="school-long">
+
+  <div class="school">
+    {% if messages %}
+    <div class="messages">
+      {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+      {% endfor %}
+    </div>  {% endif %}
     <form
       action=""
       method="POST"
-      class="form-ctrl"
+      class="form-control"
       enctype="multipart/form-data"
     >
+      <div class="top">Register school</div>
       {% csrf_token %}
-      <div class="school">
+      <div class="schoolt">
         <h2>School Info</h2>
-        <hr />
+
         <div class="fields">
           <div class="left">
             <div class="imgbox">
               <div class="field">
                 <label>{{form.badge.label}} </label>
-                {% if form.instance.badge %}
-                <img
-                  src="{{ form.instance.badge.url }}"
-                  id="image-preview"
-                  alt="Current Photo"
-                />
-                {% else %}
-
-                <img
-                  src="{% static 'images/bade.png'%}"
-                  id="image-preview"
-                  alt="No Photo"
-                />
-                {% endif %}
+                <div id="badge_preview" class="preview-container aa"></div>
               </div>
               <div class="field">
                 <input
                   type="file"
                   name="badge"
                   accept="image/*"
-                  onchange="displayImage(this);"
                   id="id_badge"
                 />
               </div>
             </div>
             <div class="fiil">
-              <div class="field flex">
+              <div class="field">
                 <label>{{ form.school_name.label}}</label>
                 {{form.school_name}}
               </div>
-              <div class="field flex">
+
+              <div class="field">
                 <label>{{ form.center_number.label}}</label>
                 {{form.center_number}}
               </div>
 
-              <div class="field flex">
+              <div class="field">
                 <label>{{ form.EMIS.label}} </label>{{form.EMIS}}
               </div>
 
               <div class="field">
-                <label>Region:</label>
-                {{form.region}}
-              </div>
-              <div class="field">
-                <label>District/ City/ Municipality </label>
+                <label>District:</label>
                 {{form.district}}
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="school">
-        <h2>HEad Teacher</h2>
-        <hr />
+      <div class="schoolt">
+        <h2>Head Teacher</h2>
+
         <div class="fields">
           <div class="left">
             <div class="imgbox">
               <div class="field">
                 <label>{{form.photo.label}} </label>
-                {% if form.instance.photo %}
-                <img
-                  src="{{ form.instance.photo.url }}"
-                  id="image-previewg"
-                  alt="Current Photo"
-                />
-                {% else %}
-
-                <img
-                  src="{% static 'images/profile.png'%}"
-                  id="image-previewg"
-                  alt="No Photo"
-                />
-                {% endif %}
+                <div id="photo_preview" class="preview-container"></div>
               </div>
               <div class="field">
                 <input
@@ -140,21 +114,25 @@
               </div>
             </div>
             <div class="fiil">
-              <div class="field flex">
-                <label>First Name</label>
-                {{form.fname}}
+              <div class="field-group grid2">
+                <div class="field">
+                  <label>First Name</label>
+                  {{form.fname}}
+                </div>
+                <div class="field">
+                  <label>Last Name</label>
+                  {{form.lname}}
+                </div>
               </div>
-              <div class="field flex">
-                <label>Last Name</label>
-                {{form.lname}}
-              </div>
-              <div class="field flex">
-                <label>{{ form.nin.label}}</label>
-                {{form.nin}}
-              </div>
+              <div class="field-group grid2">
+                <div class="field">
+                  <label>{{ form.nin.label}}</label>
+                  {{form.nin}}
+                </div>
 
-              <div class="field flex">
-                <label>{{ form.email.label}} </label>{{form.email}}
+                <div class="field">
+                  <label>{{ form.email.label}} </label>{{form.email}}
+                </div>
               </div>
 
               <div class="field">
@@ -173,28 +151,16 @@
           </div>
         </div>
       </div>
-      <div class="school">
+      <div class="schoolt">
         <h2>Games Teacher</h2>
-        <hr />
+
         <div class="fields">
           <div class="left">
             <div class="imgbox">
               <div class="field">
                 <label>Photo </label>
-                {% if form.instance.gphoto %}
-                <img
-                  src="{{ form.instance.gphoto.url }}"
-                  id="image-previews"
-                  alt="Current Photo"
-                />
-                {% else %}
 
-                <img
-                  src="{% static 'images/profile.png'%}"
-                  id="image-previews"
-                  alt="No Photo"
-                />
-                {% endif %}
+                <div id="gphoto_preview" class="preview-container"></div>
               </div>
               <div class="field">
                 <input
@@ -207,20 +173,23 @@
               </div>
             </div>
             <div class="fiil">
-              <div class="field flex">
-                <label>First name</label>
-                {{form.gfname}}
+              <div class="field-group grid2">
+                <div class="field">
+                  <label>First name</label>
+                  {{form.gfname}}
+                </div>
+                <div class="field">
+                  <label>Last name</label>
+                  {{form.glname}}
+                </div>
               </div>
-              <div class="field flex">
-                <label>Last name</label>
-                {{form.glname}}
+              <div class="field-group grid2">
+                <div class="field">
+                  <label>NIN:</label>
+                  {{form.gnin}}
+                </div>
+                <div class="field"><label>Email </label>{{form.gemail}}</div>
               </div>
-
-              <div class="field">
-                <label>NIN:</label>
-                {{form.gnin}}
-              </div>
-              <div class="field flex"><label>Email </label>{{form.gemail}}</div>
 
               <div class="field">
                 <label>Phone</label>
@@ -238,14 +207,8 @@
           </div>
         </div>
       </div>
-      {% if messages %}
-      <div class="messages">
-        {% for message in messages %}
-        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-        {% endfor %}
-      </div>
-      {% endif %}
-      <button type="submit" class="btn-submit">Save profile</button>
+
+      <button type="submit" class="btn btn-success">Save school</button>
     </form>
   </div>
 </div>

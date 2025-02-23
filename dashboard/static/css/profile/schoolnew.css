@@ -9,103 +9,114 @@
   align-items: center;
   justify-content: center;
 }
-.profile-update .school-long {
+.profile-update .school {
   width: 80%;
   background-color: #fff;
   padding: 20px;
 }
 @media (max-width: 999px) {
-  .profile-update .school-long {
+  .profile-update .school {
     width: 90%;
   }
 }
 @media (max-width: 768px) {
-  .profile-update .school-long {
+  .profile-update .school {
     width: 100%;
     margin: 10px;
   }
 }
-.profile-update .school-long h2 {
+.profile-update .school h2 {
   text-transform: uppercase;
   margin: 10px;
 }
-.profile-update .school-long hr {
+.profile-update .school hr {
   margin: 10px;
 }
-.profile-update .school-long .form-ctrl {
+.profile-update .school .form-control {
+  padding: 20px;
   width: 100%;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.497);
+  -webkit-backdrop-filter: blur(2em);
+          backdrop-filter: blur(2em);
+}
+.profile-update .school .form-control .top {
+  height: 100px;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3em;
+  text-transform: capitalize;
+  font-weight: bold;
+  margin: 0 0 10px 0;
+}
+@media (max-width: 1028px) {
+  .profile-update .school .form-control {
+    width: 100%;
+  }
+}
+.profile-update .school .form-control .schoolt {
+  margin: 20px 0;
+}
+.profile-update .school .form-control .schoolt h2 {
+  background-color: rgba(245, 245, 245, 0.1568627451);
+  padding: 10px;
+  border-bottom: solid 1px #ccc;
+}
+.profile-update .school .form-control .schoolt .fields .left {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+}
+@media (max-width: 600px) {
+  .profile-update .school .form-control .schoolt .fields .left {
+    flex-direction: column;
+  }
+}
+.profile-update .school .form-control .schoolt .fields .left .imgbox .field {
+  width: 100%;
   flex-direction: column;
 }
-.profile-update .school-long .form-ctrl .school .fields {
+.profile-update .school .form-control .schoolt .fields .left .imgbox .field .preview-container {
+  background-image: url("https://static.vecteezy.com/system/resources/thumbnails/036/594/092/small_2x/man-empty-avatar-photo-placeholder-for-social-networks-resumes-forums-and-dating-sites-male-and-female-no-photo-images-for-unfilled-user-profile-free-vector.jpg");
+  background-position: center center;
+  background-size: cover;
+}
+.profile-update .school .form-control .schoolt .fields .left .imgbox .field .aa {
+  background-image: url("https://media.istockphoto.com/id/1475470719/vector/university-logo-design-vector.jpg?s=612x612&w=0&k=20&c=qx6baDJQUUYf_U1tRu-dP3KSHS1EmGUspuo_zRfHnkQ=");
+  background-position: center center;
+  background-size: cover;
+}
+.profile-update .school .form-control .schoolt .fields .left .imgbox .field label {
+  text-transform: capitalize;
+  font-weight: 500;
+  color: #464646;
+  font-size: 15px;
+}
+.profile-update .school .form-control .schoolt .fields .left .imgbox .field input {
   width: 100%;
+  padding: 8px;
 }
-.profile-update .school-long .form-ctrl .school .fields .left {
-  display: grid;
-  grid-template-columns: 350px 2fr;
-  gap: 20px;
-  width: 100%;
-}
-@media (max-width: 768px) {
-  .profile-update .school-long .form-ctrl .school .fields .left {
-    grid-template-columns: repeat(1, 1fr);
-  }
-}
-@media (max-width: 508px) {
-  .profile-update .school-long .form-ctrl .school .fields .left {
-    grid-template-columns: repeat(1, 1fr);
-  }
-}
-.profile-update .school-long .form-ctrl .school .fields .left .fiil {
+.profile-update .school .form-control .schoolt .fields .left .fiil {
+  padding: 10px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 }
-@media (max-width: 768px) {
-  .profile-update .school-long .form-ctrl .school .fields .left .fiil {
-    grid-template-columns: repeat(1, 1fr);
-  }
-}
-@media (max-width: 508px) {
-  .profile-update .school-long .form-ctrl .school .fields .left .fiil {
-    grid-template-columns: repeat(1, 1fr);
-  }
-}
-.profile-update .school-long .form-ctrl .school .fields .left .fiil .field {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
+.profile-update .school .form-control .schoolt .fields .left .fiil .field {
+  width: 100%;
   flex-direction: column;
-  width: 100%;
 }
-.profile-update .school-long .form-ctrl .school .fields .left .fiil .field input,
-.profile-update .school-long .form-ctrl .school .fields .left .fiil .field select {
-  padding: 8px 10px;
-  border-radius: 3px;
-  width: 100% !important;
-  border: solid 1px rgba(49, 101, 255, 0.982);
-}
-.profile-update .school-long .form-ctrl .school .fields .left .lefta {
-  width: 320px;
-}
-.profile-update .school-long .form-ctrl .school .fields .left .lefta .field {
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-  justify-content: center;
-  width: 100%;
-}
-.profile-update .school-long .form-ctrl .school .fields .left .lefta .field img {
-  width: 100%;
-}
-.profile-update .school-long .form-ctrl .school p {
-  margin: 10px;
-}
-.profile-update .school-long .form-ctrl .school p label {
+.profile-update .school .form-control .schoolt .fields .left .fiil .field label {
   text-transform: capitalize;
+  font-weight: 500;
+  color: #464646;
+  font-size: 15px;
+  margin-top: 10px;
 }
-.profile-update .school-long .form-ctrl .school p input,
-.profile-update .school-long .form-ctrl .school p select {
+.profile-update .school .form-control .schoolt .fields .left .fiil .field input,
+.profile-update .school .form-control .schoolt .fields .left .fiil .field select {
   width: 100%;
   padding: 8px;
 }/*# sourceMappingURL=schoolnew.css.map */

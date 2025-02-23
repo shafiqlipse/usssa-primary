@@ -110,7 +110,7 @@
 
             <div class="d-none d-md-none d-lg-block">
               <!-- Form -->
-               {% if user.is_school %}
+              {% if user.is_school %}
               <h3>{{user.school_profile.first }}</h3>
               {% else %}
               <h3>{{user.username|lower }}</h3>
@@ -395,21 +395,7 @@
               >
             </li>
             <!-- Nav item -->
-            <!-- Nav item -->
-            <li class="nav-item">
-              <a class="nav-link has-arrow" href="{% url 'logout'%}">
-                <i data-feather="users" class="nav-icon me-2 icon-xxs"></i>
-                Change password</a
-              >
-            </li>
-            <!-- Nav item -->
-            <!-- Nav item -->
-            <li class="nav-item">
-              <a class="nav-link has-arrow" href="{% url 'logout'%}">
-                <i data-feather="users" class="nav-icon me-2 icon-xxs"></i>
-                Logout</a
-              >
-            </li>
+
             <!-- Nav item -->
             {% else %}
             <!-- Nav item -->
@@ -507,49 +493,18 @@
                 </ul>
               </div>
             </li>
-            <!-- Nav item -->
-            <li class="nav-item">
-              <a
-                class="nav-link has-arrow collapsed"
-                href="#!"
-                data-bs-toggle="collapse"
-                data-bs-target="#navKanban"
-                aria-expanded="false"
-                aria-controls="navKanban"
-              >
-                <i data-feather="layout" class="nav-icon me-2 icon-xxs"></i>
-                Kanban
-              </a>
 
-              <div id="navKanban" class="collapse" data-bs-parent="#sideNavbar">
-                <ul class="nav flex-column">
-                  <li class="nav-item">
-                    <a class="nav-link has-arrow" href="">Districts</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link has-arrow" href="">Championships</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link has-arrow" href="">Users</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link has-arrow" href="">Archives</a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-            <!-- Nav item -->
             <!-- Nav item -->
             {% endif %}
             <!-- Nav item -->
             <li class="nav-item">
-              <a class="nav-link has-arrow" href="{% url 'dashboard'%}"
+              <a class="nav-link has-arrow" href="{% url 'change_password'%}"
                 >Change password</a
               >
             </li>
             <!-- Nav item -->
             <li class="nav-item">
-              <a class="nav-link has-arrow" href="{% url 'dashboard'%}"
+              <a class="nav-link has-arrow" href="{% url 'logout'%}"
                 >Logout</a
               >
             </li>
