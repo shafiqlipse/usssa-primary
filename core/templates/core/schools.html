@@ -1,0 +1,100 @@
+{% extends "core/Base.html" %}
+<!---->
+{% load static %}<!-- Start Breadcrumb Area -->
+{% block title %}Frequently Ask Question{% endblock %}
+<!-- Start Breadcrumb Area -->
+{% block content %}
+<!-- Start Breadcrumb Area -->
+
+<!-- Start Breadcrumb Area -->
+<div
+  class="breadcrumb-area"
+  style="background-image: url('{% static "img/IMG-20240516-WA0206.jpg" %}');"
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="breadcrumb-content text-center">
+          <h2>Schools Registered </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Breadcrumb Area -->
+<div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-12 mt-4 mb-5">
+              <div class="car0d">
+                <div class="card-body">
+                  <div class="table-responsive mt-4">
+                    <table
+                      id="example"
+                      class="table text-nowrap table-centered mt-0"
+                      style="width: 100%"
+                    >
+                      <thead class="table-light">
+                        <tr>
+                          <th class="ps-1">School</th>
+                          <th>EMIS</th>
+                            <th>District</th>
+                          <th>Region</th>
+                      
+                         
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for school in schools %}
+                        <tr>
+                          <td class="pe-0">
+                            <div class="d-flex align-items-center">
+                              {% if school.badge %}
+                              <img
+                                src="{{school.badge.url}}"
+                                alt=""
+                                class="img-4by3-sm rounded-3"
+                                style="height: 50px; object-fit: cover"
+                              />
+                              {% else %}
+                              <img
+                                src="{% static 'images/fav.png'%}"
+                                alt=""
+                                class="img-4by3-sm rounded-3"
+                                style="height: 50px; object-fit: cover"
+                              />{% endif %}
+                              <div class="ms-3">
+                                <span class="mb-0">
+                                  {{school.school_name}}
+                               
+                                </span>
+                              </div>
+                            </div>
+                          </td>
+                          <td>{{school.EMIS}}</td>
+                         
+  
+                    
+                       <td>
+                            
+                             {{school.district}}
+                           
+                          </td>
+                             <td>
+                            
+                             {{school.region}}
+                           
+                          </td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+          <!-- row -->
+        </div>
+<!-- End Contact Area -->
+{% endblock %}

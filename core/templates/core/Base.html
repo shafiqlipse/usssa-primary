@@ -1,130 +1,411 @@
+<!DOCTYPE html>
 <html lang="en">
   {% load static %}
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>UPSSA | {% block title %}{% endblock title %}</title>
-    <link rel="icon" href="{%static 'images/upsa.png'%}" sizes="35x35" />
-    <link rel="stylesheet" href="{% static 'css/profile/school_new.css'%}" />
+    <title>UPSSA - {% block title %}{% endblock %}</title>
+    <link
+      rel="icon"
+      href="{% static 'images/fav.png'%}"
+      type="image/gif"
+      sizes="16x16"
+    />
+    <link
+      rel="icon"
+      href="{% static 'images/fav.png'%}"
+      type="image/gif"
+      sizes="18x18"
+    />
+    <link
+      rel="icon"
+      href="{% static 'images/fav.png'%}"
+      type="image/gif"
+      sizes="20x20"
+    />
 
-    <link rel="stylesheet" href="{% static 'css/base/base.css'%}" />
-    <link rel="stylesheet" href="{% static 'css/thanks/thanks.css'%}" />
-    <link rel="stylesheet" href="{% static 'css/home/home.css'%}" />
-    <link rel="stylesheet" href="{% static 'css/main/main.css'%}" />
-    <link rel="stylesheet" href="{% static 'css/css/all.css'%}" />
-    <link rel="stylesheet" href="{% static 'css/css/all.min.css'%}" />
-    <link rel="stylesheet" href="{% static 'css/profile/newAthlete.css'%}" />
-    <link rel="stylesheet" href="{% static 'css/profile/school_new.css'%}" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Bootstrap CSS -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Molengo&family=SUSE:wght@100..800&display=swap"
       rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
+      integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- Owl Carousel -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+      integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
     />
     <link
       rel="stylesheet"
-      href="https://cdn.datatables.net/2.0.1/css/dataTables.dataTables.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+      integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
     />
+
+    <!-- Animate.css -->
     <link
-      id="pagestyle"
-      href="{% static 'assets/css/material-dashboard.css'%}"
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+      integrity="sha512-c42qTSw/wPZ3/5LBzD+Bw5f7bSF2oxou6wEb+I/lqeaKV5FDIfMvvRp772y4jcJLKuGUOpbJMdg/BTl50fJYAw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- Magnific Popup -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.2.0/magnific-popup.min.css"
+      integrity="sha512-lvaVbvmbHhG8cmfivxLRhemYlTT60Ly9Cc35USrpi8/m+Lf/f/T8x9kEIQq47cRj1VQIFuxTxxCcvqiQeQSHjQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- Normalize.css -->
+    <!-- Normalize.css -->
+
+    <link
+      href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css"
       rel="stylesheet"
     />
+    <!-- Normalize.css -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+      integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- Local Stylesheets -->
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/responsive.css' %}" />
   </head>
   <body>
-    <header class="header">
-      <nav class="navbar">
-        <a href="/" class="nav-logo">
-          <img src="{% static 'images/upsa.png'%}" alt="" />
-        </a>
-        <ul class="nav-menu flex">
-          <li class="nav-item">
-            <a href="#" class="nav-link">About</a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">Overview</a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">School</a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">Athletes</a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">Contact</a>
-          </li>
-          <li class="nav-item">
-            {% if user.is_authenticated %}
-            <!---->
-            {% if user.is_school %}
-            <a href="{% url 'school_dashboard'%}" class="btn-submit"
-              >Dashboard</a
-            >{% elif user.is_staff %}
-            <a href="{% url 'dashboard'%}" class="btn-submit">Dashboard</a>
-            {% elif user.is_admin %}
-            <a href="{% url 'officer_dashboard'%}" class="btn-submit"
-              >Dashboard</a
-            >{%endif %} {% else %}
-            <a href="{% url 'login'%}" class="btn-submit">Login</a>
-            {% endif %}
-          </li>
-          <li class="nav-item">
-            <a href="{% url 'new_school'%}" class="btn-submit"
-              >Register school</a
-            >
-          </li>
-        </ul>
-        <div class="hamburger">
-          <i class="fa fa-bars"></i>
-        </div>
-      </nav>
-    </header>
+    <!-- Preloader -->
 
-    <div class="content">{% block content %} {% endblock %}</div>
-    <footer class="footer py-4">
-      <div class="container-fluid">
-        <div class="row align-items-center justify-content-lg-between">
-          <div class="col-lg-6 mb-lg-0 mb-4">
-            <div class="copyright text-center text-sm text-muted text-lg-start">
-              USSSA Copyright ©
-              <script>
-                document.write(new Date().getFullYear());
-              </script>
-              , All Rights Reserved.
+    <!-- Start HEader Area -->
+    <header class="header">
+      <!-- Header Top -->
+      <div class="header-top">
+        <div class="container">
+          <div class="row">
+            <!-- Top Left -->
+            <div class="col-lg-6 align-self-center">
+              <div class="top-info-left">
+                <span
+                  ><i class="fas fa-map-marker-alt"></i> GNS Plaza, Old Kampala
+                  road</span
+                >
+                <span
+                  ><i class="far fa-envelope"></i> upssaportal@gmail.com</span
+                >
+              </div>
+            </div>
+            <!-- Top Right -->
+            <div class="col-lg-6 align-self-center text-right">
+              <div class="top-info-right">
+                <div class="office-time">
+                  <span
+                    ><i class="far fa-clock"></i> Office Hour : 09:00am -
+                    5:00pm</span
+                  >
+                </div>
+                <div class="top-social">
+                  <ul>
+                    <li>
+                      <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    </li>
+                    <li>
+                      <a href="#"><i class="fab fa-twitter"></i></a>
+                    </li>
+                    <li>
+                      <a href="#"><i class="fab fa-instagram"></i></a>
+                    </li>
+                    <li>
+                      <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Header Bottom -->
+      <div class="header-bottom">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-3 col-xl-2 col-4">
+              <div class="logo">
+                <a href="index.html">
+                  <img
+                    src="{% static 'images/old-logo.jpeg'%}"
+                    alt="logo"
+                    style="width: 90px"
+                  />
+                </a>
+              </div>
+            </div>
+            <div class="col-lg-9 col-xl-10 col-8">
+              <!-- Header Search -->
+
+              <div class="canvas_open">
+                <a href="javascript:void(0)">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </a>
+              </div>
+              <!-- Menu -->
+              <div class="menu">
+                <nav>
+                  <ul>
+                    <li>
+                      <a href="/">Home</a>
+                    </li>
+                    <li>
+                      <a href="{% url 'about'%}">About us</a>
+                    </li>
+                    <li>
+                      <a href="{% url 'schooles'%}">Schools</a>
+                    </li>
+                    <li>
+                      <a href="{% url 'faq'%}">FAQs</a>
+                    </li>
+                    <li><a href="{% url 'contact'%}">Contact Us</a></li>
+                    <li>
+                      <a href="{% url 'about'%}" class="btn btn-primary"
+                        >Register School</a
+                      >
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li>
+                      <a
+                        href="{% url 'logout'%}"
+                        class="btn btn-outline-primary"
+                        >Logout</a
+                      >{% else %}
+                    </li>
+
+                    <li>
+                      <a href="{% url 'login'%}" class="btn btn-outline-primary"
+                        >Login</a
+                      >
+                    </li>
+                    {% endif %}
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- End HEader Area -->
+    <!-- Start Mobile Menu Area -->
+    <div class="mobile-menu-area">
+      <!--offcanvas menu area start-->
+      <div class="off_canvars_overlay"></div>
+      <div class="offcanvas_menu">
+        <div class="offcanvas_menu_wrapper">
+          <div class="canvas_close">
+            <a href="javascript:void(0)"><i class="fas fa-times"></i></a>
+          </div>
+          <div class="mobile-logo">
+            <a href="index.html">
+              <img src="assets/img/logo.png" alt="logo" />
+            </a>
+          </div>
+          <div id="menu" class="text-left">
+            <ul class="offcanvas_main_menu">
+              <li class="menu-item-has-children active">
+                <a href="#">Home</a>
+                <ul class="sub-menu">
+                  <li><a href="index.html">Home v1</a></li>
+                  <li><a href="index2.html">Home v2</a></li>
+                </ul>
+              </li>
+              <li class="menu-item-has-children">
+                <a href="#">Page</a>
+                <ul class="sub-menu">
+                  <li><a href="about.html">About Us</a></li>
+                  <li><a href="team.html">Team Members</a></li>
+                  <li><a href="pricing.html">Pricing Plane</a></li>
+                  <li><a href="faq.html">Faq</a></li>
+                  <li><a href="404.html">404 Error</a></li>
+                </ul>
+              </li>
+              <li class="menu-item-has-children">
+                <a href="#">Services</a>
+                <ul class="sub-menu">
+                  <li><a href="services.html">Services</a></li>
+                  <li><a href="services-details.html">Services Details</a></li>
+                </ul>
+              </li>
+              <li class="menu-item-has-children">
+                <a href="#">Project</a>
+                <ul class="sub-menu">
+                  <li><a href="project.html">Project</a></li>
+                  <li><a href="project-details.html">Project Details</a></li>
+                </ul>
+              </li>
+              <li class="menu-item-has-children">
+                <a href="#">Blog</a>
+                <ul class="sub-menu">
+                  <li><a href="blog.html">Blog</a></li>
+                  <li><a href="blog-grid.html">Blog Grid View</a></li>
+                  <li><a href="single.html">Blog Details</a></li>
+                </ul>
+              </li>
+              <li class="menu-item-has-children">
+                <a href="contact.html"> Contact Us</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--offcanvas menu area end-->
+    {% block content %}{% endblock %}
+
+    <!-- End Latest News Area -->
+
+    <!-- Start Footer Area -->
+    <footer class="footer">
+      <!-- Footer Top -->
+
+      <!-- Footer Bottom -->
+      <div class="footer-bottom pt-30 pb-30">
+        <div class="container">
+          <div class="row">
+            <div class="col-12 text-center">
+              <div class="copy-text mt-30">
+                <p style="padding: 10px">
+                  Copyright © <span id="year"></span> <a href="#">UPSSA</a> A
+                  Product of
+                  <a href="https://usssaonline.com">USSSA</a>
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </footer>
-    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <!-- End Footer Area -->
+    <!-- End Works About Area -->
+    <div class="scroll-area">
+      <i class="fa fa-angle-up"></i>
+    </div>
 
-    <script
-      src="https://code.jquery.com/jquery-3.7.1.min.js"
-      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://code.jquery.com/jquery-3.7.1.min.js"
-      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
-    <script src="{% static 'scripts/app.js'%}"></script>
-
-    <script src="{%static 'js/nav.js'%}"></script>
-
+    <!-- Js File -->
     <script>
-      // change color on scroll
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+    <!-- Modernizr -->
+    <script src="{% static 'js/modern.js' %}"></script>
 
-      window.addEventListener("scroll", function () {
-        const header = document.querySelector(".header");
-        if (window.scrollY >= 100) {
-          header.classList.add("white-bg");
-        } else {
-          header.classList.remove("white-bg");
-        }
+    <!-- jQuery -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+      integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <!-- Popper.js -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js"
+      integrity="sha512-TPh2Oxlg1zp+kz3nFA0C5vVC6leG/6mm1z9+mA81MI5eaUVqasPLO8Cuk4gMF4gUfP5etR73rgU/8PNMsSesoQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <!-- Bootstrap JS -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"
+      integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <!-- Owl Carousel -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+      integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <!-- jQuery Waypoints -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.js"
+      integrity="sha512-ZKNVEa7gi0Dz4Rq9jXcySgcPiK+5f01CqW+ZoKLLKr9VMXuCsw3RjWiv8ZpIOa0hxO79np7Ec8DDWALM0bDOaQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <!-- jQuery Counter-Up -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0.0/jquery.counterup.min.js"
+      integrity="sha512-d8F1J2kyiRowBB/8/pAWsqUl0wSEOkG5KATkVV4slfblq9VRQ6MyDZVxWl2tWd+mPhuCbpTB4M7uU/x9FlgQ9Q=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <!-- Magnific Popup -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.2.0/jquery.magnific-popup.min.js"
+      integrity="sha512-fCRpXk4VumjVNtE0j+OyOqzPxF1eZwacU3kN3SsznRPWHgMTSSo7INc8aY03KQDBWztuMo5KjKzCFXI/a5rVYQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <!-- MixItUp -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.1/mixitup.min.js"
+      integrity="sha512-nKZDK+ztK6Ug+2B6DZx+QtgeyAmo9YThZob8O3xgjqhw2IVQdAITFasl/jqbyDwclMkLXFOZRiytnUrXk/PM6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <!-- WOW.js -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"
+      integrity="sha512-Eak/29OTpb36LLo2r47IpVzPBLXnAMPAVypbSZiZ4Qkf8p/7S/XRG5xp7OKWPPYfJT6metI+IORkR5G8F900+g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <!-- Local JS Files -->
+    <script>
+      $(document).ready(function () {
+        $("#example").DataTable({ responsive: !0 });
       });
     </script>
+    <script src="{% static 'js/main.js'%}"></script>
+    <script src="{% static 'js/feather.js'%}"></script>
+    <script src="{% static 'js/opper.js'%}"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <!-- Local JS Files -->
+    <script src="{% static 'js/script.js' %}"></script>
+    <!-- Local JS Files -->
+    <script src="{% static 'js//mobile-menu.js' %}"></script>
   </body>
 </html>

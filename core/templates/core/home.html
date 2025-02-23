@@ -1,35 +1,640 @@
 {% extends "core/Base.html" %}
 <!---->
-{% load static %} {% block content %}
-<div class="home-page">
-  <div class="hero flex">
-    <div class="left flex">
-      <span>_Uganda primary schools sports association</span>
-      <h1>Primary schools online registration system</h1>
-      <p>
-        At UPSSA, every child is a star in the making, and we take pride in
-        fostering a dynamic environment where play, teamwork, and achievement
-        thrive.
-      </p>
-      <div class="btns flex">
-        <a href="" class="btn-submit">contact</a>
-        <a href="{% url 'new_school'%}" class="btn-submit">
-          get started <i class="fa fa-arrow-right"></i>
-        </a>
+{% load static %}
+<!-- Start Works About Area -->
+{% block title %}Uganda Primary Schools Sports Association{% endblock %}
+<!-- Start Works About Area -->
+
+{% block content %}
+<!-- Start Works About Area -->
+<section class="works-about-area section-padding">
+  <div class="container">
+    <div class="row">
+      <!-- Content -->
+      <div class="col-lg-6 align-self-center">
+        <div class="works-about-content">
+          <h5>UPSSA</h5>
+          <h2>Primary schools online registration system</h2>
+          <p>
+            At UPSSA, every child is a star in the making, and we take pride in
+            fostering a dynamic environment where play, teamwork, and
+            achievement thrive.
+          </p>
+          <ul>
+            <li><i class="fas fa-check-circle"></i> Athletics</li>
+            <li><i class="fas fa-check-circle"></i> Ball Games</li>
+            <li><i class="fas fa-check-circle"></i> Feassa</li>
+          </ul>
+          <div class="btn-aa">
+            <a class="button-2" href="">Get started</a>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="lefot">
-      <div class="vidcan">
-        <iframe
-          width="100%"
-          height="400"
-          src="https://www.youtube.com/embed/wmDkTGOZXds?autoplay=1&mute=1"
-          title="UPSSA School Registration form"
-        ></iframe>
+      <!-- Thumbnail -->
+      <div class="col-lg-6 align-self-center">
+        <div class="works-about-thumbanil">
+          <div class="thumbnail">
+            <img src="{% static 'img/upsa1.jpg'%}" alt="img" />
+          </div>
+          <div class="works-about-vedio">
+            <div class="video-btn">
+              <a href="https://www.youtube.com/embed/wmDkTGOZXds"
+                ><i class="fas fa-play"></i
+              ></a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <!-- your_template.html -->
+</section>
+<!-- End Works About Area -->
+<!-- Start themetechmount Area -->
+<section class="themetechmount-area section-bg">
+  <div class="container">
+    <div class="themetechmount-area-full">
+      <div class="row">
+        <!-- Single -->
+        <div class="col-lg-4 col-md-6">
+          <div class="themetechmount-item">
+            <div class="icon">
+              <i class="fas fa-cogs"></i>
+            </div>
+            <div class="content">
+              <h4>Identify</h4>
+              <p>We search and find talents</p>
+            </div>
+          </div>
+        </div>
+        <!-- Single -->
+        <div class="col-lg-4 col-md-6">
+          <div class="themetechmount-item active">
+            <div class="icon">
+              <i class="fas fa-headset"></i>
+            </div>
+            <div class="content">
+              <h4>Nurture</h4>
+              <p>We train, mentor and groom talent</p>
+            </div>
+          </div>
+        </div>
+        <!-- Single -->
+        <div class="col-lg-4 col-md-6">
+          <div class="themetechmount-item">
+            <div class="icon">
+              <i class="fas fa-user-astronaut"></i>
+            </div>
+            <div class="content">
+              <h4>Develope</h4>
+              <p>We Equip, protect and grow talent</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End themetechmount Area -->
+<!-- Start About Area -->
+<section class="about-area section-padding section-bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="about-thumbnail">
+          <img src="{% static 'img/IMG-20240520-WA0106.jpg'%}" alt="about" />
+        </div>
+      </div>
+      <div class="col-lg-6 align-self-center">
+        <div class="about-content">
+          <h5>About UPSSA</h5>
+          <h2>Uganda Primary Schools Sports Association</h2>
+          <div class="about-content-navs-tab">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link active"
+                  id="aboutus-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#aboutus"
+                  type="button"
+                  role="tab"
+                  aria-controls="aboutus"
+                  aria-selected="true"
+                >
+                  About Us
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link"
+                  id="mission-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#mission"
+                  type="button"
+                  role="tab"
+                  aria-controls="mission"
+                  aria-selected="false"
+                >
+                  Our Mission
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link"
+                  id="vision-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#vision"
+                  type="button"
+                  role="tab"
+                  aria-controls="vision"
+                  aria-selected="false"
+                >
+                  Our Vision
+                </button>
+              </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+              <div
+                class="tab-pane fade show active"
+                id="aboutus"
+                role="tabpanel"
+                aria-labelledby="aboutus-tab"
+              >
+                <div class="about-content-navs-tab-content-full">
+                  <div class="title">
+                    <h2>25+</h2>
+                    <span>Years in Existance</span>
+                  </div>
+                  <p>
+                    UPSSA is a sports association that brings together primary
+                    schools in Uganda to compete in various sports disciplines.
+                  </p>
+                  <ul>
+                    <li><i class="far fa-check-square"></i> Kid Athletics</li>
+                    <li><i class="far fa-check-square"></i> Ball Games</li>
+                    <li><i class="far fa-check-square"></i> Feassa Games</li>
+                  </ul>
+                  <a class="button-1" href="about.html">View Details</a>
+                </div>
+              </div>
+              <div
+                class="tab-pane fade"
+                id="mission"
+                role="tabpanel"
+                aria-labelledby="mission-tab"
+              >
+                <div class="about-content-navs-tab-content-full">
+                  <div class="title">
+                    <h2>100+</h2>
+                    <span>Districts participation </span>
+                  </div>
+                  <p>
+                    To uplift the standard of Sports in Schools for all learners
+                    throughout the Country.
+                  </p>
+                  <ul>
+                    <li>
+                      <i class="far fa-check-square"></i> Mass sports
+                      engagements
+                    </li>
+                    <li><i class="far fa-check-square"></i> Fair play rules</li>
+                  </ul>
+                  <a class="button-1" href="about.html">View Details</a>
+                </div>
+              </div>
+              <div
+                class="tab-pane fade"
+                id="vision"
+                role="tabpanel"
+                aria-labelledby="vision-tab"
+              >
+                <div class="about-content-navs-tab-content-full">
+                  <div class="title">
+                    <h2>10,000+</h2>
+                    <span>Schools participation </span>
+                  </div>
+                  <p>
+                    We foster friendly relations among schools, districts,
+                    municipalities and cities by promoting fair competitions.
+                  </p>
+                  <ul>
+                    <li>
+                      <i class="far fa-check-square"></i> Promote leadership
+                      skills
+                    </li>
+                    <li>
+                      <i class="far fa-check-square"></i> Foster international
+                      friendship
+                    </li>
+                  </ul>
+                  <a class="button-1" href="about.html">View Details</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End About Area -->
+
+<!-- Start Latest Projects Slider -->
+<section class="latest-project-slider pt-100">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 mb-50 text-center">
+        <div class="section-headding mb-12 m-2">
+          <h5>Latest Projects</h5>
+          <h2>Most recent activities</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="latest-projects-slider-full owl-carousel">
+      <!-- Single -->
+      <div class="project-item">
+        <div class="thumbnail">
+          <img
+            src="{% static 'img/Collaboration-and-Planning-meeting-between-UPSSANASOA-and-USSSA-7.jpeg'%}"
+            alt="about"
+          />
+        </div>
+        <div class="info">
+          <div class="info-item">
+            <div class="left-info">
+              <h4>
+                <a href="product-details.html"
+                  >Collaboration and planning meeting
+                </a>
+              </h4>
+              <a class="cat" href="#">Between UPSSA, NASOA, and USSSA.</a>
+            </div>
+            <div class="right-info">
+              <div class="img-gallery-popup">
+                <a href="assets/img/project/1.jpg"
+                  ><i class="fas fa-plus"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Single -->
+      <div class="project-item">
+        <div class="thumbnail">
+          <img src="{% static 'img/IMG-20240512-WA0309.jpg'%}" alt="about" />
+        </div>
+        <div class="info">
+          <div class="info-item">
+            <div class="left-info">
+              <h4>
+                <a href="product-details.html">Ball Games championship.</a>
+              </h4>
+              <a class="cat" href="#">Soroti ~ August 2024</a>
+            </div>
+            <div class="right-info">
+              <div class="img-gallery-popup">
+                <a href="assets/img/project/2.jpg"
+                  ><i class="fas fa-plus"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Single -->
+      <div class="project-item">
+        <div class="thumbnail">
+          <img src="{% static 'img/IMG_3690.jpg'%}" alt="about" />
+        </div>
+        <div class="info">
+          <div class="info-item">
+            <div class="left-info">
+              <h4>
+                <a href="product-details.html"
+                  >Athletics and SNE championship.</a
+                >
+              </h4>
+              <a class="cat" href="#">Kitgum ~ May 2024</a>
+            </div>
+            <div class="right-info">
+              <div class="img-gallery-popup">
+                <a href="assets/img/project/3.jpg"
+                  ><i class="fas fa-plus"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Single -->
+      <div class="project-item">
+        <div class="thumbnail">
+          <img src="{% static 'img/IMG-20240520-WA0133.jpg'%}" alt="about" />
+        </div>
+        <div class="info">
+          <div class="info-item">
+            <div class="left-info">
+              <h4>
+                <a href="product-details.html"
+                  >Athletics and SNE championship.</a
+                >
+              </h4>
+              <a class="cat" href="#">Kitgum ~ May 2024</a>
+            </div>
+            <div class="right-info">
+              <div class="img-gallery-popup">
+                <a href="assets/img/project/1.jpg"
+                  ><i class="fas fa-plus"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Single -->
+      <div class="project-item">
+        <div class="thumbnail">
+          <img src="{% static 'img/upsa1.jpg'%}" alt="about" />
+        </div>
+        <div class="info">
+          <div class="info-item">
+            <div class="left-info">
+              <h4>
+                <a href="product-details.html">UPSSA EXECUTIVE COMMITEE .</a>
+              </h4>
+              <a class="cat" href="#">2024-2028 ELECTIONS</a>
+            </div>
+            <div class="right-info">
+              <div class="img-gallery-popup">
+                <a href="assets/img/project/4.jpg"
+                  ><i class="fas fa-plus"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Single -->
+      <div class="project-item">
+        <div class="thumbnail">
+          <img src="{% static 'img/IMG-20240520-WA0106.jpg'%}" alt="about" />
+        </div>
+        <div class="info">
+          <div class="info-item">
+            <div class="left-info">
+              <h4>
+                <a href="product-details.html"
+                  >Athletics and SNE championship.</a
+                >
+              </h4>
+              <a class="cat" href="#">Kitgum ~ May 2024</a>
+            </div>
+            <div class="right-info">
+              <div class="img-gallery-popup">
+                <a href="assets/img/project/5.jpg"
+                  ><i class="fas fa-plus"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Latest Projects Slider -->
+<!-- Start Counter Area -->
+<div
+  class="counter-area pt-50 pb-20"
+  style="background-image: url('assets/img/counterbg.jpg')"
+>
+  <div class="container">
+    <div class="row">
+      <!-- Single -->
+      <div class="col-lg-3 col-md-6 mb-30">
+        <div class="counter-item">
+          <div class="icon">
+            <i class="fas fa-tasks"></i>
+          </div>
+          <div class="content">
+            <div class="title">
+              <h2 class="counter">201</h2>
+              <h3>+</h3>
+            </div>
+            <p>Projects Completed</p>
+          </div>
+        </div>
+      </div>
+      <!-- Single -->
+      <div class="col-lg-3 col-md-6 mb-30">
+        <div class="counter-item">
+          <div class="icon">
+            <i class="fas fa-dna"></i>
+          </div>
+          <div class="content">
+            <div class="title">
+              <h2 class="counter">255</h2>
+              <h3>+</h3>
+            </div>
+            <p>Remaining Project</p>
+          </div>
+        </div>
+      </div>
+      <!-- Single -->
+      <div class="col-lg-3 col-md-6 mb-30">
+        <div class="counter-item">
+          <div class="icon">
+            <i class="far fa-gem"></i>
+          </div>
+          <div class="content">
+            <div class="title">
+              <h2 class="counter">100</h2>
+              <h3>+</h3>
+            </div>
+            <p>Business Start-up</p>
+          </div>
+        </div>
+      </div>
+      <!-- Single -->
+      <div class="col-lg-3 col-md-6 mb-30">
+        <div class="counter-item">
+          <div class="icon">
+            <i class="fas fa-user-tie"></i>
+          </div>
+          <div class="content">
+            <div class="title">
+              <h2 class="counter">25</h2>
+              <h3>+</h3>
+            </div>
+            <p>Former Employer</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+<!-- End Counter Area -->
+<!-- Start We Provide Area -->
+<section
+  class="web-prodive"
+  style="background-image: url('{% static 'img/dark.png'%}')"
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 offset-lg-2 text-center">
+        <div class="we-provide-content">
+          <div class="video-btn">
+            <a href="https://youtu.be/wmDkTGOZXds"
+              ><i class="fas fa-play"></i
+            ></a>
+          </div>
+          <h2>School Registration overview</h2>
+          <p>
+            Get to know how you can register your school for the upcoming sports
+            events. incase your school is not registered yet.
+          </p>
+          <a
+            class="button-2"
+            href="https://www.youtube.com/channel/UChk3DoT3k45vPlEP9SV04Ug"
+            >More Tutorials</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End We Provide Area -->
+<!-- Start Testimonial Area -->
+<section class="testimonial-area">
+  <div class="container">
+    <div class="testimonial-area-full">
+      <div class="row">
+        <div class="col-lg-6 align-self-center">
+          <div class="what-we-do-c">
+            <h5>What We do</h5>
+            <h2>
+              Our Championships turnup has grown drastically over the years
+            </h2>
+            <div class="ww-do">
+              <div class="progress-bars wow fadeInUp" data-wow-delay=".1s">
+                <div class="single-progress">
+                  <h3>Kids Athletics</h3>
+                  <div class="progress">
+                    <div class="progress-bar wow" style="width: 90%">
+                      <span class="percent">90%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="progress-bars wow fadeInUp" data-wow-delay=".1s">
+                <div class="single-progress">
+                  <h3>Ball Games</h3>
+                  <div class="progress">
+                    <div class="progress-bar wow" style="width: 98%">
+                      <span class="percent">98%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="progress-bars wow fadeInUp" data-wow-delay=".1s">
+                <div class="single-progress">
+                  <h3>Feassa Qualifiers</h3>
+                  <div class="progress">
+                    <div class="progress-bar wow" style="width: 68%">
+                      <span class="percent">68%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div
+            class="testimonial-item-full owl-carousel"
+            style="background-image: url('{% static 'img/fer.jpg'%}')"
+          >
+            <!-- Single -->
+            <div class="testimonial-item">
+              <div class="thumbnail">
+                <img
+                  src="{% static 'img/IMG-20240520-WA0106.jpg'%}"
+                  alt="img"
+                />
+              </div>
+              <div class="content">
+                <p>
+                  Athletes from all districts in Uganda compete in the Kids
+                  Athletics champioship to mark the best district at the Games
+                </p>
+                <div class="ratting">
+                  <span><i class="fas fa-star"></i></span>
+                  <span><i class="fas fa-star"></i></span>
+                  <span><i class="fas fa-star"></i></span>
+                  <span><i class="fas fa-star"></i></span>
+                  <span><i class="fas fa-star"></i></span>
+                </div>
+                <h4>Kids Athletics</h4>
+                <h5>1st Term Holiday</h5>
+              </div>
+            </div>
+            <!-- Single -->
+            <!-- Single -->
+            <div class="testimonial-item">
+              <div class="thumbnail">
+                <img src="{% static 'img/fer.jpg'%}" alt="img" />
+              </div>
+              <div class="content">
+                <p>
+                  Showdown between the best athletes in the Districts of Uganda
+                  in the ball games championship.
+                </p>
+                <div class="ratting">
+                  <span><i class="fas fa-star"></i></span>
+                  <span><i class="fas fa-star"></i></span>
+                  <span><i class="fas fa-star"></i></span>
+                  <span><i class="fas fa-star"></i></span>
+                  <span><i class="fas fa-star"></i></span>
+                </div>
+                <h4>Kids Athletics</h4>
+                <h5>1st Term Holiday</h5>
+              </div>
+            </div>
+            <!-- Single -->
+            <!-- Single -->
+            <div class="testimonial-item">
+              <div class="thumbnail">
+                <img
+                  src="{% static 'img/IMG-20240516-WA0206.jpg'%}"
+                  alt="img"
+                />
+              </div>
+              <div class="content">
+                <p>
+                  The best schools in Uganda compete in the ball games
+                  championship to select the ones to represent the country in
+                  the East African games.
+                </p>
+                <div class="ratting">
+                  <span><i class="fas fa-star"></i></span>
+                  <span><i class="fas fa-star"></i></span>
+                  <span><i class="fas fa-star"></i></span>
+                  <span><i class="fas fa-star"></i></span>
+                  <span><i class="fas fa-star"></i></span>
+                </div>
+                <h4>Feassa Qualifiers</h4>
+                <h5>2nd Term Period</h5>
+              </div>
+            </div>
+            <!-- Single -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 {% endblock content %}

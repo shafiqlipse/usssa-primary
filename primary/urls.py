@@ -30,6 +30,7 @@ urlpatterns = [
     # path('send_email/', Sendmail, name='send_email'),
     path("dashboard/", include("dashboard.urls")),
     path("team/", include("teams.urls")),
+    path("core/", include("core.urls")),
 
     path("get_athletes/", get_athletes, name="get_athletes"),
     path("get_dist_athletes/", get_dist_athletes, name="get_dist_athletes"),
