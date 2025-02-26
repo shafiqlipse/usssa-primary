@@ -4,6 +4,6 @@ from .models import Athlete
 
 class AthleteSelectionForm(forms.Form):
     athletes = forms.ModelMultipleChoiceField(
-        queryset=Athlete.objects.all(),
+        queryset=Athlete.objects.filter(status = 'Active'),
         widget=forms.CheckboxSelectMultiple,
     )

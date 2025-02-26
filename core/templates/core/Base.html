@@ -199,9 +199,9 @@
                     {% if user.is_authenticated %}
                     <li>
                       <a
-                        href="{% url 'logout'%}"
+                        href="{% url 'dashboard'%}"
                         class="btn btn-outline-primary"
-                        >Logout</a
+                        >Dashboard</a
                       >{% else %}
                     </li>
 
@@ -236,49 +236,43 @@
           </div>
           <div id="menu" class="text-left">
             <ul class="offcanvas_main_menu">
-              <li class="menu-item-has-children active">
-                <a href="#">Home</a>
-                <ul class="sub-menu">
-                  <li><a href="index.html">Home v1</a></li>
-                  <li><a href="index2.html">Home v2</a></li>
+         
+                <ul>
+                  <li>
+                    <a href="/">Home</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'about'%}">About us</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'schooles'%}">Schools</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'faq'%}">FAQs</a>
+                  </li>
+                  <li><a href="{% url 'contact'%}">Contact Us</a></li>
+                  <li>
+                    <a href="{% url 'new_school'%}" class="btn btn-primary"
+                      >Register School</a
+                    >
+                  </li>
+                  {% if user.is_authenticated %}
+                  <li>
+                    <a
+                      href="{% url 'dashboard'%}"
+                      class="btn btn-outline-primary"
+                      >Dashboard</a
+                    >{% else %}
+                  </li>
+
+                  <li>
+                    <a href="{% url 'login'%}" class="btn btn-outline-primary"
+                      >Login</a
+                    >
+                  </li>
+                  {% endif %}
                 </ul>
-              </li>
-              <li class="menu-item-has-children">
-                <a href="#">Page</a>
-                <ul class="sub-menu">
-                  <li><a href="about.html">About Us</a></li>
-                  <li><a href="team.html">Team Members</a></li>
-                  <li><a href="pricing.html">Pricing Plane</a></li>
-                  <li><a href="faq.html">Faq</a></li>
-                  <li><a href="404.html">404 Error</a></li>
-                </ul>
-              </li>
-              <li class="menu-item-has-children">
-                <a href="#">Services</a>
-                <ul class="sub-menu">
-                  <li><a href="services.html">Services</a></li>
-                  <li><a href="services-details.html">Services Details</a></li>
-                </ul>
-              </li>
-              <li class="menu-item-has-children">
-                <a href="#">Project</a>
-                <ul class="sub-menu">
-                  <li><a href="project.html">Project</a></li>
-                  <li><a href="project-details.html">Project Details</a></li>
-                </ul>
-              </li>
-              <li class="menu-item-has-children">
-                <a href="#">Blog</a>
-                <ul class="sub-menu">
-                  <li><a href="blog.html">Blog</a></li>
-                  <li><a href="blog-grid.html">Blog Grid View</a></li>
-                  <li><a href="single.html">Blog Details</a></li>
-                </ul>
-              </li>
-              <li class="menu-item-has-children">
-                <a href="contact.html"> Contact Us</a>
-              </li>
-            </ul>
+            
           </div>
         </div>
       </div>

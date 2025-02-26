@@ -42,32 +42,30 @@ def school_registration(request):
 
 
 # Create your views here.
-@anonymous_required
+@anonymous_required  # Ensure this is properly defined
 def user_login(request):
     if request.method == "POST":
-        form = AuthenticationForm(data=request.POST)
+        form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
             user = form.get_user()
+            logout(request)  # Prevent session fixation
             login(request, user)
 
-            if user.is_school:
+            if getattr(user, 'is_school', False):
                 messages.success(request, "School login successful.")
                 return redirect("school_dashboard")
-            elif user.is_admin:
+            elif getattr(user, 'is_admin', False):
                 messages.success(request, "Officer login successful.")
                 return redirect("officer_dashboard")
             else:
                 messages.success(request, "Login successful.")
-                return redirect(
-                    "dashboard"
-                )  # Adjust the URL name for your dashboard view
+                return redirect("dashboard")
         else:
-            messages.error(request, "Error in login. Please check your credentials.")
+            messages.error(request, f"Error in login: {form.errors}")
     else:
         form = AuthenticationForm()
+
     return render(request, "login.html", {"form": form})
-
-
 def user_logout(request):
     # if user.is_authenticated:
     logout(request)

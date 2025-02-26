@@ -433,6 +433,57 @@ def Officerdash(request):
         "athletes_count": athletes_count,
     }
     return render(request, "accounts/dprofile.html", context)
+# @school_required
+def district_schools(request):
+    user = request.user
+    officer = Officer.objects.get(user_id=user.id)
+    district = officer.district
+    schools = School.objects.filter(district=district)
+    
+
+    context = {
+        "officer": officer,
+        "district": district,
+        "schools": schools,
+       
+    }
+    return render(request, "accounts/dprofile.html", context)
+# @school_required
+def district_athletes(request):
+    user = request.user
+    officer = Officer.objects.get(user_id=user.id)
+    district = officer.district
+    schools = School.objects.filter(district=district)
+    athletes = Athlete.objects.filter(school__in=schools)
+    
+
+    context = {
+        "officer": officer,
+        "district": district,
+        "schools": schools,
+        "athletes": athletes,
+    
+    }
+    return render(request, "accounts/dprofile.html", context)
+# @school_required
+def Officewrdash(request):
+    user = request.user
+    officer = Officer.objects.get(user_id=user.id)
+    district = officer.district
+    schools = School.objects.filter(district=district)
+    athletes = Athlete.objects.filter(school__in=schools)
+    schools_cout = School.objects.filter(district=district).count()
+    athletes_count = Athlete.objects.filter(school__in=schools).count()
+
+    context = {
+        "officer": officer,
+        "district": district,
+        "schools": schools,
+        "schools_cout": schools_cout,
+        "athletes": athletes,
+        "athletes_count": athletes_count,
+    }
+    return render(request, "accounts/dprofile.html", context)
 
 
 @login_required

@@ -1,4 +1,4 @@
-{% extends "dashboard/dashboard.html" %}
+{% extends "horizon/dascore.html" %}
 <!---->
 {% load static %} {% block content %}
 <div id="app-content">
@@ -60,277 +60,77 @@
             <!-- navs -->
 
             <!-- navs -->
-            <ul class="nav nav-lt-tab px-4" id="pills-tab" role="tablist">
-              <li class="nav-item">
-                <button
-                  class="nav-link active"
-                  id="home-tab"
-                  data-bs-toggle="tab"
-                  data-bs-target="#overview"
-                  type="button"
-                  role="tab"
-                  aria-controls="home"
-                  aria-selected="true"
-                >
-                  Overview
-                </button>
-              </li>
-              <li class="nav-item">
-                <button
-                  class="nav-link"
-                  id="profile-tab"
-                  data-bs-toggle="tab"
-                  data-bs-target="#projects"
-                  type="button"
-                  role="tab"
-                  aria-controls="profile"
-                  aria-selected="false"
-                >
-                  Schools
-                </button>
-              </li>
-
-              <li class="nav-item">
-                <button
-                  class="nav-link"
-                  id="athletes-tab"
-                  data-bs-toggle="tab"
-                  data-bs-target="#athletes"
-                  type="button"
-                  role="tab"
-                  aria-controls="athletes"
-                  aria-selected="false"
-                >
-                  Athletes
-                </button>
-              </li>
-              <li class="nav-item">
-                <button
-                  class="nav-link"
-                  id="profile-tab"
-                  data-bs-toggle="tab"
-                  data-bs-target="#disciplinary"
-                  type="button"
-                  role="tab"
-                  aria-controls="profile"
-                  aria-selected="false"
-                >
-                  Disciplinary
-                </button>
-              </li>
-              <li class="nav-item">
-                <button
-                  class="nav-link"
-                  id="profile-tab"
-                  data-bs-toggle="tab"
-                  data-bs-target="#clubs"
-                  type="button"
-                  role="tab"
-                  aria-controls="profile"
-                  aria-selected="false"
-                >
-                  Clubs
-                </button>
-              </li>
-              <li class="nav-item">
-                <button
-                  class="nav-link"
-                  id="profile-tab"
-                  data-bs-toggle="tab"
-                  data-bs-target="#profile"
-                  type="button"
-                  role="tab"
-                  aria-controls="profile"
-                  aria-selected="false"
-                >
-                  Profile
-                </button>
-              </li>
-            </ul>
           </div>
         </div>
       </div>
-      <div class="py-6 tab-content" id="myTabContent">
-        <div
-          class="tab-pane fade show active"
-          id="overview"
-          role="tabpanel"
-          aria-labelledby="home-tab"
-        >
-          <div>
-            <!-- row -->
-            <div class="row">
-              <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-5">
-                <!-- card -->
-                <div class="card h-100">
-                  <!-- card body -->
-                  <div class="card-header">
-                    <h4 class="mb-0">About</h4>
-                  </div>
-                  <div class="card-body">
-                    <div class="table-responsive table-card">
-                      <table class="table text-nowrap table-centered mb-0">
-                        <tbody>
-                          <tr>
-                            <td>25/07/2023</td>
-                            <td>Clothes</td>
-                          </tr>
-                          <tr>
-                            <td>20/07/2023</td>
-                            <td>Food</td>
-                          </tr>
-                          <tr>
-                            <td>16/07/2023</td>
-                            <td>Medical Checkup</td>
-                          </tr>
-                          <tr>
-                            <td>12/07/2023</td>
-                            <td>Clothes</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
+      <div>
+        <!-- row -->
+        <div class="row mt-6">
+          <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-5">
+            <!-- card -->
+            <div class="card h-100">
+              <!-- card body -->
+              <div class="card-header">
+                <h4 class="mb-0">About</h4>
               </div>
-              <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-5">
-                <!-- card -->
-                <div class="card h-100">
-                  <!-- card body -->
-                  <div class="card-header">
-                    <h4 class="mb-0">About</h4>
-                  </div>
-                  <div class="card-body">
-                    <div class="table-responsive table-card">
-                      <table class="table text-nowrap table-centered mb-0">
-                        <tbody>
-                          <tr>
-                            <td>25/07/2023</td>
-                            <td>Clothes</td>
-                          </tr>
-                          <tr>
-                            <td>20/07/2023</td>
-                            <td>Food</td>
-                          </tr>
-                          <tr>
-                            <td>16/07/2023</td>
-                            <td>Medical Checkup</td>
-                          </tr>
-                          <tr>
-                            <td>12/07/2023</td>
-                            <td>Clothes</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
+              <div class="card-body">
+                <div class="table-responsive table-card">
+                  <table class="table text-nowrap table-centered mb-0">
+                    <tbody>
+                      <tr>
+                        <td>25/07/2023</td>
+                        <td>Clothes</td>
+                      </tr>
+                      <tr>
+                        <td>20/07/2023</td>
+                        <td>Food</td>
+                      </tr>
+                      <tr>
+                        <td>16/07/2023</td>
+                        <td>Medical Checkup</td>
+                      </tr>
+                      <tr>
+                        <td>12/07/2023</td>
+                        <td>Clothes</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div
-          class="tab-pane fade show"
-          id="athletes"
-          role="tabpanel"
-          aria-labelledby="athletes-tab"
-        >
-          <div>
-            <!-- row -->
-            <div class="row">
-              <div class="col-12">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="table-responsive table-card">
-                      <table
-                        id="example"
-                        class="table text-nowrap table-centered mt-0"
-                        style="width: 100%"
-                      >
-                        <thead class="table-light">
-                          <tr>
-                            <th class="ps-1">Athlete</th>
-                            <th>LIN</th>
-                            <th>Date of Birth</th>
-                            <th>Gender | Age</th>
-
-                            <th>Status</th>
-                            <th>Action</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {% for athlete in athletes %}
-                          <tr>
-                            <td class="pe-0">
-                              <div class="d-flex align-items-center">
-                                <img
-                                  src="{{athlete.photo.url}}"
-                                  alt=""
-                                  class="img-4by3-sm rounded-3"
-                                  style="height: 30px; object-fit: cover;width: 30px;"
-                                />
-                                <div class="ms-3">
-                                  <h5 class="mb-0">
-                                    <a
-                                      href="{% url 'athlete' athlete.id %}"
-                                      class="text-inherit"
-                                      >{{athlete.fname}} {{athlete.lname}}
-                                    </a>
-                                  </h5>
-                                </div>
-                              </div>
-                            </td>
-                            <td>{{athlete.lin}}</td>
-                            <td>{{athlete.date_of_birth}}</td>
-                            <td>{{athlete.gender}} | {{athlete.age}}</td>
-
-                            <td>
-                              <span class="badge badge-success-soft"
-                                >{{athlete.status}}</span
-                              >
-                            </td>
-                            <td>
-                              <a
-                                href="#!"
-                                class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                data-template="eyeOne"
-                              >
-                                <i data-feather="eye" class="icon-xs"></i>
-                                <div id="eyeOne" class="d-none">
-                                  <span>View</span>
-                                </div>
-                              </a>
-                              <a
-                                href="#!"
-                                class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                data-template="editOne"
-                              >
-                                <i data-feather="edit" class="icon-xs"></i>
-                                <div id="editOne" class="d-none">
-                                  <span>Edit</span>
-                                </div>
-                              </a>
-                              <a
-                                href="#!"
-                                class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                data-template="trashOne"
-                              >
-                                <i data-feather="trash-2" class="icon-xs"></i>
-                                <div id="trashOne" class="d-none">
-                                  <span>Delete</span>
-                                </div>
-                              </a>
-                            </td>
-                          </tr>
-                          {% endfor %}
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
+          <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-5">
+            <!-- card -->
+            <div class="card h-100">
+              <!-- card body -->
+              <div class="card-header">
+                <h4 class="mb-0">About</h4>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive table-card">
+                  <table class="table text-nowrap table-centered mb-0">
+                    <tbody>
+                      <tr>
+                        <td>25/07/2023</td>
+                        <td>Clothes</td>
+                      </tr>
+                      <tr>
+                        <td>20/07/2023</td>
+                        <td>Food</td>
+                      </tr>
+                      <tr>
+                        <td>16/07/2023</td>
+                        <td>Medical Checkup</td>
+                      </tr>
+                      <tr>
+                        <td>12/07/2023</td>
+                        <td>Clothes</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
-            <!-- row -->
           </div>
         </div>
       </div>
