@@ -447,7 +447,7 @@ def district_schools(request):
         "schools": schools,
        
     }
-    return render(request, "accounts/dprofile.html", context)
+    return render(request, "horizon/schools.html", context)
 # @school_required
 def district_athletes(request):
     user = request.user
@@ -464,7 +464,7 @@ def district_athletes(request):
         "athletes": athletes,
     
     }
-    return render(request, "accounts/dprofile.html", context)
+    return render(request, "horizon/athletes.html", context)
 # @school_required
 def Officewrdash(request):
     user = request.user
