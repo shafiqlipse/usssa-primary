@@ -233,7 +233,6 @@ def delete_team(request, id):
 
 def Teams(request):
     teams = Team.objects.all()
-
     context = {"teams": teams}
     return render(request, "school/teams.html", context)
 

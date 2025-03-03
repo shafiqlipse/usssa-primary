@@ -1,75 +1,110 @@
-{% extends "dashboard/dashboard.html" %}
-<!--static-->
-{% block title %}Teams{% endblock %}
-<!--static-->
+{% extends "horizon/dascore.html" %}
+<!---->
 {% load static %}
-<!--khfufufu-->
+<!---->
+{%block title%}Athletes{% endblock %}
+<!---->
 {% block content %}
-<div class="schools-dew">
-  <div class="head flex">
-    <h1>Teams</h1>
-    <div class="ass">
-      {% if user.is_admin %}
-      <a href="{% url 'teamnew'%}" class="btn-submit">create team</a>
-      {% endif %}
-    </div>
-    <div class="ass">
-      {% if user.is_admin %}
-      <a href="{% url 'officer_dashboard'%}" class="btn-submit">Home</a>
-      {% endif %}
-    </div>
-  </div>
+<div id="app-content">
+  <!-- Container fluid -->
+  <div class="app-content-area">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-12">
+          <!-- Page header -->
+          <div class="mb-5">
+            <h3 class="mb-0">Teams</h3>
+           
+          </div>
+          <!-- Page header -->
+          <div class="mb-5">
+           
+            <a href="{% url 'teamnew'%}" class="btn-submit">create team</a>
+          </div>
+        </div>
+      </div>
+      <div>
+        <!-- row -->
+        {% if messages %}
+        <div class="messages">
+          {% for message in messages %}
+          <div
+            class="alert {% if message.tags == 'error' %}error-message{% elif message.tags == 'success' %}success-message{% endif %}"
+          >
+            {{ message }}
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <div class="table-responsive table-card">
+                  <table
+                    id="example"
+                    class="table text-nowrap table-centered mt-0"
+                    style="width: 100%"
+                  >
+                    <thead>
+                      <tr>
+                        <th>District</th>
+                        <th>Sport</th>
+                        <th>Gender</th>
+                        <th>Athletes</th>
+                        <th>Album</th>
+                        {% if user.is_staff %}
+                        <th>Accred</th>
 
-  <div class="filterlist glue">
-    <div class="lo">
-      <div class="official-list">
-        <table id="myTable" class="display">
-          <thead>
-            <tr>
-              <th>District</th>
-              <th>Sport</th>
-              <th>Gender</th>
-              <th>Athletes</th>
-              <th>Album</th>
-              {% if user.is_staff %}
-              <th>Accred</th>
+                        <th>Delete</th>
+                      </tr>
+                      {% endif %}
+                    </thead>
+                    <tbody>
+                      {% for team in teams %}
+                      <tr>
+                        <td>
+                          <a href="{%url 'dteam' team.id%}">
+                            {% for officer in team.team_officer.officer_profile.all %}
+                            
+                          </div>
+                            <!---->
+                            {{officer.district}} {% empty %}
+                            <p>No district found</p>
+                            {% endfor %}
+                          </a>
+                        </td>
+                        <td>{{team.team_sport}}</td>
+                        <td>{{team.team_age}} {{team.team_gender}}</td>
+                        <td>{{team.athletes.count}} athletes</td>
 
-              <th>Delete</th>
-            </tr>
-            {% endif %}
-          </thead>
-          <tbody>
-            {% for team in teams %}
-            <tr>
-              <td>
-                <a href="{%url 'dteam' team.id%}">
-                  {% for officer in team.team_officer.officer_profile.all %}
-                  {{officer.district}} {% empty %}
-                  <p>No district found</p>
-                  {% endfor %}
-                </a>
-              </td>
-              <td>{{team.team_sport}}</td>
-              <td>{{team.team_age}} {{team.team_gender}}</td>
-              <td>{{team.athletes.count}} athletes</td>
+                        <td>
+                          <a href="{%url 'dalbum' team.id %}"> Album</a>
+                        </td>
+                        {% if user.is_staff %}
+                        <td>
+                          <a href="{%url 'accred' team.id %}">Accreditation</a>
+                          <a href="{%url 'cert' team.id %}">Certificate</a>
+                        </td>
 
-              <td><a href="{%url 'dalbum' team.id %}"> Album</a></td>
-              {% if user.is_staff %}
-              <td>
-                <a href="{%url 'accred' team.id %}">Accreditation</a>
-                <a href="{%url 'cert' team.id %}">Certificate</a>
-              </td>
-
-              <td>
-                <a href="{%url 'deleteam' team.id%}" class="btn btn-danger"
-                  >Delete</a
-                >
-              </td>
-              {% endif %}
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+                        <td>
+                          <a
+                            href="{%url 'deleteam' team.id%}"
+                            class="btn btn-danger"
+                            >Delete</a
+                          >
+                        </td>
+                        {% endif %}
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- row -->
       </div>
     </div>
   </div>

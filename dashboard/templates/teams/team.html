@@ -1,0 +1,32 @@
+{% extends "horizon/dascore.html" %}
+<!---->
+{% load static %}
+<!---->
+{%block title%}Athletes{% endblock %}
+<!---->
+{% block content %}
+<div id="app-content">
+  <!-- Container fluid -->
+  <div class="app-content-area">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-12">
+          <!-- Page header -->
+          <div class="mb-5">
+            <h3 class="mb-0">{{team.championship}}</h3>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="team-head flex">
+         
+          <div class="team-text">
+            <h1></h1>
+            <p>{{team.athletes_set.all.count}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{%endblock%}
