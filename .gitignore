@@ -1,9 +1,21 @@
-primary/settings.py
-**/migrations/*
-!/migrations/__init__.py
-/athlete_photos
-/champImages
-/badge
-/profile
-/photo
-.env
+# Django settings
+usssa/settings.py
+django.log
+
+# Django migrations
+accounts/migrations/*
+agm/migrations/*
+core/migrations/*
+dashboard/migrations/*
+school/migrations/*
+teams/migrations/*
+officers/migrations/*
+
+
+# Media and uploaded files (one level up)
+athlete_photos/
+trainee_photos/
+transfer_documents/
+profile/
+badge/
+champImages/

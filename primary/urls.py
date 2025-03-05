@@ -23,7 +23,6 @@ urlpatterns = [
     path("officer/", Officera, name="officer"),
     path("officer/<int:id>", officer_details, name="officerd"),
     path("deleteofficer/<int:id>", delete_officer, name="deleted"),
-    path("school/", Dash, name="school_dashboard"),
     path("officeria/", Officerdash, name="officer_dashboard"),
        # path("enrollment/", include("registration.urls")),
     # email
@@ -31,6 +30,8 @@ urlpatterns = [
     path("dashboard/", include("dashboard.urls")),
     path("team/", include("teams.urls")),
     path("core/", include("core.urls")),
+    path("school/", include("school.urls")),
+    path("officers/", include("officers.urls")),
 
     path("get_athletes/", get_athletes, name="get_athletes"),
     path("get_dist_athletes/", get_dist_athletes, name="get_dist_athletes"),

@@ -1,0 +1,37 @@
+from django.conf import settings
+from django.conf.urls.static import static
+from django.urls import path
+from .views import *
+
+# from teams.views import delete_tdeam
+
+urlpatterns = [
+
+    path('pay/<int:id>/', initiate_payment, name='payment'),
+    path('registration/', payment_view, name='registration'),
+    path("calculate_age_choices/", calculate_age_choices, name="calculate_age_choices"),
+
+    # ===================School========================,
+    path("deleteschool/<int:id>", DeleteSchool, name="delschool"),
+    path("schools/", schools, name="schools"),
+    path("school/", Dash, name="school_dashboard"),
+    path("addschool/", Schoolnew, name="new_school"),
+    path("school/<int:id>", school_detail, name="schooldetail"),
+    path("editschool/<int:id>", school_update, name="schoolupdate"),
+    
+    # ===================Athletes========================,
+    path("athletes", athletes, name="athletes"),
+    path("addathlete", newAthlete, name="addathlete"),
+    path("athlete/<int:id>", AthleteDetail, name="athlete"),
+    path("updateathlete/<int:id>", AthleteUpdate, name="updateathlete"),
+    path("deleteathlete/<int:id>", DeleteAthlete, name="delathlete"),
+    
+   # ===================Officials========================,
+    path("officials", school_offs, name="officials"),
+    path("all_athletes/", all_athletes, name="athletex"),
+    path("addofficial", Official, name="addofficial"),
+    path("official/<int:id>", OfficialDetail, name="official"),
+    path("all_officials/", all_officials, name="all_officials"),
+    
+    
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

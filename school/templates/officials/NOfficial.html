@@ -1,0 +1,131 @@
+{% extends "dashboard/dashboard.html" %}
+<!---->
+{% load static %} {% block content %}
+
+<style>
+  .alert {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .error-message {
+    background-color: red;
+    color: white;
+  }
+
+  .success-message {
+    background-color: #4caf50;
+    color: white;
+  }
+</style>
+<div id="app-content">
+  <!-- Container fluid -->
+  <div class="app-content-area">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-12">
+          <!-- Page header -->
+          <div class="mb-5">
+            <h2>Athlete Info</h2>
+            <p>All fields labeled with <span>*</span> must be filled.</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <!-- row -->
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <form
+                action=""
+                method="POST"
+                class="form-ctrl card-body"
+                enctype="multipart/form-data"
+              >
+                {% csrf_token %}
+                <div class="fields">
+                  <div class="leftp">
+                    {% if messages %}
+                    <div class="messages">
+                      {% for message in messages %}
+                      <div
+                        class="alert {% if message.tags == 'error' %}error-message{% elif message.tags == 'success' %}success-message{% endif %}"
+                      >
+                        {{ message }}
+                      </div>
+                      {% endfor %}
+                    </div>
+                    {% endif %}
+                    <div class="left0">
+                      <div class="imgbox">
+                        <div class="field">
+                          <label>{{form.photo.label}} </label>
+                          <div
+                            id="photos_preview"
+                            class="preview-container"
+                          ></div>
+                        </div>
+                        <div class="field">
+                          <input
+                            type="file"
+                            name="photo"
+                            accept="image/*"
+                            id="id_photo"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="lefty">
+                        <div class="field-grid grid2">
+                          <div class="field">
+                            <label>Name</label>{{form.name}}
+                          </div>
+               
+                          <div class="field">
+                            <label>Email</label>{{form.email}}
+                          </div>
+                        </div>
+
+                        <div class="field-grid grid2">
+                          <div class="field">
+                            <label>National Identification Number</label
+                            >{{form.nin}}
+                          </div>
+                          <div class="field">
+                            <label>Role</label
+                            >{{form.role}}
+                          </div>
+
+                          <div class="field">
+                            <label>Phone</label>{{form.phone_number}}
+                          </div>
+                          <div class="field">
+                            <label>Gender</label>{{form.gender}}
+                          </div>
+                          <div class="field">
+                            <label>Date of Birth</label>{{form.date_of_birth}}
+                          </div>
+                            </div>
+                          <button type="submit" class="btn-submit">Save athlete</button>
+                       
+                  
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+{% endblock %}

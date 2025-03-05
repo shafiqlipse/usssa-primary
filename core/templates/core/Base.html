@@ -198,11 +198,22 @@
                     </li>
                     {% if user.is_authenticated %}
                     <li>
+                      {% if user.is_staff %}
                       <a
                         href="{% url 'dashboard'%}"
                         class="btn btn-outline-primary"
                         >Dashboard</a
-                      >{% else %}
+                      > {% elif user.is_school %}  <a
+                        href="{% url 'school_dashboard'%}"
+                        class="btn btn-outline-primary"
+                        >Dashboard</a
+                      > {% else %}  <a
+                        href="{% url 'officer_dashboard'%}"
+                        class="btn btn-outline-primary"
+                        >Dashboard</a
+                      >
+                      {% endif %}
+                      {% else %}
                     </li>
 
                     <li>

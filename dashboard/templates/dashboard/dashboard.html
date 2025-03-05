@@ -405,56 +405,53 @@
             <!-- Nav item -->
             <li class="nav-item">
               <a class="nav-link has-arrow" href="{% url 'dashboard'%}"
+                ><i data-feather="layers" class="nav-icon me-2 icon-xxs"></i
                 >Dashboard</a
               >
             </li>
             <!-- Nav item -->
+            <!-- Nav item -->
             <li class="nav-item">
-              <a
-                class="nav-link has-arrow"
-                href="#!"
-                data-bs-toggle="collapse"
-                data-bs-target="#navecommerce"
-                aria-expanded="false"
-                aria-controls="navecommerce"
-              >
-                <i data-feather="users" class="nav-icon me-2 icon-xxs"></i>
-                School
-              </a>
-
-              <div
-                id="navecommerce"
-                class="collapse show"
-                data-bs-parent="#sideNavbar"
-              >
-                <ul class="nav flex-column">
-                  <li class="nav-item">
-                    <a
-                      class="nav-link has-arrow active"
-                      href="{% url 'schools'%}"
-                      >Schools</a
-                    >
-                  </li>
-                  <li class="nav-item">
-                    <a
-                      class="nav-link has-arrow"
-                      href="{% url 'all_officials'%}"
-                      >School Officials</a
-                    >
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link has-arrow" href="{% url 'athletex'%}"
-                      >Athletes</a
-                    >
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link has-arrow" href="{% url 'athletex'%}"
-                      >Enrollments</a
-                    >
-                  </li>
-                </ul>
-              </div>
+              <div class="navbar-heading">SCHOOL</div>
             </li>
+            <!-- Nav item -->
+            <!-- Nav item -->
+            <li class="nav-item">
+              <a class="nav-link has-arrow" href="{% url 'schools'%}"
+                ><i data-feather="grid" class="nav-icon me-2 icon-xxs"></i
+                >Schools</a
+              >
+            </li>
+            <!-- Nav item -->
+            <!-- Nav item -->
+            <li class="nav-item">
+              <a class="nav-link has-arrow" href="{% url 'athletex'%}"
+                ><i data-feather="user" class="nav-icon me-2 icon-xxs"></i
+                >Athletes</a
+              >
+            </li>
+            <!-- Nav item -->
+            <!-- Nav item -->
+            <li class="nav-item">
+              <a class="nav-link has-arrow" href="{% url 'all_officials'%}"
+                ><i data-feather="users" class="nav-icon me-2 icon-xxs"></i
+                >School Officials</a
+              >
+            </li>
+            <!-- Nav item -->
+            <!-- Nav item -->
+            <li class="nav-item">
+              <a class="nav-link has-arrow" href="{% url 'all_enrollments'%}"
+                ><i data-feather="slack" class="nav-icon me-2 icon-xxs"></i
+                >School Teams</a
+              >
+            </li>
+            <!-- Nav item -->
+            <!-- Nav item -->
+            <li class="nav-item">
+              <div class="navbar-heading">DISTRICT OFFICIALS</div>
+            </li>
+            <!-- Nav item -->
             <!-- Nav item -->
             <li class="nav-item">
               <a
@@ -465,7 +462,7 @@
                 aria-expanded="false"
                 aria-controls="navEmail"
               >
-                <i data-feather="mail" class="nav-icon me-2 icon-xxs"></i>
+                <i data-feather="map-pin" class="nav-icon me-2 icon-xxs"></i>
                 District
               </a>
 
@@ -496,6 +493,11 @@
 
             <!-- Nav item -->
             {% endif %}
+            <!-- Nav item -->
+            <!-- Nav item -->
+            <li class="nav-item">
+              <div class="navbar-heading">ACCOUNT</div>
+            </li>
             <!-- Nav item -->
             <li class="nav-item">
               <a class="nav-link has-arrow" href="{% url 'change_password'%}"

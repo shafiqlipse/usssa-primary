@@ -216,7 +216,7 @@ class Athlete(models.Model):
         choices=[("Active", "Active"), ("Inactive", "Inactive")],
         null=True,
         blank=True,
-        default="Active",
+        default="New",
     )
     objects = AthleteManager()
 
