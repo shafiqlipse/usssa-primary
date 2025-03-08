@@ -644,26 +644,28 @@
 <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
 
 <script>
-  $(document).ready(function() {
-    if ($.fn.DataTable.isDataTable('#athletes')) {
-        $('#athlete').DataTable().destroy();  // Destroy existing instance
-    }
+    $(document).ready(function() {
+      if ($.fn.DataTable.isDataTable('#athletes')) {
+          $('#athletes').DataTable().destroy();  // Destroy existing instance
+      }
 
-    $('#example').DataTable({
-        "processing": true,
-        "serverSide": true,
-        "ajax": "/your-data-url/",
-        "columns": [
-            { "data": "col1" },
-            { "data": "col2" },
-            { "data": "col2" },
-            { "data": "col3" }
-        ],
-        "pageLength": 10,
-        "lengthMenu": [ [10, 25, 50, 100], [10, 25, 50, 100] ]
-    });
-});
-
-  </script>
+      $('#athletes').DataTable({
+          "processing": true,
+          "serverSide": true,
+          "ajax": "/school/get-athletes/",  // Update this to match your Django URL
+          "columns": [
+              { "data": "athlete" },  // Ensure these match your Django JSON keys
+              { "data": "lin" },
+              { "data": "dob" },
+              { "data": "gender_age" },
+              { "data": "status" },
+              { "data": "action" }
+          ],
+          "pageLength": 10,  // Default rows per page
+          "lengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],  // Page size options
+          "order": [[0, "asc"]]  // Default sorting on the first column
+      });
+  });
+</script>
   </body>
 </html>
