@@ -189,6 +189,47 @@ def DeleteSchool(request, id):
 
 # # Athletes details......................................................
 # # ........................Athletes ..............................
+from django.http import JsonResponse
+from django.core.paginator import Paginator
+
+
+def get_data(request):
+    draw = int(request.GET.get("draw", 1))  # For tracking AJAX requests
+    start = int(request.GET.get("start", 0))  # Start index
+    length = int(request.GET.get("length", 10))  # Number of records per page
+    search_value = request.GET.get("search[value]", "").strip()  # Search query
+
+    queryset = Athlete.objects.all()
+
+    # Apply search filter
+    if search_value:
+        queryset = queryset.filter(field_name__icontains=search_value)
+
+    total_records = queryset.count()
+
+    # Pagination
+    paginator = Paginator(queryset, length)
+    page_number = (start // length) + 1
+    page = paginator.get_page(page_number)
+
+    # Prepare data for DataTables
+    data = [
+        {
+            "col1": obj.fname,
+            "col2": obj.lname,
+            "col3": obj.lin,
+            "col4": obj.school_id,
+            "col5": obj.age_id,
+        }
+        for obj in page
+    ]
+
+    return JsonResponse({
+        "draw": draw,
+        "recordsTotal": total_records,
+        "recordsFiltered": total_records,
+        "data": data,
+    })
 
 # schools list, tuple or array
 @staff_required

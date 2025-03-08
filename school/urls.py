@@ -11,7 +11,7 @@ urlpatterns = [
     path('registration/', payment_view, name='registration'),
     path("calculate_age_choices/", calculate_age_choices, name="calculate_age_choices"),
     path("airtel-money/callback/", airtel_payment_callback, name="airtel_payment_callback"),
-
+    path("your-data-url/", get_data, name="your-data-url"),
     # ===================School========================,
     path("deleteschool/<int:id>", DeleteSchool, name="delschool"),
     path("schools/", schools, name="schools"),

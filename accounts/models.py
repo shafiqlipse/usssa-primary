@@ -58,7 +58,10 @@ class Tournament(models.Model):
     start_date = models.DateField(blank=True, null=True)
     end_date = models.DateField(blank=True, null=True)
     thumbnail = models.ImageField(upload_to="champImages/", blank=True, null=True)
-
+    status = models.CharField(
+        max_length=10,
+        choices=[("Active", "Active"), ("Inactive", "Inactive")], blank=True, null=True
+    )
     class Meta:
         ordering = ["-name"]
 
