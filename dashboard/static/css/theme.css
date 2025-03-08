@@ -196,7 +196,7 @@ h4 {
  */
 :root,
 [data-bs-theme="light"] {
-  --dashui-blue: #bb1502;
+  --dashui-blue: #624bff;
   --dashui-indigo: #6610f2;
   --dashui-purple: #6f42c1;
   --dashui-pink: #d63384;
@@ -220,7 +220,7 @@ h4 {
   --dashui-gray-800: #1e293b;
   --dashui-gray-900: #0f172a;
   --dashui-gray-white: #fff;
-  --dashui-primary: #bb1502;
+  --dashui-primary: #624bff;
   --dashui-secondary: #475569;
   --dashui-success: #198754;
   --dashui-info: #0dcaf0;
@@ -290,13 +290,13 @@ h4 {
   --dashui-tertiary-bg: #f1f5f9;
   --dashui-tertiary-bg-rgb: 241, 245, 249;
   --dashui-heading-color: var(--dashui-headings-color);
-  --dashui-link-color: #bb1502;
+  --dashui-link-color: #624bff;
   --dashui-link-color-rgb: 98, 75, 255;
   --dashui-link-decoration: none;
-  --dashui-link-hover-color: #bb1502;
+  --dashui-link-hover-color: #4e3ccc;
   --dashui-link-hover-color-rgb: 78, 60, 204;
   --dashui-link-hover-decoration: underline;
-  --dashui-code-color: #bb1502;
+  --dashui-code-color: #d63384;
   --dashui-highlight-color: #475569;
   --dashui-highlight-bg: #fff3cd;
   --dashui-border-width: 1px;
@@ -3267,8 +3267,8 @@ textarea.form-control-lg {
   outline: 0;
 }
 .form-check-input:checked {
-  background-color: #bb1502;
-  border-color: #bb1502;
+  background-color: #624bff;
+  border-color: #624bff;
 }
 .form-check-input:checked[type="checkbox"] {
   --dashui-form-check-bg-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3E%3C/svg%3E");
@@ -3278,8 +3278,8 @@ textarea.form-control-lg {
 }
 .form-check-input[type="checkbox"]:indeterminate {
   --dashui-form-check-bg-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10h8'/%3E%3C/svg%3E");
-  background-color: #bb1502;
-  border-color: #bb1502;
+  background-color: #624bff;
+  border-color: #624bff;
 }
 .form-check-input:disabled {
   filter: none;
@@ -3367,7 +3367,7 @@ textarea.form-control-lg {
 .form-range::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  background-color: #bb1502;
+  background-color: #624bff;
   border: 0;
   border-radius: 1rem;
   height: 1rem;
@@ -3399,7 +3399,7 @@ textarea.form-control-lg {
 .form-range::-moz-range-thumb {
   -moz-appearance: none;
   appearance: none;
-  background-color: #bb1502;
+  background-color: #624bff;
   border: 0;
   border-radius: 1rem;
   height: 1rem;
@@ -3929,19 +3929,19 @@ fieldset:disabled .btn {
 }
 .btn-primary {
   --dashui-btn-color: #fff;
-  --dashui-btn-bg: #bb1502;
-  --dashui-btn-border-color: #bb1502;
+  --dashui-btn-bg: #624bff;
+  --dashui-btn-border-color: #624bff;
   --dashui-btn-hover-color: #fff;
-  --dashui-btn-hover-bg: #bb1501;
-  --dashui-btn-hover-border-color: #bb1502;
+  --dashui-btn-hover-bg: #5340d9;
+  --dashui-btn-hover-border-color: #4e3ccc;
   --dashui-btn-focus-shadow-rgb: 122, 102, 255;
   --dashui-btn-active-color: #fff;
-  --dashui-btn-active-bg: #bb1502;
+  --dashui-btn-active-bg: #4e3ccc;
   --dashui-btn-active-border-color: #4a38bf;
   --dashui-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
   --dashui-btn-disabled-color: #fff;
-  --dashui-btn-disabled-bg: #bb1502;
-  --dashui-btn-disabled-border-color: #bb1502;
+  --dashui-btn-disabled-bg: #624bff;
+  --dashui-btn-disabled-border-color: #624bff;
 }
 .btn-secondary {
   --dashui-btn-color: #fff;
@@ -4072,19 +4072,19 @@ fieldset:disabled .btn {
   --dashui-btn-disabled-border-color: #fff;
 }
 .btn-outline-primary {
-  --dashui-btn-color: #bb1502;
-  --dashui-btn-border-color: #bb1502;
+  --dashui-btn-color: #624bff;
+  --dashui-btn-border-color: #624bff;
   --dashui-btn-hover-color: #fff;
-  --dashui-btn-hover-bg: #bb1502;
-  --dashui-btn-hover-border-color: #bb1502;
+  --dashui-btn-hover-bg: #624bff;
+  --dashui-btn-hover-border-color: #624bff;
   --dashui-btn-focus-shadow-rgb: 98, 75, 255;
   --dashui-btn-active-color: #fff;
-  --dashui-btn-active-bg: #bb1502;
-  --dashui-btn-active-border-color: #bb1502;
+  --dashui-btn-active-bg: #624bff;
+  --dashui-btn-active-border-color: #624bff;
   --dashui-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-  --dashui-btn-disabled-color: #bb1502;
+  --dashui-btn-disabled-color: #624bff;
   --dashui-btn-disabled-bg: transparent;
-  --dashui-btn-disabled-border-color: #bb1502;
+  --dashui-btn-disabled-border-color: #624bff;
   --dashui-gradient: none;
 }
 .btn-outline-secondary {
@@ -4765,7 +4765,7 @@ fieldset:disabled .btn {
 .nav-pills {
   --dashui-nav-pills-border-radius: var(--dashui-border-radius);
   --dashui-nav-pills-link-active-color: #fff;
-  --dashui-nav-pills-link-active-bg: #bb1502;
+  --dashui-nav-pills-link-active-bg: #624bff;
 }
 .nav-pills .nav-link {
   border-radius: var(--dashui-nav-pills-border-radius);
@@ -5608,8 +5608,8 @@ fieldset:disabled .btn {
   --dashui-pagination-focus-bg: var(--dashui-primary);
   --dashui-pagination-focus-box-shadow: 0 0 0 0.25rem rgba(98, 75, 255, 0.25);
   --dashui-pagination-active-color: #fff;
-  --dashui-pagination-active-bg: #bb1502;
-  --dashui-pagination-active-border-color: #bb1502;
+  --dashui-pagination-active-bg: #624bff;
+  --dashui-pagination-active-border-color: #624bff;
   --dashui-pagination-disabled-color: var(--dashui-gray-500);
   --dashui-pagination-disabled-bg: var(--dashui-gray-300);
   --dashui-pagination-disabled-border-color: var(--dashui-gray-300);
@@ -5802,7 +5802,7 @@ fieldset:disabled .btn {
   --dashui-progress-border-radius: var(--dashui-border-radius);
   --dashui-progress-box-shadow: var(--dashui-box-shadow-inset);
   --dashui-progress-bar-color: #fff;
-  --dashui-progress-bar-bg: #bb1502;
+  --dashui-progress-bar-bg: #624bff;
   --dashui-progress-bar-transition: width 0.6s ease;
   background-color: var(--dashui-progress-bg);
   border-radius: var(--dashui-progress-border-radius);
@@ -5870,8 +5870,8 @@ fieldset:disabled .btn {
   --dashui-list-group-disabled-color: var(--dashui-secondary-color);
   --dashui-list-group-disabled-bg: var(--dashui-card-bg);
   --dashui-list-group-active-color: #fff;
-  --dashui-list-group-active-bg: #bb1502;
-  --dashui-list-group-active-border-color: #bb1502;
+  --dashui-list-group-active-bg: #624bff;
+  --dashui-list-group-active-border-color: #624bff;
   border-radius: var(--dashui-list-group-border-radius);
   display: flex;
   flex-direction: column;
@@ -11167,7 +11167,7 @@ fieldset:disabled .btn {
 }
 .bg-primary {
   --dashui-bg-opacity: 1;
-  background-color: #bb1502 !important;
+  background-color: #624bff !important;
 }
 .bg-secondary {
   --dashui-bg-opacity: 1;
@@ -23059,7 +23059,7 @@ fieldset:disabled .btn {
   --dashui-gray-700: #cbd5e1;
   --dashui-gray-800: #e2e8f0;
   --dashui-gray-900: #f1f5f9;
-  --dashui-primary: #bb1502;
+  --dashui-primary: #624bff;
   --dashui-secondary: #475569;
   --dashui-success: #198754;
   --dashui-info: #0dcaf0;
@@ -23094,19 +23094,19 @@ fieldset:disabled .btn {
 }
 [data-bs-theme="dark"] .btn-primary {
   --dashui-btn-color: #fff;
-  --dashui-btn-bg: #bb1502;
-  --dashui-btn-border-color: #bb1502;
+  --dashui-btn-bg: #624bff;
+  --dashui-btn-border-color: #624bff;
   --dashui-btn-hover-color: #fff;
-  --dashui-btn-hover-bg: #bb1501;
-  --dashui-btn-hover-border-color: #bb1502;
+  --dashui-btn-hover-bg: #5340d9;
+  --dashui-btn-hover-border-color: #4e3ccc;
   --dashui-btn-focus-shadow-rgb: 122, 102, 255;
   --dashui-btn-active-color: #fff;
-  --dashui-btn-active-bg: #bb1502;
+  --dashui-btn-active-bg: #4e3ccc;
   --dashui-btn-active-border-color: #4a38bf;
   --dashui-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
   --dashui-btn-disabled-color: #fff;
-  --dashui-btn-disabled-bg: #bb1502;
-  --dashui-btn-disabled-border-color: #bb1502;
+  --dashui-btn-disabled-bg: #624bff;
+  --dashui-btn-disabled-border-color: #624bff;
 }
 [data-bs-theme="dark"] .btn-secondary {
   --dashui-btn-color: #fff;
@@ -23237,10 +23237,10 @@ fieldset:disabled .btn {
   --dashui-btn-disabled-border-color: #1e293b;
 }
 [data-bs-theme="dark"] .bg-primary {
-  background-color: #bb1502 !important;
+  background-color: #624bff !important;
 }
 [data-bs-theme="dark"] .text-primary {
-  color: #bb1502 !important;
+  color: #624bff !important;
 }
 [data-bs-theme="dark"] .bg-secondary {
   background-color: #475569 !important;
@@ -24294,7 +24294,7 @@ a {
   width: 100%;
 }
 .avatar-primary .avatar-initials {
-  background-color: #bb1502;
+  background-color: #624bff;
   color: var(--dashui-white);
 }
 .avatar-secondary .avatar-initials {
@@ -24347,17 +24347,11 @@ a {
 .img-4by3-md {
   width: 5.25rem;
 }
-.img-2by3-sm {
-  width: 2rem;
-}
 .img-4by3-sm {
   width: 4rem;
 }
 .img-4by3-xs {
   width: 2.75rem;
-}
-.p10-0 {
-  padding: 10px;
 }
 .btn-outline-white {
   --dashui-btn-font-weight: 600;
@@ -24403,8 +24397,8 @@ a {
   border-style: dashed !important;
 }
 .btn-dashed:hover {
-  border-color: #bb1502 !important;
-  color: #bb1502 !important;
+  border-color: #624bff !important;
+  color: #624bff !important;
 }
 .btn-dashed:focus {
   box-shadow: none !important;
@@ -24442,7 +24436,7 @@ a {
 }
 .btn-primary-soft {
   background-color: rgba(98, 75, 255, 0.1);
-  color: #bb1502;
+  color: #624bff;
 }
 .btn-primary-soft:hover {
   background-color: rgba(98, 75, 255, 0.9) !important;
@@ -24772,7 +24766,7 @@ input::-webkit-outer-spin-button {
 }
 .badge-primary-soft {
   background-color: rgba(98, 75, 255, 0.1);
-  color: #bb1502;
+  color: #624bff;
 }
 .badge-secondary-soft {
   background-color: rgba(71, 85, 105, 0.1);
@@ -28553,7 +28547,7 @@ span.flatpickr-weekday {
   opacity: 1;
 }
 .choices[data-type*="select-one"] .choices__button:focus {
-  box-shadow: 0 0 0 2px #bb1502;
+  box-shadow: 0 0 0 2px #624bff;
 }
 .choices[data-type*="select-one"]
   .choices__item[data-value=""]
@@ -28654,7 +28648,7 @@ span.flatpickr-weekday {
   display: inline;
 }
 .choices__list--multiple .choices__item {
-  background-color: #bb1502;
+  background-color: #624bff;
   border: 1px solid #4c32ff;
   border-radius: 20px;
   box-sizing: border-box;

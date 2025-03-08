@@ -378,6 +378,131 @@
               id="navbar-default"
             >
               <ul class="navbar-nav">
+                {% if user.is_school %}
+                <!-- Nav item -->
+                <li class="nav-item">
+                  <a class="nav-link has-arrow" href="{% url 'school_dashboard'%}">
+                    <i data-feather="users" class="nav-icon me-2 icon-xxs"></i>
+                    Dashboard</a
+                  >
+                </li>
+                <!-- Nav item -->
+                <!-- Nav item -->
+                <li class="nav-item">
+                  <a class="nav-link has-arrow" href="{% url 'athletes'%}">
+                    <i data-feather="users" class="nav-icon me-2 icon-xxs"></i>
+                    Athletes</a
+                  >
+                </li>
+                <!-- Nav item -->
+                <!-- Nav item -->
+                <li class="nav-item">
+                  <a class="nav-link has-arrow" href="{% url 'officials'%}">
+                    <i data-feather="users" class="nav-icon me-2 icon-xxs"></i>
+                    Officials</a
+                  >
+                </li>
+                <!-- Nav item -->
+                <!-- Nav item -->
+                <li class="nav-item">
+                  <a
+                    class="nav-link has-arrow"
+                    href="{% url 'school_enrollments'%}"
+                  >
+                    <i data-feather="users" class="nav-icon me-2 icon-xxs"></i>
+                    Teams</a
+                  >
+                </li>
+                <!-- Nav item -->
+    
+                <!-- Nav item -->
+                {% else %}
+                <!-- Nav item -->
+        
+                <li class="nav-item">
+                  <a class="nav-link has-arrow" href="{% url 'dashboard'%}"
+                    ><i data-feather="layers" class="nav-icon me-2 icon-xxs"></i
+                    >Dashboard</a
+                  >
+                </li>
+                <!-- Nav item -->
+      
+                <!-- Nav item -->
+                <li class="nav-item">
+                  <a class="nav-link has-arrow" href="{% url 'schools'%}"
+                    ><i data-feather="grid" class="nav-icon me-2 icon-xxs"></i
+                    >Schools</a
+                  >
+                </li>
+                <!-- Nav item -->
+                <!-- Nav item -->
+                <li class="nav-item">
+                  <a class="nav-link has-arrow" href="{% url 'athletex'%}"
+                    ><i data-feather="user" class="nav-icon me-2 icon-xxs"></i
+                    >Athletes</a
+                  >
+                </li>
+                <!-- Nav item -->
+                <!-- Nav item -->
+                <li class="nav-item">
+                  <a class="nav-link has-arrow" href="{% url 'all_officials'%}"
+                    ><i data-feather="users" class="nav-icon me-2 icon-xxs"></i
+                    >School Officials</a
+                  >
+                </li>
+                <!-- Nav item -->
+                <!-- Nav item -->
+                <li class="nav-item">
+                  <a class="nav-link has-arrow" href="{% url 'all_enrollments'%}"
+                    ><i data-feather="slack" class="nav-icon me-2 icon-xxs"></i
+                    >School Teams</a
+                  >
+                </li>
+                <!-- Nav item -->
+  
+                <!-- Nav item -->
+                <li class="nav-item">
+                  <a
+                    class="nav-link has-arrow collapsed"
+                    href="#!"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navEmail"
+                    aria-expanded="false"
+                    aria-controls="navEmail"
+                  >
+                    <i data-feather="map-pin" class="nav-icon me-2 icon-xxs"></i>
+                    District
+                  </a>
+    
+                  <div id="navEmail" class="collapse" data-bs-parent="#sideNavbar">
+                    <ul class="nav flex-column">
+                      <li class="nav-item">
+                        <a class="nav-link has-arrow" href="../pages/mail.html"
+                          >Sports officers</a
+                        >
+                      </li>
+                      <li class="nav-item">
+                        <a
+                          class="nav-link has-arrow"
+                          href="../pages/mail-details.html"
+                          >Other Officers</a
+                        >
+                      </li>
+                      <li class="nav-item">
+                        <a
+                          class="nav-link has-arrow"
+                          href="../pages/mail-draft.html"
+                          >Teams</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+    
+                <!-- Nav item -->
+                {% endif %}
+                <!-- Nav item -->
+                 {% if user.is_admin %}
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'officer_dashboard' %}">Dashboard</a>
@@ -393,7 +518,7 @@
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'district_athletes' %}">Officials</a>
-                </li>
+                </li>{% endif %}
               </ul>
             </div>
           </nav>

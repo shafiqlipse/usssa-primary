@@ -1,4 +1,6 @@
-{% extends "dashboard/dashboard.html" %}
+{% extends "horizon/dascore.html" %}
+<!---->
+{% load static %}
 
 <!--static-->
 {% block title %}Payment Successful{% endblock %}
@@ -50,9 +52,10 @@
 </style>
 <div class="schools-dew content-wrapper">
   <div class="success-box">
- 
     <div class="amount">UGX {{ amount }}</div>
-    <div class="message"><strong>Payment {{status}}, check your phone for Authorisation!</strong></div>
+    <div class="message">
+      <strong>Payment {{status}}, check your phone for Authorisation!</strong>
+    </div>
     <div class="details">
       Payment ID: {{ transaction_id }}<br />
       Date: {{ timestamp|date:"d M, Y - h:i A" }}

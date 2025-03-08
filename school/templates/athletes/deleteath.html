@@ -1,4 +1,10 @@
-{% extends 'dashboard/dashboard.html'%} {%block content%}
+{% extends "horizon/dascore.html" %}
+<!---->
+{% load static %}
+<!---->
+{%block title%}Delete {{obj}}{% endblock %}
+<!---->
+{% block content %}
 <div class="delete">
   <div class="confirm">
     <form action="" class="formdelete" method="POST">

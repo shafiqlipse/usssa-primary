@@ -1,11 +1,12 @@
-{% extends "dashboard/dashboard.html" %}
-
-<!--static-->
-{% block title %}{{official.fname}} {{official.lname}}{% endblock %}
-<!--static-->
+{% extends "horizon/dascore.html" %}
+<!---->
 {% load static %}
-<!--khfufufu-->
-{% block content %}
+<!---->
+
+{% block title %}{{official.fname}} {{official.lname}}
+<!---->
+{% endblock %}
+
 <div id="app-content">
   <!-- Container fluid -->
   <div class="app-content-area">
