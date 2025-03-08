@@ -193,21 +193,20 @@ from django.http import JsonResponse
 from django.core.paginator import Paginator
 
 def get_athletes(request):
-    draw = int(request.GET.get("draw", 1))  # Required for DataTables tracking
+    draw = int(request.GET.get("draw", 1))  # DataTables tracking
     start = int(request.GET.get("start", 0))  # Start index
     length = int(request.GET.get("length", 10))  # Number of rows per request
     search_value = request.GET.get("search[value]", "").strip()  # Search query
 
-    # Query the database
     queryset = Athlete.objects.all()
 
-    # Apply search filter (modify as needed)
+    # Apply search filter if provided
     if search_value:
-        queryset = queryset.filter(name__icontains=search_value)
+        queryset = queryset.filter(first_name__icontains=search_value)  # Modify based on your model
 
-    total_records = queryset.count()
+    total_records = queryset.count()  # Total records BEFORE pagination
 
-    # Paginate results
+    # Paginate using Django Paginator
     paginator = Paginator(queryset, length)
     page_number = (start // length) + 1
     page = paginator.get_page(page_number)
@@ -215,12 +214,12 @@ def get_athletes(request):
     # Prepare response data
     data = [
         {
-            "athlete": f"{obj.fname} {obj.lname}",  # Modify based on your model
+            "athlete": f"{obj.fname} {obj.lname}",
             "lin": obj.lin,
-            "dob": obj.date_of_birth.strftime("%Y-%m-%d"),  # Format the date
+            "dob": obj.date_of_birth.strftime("%Y-%m-%d"),
             "gender_age": f"{obj.gender} | {obj.age}",
-            "status": obj.get_status_display(),  # If using choices
-            "action": f'<a href="/school/edit-athlete/{obj.id}/" class="btn btn-sm btn-primary">Edit</a>'
+            "status": obj.get_status_display(),
+            "action": f'<a href="/edit-athlete/{obj.id}/" class="btn btn-sm btn-primary">Edit</a>'
         }
         for obj in page
     ]
@@ -230,7 +229,10 @@ def get_athletes(request):
         "recordsTotal": total_records,
         "recordsFiltered": total_records,
         "data": data,
-    })# schools list, tuple or array
+    })
+    
+    
+    # schools list, tuple or array
 @staff_required
 def all_athletes(request):
 
