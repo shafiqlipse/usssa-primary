@@ -21,7 +21,8 @@ urlpatterns = [
     path("editschool/<int:id>", school_update, name="schoolupdate"),
     
     # ===================Athletes========================,
-    path("athletes", athletes, name="athletes"),
+    path("athletexs", athletexs, name="athletexs"),
+    # path("athletes", athletes, name="athletes"),
     path("addathlete", newAthlete, name="addathlete"),
     path("athlete/<int:id>", AthleteDetail, name="athlete"),
     path("updateathlete/<int:id>", AthleteUpdate, name="updateathlete"),

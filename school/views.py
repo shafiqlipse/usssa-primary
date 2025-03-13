@@ -236,12 +236,12 @@ def get_athletes(request):
 @staff_required
 def all_athletes(request):
 
-    athletes = Athlete.objects.all()
+    athletes = Athlete.objects.select_related("school").all()
 
     context = {
         "athletes": athletes,
     }
-    return render(request, "athletes/athletes.html", context)
+    return render(request, "athletes/athletesx.html", context)
 
 # schools list, tuple or array
 
@@ -347,14 +347,14 @@ def AthleteDetail(request, id):
 
 
 @login_required(login_url="login")
-def athletes(request):
+def athletexs(request):
     user = request.user
     school_profile = (
         user.school_profile.first()
     )  # Retrieve the first related School object
     if school_profile:
         school_id = school_profile.id
-        athletes = Athlete.objects.filter(school_id=school_id)
+        athletes = Athlete.objects.select_related("school").filter(school_id=school_id)
     else:
         # Handle the case where the user is not associated with any school
         athletes = Athlete.objects.none()
