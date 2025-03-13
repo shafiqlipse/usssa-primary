@@ -5,7 +5,7 @@ from dashboard.models import *
 
 class UserAdmin(BaseUserAdmin):
     list_display = ("username", "email", "is_active", "is_school", "is_staff", "is_admin")  # Columns to display
-    search_fields = ("username", "email", "school__name")  # Enables search
+    search_fields = ("username", "email")  # Enables search
     list_filter = ("is_active", "is_school", "is_staff", "is_admin", )  # Enables filtering
 
 class AthleteAdmin(admin.ModelAdmin):  # Inherit from admin.ModelAdmin
