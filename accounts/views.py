@@ -253,6 +253,28 @@ def activate_officer(request, id):
 # return render(request, 'filter_album.html', {'form': form})
 
 
+@login_required
+def edit_user(request, id=None):
+    if id:
+        # Fetch the user to edit by their ID
+        user = get_object_or_404(User, id=id)
+    else:
+        # Default to the logged-in user if no ID is provided
+        user = request.user
+
+    if request.method == "POST":
+        form = UserEditForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "The profile was updated successfully.")
+            return redirect("users")
+    else:
+        form = UserEditForm(instance=user)
+
+    return render(request, "accounts/edit_user.html", {"form": form, "id": user.id})
+
+
+
 # views.py
 # import requests
 # from django.shortcuts import render, redirect

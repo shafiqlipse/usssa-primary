@@ -12,6 +12,7 @@ urlpatterns = [
     path("calculate_age_choices/", calculate_age_choices, name="calculate_age_choices"),
     path("airtel-money/callback/", airtel_payment_callback, name="airtel_payment_callback"),
     path("get-athletes/", get_athletes, name="get-athletes"),
+    path('payment/success/<str:transaction_id>/', payment_success, name='payment_success'),
     # ===================School========================,
     path("deleteschool/<int:id>", DeleteSchool, name="delschool"),
     path("schools/", schools, name="schools"),

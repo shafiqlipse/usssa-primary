@@ -3,6 +3,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
+from debug_toolbar.toolbar import debug_toolbar_urls
 from dashboard.views import *
 from accounts.views import *
 from core.views import *
@@ -74,4 +75,4 @@ urlpatterns = [
         name="password_reset_complete",
     ),
     #
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + debug_toolbar_urls()

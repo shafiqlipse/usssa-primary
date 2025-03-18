@@ -523,7 +523,7 @@ def payment_view(request):
                     messages.error(request, "You must select at least one athlete.")
                     return render(request, 'payments/payment_form.html', {'form': form})
 
-                total_amount = athletes.count() * 1500  # UGX 3,000 per athlete
+                total_amount = athletes.count() * 2000  # UGX 3,000 per athlete
 
                 with transaction.atomic():  # Ensures atomicity in case of failure
                     payment = Payment.objects.create(
@@ -554,7 +554,7 @@ def get_airtel_token():
     Retrieve Airtel Money OAuth token.
     """
     try:
-        url = "https://openapi.airtel.africa/auth/oauth2/token"
+        url = "https://openapiuat.airtel.africa/auth/oauth2/token"
         headers = {"Content-Type": "application/json", "Accept": "*/*" }
         payload = {
             "client_id": settings.AIRTEL_MONEY_CLIENT_ID,
@@ -600,7 +600,7 @@ def get_airtel_token():
     except Exception as e:
         logger.error(f"Unknown error: {str(e)}")
         return None
-
+import re
 import random
 from django.db import transaction as db_transaction
 
@@ -620,7 +620,7 @@ def initiate_payment(request, id):
         if not token:
             return JsonResponse({"error": "Failed to get authentication token"}, status=500)
 
-        payment_url = "https://openapi.airtel.africa/merchant/v2/payments/"
+        payment_url = "https://openapiuat.airtel.africa/merchant/v2/payments/"
         transaction_id = generate_unique_transaction_id()  
 
 
