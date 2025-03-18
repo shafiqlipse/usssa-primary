@@ -234,8 +234,3 @@ class Athlete(models.Model):
 
 
 
-
-class Payment(models.Model):
-    athletes = models.ManyToManyField(Athlete)
-    total_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    is_paid = models.BooleanField(default=False)

@@ -12,7 +12,7 @@ class Payment(models.Model):
         phone_number = models.CharField(max_length=15)
         status = models.CharField(
         max_length=20, 
-        choices=[('PENDING', 'Pending'), ('COMPLETED', 'Completed')], 
+        choices=[('PENDING', 'PENDING'), ('COMPLETED', 'COMPLETED')], 
         default='PENDING'
     )
   
