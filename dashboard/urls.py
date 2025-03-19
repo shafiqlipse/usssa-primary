@@ -10,7 +10,7 @@ from core.views import *
 urlpatterns = [
 
     path("users/", users, name="users"),
-
+    path('user/edit/<int:id>/', edit_user, name='edit_user'),
     path("tournaments/", Tournaments, name="tournaments"),
     path("districts/", districts, name="districts"),
     # path("districts/", districts, name="districts"),

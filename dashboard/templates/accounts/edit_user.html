@@ -1,0 +1,55 @@
+{% extends "horizon/dascore.html" %}
+<!---->
+{% load static %}
+<!---->
+{%block title%}User{% endblock %}
+<!---->
+{% block content %}
+<div class="app-content">
+  <div class="app-content-area">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-12">
+          <!-- Page header -->
+          <div class="mb-5">
+            <h3 class="mb-0">Edit Profile</h3>
+          </div>
+        </div>
+      </div>
+      <div>
+        <!-- row -->
+        {% if messages %}
+        <div class="messages">
+          {% for message in messages %}
+          <div
+            class="alert {% if message.tags == 'error' %}error-message{% elif message.tags == 'success' %}success-message{% endif %}"
+          >
+            {{ message }}
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <div class="row">
+                  <form method="post">
+                    {% csrf_token %} {{ form.as_p }}
+                    <button type="submit" class="btn btn-success">
+                      Save Changes
+                    </button>
+                  </form>
+                  {% for message in messages %}
+                  <p>{{ message }}</p>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

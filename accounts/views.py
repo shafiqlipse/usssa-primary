@@ -251,7 +251,7 @@ def activate_officer(request, id):
 #     form = AthleteFilterForm()
 
 # return render(request, 'filter_album.html', {'form': form})
-
+from.forms import UserEditForm
 
 @login_required
 def edit_user(request, id=None):
@@ -279,6 +279,20 @@ def edit_user(request, id=None):
 # import requests
 # from django.shortcuts import render, redirect
 # from .models import Payment
+
+# schools list, tuple or array
+@staff_required
+def users(request):
+    staff = User.objects.all().exclude(is_school=True)
+    users = User.objects.filter(is_school=True)
+
+    context = {
+        "users": users,
+        "staff": staff,
+        # "teamsFilter": teams
+    }
+    return render(request, "horizon/users.html", context)
+
 
 # def initiate_payment(request):
 #     if request.method == 'POST':

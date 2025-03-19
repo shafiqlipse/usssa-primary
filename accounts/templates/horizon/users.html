@@ -1,0 +1,103 @@
+{% extends "horizon/dascore.html" %}
+<!---->
+{% load static %}
+<!---->
+{%block title%}Users{% endblock %}
+<!---->
+{% block content %}
+
+<style>
+  .alert {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .error-message {
+    background-color: red;
+    color: white;
+  }
+
+  .success-message {
+    background-color: #4caf50;
+    color: white;
+  }
+</style>
+
+<div class="app-content">
+  <div class="app-content-area">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-12">
+          <!-- Page header -->
+          <div class="mb-5">
+            <h3 class="mb-0">Users</h3>
+          </div>
+        </div>
+      </div>
+      <div>
+        <!-- row -->
+        {% if messages %}
+        <div class="messages">
+          {% for message in messages %}
+          <div
+            class="alert {% if message.tags == 'error' %}error-message{% elif message.tags == 'success' %}success-message{% endif %}"
+          >
+            {{ message }}
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="table-responsive">
+                        <table id="myTable" class="display">
+                          <thead>
+                            <tr>
+                              <th>Username</th>
+                              <th>Email</th>
+                              <th>School</th>
+                              <th>Edit</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% for user in users%}
+                            <tr>
+                              <td>
+                                <a href="">{{user.username}}</a>
+                              </td>
+                              <td>{{user.email}}</td>
+
+                              <td>{{user.school_profile.first}} | {{user.school_profile.first.EMIS}}</td>
+
+                              <td>
+                                <a
+                                  href="{%url 'edit_user' user.id%}"
+                                  class="del"
+                                  ><i class="fa fa-pencil">Edit</i></a
+                                >
+                              </td>
+                            </tr>
+
+                            {%endfor%}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

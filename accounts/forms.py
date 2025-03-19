@@ -246,21 +246,31 @@ class UpdateAthleteForm(forms.ModelForm):
 
 
 
+from django import forms
+from django.contrib.auth.models import User
+from django.contrib.auth.hashers import make_password
+
 class UserEditForm(forms.ModelForm):
     new_password = forms.CharField(
         required=False,
-        widget=forms.PasswordInput(attrs={'placeholder': 'Enter new password'}),
+        widget=forms.PasswordInput(attrs={'placeholder': 'Enter new password', 'class': 'form-control'}),
         label="New Password"
     )
     confirm_password = forms.CharField(
         required=False,
-        widget=forms.PasswordInput(attrs={'placeholder': 'Confirm new password'}),
+        widget=forms.PasswordInput(attrs={'placeholder': 'Confirm new password', 'class': 'form-control'}),
         label="Confirm Password"
     )
 
     class Meta:
         model = User
         fields = ['username', 'first_name', 'last_name', 'email']
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control'}),
+            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+        }
 
     def clean(self):
         cleaned_data = super().clean()
