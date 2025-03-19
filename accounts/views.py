@@ -285,7 +285,7 @@ import json
 from django.http import JsonResponse
 from django.core.paginator import Paginator
 from .models import User
-
+from django.db.models import Q
 def users_data(request):
     """ Handle AJAX DataTables request for large datasets """
 
@@ -293,12 +293,19 @@ def users_data(request):
         draw = int(request.GET.get('draw', 1))
         start = int(request.GET.get('start', 0))
         length = int(request.GET.get('length', 10))
-        search_value = request.GET.get('search[value]', '')
+        search_value = request.GET.get("search[value]", "")
 
         # Fetch and filter users
         users_query = User.objects.filter(is_school=True)
+
+        # Apply search across multiple fields
         if search_value:
-            users_query = users_query.filter(username__icontains=search_value)
+            users_query = users_query.filter(
+                Q(username__icontains=search_value) |
+                Q(email__icontains=search_value) |
+                Q(school_profile__school_name__icontains=search_value) |  # Search school name
+                Q(school_profile__EMIS__icontains=search_value)   # Search EMIS
+            )
 
         # Paginate results
         paginator = Paginator(users_query, length)
@@ -308,15 +315,14 @@ def users_data(request):
         # Prepare JSON response
         data = []
         for user in users_page:
-            school = user.school_profile.first()
+            school = user.school_profile.first() if user.school_profile.exists() else None
             school_name = school.school_name if school else "No School"
             emis = school.EMIS if school else "N/A"
 
-            # Action buttons
             action_buttons = f"""
-                <a href="/users/view/{user.id}/" class="btn btn-info btn-sm">View</a>
-                <a href="/users/edit/{user.id}/" class="btn btn-warning btn-sm">Edit</a>
-                <button class="btn btn-danger btn-sm" onclick="deleteUser({user.id})">Delete</button>
+                
+                <a href="/dashboard/user/edit/{user.id}/" class="btn btn-warning btn-sm">Edit</a>
+                
             """
 
             data.append({

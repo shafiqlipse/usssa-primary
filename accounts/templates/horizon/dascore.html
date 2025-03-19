@@ -683,18 +683,22 @@
           "processing": true,
           "serverSide": true,
           "ajax": {
-              "url": "/dashboard/users/data/",  // Ensure this matches your Django URL
+              "url": "/dashboard/users/data/",
               "type": "GET"
           },
           "columns": [
               { "data": "username" },
               { "data": "email" },
-              { "data": "school_profile" },
+              { "data": "school_profile" }, // This includes both School Name and EMIS
               { "data": "actions", "orderable": false, "searchable": false }
-          ]
+          ],
+          "search": {
+              "smart": true // Enables searching across multiple fields
+          }
       });
   });
   </script>
+  
   
   </body>
 </html>
