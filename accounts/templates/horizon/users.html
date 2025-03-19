@@ -54,42 +54,17 @@
             <div class="card">
               <div class="card-body">
                 <div class="row">
-                  <div class="card">
-                    <div class="card-body">
-                      <div class="table-responsive">
-                        <table id="myTable" class="display">
-                          <thead>
-                            <tr>
-                              <th>Username</th>
-                              <th>Email</th>
-                              <th>School</th>
-                              <th>Edit</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {% for user in users%}
-                            <tr>
-                              <td>
-                                <a href="">{{user.username}}</a>
-                              </td>
-                              <td>{{user.email}}</td>
-
-                              <td>{{user.school_profile.first}} | {{user.school_profile.first.EMIS}}</td>
-
-                              <td>
-                                <a
-                                  href="{%url 'edit_user' user.id%}"
-                                  class="del"
-                                  ><i class="fa fa-pencil">Edit</i></a
-                                >
-                              </td>
-                            </tr>
-
-                            {%endfor%}
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
+                  <div class="table-responsive">
+                    <table id="userTable" class="display" style="width: 100%">
+                      <thead>
+                        <tr>
+                          <th>Username</th>
+                          <th>Email</th>
+                          <th>School</th>
+                          <th>Edit</th>
+                        </tr>
+                      </thead>
+                    </table>
                   </div>
                 </div>
               </div>
@@ -101,3 +76,27 @@
   </div>
 </div>
 {% endblock %}
+<!--
+    <tbody>
+                        {% for user in users%}
+                        <tr>
+                          <td>
+                            <a href="">{{user.username}}</a>
+                          </td>
+                          <td>{{user.email}}</td>
+
+                          <td>
+                            {{user.school_profile.first}} |
+                            {{user.school_profile.first.EMIS}}
+                          </td>
+
+                          <td>
+                            <a href="{%url 'edit_user' user.id%}" class="del"
+                              ><i class="fa fa-pencil">Edit</i></a
+                            >
+                          </td>
+                        </tr>
+
+                        {%endfor%}
+                      </tbody>
+-->

@@ -281,10 +281,72 @@ def edit_user(request, id=None):
 # from .models import Payment
 
 # schools list, tuple or array
+import json
+from django.http import JsonResponse
+from django.core.paginator import Paginator
+from .models import User
+
+def users_data(request):
+    """ Handle AJAX DataTables request for large datasets """
+
+    try:
+        draw = int(request.GET.get('draw', 1))
+        start = int(request.GET.get('start', 0))
+        length = int(request.GET.get('length', 10))
+        search_value = request.GET.get('search[value]', '')
+
+        # Fetch and filter users
+        users_query = User.objects.filter(is_school=True)
+        if search_value:
+            users_query = users_query.filter(username__icontains=search_value)
+
+        # Paginate results
+        paginator = Paginator(users_query, length)
+        page_number = (start // length) + 1
+        users_page = paginator.get_page(page_number)
+
+        # Prepare JSON response
+        data = []
+        for user in users_page:
+            school = user.school_profile.first()
+            school_name = school.school_name if school else "No School"
+            emis = school.EMIS if school else "N/A"
+
+            # Action buttons
+            action_buttons = f"""
+                <a href="/users/view/{user.id}/" class="btn btn-info btn-sm">View</a>
+                <a href="/users/edit/{user.id}/" class="btn btn-warning btn-sm">Edit</a>
+                <button class="btn btn-danger btn-sm" onclick="deleteUser({user.id})">Delete</button>
+            """
+
+            data.append({
+                "username": user.username,
+                "email": user.email,
+                "school_profile": f"{school_name} | {emis}",
+                "actions": action_buttons,
+            })
+
+        response = {
+            "draw": draw,
+            "recordsTotal": User.objects.filter(is_school=True).count(),
+            "recordsFiltered": users_query.count(),
+            "data": data,
+        }
+
+        return JsonResponse(response)
+
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)
+
+# def initiate_payment(request):
+#     if request.method == 'POST':
+#         amount = request.POST.get('amount')
+#         description = request.POST.get('description')
+#         phone_number = request.POST.get('phone_number')
 @staff_required
 def users(request):
     staff = User.objects.all().exclude(is_school=True)
-    users = User.objects.filter(is_school=True)
+    users = User.objects.select_related("school").filter(is_school=True)
 
     context = {
         "users": users,
@@ -293,12 +355,6 @@ def users(request):
     }
     return render(request, "horizon/users.html", context)
 
-
-# def initiate_payment(request):
-#     if request.method == 'POST':
-#         amount = request.POST.get('amount')
-#         description = request.POST.get('description')
-#         phone_number = request.POST.get('phone_number')
 
 #         # Determine the payment provider based on the phone number
 #         payment_provider = determine_payment_provider(phone_number)

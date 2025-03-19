@@ -56,16 +56,16 @@ def Overview(request):
 
 
 # schools list, tuple or array
-@staff_required
-def users(request):
+# @staff_required
+# def users(request):
 
-    users = User.objects.all()
+#     users = User.objects.all()
 
-    context = {
-        "users": users,
-        # "teamsFilter": teams
-    }
-    return render(request, "dashboard/users.html", context)
+#     context = {
+#         "users": users,
+#         # "teamsFilter": teams
+#     }
+#     return render(request, "dashboard/users.html", context)
 
 
 # schools list, tuple or array
@@ -721,35 +721,3 @@ def athlete_list(request):
     return render(request, "school/athlete_list.html", context)
 
 
-def payment_page(request):
-    payment = Payment.objects.filter(is_paid=False).first()
-    context = {"payment": payment}
-    return render(request, "school/payment_page.html", context)
-
-
-import requests
-from django.conf import settings
-
-
-def initiate_payment(request):
-    # Retrieve Airtel Money credentials from settings
-    client_id = settings.AIRTEL_MONEY_CLIENT_ID
-    client_secret = settings.AIRTEL_MONEY_CLIENT_SECRET
-
-    # Your payment initiation logic here
-    # Make requests to Airtel Money API using client_id, client_secret, etc.
-    # Example:
-    response = requests.post(
-        "https://openapiuat.airtel.africa/",
-        data={
-            "client_id": client_id,
-            "client_secret": client_secret,
-        },
-    )
-
-    # Process the response and handle accordingly
-    # Example:
-    if response.status_code == 200:
-        return HttpResponse("Payment initiated successfully")
-    else:
-        return HttpResponse("Failed to initiate payment")

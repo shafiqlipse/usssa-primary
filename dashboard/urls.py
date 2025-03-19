@@ -11,6 +11,7 @@ urlpatterns = [
 
     path("users/", users, name="users"),
     path('user/edit/<int:id>/', edit_user, name='edit_user'),
+    path('users/data/', users_data, name='users_data'),
     path("tournaments/", Tournaments, name="tournaments"),
     path("districts/", districts, name="districts"),
     # path("districts/", districts, name="districts"),

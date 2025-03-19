@@ -676,5 +676,25 @@
 });
 
 </script>
+
+<script>
+  $(document).ready(function() {
+      $('#userTable').DataTable({
+          "processing": true,
+          "serverSide": true,
+          "ajax": {
+              "url": "/dashboard/users/data/",  // Ensure this matches your Django URL
+              "type": "GET"
+          },
+          "columns": [
+              { "data": "username" },
+              { "data": "email" },
+              { "data": "school_profile" },
+              { "data": "actions", "orderable": false, "searchable": false }
+          ]
+      });
+  });
+  </script>
+  
   </body>
 </html>
