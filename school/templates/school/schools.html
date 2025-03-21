@@ -24,101 +24,16 @@
             <div class="card">
               <div class="card-body">
                 <div class="table-responsive table-card">
-                  <table
-                    id="example"
-                    class="table text-nowrap table-centered mt-0"
-                    style="width: 100%"
-                  >
+                  <table id="schoolTable" class="display" style="width: 100%">
                     <thead class="table-light">
                       <tr>
                         <th class="ps-1">School</th>
                         <th>EMIS</th>
-                        <th>Center</th>
-                        <th>Email</th>
+
+                        <th>district</th>
                         <th>Action</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      {% for school in schools %}
-                      <tr>
-                        <td class="pe-0">
-                          <div class="d-flex align-items-center">
-                            {% if school.badge %}
-                            <img
-                              src="{{school.badge.url}}"
-                              alt=""
-                              class="img-4by3-sm rounded-3"
-                              style="
-                                width: 30px;
-                                height: 30px;
-                                object-fit: cover;
-                              "
-                            />
-                            {% else %}
-                            <img
-                              src="{% static 'images/fav.png'%}"
-                              alt=""
-                              class="img-4by3-sm rounded-3"
-                              style="
-                                width: 30px;
-                                height: 30px;
-                                object-fit: cover;
-                              "
-                            />{% endif %}
-                            <div class="ms-3">
-                              <h5 class="mb-0">
-                                <a
-                                  href="{% url 'schooldetail' school.id%}"
-                                  class="text-inherit"
-                                  >{{school.school_name}}
-                                </a>
-                              </h5>
-                            </div>
-                          </div>
-                        </td>
-                        <td>{{school.EMIS}}</td>
-                        <td>{{school.center_number}}</td>
-
-                        <td>
-                          <span class="badge badge-success-soft"
-                            >{{school.email}}</span
-                          >
-                        </td>
-                        <td>
-                          <a
-                            href="#!"
-                            class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                            data-template="eyeOne"
-                          >
-                            <i data-feather="eye" class="icon-xs"></i>
-                            <div id="eyeOne" class="d-none">
-                              <span>View</span>
-                            </div>
-                          </a>
-                          <a
-                            href="#!"
-                            class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                            data-template="editOne"
-                          >
-                            <i data-feather="edit" class="icon-xs"></i>
-                            <div id="editOne" class="d-none">
-                              <span>Edit</span>
-                            </div>
-                          </a>
-                          <a
-                            href="#!"
-                            class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                            data-template="trashOne"
-                          >
-                            <i data-feather="trash-2" class="icon-xs"></i>
-                            <div id="trashOne" class="d-none">
-                              <span>Delete</span>
-                            </div>
-                          </a>
-                        </td>
-                      </tr>
-                      {% endfor %}
-                    </tbody>
                   </table>
                 </div>
               </div>

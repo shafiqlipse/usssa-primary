@@ -702,7 +702,7 @@
           }
       });
   });
-  </script>
+</script>
 <script>
   $(document).ready(function() {
       $('#athleteTable').DataTable({
@@ -716,6 +716,27 @@
               { "data": "Names" },
               { "data": "lin" },
               { "data": "school" }, // This includes both School Name and EMIS
+              { "data": "actions", "orderable": false, "searchable": false }
+          ],
+          "search": {
+              "smart": true // Enables searching across multiple fields
+          }
+      });
+  });
+  </script>
+<script>
+  $(document).ready(function() {
+      $('#schoolTable').DataTable({
+          "processing": true,
+          "serverSide": true,
+          "ajax": {
+              "url": "/school/schools/data/",
+              "type": "GET"
+          },
+          "columns": [
+              { "data": "Name" },
+              { "data": "emis" },
+              { "data": "district" }, // This includes both School Name and EMIS
               { "data": "actions", "orderable": false, "searchable": false }
           ],
           "search": {

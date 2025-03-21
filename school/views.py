@@ -94,6 +94,60 @@ def schools(request):
     return render(request, "school/schools.html", context)
 
 
+def schools_data(request):
+    """ Handle AJAX DataTables request for large datasets """
+
+    try:
+        draw = int(request.GET.get('draw', 1))
+        start = int(request.GET.get('start', 0))
+        length = int(request.GET.get('length', 10))
+        search_value = request.GET.get("search[value]", "")
+
+        # Fetch and filter schools
+        schools_query = School.objects.select_related("district").all()
+
+        # Apply search across multiple fields
+        if search_value:
+            schools_query = schools_query.filter(
+                Q(school_name__icontains=search_value) |
+                Q(EMIS__icontains=search_value)
+            )
+
+        # Paginate results
+        paginator = Paginator(schools_query, length)
+        page_number = (start // length) + 1
+        schools_page = paginator.get_page(page_number)
+
+        # Prepare JSON response
+        data = []
+        for school in schools_page:
+            school_name = school.school_name if school else "No School"
+            emis = school.EMIS if school.EMIS else "N/A"
+            district = school.district.name if school.district else "N/A"  # Extract district name
+
+            action_buttons = f"""
+                <a href="/school/school/{school.id}" class="btn btn-primary btn-sm">open</a>
+            """
+
+            data.append({
+                "Name": school_name,
+                "emis": emis,
+                "district": district,  # Now it's a string
+                "actions": action_buttons,
+            })
+
+        response = {
+            "draw": draw,
+            "recordsTotal": School.objects.count(),
+            "recordsFiltered": schools_query.count(),
+            "data": data,
+        }
+
+        return JsonResponse(response)
+
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)
+
 def Schoolnew(request):
     regions = Region.objects.all()
 
