@@ -17,45 +17,26 @@
        <div class="row">
         <div class="col-12">
           <div class="card">
-            <div class="card-body">
-              <div class="table-responsive table-card">
-                <table
-                  id="example"
-                  class="table text-nowrap table-centered mt-0"
-                  style="width: 100%"
-                >
-                  <thead>
-                    <tr>
-                      <th>Names</th>
-                      <th>Lin</th>
-                      <th>School</th>
-                      <th>Gender</th>
-                      <th>Sport</th>
-                      <th>Age</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {% for athlete in athletes%}
-                    <tr>
-                      <td>
-                        <a href="{% url 'athlete' athlete.id%}"
-                          >{{athlete.fname}} {{athlete.lname}}</a
-                        >
-                      </td>
-                      <td>{{athlete.lin}}</td>
-                      <td>{{athlete.school}}</td>
-                      <td>{{athlete.gender}}</td>
-                      <td>{{athlete.sport}}</td>
 
-                      <td>{{athlete.age}}</td>
-                    </tr>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="table-responsive">
+                          <table id="athleteTable" class="display" style="width: 100%">
+                            <thead>
+                              <tr>
+                                <th>Athlete</th>
+                                <th>LIN</th>
+                                <th>School</th>
+                                <th>Edit</th>
+                              </tr>
+                            </thead>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-                    {%endfor%}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
       <!-- row -->

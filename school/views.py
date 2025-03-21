@@ -245,6 +245,67 @@ def all_athletes(request):
 
 # schools list, tuple or array
 
+from django.db.models import Q
+def athletes_data(request):
+    """ Handle AJAX DataTables request for large datasets """
+
+    try:
+        draw = int(request.GET.get('draw', 1))
+        start = int(request.GET.get('start', 0))
+        length = int(request.GET.get('length', 10))
+        search_value = request.GET.get("search[value]", "")
+
+        # Fetch and filter athletes
+        athletes_query = Athlete.objects.select_related("school").all()
+
+        # Apply search across multiple fields
+        if search_value:
+            athletes_query = athletes_query.filter(
+                Q(fname__icontains=search_value) |
+                Q(lname__icontains=search_value) |
+                Q(school__school_name__icontains=search_value) |  # Search school name
+                Q(lin__icontains=search_value)   # Search LIN
+            )
+
+        # Paginate results
+        paginator = Paginator(athletes_query, length)
+        page_number = (start // length) + 1
+        athletes_page = paginator.get_page(page_number)
+
+        # Prepare JSON response
+        data = []
+        for athlete in athletes_page:
+            school_name = athlete.school.school_name if athlete.school else "No School"
+            lin = athlete.lin if athlete.lin else "N/A"
+
+            action_buttons = f"""
+                <a href="/dashboard/athlete/edit/{athlete.id}/" class="btn btn-warning btn-sm">Edit</a>
+            """
+
+            data.append({
+                "Names": f"{athlete.fname} {athlete.lname}",  # Combine first and last name
+                "lin": lin,
+                "school": school_name,
+                "actions": action_buttons,
+            })
+
+        response = {
+            "draw": draw,
+            "recordsTotal": Athlete.objects.count(),
+            "recordsFiltered": athletes_query.count(),
+            "data": data,
+        }
+
+        return JsonResponse(response)
+
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)
+
+
+
+# schools list, tuple or array
+# schools list, tuple or array
+
 @login_required
 def newAthlete(request):
     if request.method == "POST":
@@ -276,7 +337,7 @@ def newAthlete(request):
 
                 new_athlete.save()
                 messages.success(request, "Athlete added successfully!")
-                return redirect("athletes")
+                return redirect("athletexs")
 
             except IntegrityError as e:
                 if "lin" in str(e).lower():

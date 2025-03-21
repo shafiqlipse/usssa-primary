@@ -698,6 +698,27 @@
       });
   });
   </script>
+<script>
+  $(document).ready(function() {
+      $('#athleteTable').DataTable({
+          "processing": true,
+          "serverSide": true,
+          "ajax": {
+              "url": "/school/athletes/data/",
+              "type": "GET"
+          },
+          "columns": [
+              { "data": "Names" },
+              { "data": "lin" },
+              { "data": "school" }, // This includes both School Name and EMIS
+              { "data": "actions", "orderable": false, "searchable": false }
+          ],
+          "search": {
+              "smart": true // Enables searching across multiple fields
+          }
+      });
+  });
+  </script>
   
   
   </body>
