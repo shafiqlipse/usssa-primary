@@ -168,7 +168,7 @@ def school_detail(request, id):
 
     # Optimize queries using select_related
     officials = school_official.objects.filter(school_id=id).select_related("school")
-    athletes = Athlete.objects.filter(school_id=id).select_related("sport", "classroom", "age")
+    athletes = Athlete.objects.filter(school_id=id).exclude(status = 'COMPLETED').select_related("sport", "classroom", "age")
     enrollments = SchoolEnrollment.objects.filter(school=school).annotate(
         athlete_count=Count('athlete_enrollments__athletes')
     )
@@ -422,7 +422,7 @@ def athletexs(request):
     )  # Retrieve the first related School object
     if school_profile:
         school_id = school_profile.id
-        athletes = Athlete.objects.select_related("school").filter(school_id=school_id)
+        athletes = Athlete.objects.select_related("school").filter(school_id=school_id).exclude(status = 'COMPLETED')
     else:
         # Handle the case where the user is not associated with any school
         athletes = Athlete.objects.none()
@@ -456,7 +456,7 @@ def AthleteUpdate(request, id):
 
 
 def athlete_list(request):
-    athletes = Athlete.objects.all()
+    athletes = Athlete.objects.all().exclude(status = 'COMPLETED')
     context = {"athletes": athletes}
     return render(request, "school/athlete_list.html", context)
 
