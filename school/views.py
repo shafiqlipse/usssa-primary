@@ -16,10 +16,11 @@ from accounts.decorators import (
 import datetime
 from django.core.files.base import ContentFile
 import base64
+from teams.models import *
 # # Athletes details......................................................
 # # Athletes details......................................................
 from datetime import datetime
-
+from django.db.models import Count
 def get_greeting():
     current_hour = datetime.now().hour
 
@@ -164,15 +165,21 @@ def schoolupdate(request, id):
 @login_required
 def school_detail(request, id):
     school = get_object_or_404(School, id=id)
-    officials = school_official.objects.filter(school_id=id)
-    athletes = Athlete.objects.filter(school_id=id)
 
+    # Optimize queries using select_related
+    officials = school_official.objects.filter(school_id=id).select_related("school")
+    athletes = Athlete.objects.filter(school_id=id).select_related("sport", "classroom", "age")
+    enrollments = SchoolEnrollment.objects.filter(school=school).annotate(
+        athlete_count=Count('athlete_enrollments__athletes')
+    )
     context = {
         "school": school,
         "athletes": athletes,
         "officials": officials,
+        "enrollments": enrollments,
     }
     return render(request, "school/school.html", context)
+
 
 
 

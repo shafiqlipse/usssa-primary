@@ -322,6 +322,210 @@
           
         </div>
       </div>
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Athletes</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Officials</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Teams</button>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                  <!-- row -->
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <div class="table-responsive table-card">
+                  <table
+                    id="example"
+                    class="table text-nowrap table-centered mt-0"
+                    style="width: 100%"
+                  >
+                    <thead>
+                      <tr>
+                        <th>Names</th>
+                        <th>Lin</th>
+                        <th>School</th>
+                        <th>Gender</th>
+                        <th>Sport</th>
+                        <th>Age</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for athlete in athletes%}
+                      <tr>
+                        <td>
+                          <a href="{% url 'athlete' athlete.id%}"
+                            >{{athlete.fname}} {{athlete.lname}}</a
+                          >
+                        </td>
+                        <td>{{athlete.lin}}</td>
+                        <td>{{athlete.school}}</td>
+                        <td>{{athlete.gender}}</td>
+                        <td>{{athlete.sport}}</td>
+
+                        <td>{{athlete.age}}</td>
+                      </tr>
+
+                      {%endfor%}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- row -->
+        </div>
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">  
+          <div class="card">        
+          <div class="card-body">
+          <div class="table-responsive table-card">
+            <table
+              id="official"
+              class="table text-nowrap table-centered mt-0"
+              style="width: 100%"
+            >
+              <thead class="table-light">
+                <tr>
+                  <th>Official</th>
+                  <th>School</th>
+                  <th>Role</th>
+                  <th>Phone</th>
+                  <th>Email</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for official in officials %}
+                <tr>
+                  <td>
+                  
+                          <a
+                            href="{% url 'official' official.id%}"
+                            class="text-inherit"
+                            >{{official.name}}
+                          </a>
+                 
+                  </td>
+                  <td>{{official.school}}</td>
+                  <td>{{official.role}}</td>
+                  <td>{{official.phone_number}}</td>
+
+                  <td>
+                    <span class="badge badge-success-soft"
+                      >{{official.email}}</span
+                    >
+                  </td>
+                  <td>
+                    <a
+                      href="#!"
+                      class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
+                      data-template="eyeOne"
+                    >
+                      <i data-feather="eye" class="icon-xs"></i>
+                      <div id="eyeOne" class="d-none">
+                        <span>View</span>
+                      </div>
+                    </a>
+                    <a
+                      href="#!"
+                      class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
+                      data-template="editOne"
+                    >
+                      <i data-feather="edit" class="icon-xs"></i>
+                      <div id="editOne" class="d-none">
+                        <span>Edit</span>
+                      </div>
+                    </a>
+                    <a
+                      href="#!"
+                      class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
+                      data-template="trashOne"
+                    >
+                      <i data-feather="trash-2" class="icon-xs"></i>
+                      <div id="trashOne" class="d-none">
+                        <span>Delete</span>
+                      </div>
+                    </a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div></div>
+        </div></div>
+        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+          
+        <div class="filter card">
+          <div class="filterlist card-body">
+            <div class="table-responsive table-card">
+              <table
+                id="example"
+                class="table text-nowrap table-centered mt-0"
+                style="width: 100%"
+              >
+                <thead>
+                  <tr>
+                    <th>Names</th>
+                    <th>School</th>
+                    <th>Championship</th>
+                    <th>Sport</th>
+                    <th>Reports</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for school_enrollment in enrollments %}
+                  <tr>
+                    <td>
+                      <a
+                        href="{% url 'school_enrollment' school_enrollment.id%}"
+                        >{{school_enrollment.first_name}}
+                        {{school_enrollment.school}}</a
+                      >
+                    </td>
+                    <td>{{school_enrollment.school}}</td>
+                    <td>{{school_enrollment.championship}}</td>
+                    <td>{{school_enrollment.sport}}</td>
+
+                    <td>
+                      <a
+                        href="{% url 'team_album' school_enrollment.id%}"
+                        class="btn btn-primary"
+                        >Album</a
+                      >
+                      <a
+                        href="{% url 'team_accred' school_enrollment.id%}"
+                        class="btn btn-info"
+                        >Accreditation</a
+                      >
+                      <a
+                        href="{% url 'team_cert' school_enrollment.id%}"
+                        class="btn btn-success"
+                        >Certificate</a
+                      >
+                    </td>
+                  </tr>
+
+                  {%endfor%}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+      <div >
+        <!-- row -->
+  
+      </div>
+    </div>
     </div>
   </div>
 </div>
