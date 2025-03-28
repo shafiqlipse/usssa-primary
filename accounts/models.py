@@ -1,16 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-import datetime
-# Create your models here.
-
-
+from django.utils.timezone import now
 
 class User(AbstractUser):
     is_school = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
     thumbnail = models.ImageField(upload_to="profile/", blank=True, null=True)
-    date_joined = models.DateTimeField(default=datetime.datetime.now)
+    date_joined = models.DateTimeField(default=now)  # Use timezone.now()
+
 
 
 
