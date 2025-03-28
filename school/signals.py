@@ -18,27 +18,3 @@ def update_athlete_status_on_payment_completion(sender, instance, **kwargs):
         instance.athletes.update(status='ACTIVE')
 
 
-
-    """Create or deactivate a User based on the official's status."""
-    user = User.objects.filter(email=instance.email).first()  # Get the user if exists
-
-    if instance.status == "Active":
-        if not user:
-            user = User.objects.create(
-                email=instance.email,
-                username=instance.email,  # Ensure uniqueness
-                first_name=instance.fname,
-                last_name=instance.lname,
-                is_school=True,  # Set is_school=True
-                is_active=True,  # Activate the user
-            )
-            user.set_password("Password@12345")  # Consider sending a password reset email
-        else:
-            user.is_active = True  # Reactivate if previously deactivated
-
-        user.school = instance.school  # Assign school
-        user.save(update_fields=["is_active", "school", "first_name", "last_name"])
-
-    elif instance.status == "Inactive" and user:
-        user.is_active = False  # Deactivate the user
-        user.save(update_fields=["is_active"])
