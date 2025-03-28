@@ -855,7 +855,8 @@ def airtel_payment_callback(request):
 #         # Log the raw request body
 #         raw_body = request.body.decode('utf-8')
 #         logger.info(f"Raw Request Body: {raw_body}")
-
+from teams.models import *
+from django.db.models import Sum, Count, F
 #         # Parse JSON payload
 #         payload = json.loads(raw_body)
 #         logger.info(f"Parsed JSON Payload: {json.dumps(payload, indent=2)}")
@@ -878,18 +879,8 @@ def accounts(request):
     
     athletes_per_sport = AthleteEnrollment.objects.values('school_enrollment__sport__name').annotate(count=Count('athletes')).order_by('-count')
     
-    schools_per_level = SchoolEnrollment.objects.values('level').annotate(count=Count('id')).order_by('-count')
-    
-    schools_with_highest_enrollments = AthleteEnrollment.objects.values('school_enrollment__school__name').annotate(total_athletes=Count('athletes')).order_by('-total_athletes')[:10]
-    
-    most_enrolls = AthleteEnrollment.objects.values('enrolled_by__username').annotate(count=Count('id')).order_by('-count')
-    
-    most_recent_school_enrolls = SchoolEnrollment.objects.order_by('-enrollment_date')[:10]
-    
-    recent_enrolled_athletes = AthleteEnrollment.objects.order_by('-enrollment_date')[:10]
-    
-    schools_per_champs_list = SchoolEnrollment.objects.values('championship__name').annotate(count=Count('id')).order_by('-count')
-    
+   
+
     context = {
         'total_earnings': total_earnings,
         'total_pending': total_pending,
@@ -901,24 +892,13 @@ def accounts(request):
         'schools_per_champs': schools_per_champs,
         'athletes_per_champ': athletes_per_champ,
         'school_per_sport': school_per_sport,
-        'athletes_per_sport': athletes_per_sport,
-        'schools_per_level': schools_per_level,
-        'schools_with_highest_enrollments': schools_with_highest_enrollments,
-        'most_enrolls': most_enrolls,
-        'most_recent_school_enrolls': most_recent_school_enrolls,
-        'recent_enrolled_athletes': recent_enrolled_athletes,
-        'schools_per_champs_list': schools_per_champs_list,
-    }
+        'athletes_per_sport': athletes_per_sport}
     return render(request, "payments/accounts.html", context)
 
 @login_required
 def payments(request):
     pawyments = Payment.objects.select_related("school").filter(status="COMPLETED").order_by('-created_at')    
-    
-    # Apply filtering
 
-
-    # Pass the filter to the context for rendering the filter form
     context = {
         "pawyments": pawyments,
     }

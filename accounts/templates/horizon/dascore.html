@@ -472,15 +472,7 @@
                 </li>
                 <!-- Nav item -->
                               <!-- Nav item -->
-                <li class="nav-item">
-                  <a
-                    class="nav-link has-arrow"
-                    href="{% url 'payments'%}"
-                  >
-                    <i data-feather="users" class="nav-icon me-2 icon-xxs"></i>
-                    Payments</a
-                  >
-                </li>
+     
                 
     
                 <!-- Nav item -->
@@ -490,6 +482,46 @@
                     ><i data-feather="slack" class="nav-icon me-2 icon-xxs"></i
                     >Users</a
                   >
+                </li>
+                <!-- Nav item -->
+  
+                <!-- Nav item -->
+                <li class="nav-item">
+                  <a
+                    class="nav-link has-arrow collapsed"
+                    href="#!"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#payment"
+                    aria-expanded="false"
+                    aria-controls="payment"
+                  >
+                    <i data-feather="map-pin" class="nav-icon me-2 icon-xxs"></i>
+                    Payments
+                  </a>
+    
+                  <div id="payment" class="collapse" data-bs-parent="#sideNavbar">
+                    <ul class="nav flex-column">
+                      <li class="nav-item">
+                        <a class="nav-link has-arrow" href="../pages/mail.html"
+                          >All Payments</a
+                        >
+                      </li>
+                      <li class="nav-item">
+                        <a
+                          class="nav-link has-arrow"
+                          href="{% url 'pending_payments'%}"
+                          >Pending</a
+                        >
+                      </li>
+                      <li class="nav-item">
+                        <a
+                          class="nav-link has-arrow"
+                          href="{% url 'accounts'%}"
+                          >accounts</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
                 </li>
                 <!-- Nav item -->
   
