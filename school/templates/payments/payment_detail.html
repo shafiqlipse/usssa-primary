@@ -1,0 +1,57 @@
+{% extends "horizon/dascore.html" %}
+<!---->
+{% load static %}
+<!---->
+{%block title%}Payment{% endblock %}
+
+<!--static-->
+{% load static %}
+<!--khfufufu-->
+{% block content %}
+<div class="schools-dew content-wrapper">
+  <div class="head flex">
+    <h1>{{payment.school}}</h1>
+    <div class="report">
+      <a href=""><i class="fa fa-download" aria-hidden="true"></i> Export </a>
+    </div>
+    </div>
+
+    <div class="filterlist card">
+      <div class="lo">
+        <div class="table-responsive">
+          <table id="myTable" class="display">
+            <thead>
+              <tr>
+                <th>Athlete</th>
+                <th>index</th>
+                <th>class</th>
+                <th>date of birth</th>
+                <th>Date</th>
+                 
+              
+              </tr>
+            </thead>
+            <tbody>
+              {% for athlete in payment.athletes.all%}
+              <tr>
+                <td>
+                 {{athlete.fname}} {{athlete.lname}}
+                </td>
+                <td>{{athlete.index_number}}</td>
+                <td>{{athlete.classroom}}</td>
+                <td>{{athlete.date_of_birth}}</td>
+                <td>{{athlete.status}}</td>
+
+         
+          
+              </tr>
+
+              {%endfor%}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}
+</div>

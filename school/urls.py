@@ -37,6 +37,12 @@ urlpatterns = [
     path("addofficial", Official, name="addofficial"),
     path("official/<int:id>", OfficialDetail, name="official"),
     path("all_officials/", all_officials, name="all_officials"),
-    
+       
+   # ===================Officials========================,
+    path("accounts/", accounts, name="accounts"),
+    path("payments/", payments, name="payments"),
+    path("pending_payments/", pending_payments, name="pending_payments"),
+    path("activate_payment/<int:id>", activate_payment, name="activate_payment"),
+    path("payment_detail/<int:id>", payment_detail, name="payment_detail"),
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

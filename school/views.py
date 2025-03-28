@@ -859,7 +859,102 @@ def airtel_payment_callback(request):
 #         # Parse JSON payload
 #         payload = json.loads(raw_body)
 #         logger.info(f"Parsed JSON Payload: {json.dumps(payload, indent=2)}")
+@login_required
+def accounts(request):
+    
+    total_earnings = Payment.objects.filter(status="COMPLETED").aggregate(Sum('amount'))['amount__sum'] or 0
+    total_pending = Payment.objects.filter(status="PENDING").count()
+    total_completed = Payment.objects.filter(status="COMPLETED").count()
+    total_schools = Payment.objects.values('school').distinct().count()
+    total_athletes = Payment.objects.values('athletes').distinct().count()
 
+    recent_transactions = Payment.objects.order_by('-created_at')[:10]  # Last 10 transactions
+    
+    schools_per_champs = SchoolEnrollment.objects.values('championship__name').annotate(count=Count('id')).order_by('-count')
+    
+    athletes_per_champ = AthleteEnrollment.objects.values('school_enrollment__championship__name').annotate(count=Count('athletes')).order_by('-count')
+    
+    school_per_sport = SchoolEnrollment.objects.values('sport__name').annotate(count=Count('id')).order_by('-count')
+    
+    athletes_per_sport = AthleteEnrollment.objects.values('school_enrollment__sport__name').annotate(count=Count('athletes')).order_by('-count')
+    
+    schools_per_level = SchoolEnrollment.objects.values('level').annotate(count=Count('id')).order_by('-count')
+    
+    schools_with_highest_enrollments = AthleteEnrollment.objects.values('school_enrollment__school__name').annotate(total_athletes=Count('athletes')).order_by('-total_athletes')[:10]
+    
+    most_enrolls = AthleteEnrollment.objects.values('enrolled_by__username').annotate(count=Count('id')).order_by('-count')
+    
+    most_recent_school_enrolls = SchoolEnrollment.objects.order_by('-enrollment_date')[:10]
+    
+    recent_enrolled_athletes = AthleteEnrollment.objects.order_by('-enrollment_date')[:10]
+    
+    schools_per_champs_list = SchoolEnrollment.objects.values('championship__name').annotate(count=Count('id')).order_by('-count')
+    
+    context = {
+        'total_earnings': total_earnings,
+        'total_pending': total_pending,
+        'total_completed': total_completed,
+        'total_schools': total_schools,
+        'total_athletes': total_athletes,
+        'recent_transactions': recent_transactions,
+        # 'recent_transactions': recent_transactions,
+        'schools_per_champs': schools_per_champs,
+        'athletes_per_champ': athletes_per_champ,
+        'school_per_sport': school_per_sport,
+        'athletes_per_sport': athletes_per_sport,
+        'schools_per_level': schools_per_level,
+        'schools_with_highest_enrollments': schools_with_highest_enrollments,
+        'most_enrolls': most_enrolls,
+        'most_recent_school_enrolls': most_recent_school_enrolls,
+        'recent_enrolled_athletes': recent_enrolled_athletes,
+        'schools_per_champs_list': schools_per_champs_list,
+    }
+    return render(request, "payments/accounts.html", context)
+
+@login_required
+def payments(request):
+    pawyments = Payment.objects.select_related("school").filter(status="COMPLETED").order_by('-created_at')    
+    
+    # Apply filtering
+
+
+    # Pass the filter to the context for rendering the filter form
+    context = {
+        "pawyments": pawyments,
+    }
+   
+    return render(request, "payments/payments.html", context)
+
+@login_required
+def pending_payments(request):
+    pawyments = Payment.objects.select_related("school").filter(status="PENDING").order_by('-created_at')  
+    
+    # Pass the filter to the context for rendering the filter form
+    context = {
+        "payments": pawyments,
+    }
+    # Pass the filter to the context for rendering the filter form
+ 
+
+    return render(request, "payments/pending.html", context)
+
+@login_required
+def activate_payment(request, id):
+    payment = get_object_or_404(Payment,id=id)
+    payment.status = "COMPLETED"
+    payment.save() # Save the updated status
+    messages.success(request, f"Payment {payment} is now {payment.status}.")
+    return redirect("pending_payments")
+#     context = {"payment": payment}
+
+
+@login_required
+def payment_detail(request, id):
+    payment = get_object_or_404(Payment,id=id)
+    context = {"payment": payment}
+    return render(request, "payments/payment_detail.html", context)
+   
+#     context = {"payment": payment}
 #         # Extract transaction details (corrected)
 #         transaction = payload.get("transaction", {})  # Ensure transaction exists
 #         transaction_id = transaction.get("id")  # Airtel's transaction ID

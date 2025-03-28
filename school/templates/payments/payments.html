@@ -1,0 +1,71 @@
+{% extends "horizon/dascore.html" %}
+<!---->
+{% load static %}
+<!---->
+{%block title%}Payment{% endblock %}
+
+<!--static-->
+{% load static %}
+<!--khfufufu-->
+{% block content %}
+<div id="app-content">
+  <!-- Container fluid -->
+  <div class="app-content-area">
+    <div class="container-fluid">
+      <div class="card">
+        <div class="card-header">
+          <h1>Payments Records</h1>
+          <div class="report">
+            <a href=""
+              ><i class="fa fa-download" aria-hidden="true"></i> Export
+            </a>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <div class="lo">
+            <div class="table-responsive">
+              <table id="myTable" class="display">
+                <thead>
+                  <tr>
+                    <th>School</th>
+                    <th>Phone Number</th>
+                    <th>Amount</th>
+                    <th>Athletes</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for payment in pawyments%}
+                  <tr>
+                    <td>
+                      <a href="{% url 'payment_detail' payment.id%}"
+                        >{{payment.school}}</a
+                      >
+                    </td>
+                    <td>{{payment.phone_number}}</td>
+                    <td>{{payment.amount}}</td>
+                    <td>{{payment.athletes.count}}</td>
+                    <td>{{payment.created_at}}</td>
+                    <td>
+                      <p
+                        class="badge badge-outline-success"
+                        styles="color:white;"
+                      >
+                        {{payment.status}}
+                      </p>
+                    </td>
+                  </tr>
+
+                  {%endfor%}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
