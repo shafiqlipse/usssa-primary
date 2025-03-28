@@ -213,10 +213,10 @@ class Athlete(models.Model):
 
     status = models.CharField(
         max_length=10,
-        choices=[("Active", "Active"), ("Inactive", "Inactive")],
+        choices=[("ACTIVE", "ACTIVE"), ("Inactive", "Inactive")],
         null=True,
         blank=True,
-        default="New",
+        default="NEW",
     )
     objects = AthleteManager()
 
