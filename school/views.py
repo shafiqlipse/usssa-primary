@@ -127,6 +127,7 @@ def schools_data(request):
 
             action_buttons = f"""
                 <a href="/school/school/{school.id}" class="btn btn-primary btn-sm">open</a>
+                <a href="/school/deleteschool/{school.id}" class="btn btn-primary btn-sm">delete</a>
             """
 
             data.append({
@@ -244,7 +245,7 @@ def DeleteSchool(request, id):
         stud.delete()
         return redirect("schools")
 
-    return render(request, "dashboard/deletesch.html", {"obj": stud})
+    return render(request, "school/deletesch.html", {"obj": stud})
 
 
 
