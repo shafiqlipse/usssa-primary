@@ -94,7 +94,7 @@ def school_enrollment_details(request, id):
     athlete_enrollments = AthleteEnrollment.objects.filter(
         school_enrollment=school_enrollment
     )
-    all_athletes = Athlete.objects.filter(school=school, status="ACTIVE")
+    all_athletes = Athlete.objects.filter(school=school, status="ACTIVE", age = school_enrollment.age, gender = school_enrollment.gender)
 
     context = {
         "school_enrollment": school_enrollment,
@@ -264,3 +264,13 @@ def Certificate(request, id):
         return HttpResponse("We had some errors <pre>" + html + "</pre>")
 
     return response
+
+
+
+
+
+def activate_team(request, id):
+    school_enrollment = get_object_or_404(SchoolEnrollment, id=id)
+    school_enrollment.status = "Active"
+    school_enrollment.save()
+    return render(request, "activation_success.html", {"message": "School activated successfully."})

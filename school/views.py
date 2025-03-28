@@ -376,25 +376,19 @@ def newAthlete(request):
                 new_athlete = form.save(commit=False)
 
                 # Assign the school from the user profile
-                new_athlete.school = (
-                    request.user.school_profile.first()
-                )  # Ensure profile has a school
+                new_athlete.school = request.user.school_profile.first()
 
-                # Handle cropped image data for the "photo" field
+                # Handle cropped image data
                 cropped_data = request.POST.get("photo_cropped")
-                if cropped_data:
+                if cropped_data and "base64" in cropped_data:
                     try:
                         format, imgstr = cropped_data.split(";base64,")
                         ext = format.split("/")[-1]
-                        data = ContentFile(
-                            base64.b64decode(imgstr), name=f"photo.{ext}"
-                        )
-                        new_athlete.photo = data  # Assign cropped image
+                        img_data = base64.b64decode(imgstr)
+                        new_athlete.photo = ContentFile(img_data, name=f"photo.{ext}")
                     except (ValueError, TypeError) as e:
                         messages.error(request, "Invalid image data.")
-                        return render(
-                            request, "athletes/newAthlete.html", {"form": form}
-                        )
+                        return render(request, "athletes/newAthlete.html", {"form": form})
 
                 new_athlete.save()
                 messages.success(request, "Athlete added successfully!")
@@ -641,11 +635,16 @@ def payment_view(request):
                 phone_number = form.cleaned_data['phone_number']
                 athletes = form.cleaned_data['athletes']
 
+# Validate phone number format
+                if not re.match(r'^(075|074|070)\d{7}$', phone_number):
+                    messages.error(request, "Phone number must a valid Airtel money number.")
+                    return render(request, 'payments/payment_form.html', {'form': form})
+
                 if not athletes:
                     messages.error(request, "You must select at least one athlete.")
                     return render(request, 'payments/payment_form.html', {'form': form})
 
-                total_amount = athletes.count() * 2000  # UGX 3,000 per athlete
+                total_amount = athletes.count() * 1500  # UGX 3,000 per athlete
 
                 with transaction.atomic():  # Ensures atomicity in case of failure
                     payment = Payment.objects.create(

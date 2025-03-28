@@ -17,6 +17,29 @@ class SchoolEnrollment(models.Model):
     sport = models.ForeignKey(
         Sport, related_name="athlete_enrollments", on_delete=models.CASCADE
     )
+    age = models.ForeignKey(
+        Age, related_name="age_enrollments", on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+    )
+    status = models.CharField(
+        max_length=15,
+        choices=[("Normal", "Normal"), ("Special Needs", "Special Needs")],
+        null=True,
+        blank=True,
+    )
+    payment = models.CharField(
+        max_length=15,
+        choices=[("Active", "Active"), ("Inactive", "Inactive")],
+        default="Inactive",
+        null=True,
+        blank=True,
+    )
+    gender = models.CharField(
+        choices=[("Male", "male"), ("Female", "female")], max_length=10,
+        null=True,
+        blank=True,
+    )
     enrollment_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

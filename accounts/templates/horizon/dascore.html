@@ -415,9 +415,20 @@
                   >
                 </li>
                 <!-- Nav item -->
+                <!-- 
+                <li class="nav-item">
+                  <a
+                    class="nav-link has-arrow"
+                    href="{% url 'registration'%}"
+                  >
+                    <i data-feather="users" class="nav-icon me-2 icon-xxs"></i>
+                    Payments</a
+                  >
+                </li>
+                Nav item -->
     
                 <!-- Nav item -->
-                {% else %}
+                {% elif user.is_staff %}
                 <!-- Nav item -->
         
                 <li class="nav-item">
@@ -680,6 +691,12 @@
     });
 });
 
+</script>
+
+<script>
+  $(document).ready( function () {
+    $('#myTable').DataTable();
+} );
 </script>
 
 <script>

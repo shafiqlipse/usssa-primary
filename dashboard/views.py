@@ -432,7 +432,7 @@ def Officerdash(request):
         "athletes": athletes,
         "athletes_count": athletes_count,
     }
-    return render(request, "accounts/dprofile.html", context)
+    return render(request, "dprofile.html", context)
 # @school_required
 def district_schools(request):
     user = request.user

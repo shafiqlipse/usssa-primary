@@ -8,11 +8,14 @@ class SchoolEnrollmentForm(forms.ModelForm):
         model = SchoolEnrollment
         fields = [
             "championship",
-            "sport",
+            "sport","age","status","gender",
         ]
         widgets = {
             "championship": forms.Select(attrs={"class": "form-control"}),
             "sport": forms.Select(attrs={"class": "form-control"}),
+            "age": forms.Select(attrs={"class": "form-control"}),
+            "status": forms.Select(attrs={"class": "form-control"}),
+            "gender": forms.Select(attrs={"class": "form-control"}),
         }
 
 

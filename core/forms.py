@@ -41,8 +41,16 @@ class OfficerForm(forms.ModelForm):
         ]
 
         widgets = {
-            "district": Select2Widget,
-            "date_of_birth": forms.DateInput(attrs={"type": "date"}),
+            "first_name": forms.TextInput(attrs={"class": "form-control"}),
+            "last_name": forms.TextInput(attrs={"class": "form-control"}),
+            "nin": forms.TextInput(attrs={"class": "form-control"}),
+            "photo": forms.FileInput(attrs={"class": "form-control"}),
+            "phone_number": forms.TextInput(attrs={"class": "form-control"}),
+            "email": forms.TextInput(attrs={"class": "form-control"}),
+            "gender": forms.Select(attrs={"class": "form-select"}),
+            "date_of_birth": forms.DateInput(attrs={"type": "date","class": "form-control"}),
+            "region": forms.Select(attrs={"class": "form-select"}),
+            "district": forms.Select(attrs={"class": "form-select"}),
         }
 
     def __init__(self, *args, **kwargs):
@@ -65,7 +73,15 @@ class TOfficerForm(forms.ModelForm):
         ]
 
         widgets = {
-            "date_of_birth": forms.DateInput(attrs={"type": "date"}),
+            "first_name": forms.TextInput(attrs={"class": "form-control"}),
+            "last_name": forms.TextInput(attrs={"class": "form-control"}),
+            "nin": forms.TextInput(attrs={"class": "form-control"}),
+            "photo": forms.FileInput(attrs={"class": "form-control"}),
+            "phone_number": forms.TextInput(attrs={"class": "form-control"}),
+            "gender": forms.Select(attrs={"class": "form-select"}),
+            "date_of_birth": forms.DateInput(attrs={"type": "date","class": "form-control"}),
+            "role": forms.TextInput(attrs={"class": "form-control"}),
+            "district": forms.TextInput(attrs={"class": "form-form-control"}),
         }
 
     def __init__(self, *args, **kwargs):

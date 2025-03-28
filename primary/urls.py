@@ -3,7 +3,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
-from debug_toolbar.toolbar import debug_toolbar_urls
+# from debug_toolbar.toolbar import debug_toolbar_urls
 from dashboard.views import *
 from accounts.views import *
 from core.views import *
@@ -21,9 +21,6 @@ urlpatterns = [
     path("register/", school_registration, name="register"),
     path("logout/", user_logout, name="logout"),
     path("dashboard/", Overview, name="dashboard"),
-    path("officer/", Officera, name="officer"),
-    path("officer/<int:id>", officer_details, name="officerd"),
-    path("deleteofficer/<int:id>", delete_officer, name="deleted"),
     path("officeria/", Officerdash, name="officer_dashboard"),
        # path("enrollment/", include("registration.urls")),
     # email
@@ -35,25 +32,11 @@ urlpatterns = [
     path("officers/", include("officers.urls")),
 
     path("get_athletes/", get_athletes, name="get_athletes"),
-    path("get_dist_athletes/", get_dist_athletes, name="get_dist_athletes"),
     # path("enrollment/", include("registration.urls")),
     # email
     # path('send_email/', Sendmail, name='send_email'),
-    path("teams/", Teams, name="teams"),
-    path("allteams/", AllTeams, name="allteams"),
-    path("newteam/", create_team, name="teamnew"),
-    path("updateteam/<int:id>", update_team, name="updateteam"),
-    path("team/<int:id>", team_details, name="team"),
-    path("teamd/<int:id>", team_ddetails, name="dteam"),
-    # path("deleteam/<int:id>", delete_tdeam, name="deleteam"),
-    path("officers/", officers, name="officers"),
+
     path("pdf_report/", generate_album, name="pdfreport"),
-    # path("pdfreport/<int:id>", generate_scalbum, name="pdreport"),
-    path("newtofficer/", newTofficer, name="districtoff"),
-    path("tofficers/", tofficers, name="tofficers"),
-    path("dofficers/", Dofficers, name="dofficers"),
-    path("newtofficer/<int:id>", tofficer_details, name="toff"),
-    path("deloff/<int:id>", delloff, name="deloff"),
     # path("pdfreport/<int:id>", generate_scalbum, name="pdreport"),
     # path("get_athletes/", get_athletes, name="get_athletes"),
     # path("album/", album, name="album"),
@@ -75,4 +58,5 @@ urlpatterns = [
         name="password_reset_complete",
     ),
     #
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + debug_toolbar_urls()
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
+# + debug_toolbar_urls()
