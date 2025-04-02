@@ -94,7 +94,7 @@ def school_enrollment_details(request, id):
     athlete_enrollments = AthleteEnrollment.objects.filter(
         school_enrollment=school_enrollment
     )
-    all_athletes = Athlete.objects.filter(school=school, status="ACTIVE", age = school_enrollment.age, gender = school_enrollment.gender)
+    all_athletes = Athlete.objects.filter(school=school, status="ACTIVE", gender = school_enrollment.gender)
 
     context = {
         "school_enrollment": school_enrollment,
