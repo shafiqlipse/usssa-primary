@@ -20,6 +20,74 @@ from django.db.models import Count
 
 from .filters import SchoolEnrollmentFilter  # Assume you have created this filter
 
+# schools list, tuple or array
+import json
+from django.http import JsonResponse
+from django.core.paginator import Paginator
+from .models import User
+from django.db.models import Q
+def enrolls_data(request):
+    """ Handle AJAX DataTables request for large datasets """
+
+    try:
+        draw = int(request.GET.get('draw', 1))
+        start = int(request.GET.get('start', 0))
+        length = int(request.GET.get('length', 10))
+        search_value = request.GET.get("search[value]", "")
+
+        # Fetch and filter users
+        teams_query = SchoolEnrollment.objects.annotate(athlete_count=Count('athlete_enrollments__athletes'))
+
+        # Apply search across multiple fields
+        if search_value:
+            teams_query = teams_query.filter(
+                Q(school__icontains=search_value) |
+                Q(championship__icontains=search_value) |
+                Q(sport__icontains=search_value) 
+    # Search EMIS
+            )
+
+        # Paginate results
+        paginator = Paginator(teams_query, length)
+        page_number = (start // length) + 1
+        enrolls_page = paginator.get_page(page_number)
+
+        # Prepare JSON response
+        data = []
+        for team in enrolls_page:
+            school = team.school
+            championship = team.championship
+            sport = team.sport
+
+
+            action_buttons = f"""
+                
+                <a href="/dashboard/user/edit/{team.id}/" class="btn btn-primary btn-sm">Album</a>
+                <a href="/dashboard/user/edit/{team.id}/" class="btn btn-warning btn-sm">Accrediation</a>
+                <a href="/dashboard/user/edit/{team.id}/" class="btn btn-info btn-sm">Certificate</a>
+                
+            """
+
+            data.append({
+                "school": school,
+                "championship": championship,
+                "championship": sport,
+                "actions": action_buttons,
+            })
+
+        response = {
+            "draw": draw,
+            "recordsTotal": SchoolEnrollment.objects.all().count(),
+            "recordsFiltered": teams_query.count(),
+            "data": data,
+        }
+
+        return JsonResponse(response)
+
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)
+
+
 
 def SchoolEnrollments(request):
     # Get school from user profile
@@ -274,3 +342,50 @@ def activate_team(request, id):
     school_enrollment.status = "Active"
     school_enrollment.save()
     return render(request, "activation_success.html", {"message": "School activated successfully."})
+
+
+
+
+
+
+import csv
+from django.http import HttpResponse
+
+def export_ecsv(request):
+    # Create the HttpResponse object with the appropriate CSV header.
+    response = HttpResponse(content_type="text/csv")
+    response["Content-Disposition"] = 'attachment; filename="enrollments.csv"'
+
+    # Create a CSV writer object using the HttpResponse as the file.
+    writer = csv.writer(response)
+
+    # Write the header row
+    writer.writerow(
+        [
+            "id",
+            "School",
+            "District",
+            "Region",
+            "Championship",
+            "Sport",
+            "Athlete Count",
+        ]
+    )  # Replace with your model's fields
+
+    for obj in SchoolEnrollment.objects.all():
+        athlete_count = obj.athlete_enrollments.aggregate(total=models.Count('athletes'))['total'] or 0
+        writer.writerow(
+            [
+                obj.id,
+                obj.school,
+                obj.school.district,
+                obj.school.district.region,
+                obj.championship,
+                obj.sport,
+                athlete_count,
+            ]
+        ) 
+        # Replace with your model's fields
+
+    return response
+

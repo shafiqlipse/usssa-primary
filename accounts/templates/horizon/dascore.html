@@ -289,7 +289,7 @@
                 >
                   <div class="px-4 pb-0 pt-2">
                     <div class="lh-1">
-                      <h5 class="mb-1">John E. Grainger</h5>
+                      <h5 class="mb-1">{{user}}</h5>
                       <a href="#!" class="text-inherit fs-6">View my profile</a>
                     </div>
                     <div class="dropdown-divider mt-3 mb-2"></div>
@@ -314,7 +314,7 @@
                           class="me-2 icon-xxs dropdown-item-icon"
                           data-feather="activity"
                         ></i>
-                        Activity Log
+                        Change password
                       </a>
                     </li>
 
@@ -476,12 +476,44 @@
                 
     
                 <!-- Nav item -->
+ 
                 <!-- Nav item -->
                 <li class="nav-item">
-                  <a class="nav-link has-arrow" href="{% url 'users'%}"
-                    ><i data-feather="slack" class="nav-icon me-2 icon-xxs"></i
-                    >Users</a
+                  <a
+                    class="nav-link has-arrow collapsed"
+                    href="#!"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#users"
+                    aria-expanded="false"
+                    aria-controls="users"
                   >
+                    <i data-feather="map-pin" class="nav-icon me-2 icon-xxs"></i>
+                    Users
+                  </a>
+    
+                  <div id="users" class="collapse" data-bs-parent="#sideNavbar">
+                    <ul class="nav flex-column">
+                      <li class="nav-item">
+                        <a class="nav-link has-arrow" href="{% url 'users'%}"
+                          >Schools</a
+                        >
+                      </li>
+                      <li class="nav-item">
+                        <a
+                          class="nav-link has-arrow"
+                          href="{% url 'sports_officers'%}"
+                          >Sport officers</a
+                        >
+                      </li>
+                      <li class="nav-item">
+                        <a
+                          class="nav-link has-arrow"
+                          href="{% url 'staff'%}"
+                          >Staff</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
                 </li>
                 <!-- Nav item -->
   
@@ -799,6 +831,29 @@
               { "data": "Name" },
               { "data": "emis" },
               { "data": "district" }, // This includes both School Name and EMIS
+              { "data": "actions", "orderable": false, "searchable": false }
+          ],
+          "search": {
+              "smart": true // Enables searching across multiple fields
+          }
+      });
+  });
+  </script>
+  
+  
+<script>
+  $(document).ready(function() {
+      $('#enrollTable').DataTable({
+          "processing": true,
+          "serverSide": true,
+          "ajax": {
+              "url": "/team/enrolls_data/",
+              "type": "GET"
+          },
+          "columns": [
+              { "data": "School" },
+              { "data": "championship" },
+              { "data": "sport" }, // This includes both School Name and EMIS
               { "data": "actions", "orderable": false, "searchable": false }
           ],
           "search": {

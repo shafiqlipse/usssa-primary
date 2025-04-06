@@ -9,6 +9,7 @@ from .views import *
 
 urlpatterns = [
     # venues
+    path("enrolls_data/", enrolls_data, name="enrolls_data"),
     # path("teccred/", teccreditation, name="teccred"),
     path("team_accred/<int:id>", Accreditation, name="team_accred"),
     path("team_album/<int:id>", Albums, name="team_album"),
@@ -36,5 +37,7 @@ urlpatterns = [
         name="remove_athlete",
     ),
     # path("process-payment/", process_payment, name="process_payment"),  # Add this line
+    
+    path("export_ecsv/", export_ecsv, name="export_ecsv"),
     # Add more URLs as ne
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

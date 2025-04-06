@@ -361,6 +361,26 @@ def users(request):
     }
     return render(request, "horizon/users.html", context)
 
+@staff_required
+def staff(request):
+    staff = User.objects.filter(is_staff=True)
+    
+
+    context = {
+        "staff": staff,
+        # "teamsFilter": teams
+    }
+    return render(request, "horizon/staff.html", context)
+
+@staff_required
+def sports_officers(request):
+    sports_officers = User.objects.filter(is_admin=True)
+
+    context = {
+        "sports_officers": sports_officers,
+    }
+    return render(request, "horizon/sports.html", context)
+
 
 #         # Determine the payment provider based on the phone number
 #         payment_provider = determine_payment_provider(phone_number)

@@ -184,20 +184,26 @@ def Schoolnew(request):
     context = {"form": form, "regions": regions}
     return render(request, "school/create_school.html", context)
 
-@staff_required
-def school_update(request, id):
-    school = get_object_or_404(School, id=id)
+@login_required
+def school_update(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    
+    try:
+        school = request.user.school_profile
+    except School.DoesNotExist:
+        return redirect('some_error_page')
 
     if request.method == "POST":
         form = SchoolEditForm(request.POST, instance=school)
         if form.is_valid():
             form.save()
+            messages.success(request, "School updated successfully!")
             return redirect("schools")
     else:
         form = SchoolEditForm(instance=school)
 
-    context = {"form": form, "school": school}
-    return render(request, "dashboard/editschool.html", context)
+    return render(request, "school/editschool.html", {"form": form})
 
 
 @login_required

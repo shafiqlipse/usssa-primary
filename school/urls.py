@@ -21,7 +21,7 @@ urlpatterns = [
     path("school/", Dash, name="school_dashboard"),
     path("addschool/", Schoolnew, name="new_school"),
     path("school/<int:id>", school_detail, name="schooldetail"),
-    path("editschool/<int:id>", school_update, name="schoolupdate"),
+    path("editschool/", school_update, name="schoolupdate"),
     
     # ===================Athletes========================,
     path("athletexs", athletexs, name="athletexs"),
