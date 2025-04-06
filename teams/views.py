@@ -379,7 +379,7 @@ def export_ecsv(request):
                 obj.id,
                 obj.school,
                 obj.school.district,
-                obj.school.district.region,
+                obj.school.region,
                 obj.championship,
                 obj.sport,
                 athlete_count,
