@@ -80,16 +80,15 @@
                   <div class="d-flex justify-content-between
                     align-items-center">
                     
-                    <a
-                            href="{% url 'remove_athlete' enrollment.id athlete.id %}"
-                            class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                            data-template="trashOne"
-                          >
-                            <i data-feather="trash-2" class="icon-xs"></i>
+                    
+                      <form method="POST" action="{% url 'remove_athlete' enrollment.id athlete.id %}"class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
+                            data-template="trashOne"> {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">
+                            <i data-feather="trash-2" class="icon-xs"></i></button>
                             <div id="trashOne" class="d-none">
-                              <span>Remove athlete</span>
+                              <span>Remove</span>
                             </div>
-                          </a>
+                          </form>
                   </div>
                 </div>
               </div>
