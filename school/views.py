@@ -190,7 +190,7 @@ def school_update(request):
         return redirect('login')
     
     try:
-        school = request.user.school_profile
+        school = request.user.school_profile.first()
     except School.DoesNotExist:
         return redirect('some_error_page')
 
@@ -199,7 +199,7 @@ def school_update(request):
         if form.is_valid():
             form.save()
             messages.success(request, "School updated successfully!")
-            return redirect("schools")
+            return redirect("school_dashboard")
     else:
         form = SchoolEditForm(instance=school)
 

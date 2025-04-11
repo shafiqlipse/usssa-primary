@@ -4,7 +4,7 @@ from django.urls import path
 from .views import *
 from dashboard.views import *
 
-# from teams.views import delete_tdeam
+# from dteams.views import delete_tdeam
 
 urlpatterns = [
 # ===================School========================,
@@ -15,17 +15,39 @@ urlpatterns = [
     path("deleteofficer/<int:id>", delete_officer, name="deleted"),
     path("officeria/", Officerdash, name="officer_dashboard"),
 
-    path("get_dist_athletes/", get_dist_athletes, name="get_dist_athletes"),
     # path("enrollment/", include("registration.urls")),
     # email
+    #    path("enrolls_data/", enrolls_data, name="enrolls_data"),
+    # path("teccred/", teccreditation, name="teccred"),
+    path("dteam_accred/<int:id>", dAccreditation, name="dteam_accred"),
+    path("dteam_album/<int:id>", dAlbums, name="dteam_album"),
+    path("dteam_cert/<int:id>", dCertificate, name="dteam_cert"),
+    path("district_enrollments/", dTeams, name="district_enrollments"),
+    path("all_enrollments/", dAllEnrollments, name="all_enrollments"),
+    path(
+        "officer_enrollment/<int:id>",
+        officer_enrollment_details,
+        name="district_enrollment",
+    ),
+    path(
+        "delete_officer_enrollment/<int:id>",
+        officer_enroll_delete,
+        name="delete_officer_enrollment",
+    ),
+    path(
+        "update_officer_enrollment/<int:id>",
+        officer_enrollment_update,
+        name="update_officer_enrollment",
+    ),
+    path(
+        "remove-athlete/<int:enrollment_id>/<int:athlete_id>/",
+        remove_athlete,
+        name="remove_athlete",
+    ),
     # path('send_email/', Sendmail, name='send_email'),
-    path("teams/", Teams, name="teams"),
-    path("allteams/", AllTeams, name="allteams"),
-    path("newteam/", create_team, name="teamnew"),
-    path("updateteam/<int:id>", update_team, name="updateteam"),
-    path("team/<int:id>", team_details, name="team"),
-    path("teamd/<int:id>", team_ddetails, name="dteam"),
-    # path("deleteam/<int:id>", delete_tdeam, name="deleteam"),
+    path("dteams/", dTeams, name="dteams"),
+
+    # path("deledteam/<int:id>", delete_tdeam, name="deledteam"),
     path("officers/", officers, name="officers"),
     # path("pdf_report/", generate_album, name="pdfreport"),
     # path("pdfreport/<int:id>", generate_scalbum, name="pdreport"),
@@ -33,7 +55,6 @@ urlpatterns = [
     path("tofficers/", tofficers, name="tofficers"),
     path("dofficers/", Dofficers, name="dofficers"),
     path("newtofficer/<int:id>", tofficer_details, name="toff"),
-    path("deloff/<int:id>", delloff, name="deloff"),
 
 
     # ===================Athletes========================,
@@ -43,9 +64,6 @@ urlpatterns = [
     
    # ===================Officials========================,
 
-    path("dalbum/<int:id>", generate_dalbum, name="dalbum"),
-    path("accred/<int:id>", accreditation, name="accred"),
-    path("taccred/<int:id>", taccreditation, name="taccred"),
-    path("cert/<int:id>", cert, name="cert"),
+
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

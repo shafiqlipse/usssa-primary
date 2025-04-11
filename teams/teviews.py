@@ -27,17 +27,17 @@ def get_athletes(request):
     return JsonResponse(data)
 
 
-def activate_team(request, id):
-    team = get_object_or_404(SchoolTeam, id=id)
-    team.status = "Active"
-    team.save()
-    response_data = {"message": "School activated successfully."}
-    return JsonResponse(response_data)
+# def activate_team(request, id):
+#     team = get_object_or_404(SchoolTeam, id=id)
+#     team.status = "Active"
+#     team.save()
+#     response_data = {"message": "School activated successfully."}
+#     return JsonResponse(response_data)
 
 
-def deactivate_team(request, id):
-    team = get_object_or_404(SchoolTeam, id=id)
-    team.status = "Inactive"
-    team.save()
-    response_data = {"message": "School activated successfully."}
-    return JsonResponse(response_data)
+# def deactivate_team(request, id):
+#     team = get_object_or_404(SchoolTeam, id=id)
+#     team.status = "Inactive"
+#     team.save()
+#     response_data = {"message": "School activated successfully."}
+#     return JsonResponse(response_data)

@@ -4,24 +4,6 @@ from core.models import *
 from django_select2.forms import Select2Widget
 
 
-class TeamForm(forms.ModelForm):
-    class Meta:
-        model = Team
-        fields = ["team_gender", "team_age", "team_sport", "athletes", "championship"]
-        widgets = {
-            "team_gender": forms.Select(attrs={"class": "form-select"}),
-            "team_age": forms.Select(attrs={"class": "form-select"}),
-            "team_sport": forms.Select(attrs={"class": "form-select"}),
-            "athletes": forms.SelectMultiple(
-                attrs={"class": "form-select js-example-basic-multiple", "multiple": "multiple"}
-            ),
-            "championship": forms.Select(attrs={"class": "form-select"}),
-        }
-
-    def __init__(self, *args, **kwargs):
-        super(TeamForm, self).__init__(*args, **kwargs)
-        self.fields["athletes"].widget.attrs.update({"class": "js-example-basic-multiple"})
-
 
 class OfficerForm(forms.ModelForm):
     class Meta:

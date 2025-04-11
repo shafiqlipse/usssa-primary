@@ -96,7 +96,6 @@ class SchoolProfileForm(forms.ModelForm):
         super(SchoolProfileForm, self).__init__(*args, **kwargs)
         self.fields["gphoto"].widget.attrs["onchange"] = "displayImage(this);"
 
-
 class SchoolEditForm(forms.ModelForm):
     class Meta:
         model = School
@@ -125,7 +124,6 @@ class SchoolEditForm(forms.ModelForm):
             "gdate_of_birth",
             "status",
         ]
-
         widgets = {
             "district": Select2Widget,
             "date_of_birth": forms.DateInput(attrs={"type": "date"}),
@@ -133,17 +131,10 @@ class SchoolEditForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
-        super(SchoolProfileForm, self).__init__(*args, **kwargs)
+        super(SchoolEditForm, self).__init__(*args, **kwargs)
         self.fields["badge"].widget.attrs["onchange"] = "displayImage(this);"
-
-    def __init__(self, *args, **kwargs):
-        super(SchoolProfileForm, self).__init__(*args, **kwargs)
         self.fields["photo"].widget.attrs["onchange"] = "displayImage(this);"
-
-    def __init__(self, *args, **kwargs):
-        super(SchoolProfileForm, self).__init__(*args, **kwargs)
         self.fields["gphoto"].widget.attrs["onchange"] = "displayImage(this);"
-
 
 class OfficialForm(forms.ModelForm):
     class Meta:

@@ -58,16 +58,3 @@ class Officer(models.Model):
         return self.email
 
 
-class Team(models.Model):
-    team_officer = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    team_sport = models.ForeignKey(Sport, on_delete=models.CASCADE, null=True)
-    team_age = models.ForeignKey(Age, on_delete=models.CASCADE, null=True)
-    championship = models.ForeignKey(Tournament, on_delete=models.CASCADE, null=True)
-
-    team_gender = models.CharField(
-        choices=[("Male", "male"), ("Female", "female")], max_length=10
-    )
-    athletes = models.ManyToManyField(Athlete)
-
-    def __str__(self):
-        return str(self.team_officer)
