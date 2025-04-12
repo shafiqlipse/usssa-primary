@@ -218,7 +218,7 @@ def dTeams(request):
 def dAllEnrollments(request):
     # Get all officer_enrolls with athlete count
     officer_enrolls = Team.objects.annotate(
-        athlete_count=Count('athlete_enrollments__athletes')
+        athlete_count=Count('team_athletes__athletes')
     )
 
     context = {
@@ -333,8 +333,8 @@ admin_required
 
 def dAccreditation(request, id):
     team = get_object_or_404(Team, id=id)
-    athlete_enrollments = AthletesEnrollment.objects.filter(officer_enrollment=team)
-    athletes = Athlete.objects.filter(athleteenrollment__in=athlete_enrollments)
+    athlete_enrollments = AthletesEnrollment.objects.filter(team=team)
+    athletes = Athlete.objects.filter(athletesenrollment__in=athlete_enrollments)
 
     # Get template
     template = get_template("reports/acred.html")
@@ -343,6 +343,7 @@ def dAccreditation(request, id):
 
     # Prepare context
     context = {
+        "team": team,
         "athletes": athletes,
         "MEDIA_URL": settings.MEDIA_URL,
     }
@@ -373,7 +374,7 @@ def dAlbums(request, id):
 
 
     # Create a unique filename
-    filename = f"{team.team_officer} | {team.team_sport} .pdf"
+    filename = f"{team.team_officer.officer_profile.first().district } | {team.team_sport} .pdf"
 
     # Get template
     template = get_template("reports/albums.html")

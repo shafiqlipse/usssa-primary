@@ -23,7 +23,7 @@ urlpatterns = [
     path("dteam_album/<int:id>", dAlbums, name="dteam_album"),
     path("dteam_cert/<int:id>", dCertificate, name="dteam_cert"),
     path("district_enrollments/", dTeams, name="district_enrollments"),
-    path("all_enrollments/", dAllEnrollments, name="all_enrollments"),
+    path("all_denrollments/", dAllEnrollments, name="all_denrollments"),
     path(
         "officer_enrollment/<int:id>",
         officer_enrollment_details,

@@ -15,7 +15,7 @@
           <!-- Page header -->
           <div class="mb-5 flex">
             <h3 class="mb-0">Teams</h3>
-            <a href="{% url 'export_ecsv'%}" class='btn btn-success'>Export</a>
+            <a href="{% url 'export_ecsv'%}" class="btn btn-success">Export</a>
           </div>
         </div>
       </div>
@@ -38,32 +38,30 @@
                   </tr>
                 </thead>
                 <tbody>
-                  {% for school_enrollment in school_enrolls %}
+                  {% for team in officer_enrolls %}
                   <tr>
                     <td>
-                      <a
-                        href="{% url 'school_enrollment' school_enrollment.id%}"
-                        >{{school_enrollment.first_name}}
-                        {{school_enrollment.school}}</a
+                      <a href="{% url 'district_enrollment' team.id%}"
+                        > {{team.team_officer.officer_profile.first.district }}</a
                       >
                     </td>
-                    <td>{{school_enrollment.school}}</td>
-                    <td>{{school_enrollment.championship}}</td>
-                    <td>{{school_enrollment.sport}}</td>
 
+                    <td>{{team.championship}}</td>
+                    <td>{{team.team_sport}}</td>
+                    <td>{{team.team_age}}</td>
                     <td>
                       <a
-                        href="{% url 'team_album' school_enrollment.id%}"
+                        href="{% url 'dteam_album' team.id%}"
                         class="btn btn-primary"
                         >Album</a
                       >
                       <a
-                        href="{% url 'team_accred' school_enrollment.id%}"
+                        href="{% url 'dteam_accred' team.id%}"
                         class="btn btn-info"
                         >Accreditation</a
                       >
                       <a
-                        href="{% url 'team_cert' school_enrollment.id%}"
+                        href="{% url 'team_cert' team.id%}"
                         class="btn btn-success"
                         >Certificate</a
                       >
