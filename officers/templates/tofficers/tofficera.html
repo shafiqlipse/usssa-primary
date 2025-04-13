@@ -1,24 +1,91 @@
-{% extends "dashboard/dashboard.html" %}
-<!--static-->
-{% block title %}{{tofficer.first_name}} {{tofficer.last_name}}{% endblock %}
+{% extends "horizon/dascore.html" %}
+<!---->
+
+{% block title %}{{athlete.fname}} {{athlete.lname}}{% endblock %}
 <!--static-->
 {% load static %}
 <!--khfufufu-->
 {% block content %}
-<div class="schools-den">
-  <div class="head flex">
-    <h1>{{tofficer.first_name}} {{tofficer.last_name}}</h1>
-  </div>
-  <div class="image-box flex">
-    <img src="{{tofficer.photo.url}}" alt="" />
-    <div class="details">
-      <li>{{tofficer.nin}}</li>
-      <li>{{tofficer.email}}</li>
-      <li>{{tofficer.district}}</li>
-      <li>{{tofficer.gender}}</li>
-      <li>{{tofficer.phone_number}}</li>
+<div id="app-content">
+  <!-- Container fluid -->
+  <div class="app-content-area">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-12">
+          <!-- Page header -->
+          <div class="mb-5">
+            <h3 class="mb-0">#UP000{{tofficer.id}}</h3>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="row">
+          <div class="col-xl-5 mb-5">
+            <div class="card h-100">
+              <div
+                class="card-header d-flex justify-content-between align-items-center"
+              >
+                <h4 class="mb-0">
+                  {{tofficer.first_name}} {{tofficer.last_name}}
+                </h4>
+              </div>
+              <div class="card-body">
+                <div
+                  id=""
+                  class="d-flex justify-content-center"
+                  style="width: 100%"
+                >
+                  <img
+                    src="{{tofficer.photo.url}}"
+                    alt=""
+                    style="width: 100%"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-7 mb-5">
+            <div class="card h-100">
+              <div
+                class="card-header d-flex justify-content-between align-items-center"
+              >
+                <h4 class="mb-0">Details</h4>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive table-card">
+                  <table class="table text-nowrap mb-0 table-centered">
+                    <tbody>
+                      <tr>
+                        <td>National ID Number</td>
+                        <td>{{tofficer.nin}}</td>
+                      </tr>
+        
+                      <tr>
+                        <td>District</td>
+                        <td>{{tofficer.district}}</td>
+                      </tr>
+                      <tr>
+                        <td>Gender</td>
+                        <td>{{tofficer.gender}}</td>
+                      </tr>
+                      <tr>
+                        <td>Role</td>
+                        <td>{{tofficer.role}}</td>
+                      </tr>
+                      <tr>
+                        <td>Contact</td>
+                        <td>{{tofficer.phone_number}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-
 {% endblock %}

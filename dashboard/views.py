@@ -338,38 +338,7 @@ def Tournaments(request):
     return render(request, "dashboard/tournaments.html", context)
 
 
-# schools list, tuple or array
-def districts(request):
 
-    districts = District.objects.all()
-
-    # schoolFilter = schoolFilter(request.GET, queryset=schools)
-    myFilter = districtsFilter(request.GET, queryset=districts)
-
-    districtslist = myFilter.qs
-
-    items_per_page = 10
-
-    paginator = Paginator(districtslist, items_per_page)
-    page = request.GET.get("page")
-
-    try:
-        districtslist = paginator.page(page)
-    except PageNotAnInteger:
-        # If the page is not an integer, deliver the first page
-        districtslist = paginator.page(1)
-    except EmptyPage:
-        # If the page is out of range, deliver the last page
-        districtslist = paginator.page(paginator.num_pages)
-
-    context = {
-        "districtslist": districtslist,
-        "myFilter": myFilter,
-    }
-    return render(request, "dashboard/districts.html", context)
-
-
-@school_required
 def Dash(request):
     user = request.user
     school = School.objects.get(user_id=user.id)
@@ -412,78 +381,6 @@ def Dash(request):
         # "teams_bcount": teams_bcount,
     }
     return render(request, "school/schoolprofile.html", context)
-
-
-# @school_required
-def Officerdash(request):
-    user = request.user
-    officer = Officer.objects.get(user_id=user.id)
-    district = officer.district
-    schools = School.objects.filter(district=district)
-    athletes = Athlete.objects.filter(school__in=schools)
-    schools_cout = School.objects.filter(district=district).count()
-    athletes_count = Athlete.objects.filter(school__in=schools).count()
-
-    context = {
-        "officer": officer,
-        "district": district,
-        "schools": schools,
-        "schools_cout": schools_cout,
-        "athletes": athletes,
-        "athletes_count": athletes_count,
-    }
-    return render(request, "dprofile.html", context)
-# @school_required
-def district_schools(request):
-    user = request.user
-    officer = Officer.objects.get(user_id=user.id)
-    district = officer.district
-    schools = School.objects.filter(district=district)
-    
-
-    context = {
-        "officer": officer,
-        "district": district,
-        "schools": schools,
-       
-    }
-    return render(request, "horizon/schools.html", context)
-# @school_required
-def district_athletes(request):
-    user = request.user
-    officer = Officer.objects.get(user_id=user.id)
-    district = officer.district
-    schools = School.objects.filter(district=district)
-    athletes = Athlete.objects.filter(school__in=schools)
-    
-
-    context = {
-        "officer": officer,
-        "district": district,
-        "schools": schools,
-        "athletes": athletes,
-    
-    }
-    return render(request, "horizon/athletes.html", context)
-# @school_required
-def Officewrdash(request):
-    user = request.user
-    officer = Officer.objects.get(user_id=user.id)
-    district = officer.district
-    schools = School.objects.filter(district=district)
-    athletes = Athlete.objects.filter(school__in=schools)
-    schools_cout = School.objects.filter(district=district).count()
-    athletes_count = Athlete.objects.filter(school__in=schools).count()
-
-    context = {
-        "officer": officer,
-        "district": district,
-        "schools": schools,
-        "schools_cout": schools_cout,
-        "athletes": athletes,
-        "athletes_count": athletes_count,
-    }
-    return render(request, "accounts/dprofile.html", context)
 
 
 @login_required

@@ -55,6 +55,7 @@ urlpatterns = [
     path("tofficers/", tofficers, name="tofficers"),
     path("dofficers/", Dofficers, name="dofficers"),
     path("newtofficer/<int:id>", tofficer_details, name="toff"),
+    path("delete/tofficer/<int:id>", delete_tofficer, name="deltoff"),
 
 
     # ===================Athletes========================,

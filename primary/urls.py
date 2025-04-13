@@ -7,6 +7,7 @@ from django.contrib.auth import views as auth_views
 from dashboard.views import *
 from accounts.views import *
 from core.views import *
+from officers.views import *
 from teams.teviews import get_athletes
 # from teams.views import delete_tdeam
 

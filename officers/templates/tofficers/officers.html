@@ -1,109 +1,103 @@
-{% extends "dashboard/dashboard.html" %}
+{% extends "horizon/dascore.html" %}
+
 <!--static-->
-{% block title %}Officers{% endblock %}
+{% block title %}Officials{% endblock %}
 <!--static-->
 {% load static %}
 <!--khfufufu-->
 {% block content %}
-<div class="schools-dew">
-  <div class="head flex">
-    <h1>Officers</h1>
-    <div class="ass">
-      {% if school_profile.status == "Active" %}
-      <a href="{% url 'pdfreport'%}" class="btn-submit">generate album</a>
-      {% endif %}
-    </div>
-  </div>
+<div id="app-content">
+  <!-- Container fluid -->
+  <div class="app-content-area">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-12">
+          <!-- Page header -->
+          <div class="mb-5">
+            <h3 class="mb-0">Officials</h3>
+          </div>
+        </div>
+      </div>
+      <div>
+        <!-- row -->
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table id="myTable" class="display table">
+                    <thead>
+                      <tr>
+                        <th>Names</th>
+                        <th>NIN</th>
+                        <th>Status</th>
+                        <th>District/City</th>
+                        <th>Gender</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for officer in officers %}
+                      <tr>
+                        <td>
+                          <a href="{% url 'officerd' officer.id%}"
+                            >{{officer.first_name}} {{officer.last_name}}</a
+                          >
+                        </td>
+                        <td>{{officer.nin}}</td>
+                        <td>{{officer.status}}</td>
+                        <td>{{officer.district}}</td>
 
-  <div class="filterlist glue">
-    <div class="lo">
-      <div class="official-list">
-        <table id="myTable" class="display">
-          <thead>
-            <tr>
-              <th>Names</th>
-              <th>NIN</th>
-              <th>Status</th>
-              <th>District/City</th>
-              <th>Gender</th>
-              <th>Accred</th>
-
-              <th>Delete</th>
-              <th>Activate</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for officer in officers %}
-            <tr>
-              <td>
-                <a href="{% url 'officerd' officer.id%}">{{officer.first_name}} {{officer.last_name}}</a>
-              </td>
-              <td>{{officer.nin}}</td>
-              <td>{{officer.status}}</td>
-              <td>{{officer.district}}/{{officer.city}}</td>
-
-              <td>{{officer.gender}}</td>
-              <td> <a href="{%url 'taccred' officer.id%}" class="btn btn-danger">Accred</i></a></td>
-              <td>
-                <a href="{%url 'deleted' officer.id%}" class="btn btn-danger">Delete</i></a>
-              </td>
-              <td>
-                {% if officer.status == "Inactive" %}
-                <a
-                  href="{% url 'octivate' officer.id %}"
-                  class="btn btn-success activate-btn"
-                  >Activate</a
-                >
-                {% endif %}
-              </td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+                        <td>{{officer.gender}}</td>
+                        <td>
+                          <a
+                            href="#!"
+                            class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
+                            data-template="eyeOne"
+                          >
+                            <i data-feather="download" class="icon-xs"></i>
+                            <div id="eyeOne" class="d-none">
+                              <span>Accreditation</span>
+                            </div>
+                          </a>
+                          {% if officer.status == "Inactive" %}
+                          <a
+                            href="{% url 'octivate' officer.id %}"
+                            class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
+                            data-template="editOne"
+                          >
+                            <i data-feather="edit" class="icon-xs"></i>
+                            <div id="editOne" class="d-none">
+                              <span>Edit</span>
+                            </div> </a
+                          >{% endif %}
+                          <a
+                            href="{%url 'deleted' officer.id%}"
+                            class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
+                            data-template="trashOne"
+                          >
+                            <i data-feather="trash-2" class="icon-xs"></i>
+                            <div id="trashOne" class="d-none">
+                              <span>Delete</span>
+                            </div>
+                          </a>
+                        </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- row -->
       </div>
     </div>
-    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-      <div class="toast-header">
-        <img src="..." class="rounded mr-2" alt="..." />
-        <strong class="mr-auto">Bootstrap</strong>
-        <small class="text-muted">2 seconds ago</small>
-        <button
-          type="button"
-          class="ml-2 mb-1 close"
-          data-dismiss="toast"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="toast-body">Officer activated successfully!</div>
-    </div>
   </div>
+  <!-- Container fluid -->
+
+  <!-- Modal -->
 </div>
-
-<script>
-  // Function to show toast
-  function showToast() {
-    $(".toast").toast("show");
-  }
-
-  // Event listener for clicking the activation button
-  $(".activate-btn").click(function (event) {
-    event.preventDefault();
-    // Make an AJAX request to activate the officer
-    $.ajax({
-      url: $(this).attr("href"),
-      method: "GET",
-      success: function (response) {
-        // If activation is successful, show the toast
-        showToast();
-      },
-      error: function (xhr, status, error) {
-        // Handle errors if any
-        console.error(xhr.responseText);
-      },
-    });
-  });
-</script>
 
 {% endblock %}

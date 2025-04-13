@@ -574,14 +574,15 @@
                   <div id="navEmail" class="collapse" data-bs-parent="#sideNavbar">
                     <ul class="nav flex-column">
                       <li class="nav-item">
-                        <a class="nav-link has-arrow" href="../pages/mail.html"
+                        <a class="nav-link"
+                          href="{% url 'officers'%}"
                           >Sports officers</a
                         >
                       </li>
                       <li class="nav-item">
                         <a
-                          class="nav-link has-arrow"
-                          href="../pages/mail-details.html"
+                          class="nav-link"
+                          href="{% url 'dofficers'%}"
                           >Other Officers</a
                         >
                       </li>
@@ -614,7 +615,7 @@
                   <a class="nav-link" href="{% url 'district_enrollments' %}">Teams</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="{% url 'district_athletes' %}">Officials</a>
+                  <a class="nav-link" href="{% url 'tofficers' %}">Officials</a>
                 </li>{% endif %}
               </ul>
             </div>
