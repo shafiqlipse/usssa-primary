@@ -568,3 +568,34 @@ def Officewrdash(request):
     }
     return render(request, "accounts/dprofile.html", context)
 
+
+def toAccreditation(request, id):
+    district = get_object_or_404(Officer, id=id)
+    tofficers = TOfficer.objects.filter(user=district.user)
+    
+    # Get template
+    template = get_template("reports/taccred.html")
+
+    # Compress and fix rotation for athletes' photos
+    filename = f"{district.district } .pdf"
+    # Prepare context
+    context = {
+        
+        "district": district,
+        "tofficers": tofficers,
+        "MEDIA_URL": settings.MEDIA_URL,
+    }
+
+    # Render HTML
+    html = template.render(context)
+
+    # Create a PDF
+    response = HttpResponse(content_type="application/pdf")
+    response["Content-Disposition"] = f'attachment; filename="{filename}"'
+    # Generate PDF from HTML
+    pisa_status = pisa.CreatePDF(html, dest=response)
+    if pisa_status.err:
+        return HttpResponse("We had some errors <pre>" + html + "</pre>")
+
+    return response
+
