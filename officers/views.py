@@ -96,6 +96,12 @@ def officers(request):
     return render(request, "tofficers/officers.html", context)
 
 
+def Aofficers(request):
+    officers = Officer.objects.filter(status="Inactive")
+    context = {"officers": officers}
+    return render(request, "tofficers/officers.html", context)
+
+
 def Dofficers(request):
     tofficers = TOfficer.objects.all()
     context = {"tofficers": tofficers}

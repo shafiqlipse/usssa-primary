@@ -49,6 +49,7 @@ urlpatterns = [
 
     # path("deledteam/<int:id>", delete_tdeam, name="deledteam"),
     path("officers/", officers, name="officers"),
+    path("Aofficers/", Aofficers, name="Aofficers"),
     # path("pdf_report/", generate_album, name="pdfreport"),
     # path("pdfreport/<int:id>", generate_scalbum, name="pdreport"),
     path("newtofficer/", newTofficer, name="districtoff"),
