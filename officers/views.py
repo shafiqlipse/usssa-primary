@@ -101,6 +101,14 @@ def Aofficers(request):
     context = {"officers": officers}
     return render(request, "tofficers/officers.html", context)
 
+from django.http import JsonResponse
+def activate_officer(request, id):
+    officer = get_object_or_404(Officer, id=id)
+    officer.status = "Active"
+    officer.save()
+    response_data = {"message": "School activated successfully."}
+    return JsonResponse(response_data)
+
 
 def Dofficers(request):
     tofficers = TOfficer.objects.all()

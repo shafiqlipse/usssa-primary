@@ -202,15 +202,8 @@ def activate_school(request, id):
     return HttpResponse("School activated successfully.")
 
 
-from django.http import JsonResponse
 
 
-def activate_officer(request, id):
-    officer = get_object_or_404(Officer, id=id)
-    officer.status = "Active"
-    officer.save()
-    response_data = {"message": "School activated successfully."}
-    return JsonResponse(response_data)
 
 
 # from django.http import HttpResponse

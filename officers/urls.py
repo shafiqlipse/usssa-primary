@@ -51,6 +51,7 @@ urlpatterns = [
     path("officers/", officers, name="officers"),
     path("Aofficers/", Aofficers, name="Aofficers"),
     # path("pdf_report/", generate_album, name="pdfreport"),
+    path("octivate/<int:id>", activate_officer, name="octivate"),
     # path("pdfreport/<int:id>", generate_scalbum, name="pdreport"),
     path("newtofficer/", newTofficer, name="districtoff"),
     path("tofficers/", tofficers, name="tofficers"),
