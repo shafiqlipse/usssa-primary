@@ -60,7 +60,7 @@ def Officera(request):
         form = OfficerForm()
 
     context = {"form": form}
-    return render(request, "officer/newofficial.html", context)
+    return render(request, "tofficers/newofficial.html", context)
 
 
 def newTofficer(request):
