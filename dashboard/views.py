@@ -19,6 +19,7 @@ from accounts.decorators import (
 import traceback
 
 
+
 # Create your views here.
 @staff_required
 def Overview(request):
@@ -35,6 +36,7 @@ def Overview(request):
     athletes_gcount = Athlete.objects.filter(gender="female").count
     officials_bcount = school_official.objects.filter(gender="M").count
     officials_gcount = school_official.objects.filter(gender="F").count
+    # greeting = get_greeting()
     context = {
         "athletes": athletes,
         "schools": schools,
@@ -48,6 +50,7 @@ def Overview(request):
         "officials_gcount": officials_gcount,
         "active_schools": active_schools,
         "inactive_schools": inactive_schools,
+        # "greeting": greeting,
     }
     return render(request, "dashboard/analytics.html", context)
 
