@@ -34,6 +34,7 @@
                     <th>School</th>
                     <th>Championship</th>
                     <th>Sport</th>
+                    <th>Athletes</th>
                     <th>Reports</th>
                   </tr>
                 </thead>
@@ -49,6 +50,7 @@
                     <td>{{team.championship}}</td>
                     <td>{{team.team_sport}}</td>
                     <td>{{team.team_age}}</td>
+                    <td>{{team.athlete_count}} Athlete(s)</td>
                     <td>
                       <a
                         href="{% url 'dteam_album' team.id%}"
