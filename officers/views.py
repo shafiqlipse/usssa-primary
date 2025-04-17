@@ -348,7 +348,7 @@ def officer_enroll_delete(request, id):
     stud = Team.objects.get(id=id)
     if request.method == "POST":
         stud.delete()
-        return redirect("district_enrollments")
+        return redirect("all_denrollments")
 
     return render(request, "enrollments/delete_officer_enroll.html", {"obj": stud})
 
