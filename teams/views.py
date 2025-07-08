@@ -58,7 +58,7 @@ def SchoolEnrollments(request):
 
 def AllEnrollments(request):
     # Get all school_enrolls with athlete count
-    school_enrolls = SchoolEnrollment.objects.filter(championship_id = 2 )
+    school_enrolls = SchoolEnrollment.objects.filter(championship_id=2, sport_id__in=[9, 10, 12])
     context = {
         "school_enrolls": school_enrolls,
     }
