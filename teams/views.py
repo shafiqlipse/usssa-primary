@@ -26,67 +26,6 @@ from django.http import JsonResponse
 from django.core.paginator import Paginator
 from .models import User
 from django.db.models import Q
-def enrolls_data(request):
-    """ Handle AJAX DataTables request for large datasets """
-
-    try:
-        draw = int(request.GET.get('draw', 1))
-        start = int(request.GET.get('start', 0))
-        length = int(request.GET.get('length', 10))
-        search_value = request.GET.get("search[value]", "")
-
-        # Fetch and filter users
-        teams_query = SchoolEnrollment.objects.annotate(athlete_count=Count('athlete_enrollments__athletes'))
-
-        # Apply search across multiple fields
-        if search_value:
-            teams_query = teams_query.filter(
-                Q(school__icontains=search_value) |
-                Q(championship__icontains=search_value) |
-                Q(sport__icontains=search_value) 
-    # Search EMIS
-            )
-
-        # Paginate results
-        paginator = Paginator(teams_query, length)
-        page_number = (start // length) + 1
-        enrolls_page = paginator.get_page(page_number)
-
-        # Prepare JSON response
-        data = []
-        for team in enrolls_page:
-            school = team.school
-            championship = team.championship
-            sport = team.sport
-
-
-            action_buttons = f"""
-                
-                <a href="/dashboard/user/edit/{team.id}/" class="btn btn-primary btn-sm">Album</a>
-                <a href="/dashboard/user/edit/{team.id}/" class="btn btn-warning btn-sm">Accrediation</a>
-                <a href="/dashboard/user/edit/{team.id}/" class="btn btn-info btn-sm">Certificate</a>
-                
-            """
-
-            data.append({
-                "school": school,
-                "championship": championship,
-                "championship": sport,
-                "actions": action_buttons,
-            })
-
-        response = {
-            "draw": draw,
-            "recordsTotal": SchoolEnrollment.objects.all().count(),
-            "recordsFiltered": teams_query.count(),
-            "data": data,
-        }
-
-        return JsonResponse(response)
-
-    except Exception as e:
-        return JsonResponse({"error": str(e)}, status=500)
-
 
 
 def SchoolEnrollments(request):
@@ -119,15 +58,12 @@ def SchoolEnrollments(request):
 
 def AllEnrollments(request):
     # Get all school_enrolls with athlete count
-    school_enrolls = SchoolEnrollment.objects.annotate(
-        athlete_count=Count('athlete_enrollments__athletes')
-    )
-
+    school_enrolls = SchoolEnrollment.objects.filter(championship_id = 2 )
     context = {
         "school_enrolls": school_enrolls,
     }
 
-    return render(request, "enrollments/enroll.html", context)
+    return render(request, "enrollments/School_enrollments.html", context)
 
 
 def remove_athlete(request, enrollment_id, athlete_id):
