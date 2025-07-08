@@ -169,7 +169,7 @@ def Accreditation(request, id):
     athletes = Athlete.objects.filter(athleteenrollment__in=athlete_enrollments)
 
     # Get template
-    template = get_template("reports/acred.html")
+    template = get_template("reports/accred.html")
 
     # Compress and fix rotation for athletes' photos
 
