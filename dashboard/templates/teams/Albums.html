@@ -3,11 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    {% comment %}
-    <link rel="stylesheet" href="{%static 'css/main/album.css'%}" />
-    <link rel="stylesheet" href="{%static 'css/main/main.css'%}" />
-    {% endcomment %}
+    <title>Album</title>
   </head>
 
   <body>
@@ -32,6 +28,7 @@
       .header .headtexher {
         display: flex;
         align-items: center;
+        margin: 10px 0;
       }
       .header .headexher h1 {
         text-transform: uppercase;
@@ -39,7 +36,13 @@
       table tbody tr td {
         width: 50%;
         text-align: left;
-        padding: 10px;
+        padding: 5px;
+      }
+      .header .headexher .athletes table tbody tr td table tr {
+        border: solid black 1px;
+      }
+      .header .headexher .athletes table > tbody > tr > td {
+        border: none;
       }
       .header .headexher .athletes table tbody tr td .det {
         text-align: left;
@@ -50,115 +53,28 @@
       }
 
       .header .headexher .athletes table tbody tr td img {
-        width: 200px;
+        width: 140px;
+        height: 140px;
+        padding: 0;
       }
-      .header .headexher .athletes table tbody tr td table tr td img {
-        width: 200px;
-        height: 250px;
-       
-      }.header .headexher .athletes table tbody tr td ul{
-        list-style: none;
+      .header .headexher .athletes table tbody tr td ul {
+        margin-left: -30px;
       }
-      .header .headexher .athletes table tbody tr td  ul h2 {
+      .header .headexher .athletes table tbody tr td ul span {
         font-weight: bold;
-        list-style: none;
-        text-transform: uppercase;
+        margin-top: 10px;
       }
     </style>
     <div class="header">
-      <img src="https://upssa.usssaonline.com/static/images/upsa.png" alt="" />
-      <h1 style="font-size: 30px; color: #00338b">
-        UGANDA PRIMARY SCHOOLS SPORTS ASSOCIATION (UPSSA)
-      </h1>
+      <img src="https://upssaonline.com/album.png" alt="" />
 
-      <h3 style="font-size: 25px; color: #00338b">{{school.school_name}}</h3>
-      <p>EMIS: {{school.EMIS}}</p>
-      <p>{{school.region}}, {{school.district}}</p>
-      <hr />
+      <h3 style="font-size: 20px; color: #00338b">
+        {{team.school|upper}} ~ {{team.sport}} ~ {{team.age}} ~ {{team.gender}}
+        ~ {{team.status}} ~
+        E{{team.id}}A00{{athlete_count}}O00{{official_count}}
+      </h3>
 
-      <div class="geda">
-        <div class="headtexher">
-          <table id="myTable" class="display">
-            <tbody>
-              <tr>
-                <td>
-                  <table id="myTable" class="display">
-                    <tbody>
-                      <tr>
-                        <td>
-                          <h1>HEAD TEACHER</h1>
-                          {% if school.photo %}
-                          <img
-                            src="{{school.photo.path}}"
-                            alt="{{school.school_name}}"
-                          />
-                          {% else %}
-                          <img
-                            src="https://upssa.usssaonline.com/static/images/profile.png"
-                            alt="{{school.school_name}}"
-                          />
-                          {% endif %}
-                        </td>
-                        <td>
-                         
-                          <div class="det">
-                            <h3>
-                              Names:
-                              <span>{{school.fname}} {{school.lname}}</span>
-                            </h3>
-                            <h5>NIN: <span>{{school.nin}}</span></h5>
-                            <h5>Email: <span>{{school.email}}</span></h5>
-                            <h5>
-                              Contact: <span>{{school.phone_number}}</span>
-                            </h5>
-                          </div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </td>
-                <td>
-                  <table id="myTable" class="display">
-                    <tbody>
-                      <tr>
-                        <td>
-                          <h1>GAMES TEACHER</h1>
-                          {% if school.gphoto %}
-                          <img
-                            src="{{school.gphoto.path}}"
-                            alt="{{school.school_name}}"
-                          />
-                          {% else %}
-                          <img
-                            src="https://upssa.usssaonline.com/static/images/profile.png"
-                            alt="{{school.school_name}}"
-                          />
-                          {% endif %}
-                        </td>
-                        <td>
-                         
-                          <div class="det">
-                            <h3>
-                              Names:
-                              <span>{{school.gfname}} {{school.glname}}</span>
-                            </h3>
-                            <h5>NIN: <span>{{school.gnin}}</span></h5>
-                            <h5>Email: <span>{{school.gemail}}</span></h5>
-                            <h5>Contact: <span>{{school.gphone}}</span></h5>
-                          </div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
       <div class="headexher">
-        <h1 style="font-size: 2em">ATHLETES</h1>
-        <hr />
         <div class="athletes">
           <table>
             <tbody>
@@ -172,7 +88,6 @@
                   <table>
                     <tr>
                       <td>
-                        <h2 style="text-transform: uppercase;">LIN: {{ athlete.lin }}</h2>
                         {% if athlete.photo %}
                         <img
                           src="{{ athlete.photo.path }}"
@@ -184,17 +99,25 @@
                           alt="{{ athlete.fname }}"
                         />
                         {% endif %}
-                        
-                        
                       </td>
                       <td>
                         <ul>
-                          <h2 style="text-transform: uppercase;">
-                            Names: {{ athlete.fname }} {{ athlete.lname }}
-                          </h2 style="text-transform: uppercase;">
-                          <h2 style="text-transform: uppercase;">School: {{ athlete.school }}</h2>
-                          <h2 style="text-transform: uppercase;">Sport: {{ athlete.sport }}</h2>
-                          <h2 style="text-transform: uppercase;">Date of birth: {{ athlete.date_of_birth }} ({{ athlete.age }})</h2>
+                          <span>
+                            Names: {{ athlete.fname|upper }}
+                            {{athlete.lname|upper }} </span
+                          ><br />
+                          <span>LIN: {{ athlete.lin|upper }}</span
+                          ><br />
+                          <span>School: {{ athlete.school|upper }}</span
+                          ><br />
+                          <span
+                            >Date of birth:
+                            {{athlete.date_of_birth|upper}}</span
+                          ><br />
+                          <span>Age: {{ athlete.age|upper }}</span
+                          ><br />
+                          <span>Sport: {{ team.sport|upper }}</span
+                          ><br />
                         </ul>
                       </td>
                     </tr>
