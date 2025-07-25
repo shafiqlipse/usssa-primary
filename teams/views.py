@@ -209,7 +209,7 @@ def Albums(request, id):
     filename = f"{team.school} | {team.sport} .pdf"
 
     # Get template
-    template = get_template("reports/albums.html")
+    template = get_template("teams/Albums.html")
 
     # Prepare context
     context = {
