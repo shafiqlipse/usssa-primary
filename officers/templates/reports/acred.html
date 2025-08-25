@@ -12,6 +12,7 @@
         @page {
           size: A4 portrait; /* Set the size of the page to A4 in portrait orientation */
           margin: 0; /* Remove default margin */
+          background-image: url("https://upssaonline.com/yumbe.jpg");
         }
 
         body {
@@ -27,7 +28,7 @@
         }
       }
       .header .athletes table tbody tr td table tr .td {
-        padding-top: 105px;
+        padding-top: 115px;
         padding-bottom: 40px;
         padding-left: 50px;
         padding-right: 40px;
@@ -52,7 +53,7 @@
         <table>
           <tbody>
             {% for athlete in athletes %} {% if forloop.counter0|divisibleby:2%}
-            
+
             <tr>
               {% endif %}
               <td>
@@ -78,11 +79,15 @@
                         {% endif %}
                         <br />
                         <span
-                          >{{ athlete.fname|upper }} {{athlete.lname|upper}}</span
+                          >{{ athlete.fname|upper }}
+                          {{athlete.lname|upper}}</span
                         >
                         <br />
                         <span>{{ athlete.lin|upper }}</span><br />
-                        <span>{{ team.team_officer.officer_profile.first.district|upper }}</span><br />
+                        <span
+                          >{{ team.team_officer.officer_profile.first.district|upper }}
+                          </span
+                        ><br />
                         <span>{{ team.team_sport|upper }}</span><br />
                       </div>
                     </td>
