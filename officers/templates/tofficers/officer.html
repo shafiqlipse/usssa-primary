@@ -1,24 +1,48 @@
-{% extends "dashboard/dashboard.html" %}
+{% extends "horizon/dascore.html" %}
 <!--static-->
 {% block title %}Teams{% endblock %}
 <!--static-->
 {% load static %}
 <!--khfufufu-->
 {% block content %}
-<div class="schools-den">
-  <div class="head flex">
-    <h1>{{officer.first_name}} {{officer.last_name}}</h1>
-  </div>
-  <div class="image-box flex">
-    <img src="{{officer.photo.url}}" alt="" />
-    <div class="details">
-      <li>{{officer.nin}}</li>
-      <li>{{officer.email}}</li>
-      <li>{{officer.district}}</li>
-      <li>{{officer.gender}}</li>
-      <li>{{officer.phone_number}}</li>
+<div id="app-content">
+  <!-- Container fluid -->
+  <div class="app-content-area">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-12">
+          <!-- Page header -->
+          <div class="mb-5">
+            <h3 class="mb-0">
+              {{ officer.first_name }} {{ officer.last_name }}
+            </h3>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="row align-items-center">
+          <!-- Image column (30%) -->
+          <div class="col-md-4 col-12">
+            <img
+              src="{{ officer.photo.url }}"
+              alt=""
+              class="img-fluid rounded"
+            />
+          </div>
+
+          <!-- Details column (70%) -->
+          <div class="col-md-8 col-12">
+            <ul class="list-unstyled">
+              <li>{{ officer.nin }}</li>
+              <li>{{ officer.email }}</li>
+              <li>{{ officer.district }}</li>
+              <li>{{ officer.gender }}</li>
+              <li>{{ officer.phone_number }}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-
 {% endblock %}

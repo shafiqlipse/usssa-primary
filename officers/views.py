@@ -170,7 +170,7 @@ def officer_details(request, id):
     officer = Officer.objects.get(id=id)
 
     context = {"officer": officer}
-    return render(request, "officer/officer.html", context)
+    return render(request, "tofficers/officer.html", context)
 
 
 # # delete team
