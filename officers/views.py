@@ -113,7 +113,7 @@ def activate_officer(request, id):
 def Dofficers(request):
     tofficers = TOfficer.objects.all()
     context = {"tofficers": tofficers}
-    return render(request, "officer/tofficers.html", context)
+    return render(request, "tofficers/tofficers.html", context)
 
 
 def tofficers(request):
