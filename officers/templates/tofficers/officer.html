@@ -39,9 +39,14 @@
               <li>{{ officer.gender }}</li>
               <li>{{ officer.phone_number }}</li>
             </ul>
+            <a href="{% url 'tocrred' officer.id%}" class="btn btn-primary">
+              <i data-feather="download" class="icon-xs"></i
+              ><span>Accreditation</span>
+            </a>
           </div>
         </div>
       </div>
+
       <div class="card-body">
         <div class="table-responsive">
           <table id="example" class="display table" style="width: 100%">
