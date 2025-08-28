@@ -42,6 +42,70 @@
           </div>
         </div>
       </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table id="example" class="display table" style="width: 100%">
+            <thead>
+              <tr>
+                <th>names</th>
+                <th>Role</th>
+                <th>District</th>
+                <th>contact</th>
+                <th>Gender</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for official in officers%}
+              <tr>
+                <td>
+                  <a href="{% url 'toff' official.id%}"
+                    >{{official.first_name}} {{official.last_name}}</a
+                  >
+                </td>
+                <td>{{official.role}}</td>
+                <td>{{official.district}}</td>
+                <td>{{official.phone_number}}</td>
+                <td>{{official.gender}}</td>
+                <td>
+                  <a
+                    href="#!"
+                    class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
+                    data-template="eyeOne"
+                  >
+                    <i data-feather="eye" class="icon-xs"></i>
+                    <div id="eyeOne" class="d-none">
+                      <span>View</span>
+                    </div>
+                  </a>
+                  <a
+                    href="#!"
+                    class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
+                    data-template="editOne"
+                  >
+                    <i data-feather="edit" class="icon-xs"></i>
+                    <div id="editOne" class="d-none">
+                      <span>Edit</span>
+                    </div>
+                  </a>
+                  <a
+                    href="{% url 'deltoff' official.id%}"
+                    class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
+                    data-template="trashOne"
+                  >
+                    <i data-feather="trash-2" class="icon-xs"></i>
+                    <div id="trashOne" class="d-none">
+                      <span>Delete</span>
+                    </div>
+                  </a>
+                </td>
+              </tr>
+
+              {%endfor%}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </div>

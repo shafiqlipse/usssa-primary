@@ -168,8 +168,10 @@ def tofficer_details(request, id):
 
 def officer_details(request, id):
     officer = Officer.objects.get(id=id)
+    user = officer.user
+    officers = TOfficer.objects.filter(user=user)
 
-    context = {"officer": officer}
+    context = {"officer": officer, "officers": officers}
     return render(request, "tofficers/officer.html", context)
 
 
