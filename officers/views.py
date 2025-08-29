@@ -451,8 +451,8 @@ admin_required
 
 def dCertificate(request, id):
     team = get_object_or_404(Team, id=id)
-    athlete_enrollments = AthletesEnrollment.objects.filter(officer_enrollment=team)
-    athletes = Athlete.objects.filter(athleteenrollment__in=athlete_enrollments)
+    athlete_enrollments = AthletesEnrollment.objects.filter(team=team)
+    athletes = Athlete.objects.filter(athletesenrollment__in=athlete_enrollments)
 
     # Get template
     template = get_template("reports/cert.html")
@@ -591,6 +591,37 @@ def toAccreditation(request, id):
     
     # Get template
     template = get_template("reports/taccred.html")
+
+    # Compress and fix rotation for athletes' photos
+    filename = f"{district.district } .pdf"
+    # Prepare context
+    context = {
+        
+        "district": district,
+        "tofficers": tofficers,
+        "MEDIA_URL": settings.MEDIA_URL,
+    }
+
+    # Render HTML
+    html = template.render(context)
+
+    # Create a PDF
+    response = HttpResponse(content_type="application/pdf")
+    response["Content-Disposition"] = f'attachment; filename="{filename}"'
+    # Generate PDF from HTML
+    pisa_status = pisa.CreatePDF(html, dest=response)
+    if pisa_status.err:
+        return HttpResponse("We had some errors <pre>" + html + "</pre>")
+
+    return response
+
+
+def toCertification(request, id):
+    district = get_object_or_404(Officer, id=id)
+    tofficers = TOfficer.objects.filter(user=district.user)
+    
+    # Get template
+    template = get_template("reports/certs.html")
 
     # Compress and fix rotation for athletes' photos
     filename = f"{district.district } .pdf"
