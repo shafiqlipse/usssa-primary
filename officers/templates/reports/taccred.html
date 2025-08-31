@@ -12,6 +12,7 @@
         @page {
           size: A4 portrait; /* Set the size of the page to A4 in portrait orientation */
           margin: 0; /* Remove default margin */
+          
         }
 
         body {
@@ -51,8 +52,8 @@
       <div class="athletes">
         <table>
           <tbody>
-            {% for tofficer in tofficers %} {% if forloop.counter0|divisibleby:2%}
-            
+            {% for tofficer in tofficers %} {% if
+            forloop.counter0|divisibleby:2%}
 
             <tr>
               {% endif %}
@@ -80,7 +81,7 @@
                           {{tofficer.last_name|upper}}</span
                         >
                         <br />
-                       
+
                         <span>{{ tofficer.role|upper }}</span><br />
                         <span>{{ district.district|upper }}</span><br />
                       </div>

@@ -453,7 +453,9 @@ def dCertificate(request, id):
     team = get_object_or_404(Team, id=id)
     athlete_enrollments = AthletesEnrollment.objects.filter(team=team)
     athletes = Athlete.objects.filter(athletesenrollment__in=athlete_enrollments)
-
+    user = team.team_officer
+    officer = Officer.objects.get(user=user)
+    district = officer.district 
     # Get template
     template = get_template("reports/cert.html")
 
@@ -461,6 +463,8 @@ def dCertificate(request, id):
 
     # Prepare context
     context = {
+        "team": team,
+        "district": district,
         "athletes": athletes,
         "MEDIA_URL": settings.MEDIA_URL,
     }
