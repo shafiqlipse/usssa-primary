@@ -5,6 +5,12 @@ from django.core.exceptions import ValidationError
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.contrib.auth.hashers import make_password
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
+from PIL import Image, ExifTags
+import io
+import os
+from django.core.files.uploadedfile import InMemoryUploadedFile
 
 # Create your models here.
 # Create your models here.
@@ -165,12 +171,6 @@ class AthleteManager(models.Manager):
         )
 
 
-from django.db.models.signals import pre_save
-from django.dispatch import receiver
-from PIL import Image, ExifTags
-import io
-import os
-from django.core.files.uploadedfile import InMemoryUploadedFile
 
 
 class Athlete(models.Model):

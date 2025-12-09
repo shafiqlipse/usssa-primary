@@ -19,7 +19,8 @@ import base64
 from teams.models import *
 # # Athletes details......................................................
 # # Athletes details......................................................
-from datetime import datetime
+import datetime
+
 from django.db.models import Count
 def get_greeting():
     current_hour = datetime.now().hour
