@@ -8,6 +8,7 @@ from core.frontviews import *
 
 urlpatterns = [
     # venues
+    path("", home, name="home"),    
     path("contact", contact, name="contact"),
     path("about", about, name="about"),
     path("schools", schooles, name="schooles"),

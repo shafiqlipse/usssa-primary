@@ -14,7 +14,7 @@ def school_required(view_func):
         if request.user.is_school:
             return view_func(request, *args, **kwargs)
         else:
-            return render(request, "login.html")  # You can customize this template
+            return render(request, "auth/login.html")  # You can customize this template
 
     return _wrapped_view
 
@@ -25,7 +25,7 @@ def admin_required(view_func):
         if request.user.is_admin:
             return view_func(request, *args, **kwargs)
         else:
-            return render(request, "login.html")  # You can customize this template
+            return render(request, "auth/login.html")  # You can customize this template
 
     return _wrapped_view
 
@@ -35,7 +35,7 @@ def staff_required(view_func):
         if request.user.is_staff:
             return view_func(request, *args, **kwargs)
         else:
-            return render(request, "login.html")  # You can customize this template
+            return render(request, "auth/login.html")  # You can customize this template
 
     return _wrapped_view
 

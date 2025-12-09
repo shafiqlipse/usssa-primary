@@ -1,5 +1,15 @@
 from django.shortcuts import render
-from dashboard.models import School
+from school.models import School
+
+
+
+# Create your views here.
+
+def home(request):
+    context = {}
+    return render(request, "core/home.html", context)
+
+
 def contact(request):
 
     context = {}

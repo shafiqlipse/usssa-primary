@@ -1,0 +1,233 @@
+{% load static %}
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+<!-- Select2 (MUST come after jQuery) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'js/feather.min.js' %}"></script>
+<script src="{% static 'js/simplebar.min.js' %}"></script>
+
+<!-- Theme JS -->
+<script src="{% static 'js/theme.min.js' %}"></script>
+
+<!-- jsvectormap -->
+<script src="{% static 'js/jsvectormap.min.js' %}"></script>
+<script src="{% static 'js/world.js' %}"></script>
+<script src="{% static 'js/apexcharts.min.js' %}"></script>
+<script src="{% static 'js/chart.js' %}"></script>
+<!-- jQuery (MUST be first) -->
+
+<script>
+  function get_athletes() {
+    var gender_select = document.getElementById(
+      "{{ form.team_gender.id_for_label }}"
+    );
+    var age_select = document.getElementById(
+      "{{ form.team_age.id_for_label }}"
+    );
+    var athlete_select = document.getElementById("id_athletes");
+
+    // Show loading indicator for athletes
+    athlete_select.innerHTML = "<option>Loading athletes...</option>";
+
+    var team_gender = gender_select.value;
+    var team_age = age_select.value;
+
+    // Fetch athletes
+    fetch(`/get_dist_athletes/?team_gender=${team_gender}&team_age=${team_age}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.text();
+      })
+      .then((text) => {
+        try {
+          return JSON.parse(text);
+        } catch (e) {
+          console.error("Server response is not JSON:", text);
+          throw new Error("The server's response was not valid JSON.");
+        }
+      })
+      .then((data) => {
+        console.log(data);
+        athlete_select.innerHTML = ""; // Clear previous content
+
+        // Update the 'athlete' select with the fetched data
+        if (data.athletes.length === 0) {
+          athlete_select.innerHTML = "<option>No athletes found.</option>";
+        } else {
+          data.athletes.forEach((athlete) => {
+            var option = document.createElement("option");
+            option.value = athlete.id;
+            option.textContent = `${athlete.fname} ${athlete.lname} (${athlete.lin})`;
+            athlete_select.appendChild(option);
+          });
+        }
+
+        // Reinitialize Select2 after populating options
+        $(athlete_select).select2();
+      })
+      .catch((error) => {
+        console.error("Error fetching athletes:", error);
+        athlete_select.innerHTML =
+          "<option>Error fetching athletes. Please try again.</option>";
+      });
+  }
+
+  // Attach the get_athletes function to the onchange events of the gender and age elements
+  document.getElementById("{{ form.team_gender.id_for_label }}").onchange =
+    get_athletes;
+  document.getElementById("{{ form.team_age.id_for_label }}").onchange =
+    get_athletes;
+
+  // Initialize Select2 on page load
+  $(document).ready(function () {
+    $(".js-example-basic-multiple").select2();
+  });
+</script>
+<!-- Libs JS -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/simplebar@6.2.1/dist/simplebar.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tippy.js@6.3.7/dist/tippy-bundle.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $("#example").DataTable({ responsive: !0 });
+  });
+</script>
+<script>
+  $(document).ready(function () {
+    $("#officials").DataTable({ responsive: !0 });
+  });
+</script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.5.1/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jsvectormap@1.9.0/dist/js/jsvectormap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jsvectormap@1.9.0/dist/maps/world.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts@3.41.0/dist/apexcharts.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+    let table = $("#athletes").DataTable({
+      processing: true,
+      serverSide: true,
+      ajax: {
+        url: "/school/get-athletes/",
+        type: "GET",
+      },
+      columns: [
+        { data: "athlete" },
+        { data: "lin" },
+        { data: "dob" },
+        { data: "gender_age" },
+        { data: "status" },
+        { data: "action" },
+      ],
+      pageLength: 10, // Default number of rows per page
+      lengthMenu: [
+        [10, 25, 50, 100],
+        [10, 25, 50, 100],
+      ], // Page size options
+      ordering: true, // Enable sorting
+      searching: true, // Enable searching
+    });
+  });
+</script>
+
+<script>
+  $(document).ready(function () {
+    $("#myTable").DataTable();
+  });
+</script>
+
+<script>
+  $(document).ready(function () {
+    $("#userTable").DataTable({
+      processing: true,
+      serverSide: true,
+      ajax: {
+        url: "/dashboard/users/data/",
+        type: "GET",
+      },
+      columns: [
+        { data: "username" },
+        { data: "email" },
+        { data: "school_profile" }, // This includes both School Name and EMIS
+        { data: "actions", orderable: false, searchable: false },
+      ],
+      search: {
+        smart: true, // Enables searching across multiple fields
+      },
+    });
+  });
+</script>
+<script>
+  $(document).ready(function () {
+    $("#athleteTable").DataTable({
+      processing: true,
+      serverSide: true,
+      ajax: {
+        url: "/school/athletes/data/",
+        type: "GET",
+      },
+      columns: [
+        { data: "Names" },
+        { data: "lin" },
+        { data: "school" }, // This includes both School Name and EMIS
+        { data: "actions", orderable: false, searchable: false },
+      ],
+      search: {
+        smart: true, // Enables searching across multiple fields
+      },
+    });
+  });
+</script>
+<script>
+  $(document).ready(function () {
+    $("#schoolTable").DataTable({
+      processing: true,
+      serverSide: true,
+      ajax: {
+        url: "/school/schools/data/",
+        type: "GET",
+      },
+      columns: [
+        { data: "Name" },
+        { data: "emis" },
+        { data: "district" }, // This includes both School Name and EMIS
+        { data: "actions", orderable: false, searchable: false },
+      ],
+      search: {
+        smart: true, // Enables searching across multiple fields
+      },
+    });
+  });
+</script>
+
+<script>
+  $(document).ready(function () {
+    $("#enrollTable").DataTable({
+      processing: true,
+      serverSide: true,
+      ajax: {
+        url: "/team/enrolls_data/",
+        type: "GET",
+      },
+      columns: [
+        { data: "School" },
+        { data: "championship" },
+        { data: "sport" }, // This includes both School Name and EMIS
+        { data: "actions", orderable: false, searchable: false },
+      ],
+      search: {
+        smart: true, // Enables searching across multiple fields
+      },
+    });
+  });
+</script>

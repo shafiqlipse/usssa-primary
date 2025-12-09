@@ -14,25 +14,9 @@ from accounts.decorators import (
     login_required,
 )
 import datetime
-from django.core.files.base import ContentFile
-import base64
-from teams.models import *
-# # Athletes details......................................................
-# # Athletes details......................................................
-import datetime
 
 from django.db.models import Count
-def get_greeting():
-    current_hour = datetime.now().hour
 
-    if 5 <= current_hour < 12:
-        return "Good morning,"
-    elif 12 <= current_hour < 17:
-        return "Good afternoon,"
-    elif 17 <= current_hour < 21:
-        return "Good evening,"
-    else:
-        return "Good night,"
 
 
 @school_required
@@ -54,7 +38,7 @@ def Dash(request):
     # teams_gcount = SchoolTeam.objects.filter(
     #     school_id=school.id, gender="Female"
     # # ).count()
-    greeting = get_greeting()
+
     # teams_bcount = SchoolTeam.objects.filter(
     #     school_id=school.id, gender="Male"
     # # ).count()
@@ -74,7 +58,7 @@ def Dash(request):
         "officials": officials,
         "school": school,
         "athletes": athletes,
-        "greeting": greeting
+  
         # "teams": teams,
         # "teams_gcount": teams_gcount,
         # "teams_bcount": teams_bcount,
@@ -231,14 +215,14 @@ def school_detail(request, id):
     # Optimize queries using select_related
     officials = school_official.objects.filter(school_id=id).select_related("school")
     athletes = Athlete.objects.filter(school_id=id).exclude(status = 'COMPLETED').select_related("sport", "classroom", "age")
-    enrollments = SchoolEnrollment.objects.filter(school=school).annotate(
-        athlete_count=Count('athlete_enrollments__athletes')
-    )
+    # enrollments = SchoolEnrollment.objects.filter(school=school).annotate(
+    #     athlete_count=Count('athlete_enrollments__athletes')
+    # )
     context = {
         "school": school,
         "athletes": athletes,
         "officials": officials,
-        "enrollments": enrollments,
+        # "enrollments": enrollments,
     }
     return render(request, "school/school.html", context)
 
@@ -385,19 +369,6 @@ def newAthlete(request):
 
                 # Assign the school from the user profile
                 new_athlete.school = request.user.school_profile.first()
-
-                # Handle cropped image data
-                cropped_data = request.POST.get("photo_cropped")
-                if cropped_data and "base64" in cropped_data:
-                    try:
-                        format, imgstr = cropped_data.split(";base64,")
-                        ext = format.split("/")[-1]
-                        img_data = base64.b64decode(imgstr)
-                        new_athlete.photo = ContentFile(img_data, name=f"photo.{ext}")
-                    except (ValueError, TypeError) as e:
-                        messages.error(request, "Invalid image data.")
-                        return render(request, "athletes/newAthlete.html", {"form": form})
-
                 new_athlete.save()
                 messages.success(request, "Athlete added successfully!")
                 return redirect("athletexs")
@@ -600,11 +571,6 @@ def OfficialDetail(request, id):
     }
 
     return render(request, "officials/official.html", context)
-
-
-
-# Create your views here.
-
 
 
 
@@ -852,22 +818,10 @@ def airtel_payment_callback(request):
         airtel_logger.error(f"❌ Error processing callback: {str(e)}")
         return JsonResponse({"error": "Internal Server Error"}, status=500)
     
-    
-# @csrf_exempt
-# def airtel_payment_callback(request):
 
-#     if request.method != 'POST':
-#         return HttpResponse("Method Not Allowed", status=405)
-
-#     try:
-#         # Log the raw request body
-#         raw_body = request.body.decode('utf-8')
-#         logger.info(f"Raw Request Body: {raw_body}")
-from teams.models import *
+# f
 from django.db.models import Sum, Count, F
-#         # Parse JSON payload
-#         payload = json.loads(raw_body)
-#         logger.info(f"Parsed JSON Payload: {json.dumps(payload, indent=2)}")
+
 @login_required
 def accounts(request):
     
@@ -879,13 +833,13 @@ def accounts(request):
 
     recent_transactions = Payment.objects.order_by('-created_at')[:10]  # Last 10 transactions
     
-    schools_per_champs = SchoolEnrollment.objects.values('championship__name').annotate(count=Count('id')).order_by('-count')
+    # schools_per_champs = SchoolEnrollment.objects.values('championship__name').annotate(count=Count('id')).order_by('-count')
     
-    athletes_per_champ = AthleteEnrollment.objects.values('school_enrollment__championship__name').annotate(count=Count('athletes')).order_by('-count')
+    # athletes_per_champ = AthleteEnrollment.objects.values('school_enrollment__championship__name').annotate(count=Count('athletes')).order_by('-count')
     
-    school_per_sport = SchoolEnrollment.objects.values('sport__name').annotate(count=Count('id')).order_by('-count')
+    # school_per_sport = SchoolEnrollment.objects.values('sport__name').annotate(count=Count('id')).order_by('-count')
     
-    athletes_per_sport = AthleteEnrollment.objects.values('school_enrollment__sport__name').annotate(count=Count('athletes')).order_by('-count')
+    # athletes_per_sport = AthleteEnrollment.objects.values('school_enrollment__sport__name').annotate(count=Count('athletes')).order_by('-count')
     
    
 
@@ -897,10 +851,11 @@ def accounts(request):
         'total_athletes': total_athletes,
         'recent_transactions': recent_transactions,
         # 'recent_transactions': recent_transactions,
-        'schools_per_champs': schools_per_champs,
-        'athletes_per_champ': athletes_per_champ,
-        'school_per_sport': school_per_sport,
-        'athletes_per_sport': athletes_per_sport}
+        # 'schools_per_champs': schools_per_champs,
+        # 'athletes_per_champ': athletes_per_champ,
+        # 'school_per_sport': school_per_sport,
+        # 'athletes_per_sport': athletes_per_sport
+        }
     return render(request, "payments/accounts.html", context)
 
 @login_required
@@ -942,31 +897,7 @@ def payment_detail(request, id):
     context = {"payment": payment}
     return render(request, "payments/payment_detail.html", context)
    
-#     context = {"payment": payment}
-#         # Extract transaction details (corrected)
-#         transaction = payload.get("transaction", {})  # Ensure transaction exists
-#         transaction_id = transaction.get("id")  # Airtel's transaction ID
-#         status_code = transaction.get("status_code")  # Example: "TS" (Success)
-#         airtel_money_id = transaction.get("airtel_money_id")  # Airtel reference ID
 
-#         logger.info(f"Transaction ID: {transaction_id}, Status Code: {status_code}, Airtel Money ID: {airtel_money_id}")
-
-#         # Ensure required fields exist
-#         if not all([transaction_id, status_code, airtel_money_id]):
-#             logger.error("❌ Missing required fields in callback payload")
-#             return JsonResponse({"error": "Invalid callback payload"}, status=400)
-
-#         # Process the payment callback (Update Payment record)
-#         return JsonResponse({"message": "Callback processed successfully"}, status=200)
-
-#     except json.JSONDecodeError:
-#         logger.error("❌ Invalid JSON payload received")
-#         return JsonResponse({"error": "Invalid JSON"}, status=400)
-
-#     except Exception as e:
-#         logger.error(f"❌ Error processing callback: {str(e)}")
-#         return JsonResponse({"error": "Internal Server Error"}, status=500)
-    
     
     
 def payment_success(request, transaction_id):

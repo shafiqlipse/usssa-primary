@@ -1,4 +1,4 @@
-{% extends "horizon/dascore.html" %}
+{% extends "dashboard/dashboard.html" %}
 <!---->
 {% load static %}
 <!---->
@@ -11,15 +11,15 @@
   <div class="app-content-area">
     <div class="container-fluid">
       <div class="athlete-dew content-wrapper">
-        <div class="athlete flex">
-          <div class="img-ath">
+        <div class="row">
+          <div class="col-md-4">
             <img src="{{official.photo.url}}" alt="" />
           </div>
-          <div class="line-ath">
+          <div class="col-md-8">
             <h1>{{official.name}}</h1>
             <p>{{official.email}}</p>
             <hr />
-            <div class="small-details grid2">
+            <div class="info-ath">
               <span
                 >National Identification number:
                 <h3>{{official.nin}}</h3></span
