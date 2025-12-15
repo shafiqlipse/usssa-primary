@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-layout="horizontal">
   {% load static %}
   <head>
     <!-- Required meta tags -->
@@ -10,28 +10,83 @@
     />
     <meta name="author" content="Codescandy" />
 
+
+
     <!-- Favicon icon-->
     <link
       rel="shortcut icon"
       type="image/x-icon"
       href="{% static 'images/fav.png' %}"
     />
+
+    <!-- Color modes -->
+    <script src="{% static 'js/color-modes.js' %}"></script>
+
     <!-- Libs CSS -->
-    {% include "assets/css.html" %}
-    <!-- Libs CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.95/css/materialdesignicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.css"
+      rel="stylesheet"
+    />
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"
+  />
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/cropper/4.1.0/cropper.min.css"
+    />
+    <link href="{% static 'css/simplabar.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/main/main.css'%}" />
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="{% static 'css/theme.css' %}" />
+    <!-- Layout styles -->
+
+    <link rel="icon" href="{%static 'images/upsaa.png'%}" sizes="35x35" />
+    <link rel="stylesheet" href="{% static 'css/main/main.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/dashboard/dashboard.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/dashboard/school.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/dashboard/delete.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/dashboard/schooled.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/dashboard/schoolist.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/newteam.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/team.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/tprofile.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/profile/school_new.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/thanks/officer.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/profile/athlete.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/profile/athletes.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/profile/newAthlete.css'%}" />
+
     <title>UPSSA {% block title %}{% endblock title %}</title>
   </head>
 
   <body>
-    <!-- Wrapper -->
     <main id="main-wrapper" class="main-wrapper">
       <div class="header">
         <!-- navbar -->
         <div class="navbar-custom navbar navbar-expand-lg">
           <div class="container-fluid px-0">
-            <a class="navbar-brand d-block d-md-none" href="/">
-              <img src="{% static 'images/uni.png'%}" alt="Image" />
+            <a class="navbar-brand d-block d-md-none" href="../index.html">
+              <img
+                src="{% static 'images/upsa.png'%}"
+                alt="Image"
+                style="width: 90px"
+              />
             </a>
+
             <a id="nav-toggle" href="#!" class="ms-auto ms-md-0 me-0 me-lg-3">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -43,18 +98,10 @@
               >
                 <path
                   d="M2 3.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm.646 2.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L4.293 8 2.646 6.354a.5.5 0 0 1 0-.708zM7 6.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm-5 3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"
-                ></path>
+                />
               </svg>
             </a>
 
-            <div class="d-none d-md-none d-lg-block">
-              <!-- Form -->
-              {% if user.is_school %}
-              <h3>{{user.school_profile.first }}</h3>
-              {% else %}
-              <h3>{{user.username|lower }}</h3>
-              {% endif %}
-            </div>
             <!--Navbar nav -->
             <ul
               class="navbar-nav navbar-right-wrap ms-lg-auto d-flex nav-top-wrap align-items-center ms-4 ms-lg-0"
@@ -208,18 +255,19 @@
                   aria-expanded="false"
                 >
                   <div class="avatar avatar-md avatar-indicators avatar-online">
-                    {% if user.school_profile.first.badge %}
+                    {% if officer.photo %}
                     <img
-                      alt="avatar"
-                      src="{{user.school_profile.first.badge.url }}"
-                      class="rounded-circle"
+                      src="{{officer.photo.url}}"
+                      class="avatar-xxl rounded-circle border border-2"
+                      alt="Image"
                     />
                     {% else %}
                     <img
-                      alt="avatar"
-                      src="{% static 'images/fav.png'%}"
-                      class="rounded-circle"
-                    />{% endif %}
+                      src="{% static 'images/fav.png' %}"
+                      class="avatar-xxl rounded-circle border border-2"
+                      alt="Image"
+                    />
+                    {% endif %}
                   </div>
                 </a>
                 <div
@@ -228,7 +276,8 @@
                 >
                   <div class="px-4 pb-0 pt-2">
                     <div class="lh-1">
-                      <h5 class="mb-1">{{user.school_profile.first }}</h5>
+                      <h5 class="mb-1">{{user.first_name |upper }} {{user.last_name |upper }}</h5>
+                      <a href="#!" class="text-inherit fs-6">View my profile</a>
                     </div>
                     <div class="dropdown-divider mt-3 mb-2"></div>
                   </div>
@@ -237,9 +286,8 @@
                     <li>
                       <a
                         class="dropdown-item d-flex align-items-center"
-                        href=""
+                        href="{% url 'schoolupdate'%}"
                       >
-                        <!--url 'schoolpdate' school.id -->
                         <i
                           class="me-2 icon-xxs dropdown-item-icon"
                           data-feather="user"
@@ -253,7 +301,7 @@
                           class="me-2 icon-xxs dropdown-item-icon"
                           data-feather="activity"
                         ></i>
-                        Activity Log
+                        Change password
                       </a>
                     </li>
 
@@ -286,66 +334,90 @@
         </div>
       </div>
 
-      <!-- navbar vertical -->
-      <!-- Sidebar -->
-
-      <div class="navbar-vertical navbar nav-dashboard">
-        <div class="h-100" data-simplebar>
-          <!-- Brand logo -->
-          <a class="navbar-brand" href="">
-            <img src="{% static 'images/upsa.png' %}" alt="UPSSA" />
-          </a>
-          <!-- Navbar nav -->
-          <ul class="navbar-nav flex-column" id="sideNavbar">
-            <!-- Nav item -->
-            {% if user.is_school %}
-            <!-- Nav item -->
-            <li class="nav-item">
-              <a class="nav-link has-arrow" href="{% url 'school_dashboard'%}">
-                <i data-feather="users" class="nav-icon me-2 icon-xxs"></i>
-                Dashboard</a
+      <!-- navbar horizontal -->
+      <!-- navbar -->
+      <div class="navbar-horizontal nav-dashboard">
+        <div class="container-fluid">
+          <nav
+            class="navbar navbar-expand-lg navbar-default navbar-dropdown p-0 py-lg-2"
+          >
+            <div
+              class="d-flex d-lg-block justify-content-between align-items-center w-100 w-lg-0 py-2 px-4 px-md-2 px-lg-0"
+            >
+              <span class="d-lg-none">Menu</span>
+              <!-- Button -->
+              <button
+                class="navbar-toggler collapsed ms-2"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbar-default"
+                aria-controls="navbar-default"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
               >
-            </li>
-            <!-- Nav item -->
-            <!-- Nav item -->
-            <li class="nav-item">
-              <a class="nav-link has-arrow" href="{% url 'athletexs'%}">
-                <i data-feather="users" class="nav-icon me-2 icon-xxs"></i>
-                Athletes</a
-              >
-            </li>
-            <!-- Nav item -->
-            <!-- Nav item -->
-            <li class="nav-item">
-              <a class="nav-link has-arrow" href="{% url 'officials'%}">
-                <i data-feather="users" class="nav-icon me-2 icon-xxs"></i>
-                Officials</a
-              >
-            </li>
-            <!-- Nav item -->
-            <!-- Nav item -->
-            <li class="nav-item">
-              <a
-                class="nav-link has-arrow"
-                href="{% url 'school_enrollments'%}"
-              >
-                <i data-feather="users" class="nav-icon me-2 icon-xxs"></i>
-                Teams</a
-              >
-            </li>
-            <!-- Nav item -->
-            <!-- Nav item -->
-            <li class="nav-item">
-              <a class="nav-link has-arrow" href="{% url 'registration'%}">
-                <i data-feather="users" class="nav-icon me-2 icon-xxs"></i>
-                Payments</a
-              >
-            </li>
-
-            <!-- Nav item -->
-            <!-- Nav item -->
-            {% elif user.is_staff %}
-  
+                <span class="icon-bar top-bar mt-0"></span>
+                <span class="icon-bar middle-bar"></span>
+                <span class="icon-bar bottom-bar"></span>
+              </button>
+            </div>
+            <!-- Collapse -->
+            <div
+              class="collapse navbar-collapse px-6 px-lg-0"
+              id="navbar-default"
+            >
+              <ul class="navbar-nav">
+                {% if user.is_school %}
+                <!-- Nav item -->
+                <li class="nav-item">
+                  <a class="nav-link has-arrow" href="{% url 'school_dashboard'%}">
+                    <i data-feather="users" class="nav-icon me-2 icon-xxs"></i>
+                    Dashboard</a
+                  >
+                </li>
+                <!-- Nav item -->
+                <!-- Nav item -->
+                <li class="nav-item">
+                  <a class="nav-link has-arrow" href="{% url 'athletexs'%}">
+                    <i data-feather="users" class="nav-icon me-2 icon-xxs"></i>
+                    Athletes</a
+                  >
+                </li>
+                <!-- Nav item -->
+                <!-- Nav item -->
+                <li class="nav-item">
+                  <a class="nav-link has-arrow" href="{% url 'officials'%}">
+                    <i data-feather="users" class="nav-icon me-2 icon-xxs"></i>
+                    Officials</a
+                  >
+                </li>
+                <!-- Nav item -->
+                <!-- Nav item -->
+                <li class="nav-item">
+                  <a
+                    class="nav-link has-arrow"
+                    href="{% url 'school_enrollments'%}"
+                  >
+                    <i data-feather="users" class="nav-icon me-2 icon-xxs"></i>
+                    Teams</a
+                  >
+                </li>
+                <!-- Nav item -->
+                <!-- Nav item -->
+                <li class="nav-item">
+                  <a
+                    class="nav-link has-arrow"
+                    href="{% url 'registration'%}"
+                  >
+                    <i data-feather="users" class="nav-icon me-2 icon-xxs"></i>
+                    Payments</a
+                  >
+                </li>
+                
+    
+                <!-- Nav item -->
+                {% elif user.is_staff %}
+                <!-- Nav item -->
+        
                 <li class="nav-item">
                   <a class="nav-link has-arrow" href="{% url 'dashboard'%}"
                     ><i data-feather="layers" class="nav-icon me-2 icon-xxs"></i
@@ -409,21 +481,21 @@
                   <div id="users" class="collapse" data-bs-parent="#sideNavbar">
                     <ul class="nav flex-column">
                       <li class="nav-item">
-                        <a class="nav-link has-arrow" href=""
+                        <a class="nav-link has-arrow" href="{% url 'users'%}"
                           >Schools</a
                         >
                       </li>
                       <li class="nav-item">
                         <a
                           class="nav-link has-arrow"
-                          href=""
+                          href="{% url 'sports_officers'%}"
                           >Sport officers</a
                         >
                       </li>
                       <li class="nav-item">
                         <a
                           class="nav-link has-arrow"
-                          href=""
+                          href="{% url 'staff'%}"
                           >Staff</a
                         >
                       </li>
@@ -496,21 +568,21 @@
                       </li>
                       <li class="nav-item">
                         <a class="nav-link"
-                          href=""
+                          href="{% url 'Aofficers'%}"
                           >Officers</a
                         >
                       </li>
                       <li class="nav-item">
                         <a
                           class="nav-link"
-                          href=""
+                          href="{% url 'dofficers'%}"
                           >Other Officers</a
                         >
                       </li>
                       <li class="nav-item">
                         <a
                           class="nav-link has-arrow"
-                          href=""
+                          href="{% url 'all_denrollments' %}"
                           >Teams</a
                         >
                       </li>
@@ -519,9 +591,9 @@
                 </li>
     
                 <!-- Nav item -->
-          
+                {% endif %}
                 <!-- Nav item -->
-                 {% elif user.is_admin %}
+                 {% if user.is_admin %}
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'officer_dashboard' %}">Dashboard</a>
@@ -533,39 +605,261 @@
                   <a class="nav-link" href="{% url 'district_athletes' %}">Athletes</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="">Teams</a>
+                  <a class="nav-link" href="{% url 'district_enrollments' %}">Teams</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="{% url 'team_officers' %}">Officials</a>
-                </li>
-                  <!-- Nav item -->
-
-            <!-- Nav item -->
-            {% endif %}
-            <!-- Nav item -->
-            <!-- Nav item -->
-            <li class="nav-item">
-              <div class="navbar-heading">ACCOUNT</div>
-            </li>
-            <!-- Nav item -->
-            <li class="nav-item">
-              <a class="nav-link has-arrow" href="{% url 'change_password'%}"
-                >Change password</a
-              >
-            </li>
-            <!-- Nav item -->
-            <li class="nav-item">
-              <a class="nav-link has-arrow" href="{% url 'logout'%}">Logout</a>
-            </li>
-          </ul>
+                  <a class="nav-link" href="{% url 'tofficers' %}">Officials</a>
+                </li>{% endif %}
+              </ul>
+            </div>
+          </nav>
         </div>
       </div>
 
-      <!-- Page Content -->
       {% block content %}{% endblock %}
-      <!-- Page Content -->
     </main>
+    <!-- Scripts -->
+    <!-- Include jQuery -->
+    <!-- jQuery (MUST be first) -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 
-    {% include "assets/js.html" %}
+    <!-- Select2 (MUST come after jQuery) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+
+    <script>
+      function get_athletes() {
+        var gender_select = document.getElementById(
+          "{{ form.team_gender.id_for_label }}"
+        );
+        var age_select = document.getElementById(
+          "{{ form.team_age.id_for_label }}"
+        );
+        var athlete_select = document.getElementById("id_athletes");
+
+        // Show loading indicator for athletes
+        athlete_select.innerHTML = "<option>Loading athletes...</option>";
+
+        var team_gender = gender_select.value;
+        var team_age = age_select.value;
+
+        // Fetch athletes
+        fetch(
+          `/get_dist_athletes/?team_gender=${team_gender}&team_age=${team_age}`
+        )
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.text();
+          })
+          .then((text) => {
+            try {
+              return JSON.parse(text);
+            } catch (e) {
+              console.error("Server response is not JSON:", text);
+              throw new Error("The server's response was not valid JSON.");
+            }
+          })
+          .then((data) => {
+            console.log(data);
+            athlete_select.innerHTML = ""; // Clear previous content
+
+            // Update the 'athlete' select with the fetched data
+            if (data.athletes.length === 0) {
+              athlete_select.innerHTML = "<option>No athletes found.</option>";
+            } else {
+              data.athletes.forEach((athlete) => {
+                var option = document.createElement("option");
+                option.value = athlete.id;
+                option.textContent = `${athlete.fname} ${athlete.lname} (${athlete.lin})`;
+                athlete_select.appendChild(option);
+              });
+            }
+
+            // Reinitialize Select2 after populating options
+            $(athlete_select).select2();
+          })
+          .catch((error) => {
+            console.error("Error fetching athletes:", error);
+            athlete_select.innerHTML =
+              "<option>Error fetching athletes. Please try again.</option>";
+          });
+      }
+
+      // Attach the get_athletes function to the onchange events of the gender and age elements
+      document.getElementById("{{ form.team_gender.id_for_label }}").onchange =
+        get_athletes;
+      document.getElementById("{{ form.team_age.id_for_label }}").onchange =
+        get_athletes;
+
+      // Initialize Select2 on page load
+      $(document).ready(function () {
+        $(".js-example-basic-multiple").select2();
+      });
+    </script>
+    <!-- Libs JS -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simplebar@6.2.1/dist/simplebar.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tippy.js@6.3.7/dist/tippy-bundle.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#example").DataTable({ responsive: !0 });
+      });
+    </script>
+    <script>
+      $(document).ready(function () {
+        $("#officials").DataTable({ responsive: !0 });
+      });
+    </script>
+    <script src="{% static 'js/main.js'%}"></script>
+    <script src="{% static 'js/feather.js'%}"></script>
+    <script src="{% static 'js/opper.js'%}"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.5.1/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsvectormap@1.9.0/dist/js/jsvectormap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsvectormap@1.9.0/dist/maps/world.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.41.0/dist/apexcharts.min.js"></script>
+
+    <script src="{% static 'js/chat.js'%}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/min/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js"></script>
+    <!-- DataTables Buttons CSS -->
+
+<!-- DataTables Buttons JS -->
+<script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
+<!-- DataTables scripts (Make sure jQuery and DataTables are included) -->
+
+
+
+<script>
+  $(document).ready(function() {
+    let table = $('#athletes').DataTable({
+        "processing": true,
+        "serverSide": true,
+        "ajax": {
+            "url": "/school/get-athletes/",
+            "type": "GET"
+        },
+        "columns": [
+            { "data": "athlete" },
+            { "data": "lin" },
+            { "data": "dob" },
+            { "data": "gender_age" },
+            { "data": "status" },
+            { "data": "action" }
+        ],
+        "pageLength": 10,  // Default number of rows per page
+        "lengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],  // Page size options
+        "ordering": true,  // Enable sorting
+        "searching": true  // Enable searching
+    });
+});
+
+</script>
+
+<script>
+  $(document).ready( function () {
+    $('#myTable').DataTable();
+} );
+</script>
+
+<script>
+  $(document).ready(function() {
+      $('#userTable').DataTable({
+          "processing": true,
+          "serverSide": true,
+          "ajax": {
+              "url": "/dashboard/users/data/",
+              "type": "GET"
+          },
+          "columns": [
+              { "data": "username" },
+              { "data": "email" },
+              { "data": "school_profile" }, // This includes both School Name and EMIS
+              { "data": "actions", "orderable": false, "searchable": false }
+          ],
+          "search": {
+              "smart": true // Enables searching across multiple fields
+          }
+      });
+  });
+</script>
+<script>
+  $(document).ready(function() {
+      $('#athleteTable').DataTable({
+          "processing": true,
+          "serverSide": true,
+          "ajax": {
+              "url": "/school/athletes/data/",
+              "type": "GET"
+          },
+          "columns": [
+              { "data": "Names" },
+              { "data": "lin" },
+              { "data": "school" }, // This includes both School Name and EMIS
+              { "data": "actions", "orderable": false, "searchable": false }
+          ],
+          "search": {
+              "smart": true // Enables searching across multiple fields
+          }
+      });
+  });
+  </script>
+<script>
+  $(document).ready(function() {
+      $('#schoolTable').DataTable({
+          "processing": true,
+          "serverSide": true,
+          "ajax": {
+              "url": "/school/schools/data/",
+              "type": "GET"
+          },
+          "columns": [
+              { "data": "Name" },
+              { "data": "emis" },
+              { "data": "district" }, // This includes both School Name and EMIS
+              { "data": "actions", "orderable": false, "searchable": false }
+          ],
+          "search": {
+              "smart": true // Enables searching across multiple fields
+          }
+      });
+  });
+  </script>
+  
+  
+<script>
+  $(document).ready(function() {
+      $('#enrollTable').DataTable({
+          "processing": true,
+          "serverSide": true,
+          "ajax": {
+              "url": "/team/enrolls_data/",
+              "type": "GET"
+          },
+          "columns": [
+              { "data": "School" },
+              { "data": "championship" },
+              { "data": "sport" }, // This includes both School Name and EMIS
+              { "data": "actions", "orderable": false, "searchable": false }
+          ],
+          "search": {
+              "smart": true // Enables searching across multiple fields
+          }
+      });
+  });
+  </script>
+  
+  
   </body>
 </html>

@@ -1,6 +1,6 @@
-{% extends "horizon/dascore.html" %}
+{% extends "dashboard/dashboard.html" %}
 <!--static-->
-{% block title %}Teams{% endblock %}
+{% block title %}Sports Officer{% endblock %}
 <!--static-->
 {% load static %}
 <!--khfufufu-->
@@ -39,11 +39,11 @@
               <li>{{ officer.gender }}</li>
               <li>{{ officer.phone_number }}</li>
             </ul>
-            <a href="{% url 'tocrred' officer.id%}" class="btn btn-primary">
+            <a href="" class="btn btn-primary">
               <i data-feather="download" class="icon-xs"></i
               ><span>Accreditation</span>
             </a>
-            <a href="{% url 'tocert' officer.id%}" class="btn btn-primary">
+            <a href="" class="btn btn-primary">
               <i data-feather="download" class="icon-xs"></i
               ><span>Certification</span>
             </a>
