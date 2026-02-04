@@ -93,6 +93,11 @@ class Team(models.Model):
     team_gender = models.CharField(
         choices=[("Male", "male"), ("Female", "female")], max_length=10
     )
+    
+    class Meta:
+        unique_together = ("team_sport", "championship", "team_age", "team_gender")
+        
+        
     def __str__(self):
         return str(self.team_officer)
 

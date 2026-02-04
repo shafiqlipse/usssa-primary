@@ -1,12 +1,18 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from core.forms import *
 from .forms import *
-from core.models import *
 import base64
 from django.core.files.base import ContentFile
 from django.contrib import messages
 from accounts.decorators import admin_required
-
+from .models import *
+from django.db.models import Count
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages 
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+from xhtml2pdf import pisa
+from django.template.loader import get_template
+from django.http import HttpResponse
 from django.conf import settings
 from django.db import IntegrityError
 # Create your views here.
@@ -227,22 +233,313 @@ def district_athletes(request):
     }
     return render(request, "horizon/athletes.html", context)
 # @school_required
-def Officewrdash(request):
+
+
+#{{{{{{{{{{{{{{{{{{{     Teams     }}}}}}}}}}}}}}}}}}}
+
+
+
+def district_teams(request):
+    # Get officer from user profile
+    
     user = request.user
-    officer = SportsOfficer.objects.get(user_id=user.id)
-    district = officer.district
-    schools = School.objects.filter(district=district)
-    athletes = Athlete.objects.filter(school__in=schools)
-    schools_cout = School.objects.filter(district=district).count()
-    athletes_count = Athlete.objects.filter(school__in=schools).count()
+    officer = SportsOfficer.objects.get(user_id=user.id) # Assuming profile has officer attribute
+
+    # Get all enrollments for the officer
+    enrollments = Team.objects.filter(team_officer=user).annotate(
+        athlete_count=Count('team_athletes__athletes')
+    )
+
+    if request.method == "POST":
+        form = TeamForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            enrollment = form.save(commit=False)
+            enrollment.team_officer = user
+            enrollment.save()
+            messages.success(request, "Enrollment created successfully!")
+            return redirect("district_enrollments")
+        else:
+            messages.error(request, "Please correct the errors below.")
+    else:
+        form = TeamForm()
+
+    context = {"form": form, "enrollments": enrollments}
+    return render(request, "enrollments/officer_enrolls.html", context)
+
+def dAllEnrollments(request):
+    # Get all officer_enrolls with athlete count
+    officer_enrolls = Team.objects.annotate(
+        athlete_count=Count('team_athletes__athletes')
+    )
 
     context = {
-        "officer": officer,
-        "district": district,
-        "schools": schools,
-        "schools_cout": schools_cout,
-        "athletes": athletes,
-        "athletes_count": athletes_count,
+        "officer_enrolls": officer_enrolls,
     }
-    return render(request, "accounts/dprofile.html", context)
+
+    return render(request, "enrollments/enroll.html", context)
+
+
+def remove_athlete(request, enrollment_id, athlete_id):
+    athlete_enrollment = get_object_or_404(AthletesEnrollment, id=enrollment_id)
+    athlete = get_object_or_404(Athlete, id=athlete_id)
+
+    if request.method == "POST":
+        athlete_enrollment.athletes.remove(athlete)
+        return HttpResponseRedirect(
+            reverse("district_enrollment", args=[athlete_enrollment.team.id])
+        )
+
+    return redirect(
+        "enrollments/officer_enrollment", id=athlete_enrollment.team.id
+    )
+
+
+def officer_enrollment_details(request, id):
+    officer_enrollment = get_object_or_404(Team, id=id)
+    officer = SportsOfficer.objects.get(user=request.user)
+    location = officer.district
+
+    schools = School.objects.filter(district=location)
+    # Start with the base queryset for athletes in the user's schools
+    # athletes = Athlete.objects.filter()
+    
+    if request.method == "POST":
+        form = AthleteEnrollmentForm(request.POST)
+        if form.is_valid():
+            athlete_enrollment = AthletesEnrollment.objects.create(
+                team=officer_enrollment
+            )
+            athlete_enrollment.athletes.set(form.cleaned_data["athletes"])
+            return HttpResponseRedirect(reverse("district_enrollment", args=[id]))
+    else:
+        form = AthleteEnrollmentForm()
+
+    athlete_enrollments = AthletesEnrollment.objects.filter(
+        team=officer_enrollment
+    )
+    all_athletes = Athlete.objects.filter(school__in=schools, status="ACTIVE",age = officer_enrollment.team_age, gender = officer_enrollment.team_gender)
+
+    context = {
+        "officer_enrollment": officer_enrollment,
+        "form": form,
+        "athlete_enrollments": athlete_enrollments,
+        "all_athletes": all_athletes,
+    }
+    return render(request, "enrollments/officer_enroll.html", context)
+
+
+def officer_enrollment_update(request, id):
+    officer_enrollment = get_object_or_404(Team, id=id)
+
+    if request.method == "POST":
+        form = TeamForm(
+            request.POST, request.FILES, instance=officer_enrollment
+        )
+        if form.is_valid():
+            form.save()
+            messages.success(
+                request, "Team information updated successfully!"
+            )
+            return redirect("officer_enrollment", id=officer_enrollment.id)
+        else:
+            messages.error(request, "Please correct the errors below.")
+    else:
+        form = TeamForm(instance=officer_enrollment)
+
+    context = {
+        "form": form,
+        "officer_enrollment": officer_enrollment,
+    }
+    return render(request, "enrollments/update_officer_enroll.html", context)
+
+
+def officer_enroll_delete(request, id):
+    stud = Team.objects.get(id=id)
+    if request.method == "POST":
+        stud.delete()
+        return redirect("all_denrollments")
+
+    return render(request, "enrollments/delete_officer_enroll.html", {"obj": stud})
+
+
+# Make sure to import your models
+
+admin_required
+
+
+def dAccreditation(request, id):
+    team = get_object_or_404(Team, id=id)
+    athlete_enrollments = AthletesEnrollment.objects.filter(team=team)
+    athletes = Athlete.objects.filter(athletesenrollment__in=athlete_enrollments)
+
+    # Get template
+    template = get_template("reports/acred.html")
+
+    # Compress and fix rotation for athletes' photos
+
+    # Prepare context
+    context = {
+        "team": team,
+        "athletes": athletes,
+        "MEDIA_URL": settings.MEDIA_URL,
+    }
+
+    # Render HTML
+    html = template.render(context)
+
+    # Create a PDF
+    response = HttpResponse(content_type="application/pdf")
+    response["Content-Disposition"] = 'attachment; filename="Accreditation.pdf"'
+
+    # Generate PDF from HTML
+    pisa_status = pisa.CreatePDF(html, dest=response)
+    if pisa_status.err:
+        return HttpResponse("We had some errors <pre>" + html + "</pre>")
+
+    return response
+
+
+def dAlbums(request, id):
+    team = get_object_or_404(Team, id=id)
+    athlete_enrollments = AthletesEnrollment.objects.filter(team=team)
+    athletes = Athlete.objects.filter(athletesenrollment__in=athlete_enrollments)
+
+
+    # Get athlete and official counts
+    athlete_count = athletes.count()
+
+
+    # Create a unique filename
+    filename = f"{team.team_officer.officer_profile.first().district } | {team.team_sport} .pdf"
+
+    # Get template
+    template = get_template("reports/albums.html")
+
+    # Prepare context
+    context = {
+        "team": team,
+        "athlete_count": athlete_count,
+        "athletes": athletes,
+        "MEDIA_URL": settings.MEDIA_URL,
+    }
+
+    # Render HTML
+    html = template.render(context)
+
+    # Create a PDF
+    response = HttpResponse(content_type="application/pdf")
+    response["Content-Disposition"] = f'attachment; filename="{filename}"'
+
+    # Generate PDF from HTML
+    pisa_status = pisa.CreatePDF(html, dest=response)
+    if pisa_status.err:
+        return HttpResponse("We had some errors <pre>" + html + "</pre>")
+
+    return response
+
+
+admin_required
+
+
+def dCertificate(request, id):
+    team = get_object_or_404(Team, id=id)
+    athlete_enrollments = AthletesEnrollment.objects.filter(team=team)
+    athletes = Athlete.objects.filter(athletesenrollment__in=athlete_enrollments)
+    user = team.team_officer
+    officer = SportsOfficer.objects.get(user=user)
+    district = officer.district 
+    # Get template
+    template = get_template("reports/cert.html")
+
+    # Compress and fix rotation for athletes' photos
+
+    # Prepare context
+    context = {
+        "team": team,
+        "district": district,
+        "athletes": athletes,
+        "MEDIA_URL": settings.MEDIA_URL,
+    }
+
+    # Render HTML
+    html = template.render(context)
+
+    # Create a PDF
+    response = HttpResponse(content_type="application/pdf")
+    response["Content-Disposition"] = 'attachment; filename="Accreditation.pdf"'
+
+    # Generate PDF from HTML
+    pisa_status = pisa.CreatePDF(html, dest=response)
+    if pisa_status.err:
+        return HttpResponse("We had some errors <pre>" + html + "</pre>")
+
+    return response
+
+
+# district -============-=========================
+
+
+
+
+def toAccreditation(request, id):
+    district = get_object_or_404(SportsOfficer, id=id)
+    tofficers = TeamOfficer.objects.filter(user=district.user)
+    
+    # Get template
+    template = get_template("reports/taccred.html")
+
+    # Compress and fix rotation for athletes' photos
+    filename = f"{district.district } .pdf"
+    # Prepare context
+    context = {
+        
+        "district": district,
+        "tofficers": tofficers,
+        "MEDIA_URL": settings.MEDIA_URL,
+    }
+
+    # Render HTML
+    html = template.render(context)
+
+    # Create a PDF
+    response = HttpResponse(content_type="application/pdf")
+    response["Content-Disposition"] = f'attachment; filename="{filename}"'
+    # Generate PDF from HTML
+    pisa_status = pisa.CreatePDF(html, dest=response)
+    if pisa_status.err:
+        return HttpResponse("We had some errors <pre>" + html + "</pre>")
+
+    return response
+
+
+def toCertification(request, id):
+    district = get_object_or_404(SportsOfficer, id=id)
+    tofficers = TeamOfficer.objects.filter(user=district.user)
+    
+    # Get template
+    template = get_template("reports/certs.html")
+
+    # Compress and fix rotation for athletes' photos
+    filename = f"{district.district } .pdf"
+    # Prepare context
+    context = {
+        
+        "district": district,
+        "tofficers": tofficers,
+        "MEDIA_URL": settings.MEDIA_URL,
+    }
+
+    # Render HTML
+    html = template.render(context)
+
+    # Create a PDF
+    response = HttpResponse(content_type="application/pdf")
+    response["Content-Disposition"] = f'attachment; filename="{filename}"'
+    # Generate PDF from HTML
+    pisa_status = pisa.CreatePDF(html, dest=response)
+    if pisa_status.err:
+        return HttpResponse("We had some errors <pre>" + html + "</pre>")
+
+    return response
 

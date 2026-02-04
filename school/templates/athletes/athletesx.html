@@ -5,14 +5,31 @@
 {%block title%}Athletes{% endblock %}
 <!---->
 {% block content %}
-<!--khfufufu-->
-<div class="app-content-area">
-  <div class="container-fluid">
-<div class="schools-dew">
-  <div class="head flex">
-    <h1>Athletes</h1>
-    
-  </div>
+<!--khfufufu--><div id="app-content">
+  <!-- Container fluid -->
+  <div class="app-content-area">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-12">
+          <!-- Page header -->
+          <div class="mb-4">
+            <h3 class="mb-0">{{school.school_name}}</h3>
+          </div>
+        </div>
+      </div>
+      <div>
+        <!-- row -->
+        {% if messages %}
+        <div class="messages">
+          {% for message in messages %}
+          <div
+            class="alert {% if message.tags == 'error' %}error-message{% elif message.tags == 'success' %}success-message{% endif %}"
+          >
+            {{ message }}
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
        <!-- row -->
        <div class="row">
         <div class="col-12">
@@ -85,8 +102,7 @@
     </div>
     
   </div>
+
 </div>
 </div>
-</div>
-</div></div>
 {% endblock %}
