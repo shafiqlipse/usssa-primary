@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from accounts.models import *
-# from dashboard.models import *
+from school.models import *
 
 class UserAdmin(BaseUserAdmin):
     list_display = ("username", "email", "is_active", "is_school", "is_staff", "is_admin")  # Columns to display
@@ -26,9 +26,10 @@ admin.site.register(Sport)
 admin.site.register(Tournament)
 admin.site.register(Region)
 admin.site.register(District)
-# admin.site.register(School,SchoolAdmin)
+admin.site.register(School,SchoolAdmin)
+admin.site.register(Athlete,AthleteAdmin)
 admin.site.register(City)
 admin.site.register(Municipality)
 # admin.site.register(Classroom)
 # admin.site.register(TOfficer)
-# admin.site.register(school_official)
+admin.site.register(school_official)
