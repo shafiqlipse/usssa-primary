@@ -1,4 +1,4 @@
-{% extends "horizon/dascore.html" %}
+{% extends "dashboard/dashboard.html" %}
 <!---->
 {% load static %}
 <!---->
@@ -25,7 +25,7 @@
   }
 </style>
 
-<div class="app-content">
+<div id="app-content">
   <div class="app-content-area">
     <div class="container-fluid">
       <div class="row">
@@ -76,27 +76,3 @@
   </div>
 </div>
 {% endblock %}
-<!--
-    <tbody>
-                        {% for user in users%}
-                        <tr>
-                          <td>
-                            <a href="">{{user.username}}</a>
-                          </td>
-                          <td>{{user.email}}</td>
-
-                          <td>
-                            {{user.school_profile.first}} |
-                            {{user.school_profile.first.EMIS}}
-                          </td>
-
-                          <td>
-                            <a href="{%url 'edit_user' user.id%}" class="del"
-                              ><i class="fa fa-pencil">Edit</i></a
-                            >
-                          </td>
-                        </tr>
-
-                        {%endfor%}
-                      </tbody>
--->

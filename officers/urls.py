@@ -13,7 +13,7 @@ urlpatterns = [
     path("add_officer/", add_sports_officer, name="add_officer"),
     path("officer/<int:id>", officer_details, name="officerd"),
     path("deleteofficer/<int:id>", delete_officer, name="deleted"),
-    path("officers/", officers, name="officers"),
+    path("sports_officers/", sports_officers, name="sports_officers"),
     path("sports_officer_activate/<int:id>", activate_officer, name="dso_activate"),
     path("officeria/", Officerdash, name="officer_dashboard"),
 
@@ -52,9 +52,9 @@ urlpatterns = [
     path("Aofficers/", Aofficers, name="Aofficers"),
     # path("pdf_report/", generate_album, name="pdfreport"),
     # path("pdfreport/<int:id>", generate_scalbum, name="pdreport"),
-    path("newtofficer/", newTofficer, name="districtoff"),
-    path("tofficers/", team_officers, name="team_officers"),
-    path("dofficers/", District_officers, name="dofficers"),
+    path("newtofficer/", new_team_officer, name="districtoff"),
+    path("team_officers/", team_officers, name="team_officers"),
+    path("district_officers/", District_officers, name="district_officers"),
     path("newtofficer/<int:id>", tofficer_details, name="toff"),
     path("delete/tofficer/<int:id>", delete_tofficer, name="deltoff"),
 

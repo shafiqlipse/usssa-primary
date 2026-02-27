@@ -409,21 +409,21 @@
                   <div id="users" class="collapse" data-bs-parent="#sideNavbar">
                     <ul class="nav flex-column">
                       <li class="nav-item">
-                        <a class="nav-link has-arrow" href=""
+                        <a class="nav-link has-arrow" href="{% url 'users'%}"
                           >Schools</a
                         >
                       </li>
                       <li class="nav-item">
                         <a
                           class="nav-link has-arrow"
-                          href=""
+                          href="{% url 'xsports_officers'%}"
                           >Sport officers</a
                         >
                       </li>
                       <li class="nav-item">
                         <a
                           class="nav-link has-arrow"
-                          href=""
+                          href="{% url 'staff'%}"
                           >Staff</a
                         >
                       </li>
@@ -490,14 +490,14 @@
                     <ul class="nav flex-column">
                       <li class="nav-item">
                         <a class="nav-link"
-                          href="{% url 'officers'%}"
+                          href="{% url 'sports_officers'%}"
                           >Sports officers</a
                         >
                       </li>
                       <li class="nav-item">
                         <a class="nav-link"
-                          href=""
-                          >Officers</a
+                          href="{% url 'district_officers'%}"
+                          >Team Officers</a
                         >
                       </li>
                       <li class="nav-item">

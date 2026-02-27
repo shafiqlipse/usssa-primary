@@ -101,6 +101,7 @@ from django.http import JsonResponse
 from django.core.paginator import Paginator
 from .models import User
 from django.db.models import Q
+
 def users_data(request):
     """ Handle AJAX DataTables request for large datasets """
 
@@ -174,7 +175,7 @@ def users(request):
         "staff": staff,
         # "teamsFilter": teams
     }
-    return render(request, "accounts/users.html", context)
+    return render(request, "auth/users.html", context)
 
 @staff_required
 def staff(request):

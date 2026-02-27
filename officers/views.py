@@ -41,7 +41,7 @@ def add_sports_officer(request):
     return render(request, "sportsofficers/newofficial.html", context)
 
 
-def newTofficer(request):
+def new_team_officer(request):
 
     if request.method == "POST":
         form = TOfficerForm(request.POST, request.FILES)
@@ -68,7 +68,7 @@ def newTofficer(request):
     return render(request, "officer/tofficer.html", context)
 
 
-def officers(request):
+def sports_officers(request):
     officers = SportsOfficer.objects.filter()
     context = {"officers": officers}
     return render(request, "sportsofficers/officers.html", context)
