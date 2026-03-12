@@ -28,6 +28,7 @@ urlpatterns = [
     #user management
     path("users_data/", users_data, name="users_data"),
     path("users/", users, name="users"),
+    path('user/edit/<int:id>/', edit_user, name='edit_user'),
     path("staff/", staff, name="staff"),
     path("sports-officers/", sports_officers, name="xsports_officers"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 

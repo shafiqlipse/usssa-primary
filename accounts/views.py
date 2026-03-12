@@ -86,7 +86,7 @@ def edit_user(request, id=None):
     else:
         form = UserEditForm(instance=user)
 
-    return render(request, "accounts/edit_user.html", {"form": form, "id": user.id})
+    return render(request, "auth/edit_user.html", {"form": form, "id": user.id})
 
 
 
