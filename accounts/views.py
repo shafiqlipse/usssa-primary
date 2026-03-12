@@ -137,7 +137,7 @@ def users_data(request):
 
             action_buttons = f"""
                 
-                <a href="/dashboard/user/edit/{user.id}/" class="btn btn-warning btn-sm">Edit</a>
+                <a href="/auth/user/edit/{user.id}/" class="btn btn-warning btn-sm">Edit</a>
                 
             """
 
