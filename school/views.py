@@ -106,7 +106,7 @@ def schools_data(request):
         # Prepare JSON response
         data = []
         for school in schools_page:
-            school_name = school.school_name if school else "No School"
+            school_name =  f"""<a href="/school/school/{school.id}" >{school.school_name}</a>"""
             emis = school.EMIS if school.EMIS else "N/A"
             district = school.district.name if school.district else "N/A"  # Extract district name
 

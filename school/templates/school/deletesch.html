@@ -2,20 +2,28 @@
 <!---->
 {% load static %}
 <!---->
-{%block title%}delete {{obj}}{% endblock %}
-
-{% block content %}
-<div class="delete">
-  <div class="confirm">
-    <form action="" class="formdelete" method="POST">
-      {% csrf_token %}
-      <p>Are you sure you want to delete <span>"{{obj}}"</span>?</p>
-      <hr>
-      <div class="btns">
-        <input type="submit" value="confirm" />
-        <a href="{{request.META.HTTP_REFERER}}" class="btn-flux">cancel</a>
+{%block title%}delete {{obj}}{% endblock %} {% block content %}
+<div id="app-content">
+  <div class="app-content-area">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="delete">
+          <div class="confirm">
+            <form action="" class="formdelete" method="POST">
+              {% csrf_token %}
+              <p>Are you sure you want to delete <span>"{{obj}}"</span>?</p>
+              <hr />
+              <div class="btns">
+                <input type="submit" value="confirm" class="btn btn-danger" />
+                <a href="{{request.META.HTTP_REFERER}}" class="btn btn-primary"
+                  >cancel</a
+                >
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
-    </form>
+    </div>
   </div>
+  {%endblock%}
 </div>
-{%endblock%}
