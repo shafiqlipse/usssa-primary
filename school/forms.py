@@ -34,14 +34,14 @@ class SchoolProfileForm(forms.ModelForm):
         ]
 
         widgets = {
-            # "badge": ImageCropWidget,
-            # "photo": ImageCropWidget,
-            # "gphoto": ImageCropWidget,
+
             "school_name": forms.TextInput(attrs={"class": "form-control"}),
             "EMIS": forms.TextInput(attrs={"class": "form-control"}),
             "center_number": forms.TextInput(attrs={"class": "form-control"}),
-            "region": forms.Select(attrs={"class": "form-control"}),
-            "district": forms.Select(attrs={"class": "form-control"}),
+            "region": forms.Select(attrs={"class": "form-select"}),
+            "district": forms.Select(attrs={"class": "form-select"}),
+            "gender": forms.Select(attrs={"class": "form-select"}),
+            "ggender": forms.Select(attrs={"class": "form-select"}),
             #    --------------------------------------
             "fname": forms.TextInput(attrs={"class": "form-control"}),
             "lname": forms.TextInput(attrs={"class": "form-control"}),
@@ -53,7 +53,7 @@ class SchoolProfileForm(forms.ModelForm):
             "gfname": forms.TextInput(attrs={"class": "form-control"}),
             "glname": forms.TextInput(attrs={"class": "form-control"}),
             "gnin": forms.TextInput(attrs={"class": "form-control"}),
-            "gphone_number": forms.TextInput(attrs={"class": "form-control"}),
+            "gphone": forms.TextInput(attrs={"class": "form-control"}),
             "gemail": forms.TextInput(attrs={"class": "form-control"}),
             "ggender": forms.Select(attrs={"class": "form-control"}),
             "date_of_birth": forms.DateInput(
@@ -104,10 +104,36 @@ class SchoolEditForm(forms.ModelForm):
             "gdate_of_birth",
             "status",
         ]
+
         widgets = {
-            "district": Select2Widget,
-            "date_of_birth": forms.DateInput(attrs={"type": "date"}),
-            "gdate_of_birth": forms.DateInput(attrs={"type": "date"}),
+
+            "school_name": forms.TextInput(attrs={"class": "form-control"}),
+            "EMIS": forms.TextInput(attrs={"class": "form-control"}),
+            "center_number": forms.TextInput(attrs={"class": "form-control"}),
+            "region": forms.Select(attrs={"class": "form-select"}),
+            "district": forms.Select(attrs={"class": "form-select"}),
+            "gender": forms.Select(attrs={"class": "form-select"}),
+            "ggender": forms.Select(attrs={"class": "form-select"}),
+            #    --------------------------------------
+            "fname": forms.TextInput(attrs={"class": "form-control"}),
+            "lname": forms.TextInput(attrs={"class": "form-control"}),
+            "nin": forms.TextInput(attrs={"class": "form-control"}),
+            "phone_number": forms.TextInput(attrs={"class": "form-control"}),
+            "email": forms.TextInput(attrs={"class": "form-control"}),
+            "gender": forms.Select(attrs={"class": "form-control"}),
+            #    --------------------------------------
+            "gfname": forms.TextInput(attrs={"class": "form-control"}),
+            "glname": forms.TextInput(attrs={"class": "form-control"}),
+            "gnin": forms.TextInput(attrs={"class": "form-control"}),
+            "gphone": forms.TextInput(attrs={"class": "form-control"}),
+            "gemail": forms.TextInput(attrs={"class": "form-control"}),
+            "ggender": forms.Select(attrs={"class": "form-control"}),
+            "date_of_birth": forms.DateInput(
+                attrs={"type": "date", "class": "form-control"}
+            ),
+            "gdate_of_birth": forms.DateInput(
+                attrs={"type": "date", "class": "form-control"}
+            ),
         }
 
     def __init__(self, *args, **kwargs):
