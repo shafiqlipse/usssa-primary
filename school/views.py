@@ -25,7 +25,7 @@ def Dash(request):
     school = School.objects.get(user_id=user.id)
     officials_count = school_official.objects.filter(school_id=school.id).count()
     athletes_count = Athlete.objects.filter(school_id=school.id).count()
-    athletes = Athlete.objects.filter(school_id=school.id)[:6]
+    athletes = Athlete.objects.filter(school_id=school.id).exclude(status="COMPLETED")[:6]
     officials_bcount = school_official.objects.filter(
         school_id=school.id, gender="M"
     ).count()
