@@ -40,7 +40,7 @@
                       {% for officer in officers %}
                       <tr>
                         <td>
-                          <a href="{% url 'officerd'%}"
+                          <a href="{% url 'officerd' officer.id %}"
                             >{{officer.first_name}} {{officer.last_name}}</a
                           >
                         </td>
