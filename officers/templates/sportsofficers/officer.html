@@ -39,7 +39,10 @@
               <li>{{ officer.gender }}</li>
               <li>{{ officer.phone_number }}</li>
             </ul>
-            <a href="" class="btn btn-primary">
+            <a
+              href="{% url 'dteam_accred' officer.id %}"
+              class="btn btn-primary"
+            >
               <i data-feather="download" class="icon-xs"></i
               ><span>Accreditation</span>
             </a>

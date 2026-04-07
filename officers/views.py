@@ -414,7 +414,7 @@ def dAlbums(request, id):
     filename = f"{team.team_officer.officer_profile.first().district } | {team.team_sport} .pdf"
 
     # Get template
-    template = get_template("reports/albums.html")
+    template = get_template("reports/album.html")
 
     # Prepare context
     context = {
