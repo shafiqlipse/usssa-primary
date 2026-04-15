@@ -95,7 +95,7 @@ class Team(models.Model):
     )
     
     class Meta:
-        unique_together = ("team_sport", "championship", "team_age", "team_gender")
+        unique_together = ("team_officer","team_sport", "championship", "team_age", "team_gender")
         
         
     def __str__(self):
