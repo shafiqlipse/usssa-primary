@@ -328,6 +328,18 @@ def officer_enrollment_details(request, id):
     }
     return render(request, "enrollments/officer_enroll.html", context)
 
+def team_details(request, id):
+    officer_enrollment = get_object_or_404(Team, id=id)
+
+    athlete_enrollments = AthletesEnrollment.objects.filter(
+        team=officer_enrollment
+    )
+    context = {
+        "officer_enrollment": officer_enrollment,
+        "athlete_enrollments": athlete_enrollments,
+    }
+    return render(request, "enrollments/team_details.html", context)
+
 
 def officer_enrollment_update(request, id):
     officer_enrollment = get_object_or_404(Team, id=id)

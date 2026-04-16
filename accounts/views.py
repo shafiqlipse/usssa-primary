@@ -195,7 +195,7 @@ def sports_officers(request):
     context = {
         "sports_officers": sports_officers,
     }
-    return render(request, "accounts/sports.html", context)
+    return render(request, "auth/officers.html", context)
 
 
 

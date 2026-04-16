@@ -22,6 +22,7 @@ urlpatterns = [
     # path("teccred/", teccreditation, name="teccred"),
     path("dteam_accred/<int:id>", dAccreditation, name="dteam_accred"),
     path("dteam_album/<int:id>", dAlbums, name="dteam_album"),
+    path("team_details/<int:id>", team_details, name="team_details"),
     path("dteam_cert/<int:id>", dCertificate, name="dteam_cert"),
     path("district_enrollments/", district_teams, name="district_enrollments"),
     path("all_denrollments/", dAllEnrollments, name="all_denrollments"),
@@ -65,7 +66,7 @@ urlpatterns = [
     # path("editofficer/<int:id>", profile_update, name="editofficer"),
     # path("dacreditation/<int:id>", toAccreditation, name="tocrred"),
     # path("dacertification/<int:id>", toCertification, name="tocert"),
-    # path("delete/enrollment/<int:id>", officer_enroll_delete, name="delteam"),
+    path("delete/enrollment/<int:id>", officer_enroll_delete, name="delteam"),
     
    # ===================Officials========================,
 

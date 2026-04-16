@@ -42,8 +42,8 @@
                   {% for team in officer_enrolls %}
                   <tr>
                     <td>
-                      <a href="{% url 'district_enrollment' team.id%}"
-                        > {{team.team_officer.officer_profile.first.district }}</a
+                      <a href="{% url 'team_details' team.id%}"
+                        > {{team.team_officer.sports_officer.first.district }}</a
                       >
                     </td>
 
