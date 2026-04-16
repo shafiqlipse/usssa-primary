@@ -411,7 +411,7 @@ def dAlbums(request, id):
 
 
     # Create a unique filename
-    filename = f"{team.team_officer.officer_profile.first().district } | {team.team_sport} .pdf"
+    filename = f"{team.team_officer.sports_officer.first().district } | {team.team_sport} .pdf"
 
     # Get template
     template = get_template("reports/album.html")
