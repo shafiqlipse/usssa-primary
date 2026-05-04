@@ -399,10 +399,11 @@ def dAccreditation(request, id):
 
     # Render HTML
     html = template.render(context)
-
+    officer = team.team_officer.sports_officer.first()
+    filename = officer.district if officer else "unknown"
     # Create a PDF
     response = HttpResponse(content_type="application/pdf")
-    response["Content-Disposition"] = 'attachment; filename="Accreditation.pdf"'
+    response["Content-Disposition"] = f'attachment; filename="{filename}-{team.team_sport}.pdf"'
 
     # Generate PDF from HTML
     pisa_status = pisa.CreatePDF(html, dest=response)
