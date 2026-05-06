@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from accounts.models import *
 from school.models import *
+from officers.models import *
 
 class UserAdmin(BaseUserAdmin):
     list_display = ("username", "email", "is_active", "is_school", "is_staff", "is_admin")  # Columns to display
@@ -33,3 +34,4 @@ admin.site.register(Municipality)
 # admin.site.register(Classroom)
 # admin.site.register(TOfficer)
 admin.site.register(school_official)
+admin.site.register(SportsOfficer)
