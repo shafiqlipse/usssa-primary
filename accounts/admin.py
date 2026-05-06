@@ -22,7 +22,7 @@ class SchoolAdmin(admin.ModelAdmin):  # Inherit from admin.ModelAdmin
     
 class SportsOfficerAdmin(admin.ModelAdmin):  # Inherit from admin.ModelAdmin
     list_display = ("first_name", "last_name", "email", "district")
-    search_fields =( "first_name", "last_name", "district")  # Use school__name instead of school
+    search_fields =( "first_name", "last_name", "district__name")  # Use school__name instead of school
 
 # Register your models here.
 admin.site.register(User, UserAdmin)
