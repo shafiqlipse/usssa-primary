@@ -64,7 +64,7 @@ urlpatterns = [
     path("district_schools/", district_schools, name="district_schools"),
     path("district_athletes/", district_athletes, name="district_athletes"),
     # path("editofficer/<int:id>", profile_update, name="editofficer"),
-    # path("dacreditation/<int:id>", toAccreditation, name="tocrred"),
+    path("dacreditation/<int:id>", toAccreditation, name="tocrred"),
     # path("dacertification/<int:id>", toCertification, name="tocert"),
     path("delete/enrollment/<int:id>", officer_enroll_delete, name="delteam"),
     

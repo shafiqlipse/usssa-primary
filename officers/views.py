@@ -496,18 +496,18 @@ def dCertificate(request, id):
 
 
 def toAccreditation(request, id):
-    district = get_object_or_404(SportsOfficer, id=id)
-    tofficers = TeamOfficer.objects.filter(user=district.user)
+    dso = get_object_or_404(SportsOfficer, id=id)
+    tofficers = TeamOfficer.objects.filter(user=dso.user)
     
     # Get template
     template = get_template("reports/taccred.html")
 
     # Compress and fix rotation for athletes' photos
-    filename = f"{district.district } .pdf"
+    filename = f"{dso.district } .pdf"
     # Prepare context
     context = {
         
-        "district": district,
+        "district": dso,
         "tofficers": tofficers,
         "MEDIA_URL": settings.MEDIA_URL,
     }
